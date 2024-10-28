@@ -6,6 +6,8 @@ import { useRouter } from 'next/router';
 import i18nextConfig from '../../next-i18next.config';
 import LanguageSwitchLink from './LanguageSwitchLink';
 import Link from 'next/link';
+import {faGlobe, faHome} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const Header: React.FC = () => {
   const { t } = useTranslation(['common']);
@@ -29,10 +31,13 @@ const Header: React.FC = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">{t('common:common.home')}</Nav.Link>
+            <Nav.Link href="/">
+              <FontAwesomeIcon icon={faHome} className="me-2" />
+              {t('common:common.home')}
+            </Nav.Link>
           </Nav>
           <Nav>
-            <NavDropdown title={t('common:common.language')} id="language-selector">
+            <NavDropdown title={<><FontAwesomeIcon icon={faGlobe} className="me-2" />{t('common:common.language')}</>} id="language-selector">
               {i18nextConfig.i18n.locales.map((locale) => {
                 if (locale === currentLocale) return null;
                 return <LanguageSwitchLink locale={locale} key={locale} />;

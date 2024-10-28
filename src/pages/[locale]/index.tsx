@@ -8,6 +8,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import {fetchHelloMessage} from "@/api/helloApi";
 import {HelloDTO} from "@/interfaces/helloDTO";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faHome, faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
@@ -40,7 +42,9 @@ const Home = () => {
       <Header />
 
       <Container className="mt-4">
-        <h1>{t('home:home.heading')}</h1>
+        <h1>
+          {t('home:home.heading')}
+        </h1>
         <p>{t('home:home.description')}</p>
 
         <div className="my-3">
@@ -55,12 +59,16 @@ const Home = () => {
           )}
         </div>
 
-        <Button variant="primary" className="mb-4">
-          {t('common:common:save')}
-        </Button>
-        <Button variant="secondary" className="ms-2 mb-4">
-          {t('common:common:cancel')}
-        </Button>
+        <div className="d-flex gap-2 mb-4">
+          <Button variant="primary" className="mb-4">
+            <FontAwesomeIcon icon={faSave} className="me-2"/>
+            {t('common:common.save')}
+          </Button>
+          <Button variant="secondary" className="ms-2 mb-4">
+            <FontAwesomeIcon icon={faTimes} className="me-2"/>
+            {t('common:common.cancel')}
+          </Button>
+        </div>
       </Container>
 
       <Footer/>
