@@ -6,7 +6,8 @@ import { makeStaticProps, getStaticPaths } from '@/lib/getStatic';
 import React, {useEffect, useState} from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import {fetchHelloMessage, HelloDTO} from "@/api/helloApi";
+import {fetchHelloMessage} from "@/api/helloApi";
+import {HelloDTO} from "@/interfaces/helloDTO";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);

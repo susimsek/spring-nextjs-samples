@@ -1,10 +1,6 @@
 // /api/helloApi.ts
 import apiClient from './apiClient';
-
-// Define the HelloDTO interface to match the backend response
-export interface HelloDTO {
-  message: string;
-}
+import {HelloDTO} from "@/interfaces/helloDTO";
 
 export const fetchHelloMessage = async (): Promise<HelloDTO> => {
   const response = await apiClient.get<HelloDTO>('/hello');
