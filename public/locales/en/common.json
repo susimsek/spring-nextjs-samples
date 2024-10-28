@@ -6,6 +6,13 @@
     "save": "Save",
     "cancel": "Cancel",
     "submit": "Submit",
-    "back-to-home": "Back to Home"
+    "back-to-home": "Back to Home",
+    "saveSuccess": "Your changes have been saved successfully.",
+    "variant": {
+      "danger": "Error",
+      "info": "Info",
+      "success": "Success",
+      "warning": "Warning"
+    }
   }
 }

@@ -7,14 +7,25 @@ import React, {useEffect, useState} from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import {fetchHelloMessage} from "@/api/helloApi";
-import {HelloDTO} from "@/interfaces/helloDTO";
+import {HelloDTO} from "@/types/helloDTO";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome, faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
+import NotificationToast from "@/components/NotificationToast";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
   const [messageData, setMessageData] = useState<HelloDTO | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [toast, setToast] = useState<{ message?: string; key?: string; data?: any } | null>(null);
+
+  const showToast = () => {
+    setToast({
+      message: t('common:common:saveSuccess'),
+    });
+  };
+
+  const closeToast = () => setToast(null);
+
 
   useEffect(() => {
     const getMessage = async () => {
@@ -60,7 +71,7 @@ const Home = () => {
         </div>
 
         <div className="d-flex gap-2 mb-4">
-          <Button variant="primary" className="mb-4">
+          <Button variant="primary" className="mb-4" onClick={showToast}>
             <FontAwesomeIcon icon={faSave} className="me-2"/>
             {t('common:common.save')}
           </Button>
@@ -72,6 +83,17 @@ const Home = () => {
       </Container>
 
       <Footer/>
+
+      {toast && (
+        <NotificationToast
+          message={toast.message}
+          key={toast.key}
+          data={toast.data}
+          show={!!toast}
+          onClose={closeToast}
+          variant="success"
+        />
+      )}
     </>
   );
 };
