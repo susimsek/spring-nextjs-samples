@@ -1,0 +1,11 @@
+{
+  "common": {
+    "siteTitle": "Next.js Demo",
+    "home": "Ana Sayfa",
+    "language": "Dil",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "submit": "Gönder",
+    "back-to-home": "Ana Sayfaya Dön"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "common": {
+    "siteTitle": "Next.js Demo",
+    "home": "Home",
+    "language": "Language",
+    "save": "Save",
+    "cancel": "Cancel",
+    "submit": "Submit",
+    "back-to-home": "Back to Home"
+  }
+}

@@ -1,0 +1,31 @@
+server:
+  port: 8080
+  shutdown: graceful
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: text/html,text/xml,text/plain,text/css,application/javascript,application/json,image/svg+xml
+
+spring:
+  messages:
+    cache-duration: 1h
+  mvc:
+    cors:
+      enabled: false
+      allowed-origins: "http://localhost:8100"
+      allowed-methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH"
+      allowed-headers: "Authorization,Content-Type,Accept,Cache-Control,X-Requested-With,Origin,Referer,User-Agent,X-Request-ID,X-Correlation-ID,X-Idempotency-Key,X-JWS-Signature"
+      allow-credentials: true
+      max-age: 3600
+
+
+logging:
+  level:
+    ROOT: INFO
+    org.hibernate.SQL: INFO
+    io.github.susimsek.springnextjssamples: INFO
+  async:
+    queueSize: 10000
+    discardingThreshold: 0
+    maxFlushTime: 5000
+    includeCallerData: false
