@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>{t('home:home.title')}</title>
+        <title>{t('common:common.siteTitle')}</title>
       </Head>
 
       <Header />
