@@ -91,7 +91,7 @@ const Home = () => {
           data={toast.data}
           show={!!toast}
           onClose={closeToast}
-          variant="danger"
+          variant="success"
           dismissible={true}
           size="lg"
         />
