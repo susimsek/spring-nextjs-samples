@@ -19,7 +19,7 @@ export type TostMessage = {
 
 interface NotificationToastProps extends TostMessage {
   show: boolean;
-  onClose: () => void;
+  onClose?: () => void;
   dismissible?: boolean;
   size?: 'sm' | 'lg' | 'xl';
 }
@@ -30,7 +30,7 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
                                                                data,
                                                                variant = 'info',
                                                                show,
-                                                               onClose,
+                                                               onClose = () => {},
                                                                dismissible = true,
                                                                size = 'lg',
                                                              }) => {
