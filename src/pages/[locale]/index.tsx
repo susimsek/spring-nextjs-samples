@@ -50,6 +50,19 @@ const Home = () => {
         <title>{t('common:common.siteTitle')}</title>
       </Head>
 
+      {toast && (
+        <NotificationToast
+          message={toast.message}
+          key={toast.key}
+          data={toast.data}
+          show={!!toast}
+          onClose={closeToast}
+          variant="success"
+          dismissible={true}
+          size="lg"
+        />
+      )}
+
       <Header />
 
       <Container className="mt-4">
@@ -83,19 +96,6 @@ const Home = () => {
       </Container>
 
       <Footer/>
-
-      {toast && (
-        <NotificationToast
-          message={toast.message}
-          key={toast.key}
-          data={toast.data}
-          show={!!toast}
-          onClose={closeToast}
-          variant="success"
-          dismissible={true}
-          size="lg"
-        />
-      )}
     </>
   );
 };
