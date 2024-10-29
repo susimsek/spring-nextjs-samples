@@ -1,9 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
+import notificationReducer from '@/reducers/notification';
+
 // Configure the store without any reducers
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    notification: notificationReducer,
+  },
 });
 
 // Types for Redux state and dispatch

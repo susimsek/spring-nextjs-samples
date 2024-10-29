@@ -1,5 +1,5 @@
 // pages/index.tsx
-import {Container, Button, Spinner} from 'react-bootstrap';
+import {Container, Button, Spinner, Alert} from 'react-bootstrap';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 import { makeStaticProps, getStaticPaths } from '@/lib/getStatic';
@@ -9,26 +9,13 @@ import Footer from '@/components/Footer';
 import {fetchHelloMessage} from "@/api/helloApi";
 import {HelloDTO} from "@/types/helloDTO";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faHome, faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
-import NotificationToast, {TostMessage} from "@/components/NotificationToast";
-import {ProblemDetail} from "@/types/problemDetail";
-import axios from 'axios';
+import {faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
   const [messageData, setMessageData] = useState<HelloDTO | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [toast, setToast] = useState<TostMessage| null>(null);
-
-  const showToast = () => {
-    setToast({
-      messageKey: 'common:common:saveSuccess',
-      variant: "success"
-    });
-  };
-
-  const closeToast = () => setToast(null);
-
+  const [showAlert, setShowAlert] = useState<string | null>(null); // Alert için state
 
   useEffect(() => {
     const getMessage = async () => {
@@ -37,7 +24,6 @@ const Home = () => {
         setMessageData(data);
       } catch (error) {
         console.error(error);
-        handleError(error)
       } finally {
         setLoading(false);
       }
@@ -46,57 +32,19 @@ const Home = () => {
     getMessage();
   }, []);
 
-
-  const handleError = (error: any) => {
-    let messageKey: string | undefined = 'common:common.error.http.default';
-    let errorMessage: string | undefined = undefined;
-
-    if (axios.isAxiosError(error) && error.response) {
-      const status = error.response.status;
-      const problemDetail: ProblemDetail = error.response.data;
-
-      switch (status) {
-        case 500:
-        case 503:
-        case 405:
-          messageKey = `common:common.error.http.${status}`;
-          break;
-        default:
-          if (problemDetail.detail) {
-            errorMessage = problemDetail.detail;
-            messageKey = undefined;
-          }
-          break;
-      }
-
-      if (problemDetail.violations && problemDetail.violations.length > 0) {
-        problemDetail.violations.forEach(violation => {
-          errorMessage += `\nfield: ${violation.field}, message: ${violation.message}\n`;
-        });
-      }
-    }
-    setToast({ messageKey, message: errorMessage, variant: "danger"});
+  const handleSave = () => {
+    setShowAlert(t('common:common.saveSuccess'));
   };
 
+  const handleCancel = () => {
+    setShowAlert(t('common:common.cancelAction'));
+  };
 
   return (
     <>
       <Head>
         <title>{t('common:common.siteTitle')}</title>
       </Head>
-
-      {toast && (
-        <NotificationToast
-          message={toast.message}
-          messageKey={toast.messageKey}
-          data={toast.data}
-          show={!!toast}
-          onClose={closeToast}
-          variant={toast.variant}
-          dismissible={true}
-          size="lg"
-        />
-      )}
 
       <Header />
 
@@ -118,12 +66,18 @@ const Home = () => {
           )}
         </div>
 
+        {showAlert && (
+          <Alert variant="info" onClose={() => setShowAlert(null)} dismissible>
+            {showAlert}
+          </Alert>
+        )}
+
         <div className="d-flex gap-2 mb-4">
-          <Button variant="primary" className="mb-4" onClick={showToast}>
+          <Button variant="primary" className="mb-4" onClick={handleSave}>
             <FontAwesomeIcon icon={faSave} className="me-2"/>
             {t('common:common.save')}
           </Button>
-          <Button variant="secondary" className="ms-2 mb-4">
+          <Button variant="secondary" className="ms-2 mb-4" onClick={handleCancel}>
             <FontAwesomeIcon icon={faTimes} className="me-2"/>
             {t('common:common.cancel')}
           </Button>

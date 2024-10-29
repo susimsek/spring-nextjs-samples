@@ -8,6 +8,7 @@
     "submit": "Submit",
     "back-to-home": "Back to Home",
     "saveSuccess": "Your changes have been saved successfully.",
+    "cancelAction": "Action canceled.",
     "variant": {
       "danger": "Error",
       "info": "Info",

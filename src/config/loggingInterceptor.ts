@@ -15,7 +15,7 @@ const getErrorMessage = (problemDetail: ProblemDetail): string => {
   return detail;
 };
 
-export const errorInterceptor = (error: AxiosError): Promise<AxiosError> => {
+export const loggingInterceptor = (error: AxiosError): Promise<AxiosError> => {
   if (DEVELOPMENT) {
 
     if (error.response && error.response.data) {

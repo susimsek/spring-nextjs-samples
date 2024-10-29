@@ -1,7 +1,8 @@
 // /api/apiClient.ts
 import axios from 'axios';
 import languageDetector from '../lib/languageDetector';
-import {errorInterceptor} from "@/config/error-interceptor";
+import {loggingInterceptor} from "@/config/loggingInterceptor";
+import {notificationInterceptor} from "@/config/notificationInterceptor";
 
 const TIMEOUT = 60 * 1000;
 const detectedLng = languageDetector.detect() as string;
@@ -17,7 +18,14 @@ const apiClient = axios.create({
 
 apiClient.interceptors.response.use(
   response => response,
-  errorInterceptor
+  loggingInterceptor
 );
+
+apiClient.interceptors.response.use(
+  response => response,
+  notificationInterceptor
+);
+
+
 
 export default apiClient;
