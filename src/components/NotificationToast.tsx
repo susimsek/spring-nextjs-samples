@@ -2,7 +2,12 @@
 import React from 'react';
 import { Toast, ToastContainer } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faExclamationTriangle, faInfoCircle, faCheckCircle, faExclamationCircle, faInfo } from '@fortawesome/free-solid-svg-icons';
+import {
+  faExclamationTriangle,
+  faInfoCircle,
+  faCheckCircle,
+  faExclamationCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'next-i18next';
 
 export type TostMessage = {
@@ -32,84 +37,19 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
   const { t } = useTranslation('common');
   const toastMessage = messageKey ? String(t(messageKey, data)) : message;
 
-  const getVariantStyles = () => {
-    switch (variant) {
-      case 'danger':
-        return {
-          backgroundColor: '#fdecea',
-          color: '#a71d2a',
-          borderColor: '#f5c2c7',
-          icon: faExclamationTriangle,
-          title: t('common:common.variant.danger'),
-        };
-      case 'info':
-        return {
-          backgroundColor: '#e7f5ff',
-          color: '#1c7ed6',
-          borderColor: '#b6d4fe',
-          icon: faInfoCircle,
-          title: t('common:common.variant.info'),
-        };
-      case 'success':
-        return {
-          backgroundColor: '#d3f9d8',
-          color: '#2f9e44',
-          borderColor: '#b2f2bb',
-          icon: faCheckCircle,
-          title: t('common:common.variant.success'),
-        };
-      case 'warning':
-        return {
-          backgroundColor: '#fff3cd',
-          color: '#856404',
-          borderColor: '#ffeeba',
-          icon: faExclamationCircle,
-          title: t('common:common.variant.warning'),
-        };
-      case 'primary':
-        return {
-          backgroundColor: '#cfe2ff',
-          color: '#084298',
-          borderColor: '#b6d4fe',
-          icon: faInfoCircle,
-          title: t('common:common.variant.info'),
-        };
-      case 'secondary':
-        return {
-          backgroundColor: '#e2e3e5',
-          color: '#41464b',
-          borderColor: '#d3d6d8',
-          icon: faInfoCircle,
-          title: t('common:common.variant.info'),
-        };
-      case 'dark':
-        return {
-          backgroundColor: '#d3d3d4',
-          color: '#3a3b3c',
-          borderColor: '#bcbebf',
-          icon: faInfoCircle,
-          title: t('common:common.variant.info'),
-        };
-      case 'light':
-        return {
-          backgroundColor: '#fefefe',
-          color: '#636464',
-          borderColor: '#fdfdfe',
-          icon: faInfoCircle,
-          title: t('common:common.variant.info'),
-        };
-      default:
-        return {
-          backgroundColor: '#e7f5ff',
-          color: '#1c7ed6',
-          borderColor: '#b6d4fe',
-          icon: faInfoCircle,
-          title: t('common:common.variant.info'),
-        };
-    }
+  const variantStyles = {
+    danger: { bg: '#fdecea', color: '#a71d2a', border: '#f5c2c7', icon: faExclamationTriangle },
+    info: { bg: '#e7f5ff', color: '#1c7ed6', border: '#b6d4fe', icon: faInfoCircle },
+    success: { bg: '#d3f9d8', color: '#2f9e44', border: '#b2f2bb', icon: faCheckCircle },
+    warning: { bg: '#fff3cd', color: '#856404', border: '#ffeeba', icon: faExclamationCircle },
+    primary: { bg: '#cfe2ff', color: '#084298', border: '#b6d4fe', icon: faInfoCircle },
+    secondary: { bg: '#e2e3e5', color: '#41464b', border: '#d3d6d8', icon: faInfoCircle },
+    dark: { bg: '#d3d3d4', color: '#3a3b3c', border: '#bcbebf', icon: faInfoCircle },
+    light: { bg: '#fefefe', color: '#636464', border: '#fdfdfe', icon: faInfoCircle },
   };
 
-  const { backgroundColor, color, borderColor, icon, title } = getVariantStyles();
+  const { bg, color, border, icon } = variantStyles[variant] || variantStyles.info;
+  const title = t(`common:common:variant.${variant}`, { defaultValue: 'Info' });
 
   const dimensions = {
     sm: { width: '300px', minHeight: '100px' },
@@ -140,9 +80,9 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
           minHeight,
           padding: '16px',
           fontSize: '16px',
-          backgroundColor,
+          backgroundColor: bg,
           color,
-          border: `1px solid ${borderColor}`,
+          border: `1px solid ${border}`,
           borderRadius: '8px',
           boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
         }}
@@ -150,9 +90,9 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
         <Toast.Header
           closeButton={dismissible}
           style={{
-            backgroundColor,
+            backgroundColor: bg,
             color,
-            borderBottom: `1px solid ${borderColor}`,
+            borderBottom: `1px solid ${border}`,
           }}
         >
           <FontAwesomeIcon icon={icon} className="me-2" style={{ color, fontSize: '20px' }} />
