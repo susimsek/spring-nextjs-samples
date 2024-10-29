@@ -13,6 +13,15 @@
       "info": "Info",
       "success": "Success",
       "warning": "Warning"
+    },
+    "error": {
+      "http": {
+        "500": "Internal Server Error. Please try again later.",
+        "503": "Service Unavailable. Please try again later.",
+        "405": "Method Not Allowed. Please check the request method.",
+        "default": "An unexpected error occurred. Please try again."
+      },
+      "validationErrors": "Validation errors found:"
     }
   }
 }

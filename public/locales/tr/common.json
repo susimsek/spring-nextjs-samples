@@ -13,6 +13,15 @@
       "info": "Bilgi",
       "success": "Başarılı",
       "warning": "Uyarı"
+    },
+    "error": {
+      "http": {
+        "500": "Sunucu Hatası. Lütfen daha sonra tekrar deneyin.",
+        "503": "Hizmet Kullanılamıyor. Lütfen daha sonra tekrar deneyin.",
+        "405": "İzin Verilmeyen Yöntem. Lütfen istek yöntemini kontrol edin.",
+        "default": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin."
+      },
+      "validationErrors": "Aşağıdaki alanlarda hata oluştu:"
     }
   }
 }

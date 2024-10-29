@@ -9,13 +9,13 @@ export type TostMessage = {
   message?: string;
   messageKey?: string;
   data?: any;
+  variant?: 'danger' | 'info' | 'success' | 'warning' | 'primary' | 'secondary' | 'dark' | 'light';
 };
 
 interface NotificationToastProps extends TostMessage {
   show: boolean;
   onClose: () => void;
   dismissible?: boolean;
-  variant?: 'danger' | 'info' | 'success' | 'warning' | 'primary' | 'secondary' | 'dark' | 'light';
   size?: 'sm' | 'lg' | 'xl';
 }
 
@@ -159,7 +159,7 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
           <strong className="me-auto" style={{ fontSize: '18px' }}>{title}</strong>
         </Toast.Header>
         <Toast.Body style={{ fontSize: '16px' }}>
-          {toastMessage ?? t('common:common.defaultErrorMessage')}
+          {toastMessage ?? t('common:common.error.http.default')}
         </Toast.Body>
       </Toast>
     </ToastContainer>

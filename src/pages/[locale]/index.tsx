@@ -11,6 +11,8 @@ import {HelloDTO} from "@/types/helloDTO";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome, faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
 import NotificationToast, {TostMessage} from "@/components/NotificationToast";
+import {ProblemDetail} from "@/types/problemDetail";
+import axios from 'axios';
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
@@ -21,6 +23,7 @@ const Home = () => {
   const showToast = () => {
     setToast({
       messageKey: 'common:common:saveSuccess',
+      variant: "success"
     });
   };
 
@@ -34,7 +37,7 @@ const Home = () => {
         setMessageData(data);
       } catch (error) {
         console.error(error);
-        setMessageData({ message: 'Failed to fetch message' });
+        handleError(error)
       } finally {
         setLoading(false);
       }
@@ -42,6 +45,37 @@ const Home = () => {
 
     getMessage();
   }, []);
+
+
+  const handleError = (error: any) => {
+    let messageKey: string | undefined = undefined;
+    let errorMessage = t('common:common.error.http.default');
+
+    if (axios.isAxiosError(error) && error.response) {
+      const status = error.response.status;
+      const problemDetail: ProblemDetail = error.response.data;
+
+      switch (status) {
+        case 500:
+        case 503:
+        case 405:
+          messageKey = `common:common.error.http.${status}`;
+          errorMessage = t(messageKey);
+          break;
+        default:
+          errorMessage = problemDetail.detail || errorMessage;
+          break;
+      }
+
+      if (problemDetail.violations && problemDetail.violations.length > 0) {
+        const validationErrors = problemDetail.violations
+          .map(v => `${v.field}: ${v.message}`)
+          .join('\n');
+        errorMessage += `\n${t("common:common.error.validationErrors")}\n${validationErrors}`;
+      }
+    }
+    setToast({ messageKey, message: errorMessage, variant: "danger"});
+  };
 
 
   return (
@@ -57,7 +91,7 @@ const Home = () => {
           data={toast.data}
           show={!!toast}
           onClose={closeToast}
-          variant="success"
+          variant={toast.variant}
           dismissible={true}
           size="lg"
         />
