@@ -1,4 +1,4 @@
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV === 'development';
 
 const options = {
   tls: false,
@@ -10,17 +10,16 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  async rewrites() {
-    if (isDev) {
+  ...(isDev && {
+    async rewrites() {
       return [
         {
           source: '/api/:path*',
           destination: `http${options.tls ? 's' : ''}://localhost:8080/api/:path*`,
         },
       ];
-    }
-    return [];
-  },
-}
+    },
+  }),
+};
 
 module.exports = nextConfig;
