@@ -15,9 +15,20 @@ export type TostMessage = {
 interface NotificationToastProps extends TostMessage {
   show: boolean;
   onClose: () => void;
+  dismissible?: boolean;
+  size?: 'sm' | 'lg' | 'xl';
 }
 
-const NotificationToast: React.FC<NotificationToastProps> = ({ message, key, data, variant = 'info', show, onClose }) => {
+const NotificationToast: React.FC<NotificationToastProps> = ({
+                                                               message,
+                                                               key,
+                                                               data,
+                                                               variant = 'info',
+                                                               show,
+                                                               onClose,
+                                                               dismissible = true,
+                                                               size = 'lg',
+                                                             }) => {
   const { t } = useTranslation('common');
   const toastMessage = key ? String(t(key, data)) : message;
 
@@ -100,6 +111,14 @@ const NotificationToast: React.FC<NotificationToastProps> = ({ message, key, dat
 
   const { backgroundColor, color, borderColor, icon, title } = getVariantStyles();
 
+  const dimensions = {
+    sm: { width: '300px', minHeight: '100px' },
+    lg: { width: '450px', minHeight: '150px' },
+    xl: { width: '700px', minHeight: '200px' },
+  };
+
+  const { width, minHeight } = dimensions[size || 'lg'];
+
   return (
     <ToastContainer
       className="d-flex justify-content-center"
@@ -117,9 +136,8 @@ const NotificationToast: React.FC<NotificationToastProps> = ({ message, key, dat
         delay={5000}
         autohide
         style={{
-          maxWidth: '500px',
-          minWidth: '300px',
-          width: '90%',
+          width,
+          minHeight,
           padding: '16px',
           fontSize: '16px',
           backgroundColor,
@@ -130,7 +148,7 @@ const NotificationToast: React.FC<NotificationToastProps> = ({ message, key, dat
         }}
       >
         <Toast.Header
-          closeButton
+          closeButton={dismissible}
           style={{
             backgroundColor,
             color,
