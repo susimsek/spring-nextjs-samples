@@ -7,21 +7,21 @@ import { useTranslation } from 'next-i18next';
 
 export type TostMessage = {
   message?: string;
-  key?: string;
+  messageKey?: string;
   data?: any;
-  variant?: 'danger' | 'info' | 'success' | 'warning' | 'primary' | 'secondary' | 'dark' | 'light';
 };
 
 interface NotificationToastProps extends TostMessage {
   show: boolean;
   onClose: () => void;
   dismissible?: boolean;
+  variant?: 'danger' | 'info' | 'success' | 'warning' | 'primary' | 'secondary' | 'dark' | 'light';
   size?: 'sm' | 'lg' | 'xl';
 }
 
 const NotificationToast: React.FC<NotificationToastProps> = ({
                                                                message,
-                                                               key,
+                                                               messageKey,
                                                                data,
                                                                variant = 'info',
                                                                show,
@@ -30,7 +30,7 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
                                                                size = 'lg',
                                                              }) => {
   const { t } = useTranslation('common');
-  const toastMessage = key ? String(t(key, data)) : message;
+  const toastMessage = messageKey ? String(t(messageKey, data)) : message;
 
   const getVariantStyles = () => {
     switch (variant) {

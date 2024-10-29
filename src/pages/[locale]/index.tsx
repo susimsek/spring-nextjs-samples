@@ -10,17 +10,17 @@ import {fetchHelloMessage} from "@/api/helloApi";
 import {HelloDTO} from "@/types/helloDTO";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHome, faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
-import NotificationToast from "@/components/NotificationToast";
+import NotificationToast, {TostMessage} from "@/components/NotificationToast";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
   const [messageData, setMessageData] = useState<HelloDTO | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [toast, setToast] = useState<{ message?: string; key?: string; data?: any } | null>(null);
+  const [toast, setToast] = useState<TostMessage| null>(null);
 
   const showToast = () => {
     setToast({
-      message: t('common:common:saveSuccess'),
+      messageKey: 'common:common:saveSuccess',
     });
   };
 
@@ -53,7 +53,7 @@ const Home = () => {
       {toast && (
         <NotificationToast
           message={toast.message}
-          key={toast.key}
+          messageKey={toast.messageKey}
           data={toast.data}
           show={!!toast}
           onClose={closeToast}
