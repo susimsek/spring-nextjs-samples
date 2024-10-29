@@ -17,6 +17,7 @@
     },
     "error": {
       "http": {
+        "0": "Ağ hatası. Lütfen internet bağlantınızı kontrol edin.",
         "500": "Sunucu Hatası. Lütfen daha sonra tekrar deneyin.",
         "503": "Hizmet Kullanılamıyor. Lütfen daha sonra tekrar deneyin.",
         "404": "Sayfa bulunamadı. Aradığınız kaynak mevcut değil.",

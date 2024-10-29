@@ -13,10 +13,14 @@ export const notificationInterceptor = (error: AxiosError): Promise<AxiosError> 
     const problemDetail: ProblemDetail = error.response.data as ProblemDetail;
 
     switch (status) {
+      case 401:
+        // Ignore, page will be redirected to login.
+        return Promise.reject(error);
+      case 0:
+      case 403:
+      case 405:
       case 500:
       case 503:
-      case 405:
-      case 403:
         messageKey = `common:common.error.http.${status}`;
         break;
       default:

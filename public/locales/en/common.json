@@ -17,6 +17,7 @@
     },
     "error": {
       "http": {
+        "0": "Network error. Please check your internet connection.",
         "500": "Internal Server Error. Please try again later.",
         "503": "Service Unavailable. Please try again later.",
         "404": "Page not found. The resource you are looking for does not exist.",
