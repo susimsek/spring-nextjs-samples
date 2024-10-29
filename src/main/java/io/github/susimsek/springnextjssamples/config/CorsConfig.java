@@ -1,5 +1,6 @@
 package io.github.susimsek.springnextjssamples.config;
 
+import io.github.susimsek.springnextjssamples.security.cors.CorsProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

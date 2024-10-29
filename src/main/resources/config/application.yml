@@ -17,8 +17,11 @@ spring:
         cachecontrol:
           max-age: 30d
   messages:
+    basename: i18n/messages
     fallback-to-system-locale: false
     use-code-as-default-message: true
+  liquibase:
+    change-log: classpath:config/liquibase/master.xml
   output:
     ansi:
       enabled: always
@@ -46,9 +49,46 @@ spring:
       shutdown:
         await-termination: true
         await-termination-period: 60s
+  cache:
+    cache-names:
+      - roleEntity
+      - roleEntityByName
+      - userEntity
+      - userEntity.userRoles
+      - userEntityByUsername
+      - userEntityByEmail
+      - userRoleMappingEntity
+      - messageEntity
+      - messagesCache
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: deferred
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    open-in-view: false
+    properties:
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: true
+      hibernate.generate_statistics: false
+      hibernate.jdbc.batch_size: 25
+      hibernate.order_inserts: true
+      hibernate.order_updates: true
+      hibernate.query.fail_on_pagination_over_collection_fetch: true
+      hibernate.query.in_clause_parameter_padding: true
+      jakarta.persistence.sharedCache.mode: ENABLE_SELECTIVE
 
 management:
   metrics:
+    data:
+      repository:
+        autotime:
+          enabled: true
     enable:
       http: true
       jvm: true
@@ -90,7 +130,7 @@ management:
         liveness:
           include: livenessState
         readiness:
-          include: readinessState
+          include: readinessState,db
   info:
     git:
       mode: full
@@ -101,6 +141,8 @@ management:
       probability: 1.0
     enabled: true
 
+security:
+  content-security-policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' maxcdn.bootstrapcdn.com getbootstrap.com; worker-src 'self' blob:; img-src 'self' data:; frame-src 'self' data:; font-src 'self' data:"
 
 logging:
   pattern:

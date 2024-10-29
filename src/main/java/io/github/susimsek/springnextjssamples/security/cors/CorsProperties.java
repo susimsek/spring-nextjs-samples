@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.config;
+package io.github.susimsek.springnextjssamples.security.cors;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
