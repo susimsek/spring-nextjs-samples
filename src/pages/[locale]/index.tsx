@@ -70,10 +70,9 @@ const Home = () => {
       }
 
       if (problemDetail.violations && problemDetail.violations.length > 0) {
-        const validationErrors = problemDetail.violations
-          .map(v => `${v.field}: ${v.message}`)
-          .join('\n');
-        errorMessage += `\n${t("common:common.error.validationErrors")}\n${validationErrors}`;
+        problemDetail.violations.forEach(violation => {
+          errorMessage += `\nfield: ${violation.field}, message: ${violation.message}\n`;
+        });
       }
     }
     setToast({ messageKey, message: errorMessage, variant: "danger"});
