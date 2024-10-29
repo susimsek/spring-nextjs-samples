@@ -16,6 +16,7 @@ export const notificationInterceptor = (error: AxiosError): Promise<AxiosError> 
       case 500:
       case 503:
       case 405:
+      case 403:
         messageKey = `common:common.error.http.${status}`;
         break;
       default:

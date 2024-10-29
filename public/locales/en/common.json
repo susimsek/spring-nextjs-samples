@@ -20,6 +20,7 @@
         "500": "Internal Server Error. Please try again later.",
         "503": "Service Unavailable. Please try again later.",
         "405": "Method Not Allowed. Please check the request method.",
+        "403": "Forbidden. You do not have permission to access this resource.",
         "default": "An unexpected error occurred. Please try again."
       },
       "validationErrors": "Validation errors found:"

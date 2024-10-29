@@ -20,6 +20,7 @@
         "500": "Sunucu Hatası. Lütfen daha sonra tekrar deneyin.",
         "503": "Hizmet Kullanılamıyor. Lütfen daha sonra tekrar deneyin.",
         "405": "İzin Verilmeyen Yöntem. Lütfen istek yöntemini kontrol edin.",
+        "403": "Erişim Engellendi. Bu kaynağa erişim izniniz yok.",
         "default": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin."
       },
       "validationErrors": "Aşağıdaki alanlarda hata oluştu:"
