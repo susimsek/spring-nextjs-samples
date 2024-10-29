@@ -48,8 +48,8 @@ const Home = () => {
 
 
   const handleError = (error: any) => {
-    let messageKey: string | undefined = undefined;
-    let errorMessage = t('common:common.error.http.default');
+    let messageKey: string | undefined = 'common:common.error.http.default';
+    let errorMessage: string | undefined = undefined;
 
     if (axios.isAxiosError(error) && error.response) {
       const status = error.response.status;
@@ -60,10 +60,12 @@ const Home = () => {
         case 503:
         case 405:
           messageKey = `common:common.error.http.${status}`;
-          errorMessage = t(messageKey);
           break;
         default:
-          errorMessage = problemDetail.detail || errorMessage;
+          if (problemDetail.detail) {
+            errorMessage = problemDetail.detail;
+            messageKey = undefined;
+          }
           break;
       }
 
