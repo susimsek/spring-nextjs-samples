@@ -9,11 +9,13 @@ import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 import io.github.susimsek.springnextjssamples.mapper.KeyMapper;
 import io.github.susimsek.springnextjssamples.repository.KeyRepository;
+import io.github.susimsek.springnextjssamples.security.SecurityProperties;
 import io.github.susimsek.springnextjssamples.security.jwk.DomainJWKSource;
 import io.github.susimsek.springnextjssamples.security.key.KeyService;
 import io.github.susimsek.springnextjssamples.security.token.DomainTokenEncoder;
 import io.github.susimsek.springnextjssamples.security.token.TokenDecoder;
 import io.github.susimsek.springnextjssamples.security.token.TokenEncoder;
+import io.github.susimsek.springnextjssamples.security.token.TokenGenerator;
 import io.github.susimsek.springnextjssamples.service.DomainKeyService;
 import java.util.HashSet;
 import java.util.Set;
@@ -60,6 +62,13 @@ public class SecurityJwtConfig {
         jwtProcessor.setJWTClaimsSetVerifier((claims, context) -> {
         });
         return new TokenDecoder(keyService, jwtProcessor);
+    }
+
+    @Bean
+    public TokenGenerator tokenGenerator(TokenEncoder tokenEncoder,
+                                         KeyService oAuth2KeyService,
+                                         SecurityProperties securityProperties) {
+        return new TokenGenerator(tokenEncoder, oAuth2KeyService, securityProperties);
     }
 
 }

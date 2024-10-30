@@ -74,3 +74,9 @@ management:
   zipkin:
     tracing:
       endpoint: http://localhost:9411
+
+security:
+  token:
+    jwe-enabled: true
+    key-id: 3f8a8e5b-89f4-4b7d-91e1-5b5c1d4e7b9c
+    access-token-time-to-live: PT1H
