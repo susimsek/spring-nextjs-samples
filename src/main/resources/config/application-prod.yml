@@ -73,7 +73,7 @@ logging:
       max-retry-backoff: 1m
       max-retry-jitter: 500ms
   aspect:
-    enabled: true
+    enabled: false
     log-level: FULL
   http:
     enabled: true
