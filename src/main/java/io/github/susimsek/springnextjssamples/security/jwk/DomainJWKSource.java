@@ -14,11 +14,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class DomainJWKSource implements JWKSource<SecurityContext> {
 
-    private final KeyService oAuth2KeyService;
+    private final KeyService keyService;
 
     @Override
     public List<JWK> get(JWKSelector jwkSelector, SecurityContext context) throws KeySourceException {
-        return this.oAuth2KeyService.findAll().stream()
+        return this.keyService.findAll().stream()
             .map(Key::toRSAKey)
             .filter(rsaKey -> jwkSelector.getMatcher().matches(rsaKey))
             .collect(Collectors.toList());

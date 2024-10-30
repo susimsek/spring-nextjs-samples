@@ -41,7 +41,7 @@ public final class TokenDecoder implements JwtDecoder {
         "An error occurred while attempting to decode the Jwt: %s";
 
     private final Log logger = LogFactory.getLog(this.getClass());
-    private final KeyService oAuth2KeyService;
+    private final KeyService keyService;
     private final JWTProcessor<SecurityContext> jwtProcessor;
     private OAuth2TokenValidator<Jwt> jwtValidator = JwtValidators.createDefault();
     private Converter<Map<String, Object>, Map<String, Object>> claimSetConverter =
@@ -65,7 +65,7 @@ public final class TokenDecoder implements JwtDecoder {
             JWEObject jweObject = this.parseJwe(token);
             JWEHeader jweHeader = jweObject.getHeader();
             String jweKeyId = jweHeader.getKeyID();
-            Key oAuth2Key = oAuth2KeyService.findByKidOrThrow(jweKeyId);
+            Key oAuth2Key = keyService.findByKidOrThrow(jweKeyId);
             decrypt(jweObject, oAuth2Key.toRSAKey());
             jwt = getSignedJWT(jweObject);
         } else {
