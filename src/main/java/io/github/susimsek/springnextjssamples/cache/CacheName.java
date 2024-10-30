@@ -18,9 +18,9 @@ public final class CacheName {
         "oauth2ClientEntityCountByClientSecret";
     public static final String OAUTH2_SCOPE_ENTITY_CACHE = "oauth2ScopeEntity";
     public static final String OAUTH2_CLIENT_SCOPE_MAPPING_ENTITY_CACHE = "oauth2ClientScopeMappingEntity";
-    public static final String OAUTH2_KEY_ENTITY_CACHE = "oauth2KeyEntity";
-    public static final String OAUTH2_KEY_ENTITY_BY_KID_CACHE = "oauth2KeyEntityByKid";
-    public static final String OAUTH2_KEY_ENTITY_BY_USE_CACHE = "oauth2KeyEntityByUse";
+    public static final String KEY_ENTITY_CACHE = "keyEntity";
+    public static final String KEY_ENTITY_BY_KID_CACHE = "keyEntityByKid";
+    public static final String KEY_ENTITY_BY_USE_CACHE = "keyEntityByUse";
     public static final String ROLE_ENTITY_CACHE = "roleEntity";
     public static final String USER_ENTITY_CACHE = "userEntity";
     public static final String MESSAGE_ENTITY_CACHE = "messageEntity";

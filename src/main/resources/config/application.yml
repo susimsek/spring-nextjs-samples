@@ -60,6 +60,9 @@ spring:
       - userRoleMappingEntity
       - messageEntity
       - messagesCache
+      - keyEntity
+      - keyEntityByKid
+      - keyEntityByUse
   data:
     jpa:
       repositories:
