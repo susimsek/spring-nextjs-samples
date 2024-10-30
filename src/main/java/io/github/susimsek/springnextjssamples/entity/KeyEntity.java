@@ -16,7 +16,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.proxy.HibernateProxy;
 
 @Entity
-@Table(name = "key")
+@Table(name = "security_key")
 @Getter
 @Setter
 @NoArgsConstructor

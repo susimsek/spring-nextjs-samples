@@ -78,6 +78,7 @@ public class SecurityConfig {
                     .requestMatchers(requestMatcherConfig.swaggerPaths()).permitAll()
                     .requestMatchers(requestMatcherConfig.actuatorPaths()).permitAll()
                     .requestMatchers(requestMatcherConfig.helloApiPaths()).permitAll()
+                    .requestMatchers(requestMatcherConfig.tokenPath()).permitAll()
                     .requestMatchers(mvc.pattern(LOGIN_PAGE_URI)).permitAll()
                     .anyRequest().authenticated())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

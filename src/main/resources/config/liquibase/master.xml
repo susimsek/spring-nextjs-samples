@@ -20,4 +20,5 @@
 
     <include file="/config/liquibase/changelog/added-message-entity.xml" relativeToChangelogFile="false"/>
     <include file="/config/liquibase/changelog/added-user-entity.xml" relativeToChangelogFile="false"/>
+    <include file="/config/liquibase/changelog/added-key-entity.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

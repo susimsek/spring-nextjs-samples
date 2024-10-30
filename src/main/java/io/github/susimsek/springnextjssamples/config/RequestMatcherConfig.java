@@ -77,4 +77,8 @@ public class RequestMatcherConfig {
             mvc.pattern("/actuator/**")
         };
     }
+
+    public RequestMatcher tokenPath() {
+        return  mvc.pattern("/api/v{version}/auth/token");
+    }
 }

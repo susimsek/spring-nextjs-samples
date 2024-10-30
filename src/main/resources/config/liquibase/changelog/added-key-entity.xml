@@ -7,9 +7,9 @@
     objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
 
     <changeSet id="1699444800004-1" author="susimsek">
-        <createTable tableName="key">
+        <createTable tableName="security_key">
             <column name="id" type="varchar(36)">
-                <constraints primaryKey="true" primaryKeyName="pk_key" nullable="false"/>
+                <constraints primaryKey="true" primaryKeyName="pk_security_key" nullable="false"/>
             </column>
             <column name="type" type="varchar(255)">
                 <constraints nullable="false"/>
@@ -36,19 +36,19 @@
             <column name="updated_by" type="varchar(50)"/>
         </createTable>
 
-        <createIndex indexName="idx_key_type" tableName="key">
+        <createIndex indexName="idx_security_key_type" tableName="security_key">
             <column name="type"/>
         </createIndex>
 
-        <createIndex indexName="idx_key_algorithm" tableName="key">
+        <createIndex indexName="idx_security_key_algorithm" tableName="security_key">
             <column name="algorithm"/>
         </createIndex>
 
-        <createIndex indexName="idx_key_kid" tableName="key">
+        <createIndex indexName="idx_security_key_kid" tableName="security_key">
             <column name="kid"/>
         </createIndex>
 
-        <createIndex indexName="idx_key_active_use" tableName="key">
+        <createIndex indexName="idx_security_key_active_use" tableName="security_key">
             <column name="active"/>
             <column name="use"/>
         </createIndex>
@@ -58,7 +58,7 @@
         <loadData
             file="config/liquibase/data/key.csv"
             separator=";"
-            tableName="key">
+            tableName="security_key">
             <column name="id" type="varchar"/>
             <column name="type" type="varchar"/>
             <column name="algorithm" type="varchar"/>
