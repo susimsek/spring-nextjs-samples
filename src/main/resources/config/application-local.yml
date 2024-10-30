@@ -7,6 +7,9 @@ spring:
       enabled: true
   messages:
     cache-duration: 1h
+  restclient:
+    connect-timeout: 5s
+    read-timeout: 10s
   liquibase:
     contexts: local
   mvc:
@@ -53,6 +56,17 @@ logging:
     discardingThreshold: 0
     maxFlushTime: 5000
     includeCallerData: false
+  loki:
+    enabled: false
+    url: http://localhost:3100/loki/api/v1/push
+  aspect:
+    enabled: true
+    log-level: FULL
+  http:
+    enabled: true
+    log-level: FULL
+  obfuscate:
+    enabled: true
 
 management:
   tracing:
