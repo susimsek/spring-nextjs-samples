@@ -9,6 +9,7 @@ import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 import io.github.susimsek.springnextjssamples.mapper.KeyMapper;
 import io.github.susimsek.springnextjssamples.repository.KeyRepository;
+import io.github.susimsek.springnextjssamples.security.AuthoritiesConstants;
 import io.github.susimsek.springnextjssamples.security.SecurityProperties;
 import io.github.susimsek.springnextjssamples.security.jwk.DomainJWKSource;
 import io.github.susimsek.springnextjssamples.security.key.KeyService;
@@ -25,6 +26,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Role;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
 @Configuration(proxyBeanMethods = false)
 @RequiredArgsConstructor
@@ -62,6 +65,17 @@ public class SecurityJwtConfig {
         jwtProcessor.setJWTClaimsSetVerifier((claims, context) -> {
         });
         return new TokenDecoder(keyService, jwtProcessor);
+    }
+
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        grantedAuthoritiesConverter.setAuthoritiesClaimName(AuthoritiesConstants.CLAIM_NAME);
+        grantedAuthoritiesConverter.setAuthorityPrefix("");
+
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+        return jwtAuthenticationConverter;
     }
 
     @Bean

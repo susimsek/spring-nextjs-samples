@@ -3,6 +3,7 @@ package io.github.susimsek.springnextjssamples.security.token;
 import com.nimbusds.jose.EncryptionMethod;
 import com.nimbusds.jose.JWEAlgorithm;
 import com.nimbusds.jose.JWEHeader;
+import io.github.susimsek.springnextjssamples.security.AuthoritiesConstants;
 import io.github.susimsek.springnextjssamples.security.SecurityProperties;
 import io.github.susimsek.springnextjssamples.security.key.Key;
 import io.github.susimsek.springnextjssamples.security.key.KeyService;
@@ -48,11 +49,11 @@ public final class TokenGenerator {
             .expiresAt(expiresAt).id(UUID.randomUUID().toString())
             .notBefore(issuedAt);
 
-        var authorizedScopes = authentication.getAuthorities().stream()
+        var authorities = authentication.getAuthorities().stream()
             .map(Object::toString)
             .toList();
-        if (!CollectionUtils.isEmpty(authorizedScopes)) {
-            claimsBuilder.claim("scope", authorizedScopes);
+        if (!CollectionUtils.isEmpty(authorities)) {
+            claimsBuilder.claim(AuthoritiesConstants.CLAIM_NAME, authorities);
         }
 
         JwsHeader.Builder jwsHeaderBuilder = JwsHeader.with(jwsAlgorithm);

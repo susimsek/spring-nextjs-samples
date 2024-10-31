@@ -1,6 +1,7 @@
 package io.github.susimsek.springnextjssamples.config;
 
 import static io.github.susimsek.springnextjssamples.constant.Constants.SPRING_PROFILE_DEVELOPMENT;
+import static io.github.susimsek.springnextjssamples.security.AuthoritiesConstants.ADMIN;
 import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
@@ -60,7 +61,7 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .httpBasic(AbstractHttpConfigurer::disable)
-            .addFilterAfter(new SpaWebFilter(), BasicAuthenticationFilter.class)
+            .logout(AbstractHttpConfigurer::disable)
             .cors(withDefaults())
             .headers(headers -> headers
                 .contentSecurityPolicy(csp -> csp.policyDirectives(securityProperties.getContentSecurityPolicy()))
@@ -77,11 +78,15 @@ public class SecurityConfig {
                     .requestMatchers(requestMatcherConfig.staticResources()).permitAll()
                     .requestMatchers(requestMatcherConfig.swaggerPaths()).permitAll()
                     .requestMatchers(requestMatcherConfig.actuatorPaths()).permitAll()
-                    .requestMatchers(requestMatcherConfig.helloApiPaths()).permitAll()
                     .requestMatchers(requestMatcherConfig.tokenPath()).permitAll()
-                    .requestMatchers(mvc.pattern(LOGIN_PAGE_URI)).permitAll()
+                    .requestMatchers(requestMatcherConfig.helloApiPaths()).hasAuthority(ADMIN)
                     .anyRequest().authenticated())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .oauth2ResourceServer(oauth2 -> oauth2
+                .authenticationEntryPoint(problemSupport)
+                .accessDeniedHandler(problemSupport)
+                .jwt(withDefaults()))
+            .addFilterAfter(new SpaWebFilter(), BasicAuthenticationFilter.class)
             .addFilterAfter(xssFilter(requestMatcherConfig), BearerTokenAuthenticationFilter.class);
         return http.build();
     }
