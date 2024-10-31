@@ -47,11 +47,9 @@ const Login = () => {
     }
   };
 
-  // Watch input changes
   const username = watch('username');
   const password = watch('password');
 
-  // Clear errors on input change
   useEffect(() => {
     if (username || password) {
       setError(null);
@@ -61,14 +59,14 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>{t('login:login.pageTitle')}</title>
+        <title>{t('common:siteTitle')}</title>
       </Head>
 
       <Header />
 
-      <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
+      <Container className="mt-4 mb-4 d-flex justify-content-center align-items-center">
         <Row className="w-100">
-          <Col xs={12} md={8} lg={5} className="mx-auto">
+          <Col xs={12} md={10} lg={6} className="mx-auto">
             <Card className="shadow-lg border-0">
               <Card.Header
                 className="text-center"

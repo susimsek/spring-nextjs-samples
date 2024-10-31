@@ -48,7 +48,7 @@ const Home = () => {
 
       <Header />
 
-      <Container className="mt-4">
+      <Container className="mt-4 mb-4">
         <h1>
           {t('home:home.heading')}
         </h1>
@@ -73,11 +73,11 @@ const Home = () => {
         )}
 
         <div className="d-flex gap-2 mb-4">
-          <Button variant="primary" className="mb-4" onClick={handleSave}>
+          <Button variant="primary" onClick={handleSave}>
             <FontAwesomeIcon icon={faSave} className="me-2"/>
             {t('common:common.save')}
           </Button>
-          <Button variant="secondary" className="ms-2 mb-4" onClick={handleCancel}>
+          <Button variant="secondary" className="ms-2" onClick={handleCancel}>
             <FontAwesomeIcon icon={faTimes} className="me-2"/>
             {t('common:common.cancel')}
           </Button>
