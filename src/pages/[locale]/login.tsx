@@ -14,7 +14,6 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '@/config/store';
 import { login as loginAction } from '@/reducers/authentication';
 import {useRedirect} from "@/hooks/useRedirect";
-import {router} from "next/client";
 
 interface LoginFormInputs {
   username: string;

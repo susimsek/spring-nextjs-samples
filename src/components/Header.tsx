@@ -2,39 +2,50 @@
 import React from 'react';
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { useTranslation } from 'next-i18next';
-import { useRouter } from 'next/router';
 import i18nextConfig from '../../next-i18next.config';
-import LanguageSwitchLink from './LanguageSwitchLink';
-import Link from 'next/link';
-import {faGlobe, faHome} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import LanguageSwitchLink from '../components/LanguageSwitchLink';
+import LinkComponent from '../components/Link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGlobe, faHome, faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import { useAppSelector, useAppDispatch } from '@/config/store';
+import { logout } from '@/reducers/authentication';
+import {useRouter} from "next/router";
 
 const Header: React.FC = () => {
   const { t } = useTranslation(['common']);
-  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
+  const router = useRouter();// Custom hook for redirecting
   const currentLocale = router.query.locale || i18nextConfig.i18n.defaultLocale;
+
+  const handleLogout = () => {
+    dispatch(logout());
+    router.replace(`/${currentLocale}/login`); // Redirect to login page after logout
+  };
 
   return (
     <Navbar bg="light" expand="lg" className="mb-4">
       <Container>
-        <Navbar.Brand href="/" className="d-flex align-items-center">
-          <img
-            src="/logo.png" // Path to logo
-            alt={t('common:common.siteTitle')}
-            width="40"
-            height="40"
-            className="d-inline-block align-top me-2"
-          />
+        <Navbar.Brand as="span" className="d-flex align-items-center">
+          <LinkComponent href="/">
+            <img
+              src="/logo.png"
+              alt={t('common:common.siteTitle')}
+              width="40"
+              height="40"
+              className="d-inline-block align-top me-2"
+            />
+          </LinkComponent>
           <span className="fw-bold">{t('common:common.siteTitle')}</span>
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">
-              <FontAwesomeIcon icon={faHome} className="me-2" />
-              {t('common:common.home')}
-            </Nav.Link>
+              <LinkComponent href="/">
+                <FontAwesomeIcon icon={faHome} className="me-2" />
+                {t('common:common.home')}
+              </LinkComponent>
           </Nav>
           <Nav>
             <NavDropdown title={<><FontAwesomeIcon icon={faGlobe} className="me-2" />{t('common:common.language')}</>} id="language-selector">
@@ -43,6 +54,17 @@ const Header: React.FC = () => {
                 return <LanguageSwitchLink locale={locale} key={locale} />;
               })}
             </NavDropdown>
+            {isAuthenticated ? (
+              <Nav.Link as="span" onClick={handleLogout} className="ms-3">
+                <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
+                {t('common:common.logout')}
+              </Nav.Link>
+            ) : (
+                <LinkComponent href="/login">
+                  <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
+                  {t('common:common.login')}
+                </LinkComponent>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

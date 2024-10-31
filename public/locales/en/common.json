@@ -7,6 +7,8 @@
     "cancel": "Cancel",
     "submit": "Submit",
     "back-to-home": "Back to Home",
+    "login": "Sign In",
+    "logout": "Sign Out",
     "saveSuccess": "Your changes have been saved successfully.",
     "cancelAction": "Action canceled.",
     "variant": {

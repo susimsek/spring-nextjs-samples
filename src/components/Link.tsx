@@ -1,17 +1,20 @@
 import React, { ReactNode } from 'react';
 import Link, { LinkProps } from 'next/link';
 import { useRouter } from 'next/router';
+import classNames from 'classnames';
 
-interface LinkComponentProps extends Omit<LinkProps, 'href'> { // 'href' dışında diğer LinkProps
+interface LinkComponentProps extends Omit<LinkProps, 'href'> {
   children: ReactNode;
   skipLocaleHandling?: boolean;
   href?: string;
+  className?: string; // Additional custom classes
 }
 
 const LinkComponent: React.FC<LinkComponentProps> = ({
                                                        children,
                                                        skipLocaleHandling = false,
                                                        href,
+                                                       className,
                                                        ...rest
                                                      }) => {
   const router = useRouter();
@@ -29,7 +32,7 @@ const LinkComponent: React.FC<LinkComponentProps> = ({
 
   return (
     <Link href={computedHref} legacyBehavior {...rest}>
-      <a>{children}</a>
+      <a className={classNames('nav-link', className)}>{children}</a>
     </Link>
   );
 };
