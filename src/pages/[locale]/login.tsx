@@ -12,6 +12,8 @@ import { LoginRequestDTO } from '@/types/loginRequestDTO';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { useAppDispatch } from '@/config/store';
+import { login as loginAction } from '@/reducers/authentication';
 
 interface LoginFormInputs {
   username: string;
@@ -24,6 +26,7 @@ const Login = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm<LoginFormInputs>({
     mode: 'onChange',
@@ -38,7 +41,7 @@ const Login = () => {
     try {
       const loginData: LoginRequestDTO = { username, password };
       const tokenData = await login(loginData);
-      console.log('Received token:', tokenData.accessToken);
+      dispatch(loginAction(tokenData.accessToken));
       await router.push('/');
     } catch (error) {
       setError(t('login:login.form.errorInvalidCredentials'));
@@ -59,29 +62,16 @@ const Login = () => {
   return (
     <>
       <Head>
-        <title>{t('common:siteTitle')}</title>
+        <title>{t('login:login.pageTitle')}</title>
       </Head>
 
       <Header />
 
-      <Container className="mt-4 mb-4 d-flex justify-content-center align-items-center">
+      <Container className="mt-4 mb-4 d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
         <Row className="w-100">
           <Col xs={12} md={10} lg={6} className="mx-auto">
             <Card className="shadow-lg border-0">
-              <Card.Header
-                className="text-center"
-                style={{
-                  backgroundColor: '#f8f9fa',
-                  color: '#333',
-                  fontWeight: 'bold',
-                  fontSize: '1.5rem',
-                  borderTopLeftRadius: '0.25rem',
-                  borderTopRightRadius: '0.25rem',
-                  padding: '1rem',
-                  marginBottom: '0.5rem',
-                  boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-                }}
-              >
+              <Card.Header className="text-center" style={{ backgroundColor: '#f8f9fa', color: '#333', fontWeight: 'bold', fontSize: '1.5rem', padding: '1rem', marginBottom: '0.5rem', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
                 {t('login:login.form.heading')}
               </Card.Header>
 
@@ -109,10 +99,7 @@ const Login = () => {
                         {...register("password", { required: t('common:common.validation.required') })}
                         isInvalid={!!errors.password}
                       />
-                      <Button
-                        variant="outline-secondary"
-                        onClick={() => setPasswordVisible(!passwordVisible)}
-                      >
+                      <Button variant="outline-secondary" onClick={() => setPasswordVisible(!passwordVisible)}>
                         <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
                       </Button>
                       <Form.Control.Feedback type="invalid">
