@@ -1,5 +1,5 @@
 // pages/login.tsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col, Alert, Spinner, Card, InputGroup } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -25,7 +25,9 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const router = useRouter();
 
-  const { register, handleSubmit, formState: { errors }, setError: setFormError, clearErrors } = useForm<LoginFormInputs>();
+  const { register, handleSubmit, formState: { errors }, watch } = useForm<LoginFormInputs>({
+    mode: 'onChange',
+  });
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
     setError(null);
@@ -37,7 +39,7 @@ const Login = () => {
       const loginData: LoginRequestDTO = { username, password };
       const tokenData = await login(loginData);
       console.log('Received token:', tokenData.accessToken);
-      router.push('/');
+      await router.push('/');
     } catch (error) {
       setError(t('login:login.form.errorInvalidCredentials'));
     } finally {
@@ -45,16 +47,21 @@ const Login = () => {
     }
   };
 
-  const handleInputChange = (field: keyof LoginFormInputs) => {
-    return (event: React.ChangeEvent<HTMLInputElement>) => {
-      clearErrors(field);
+  // Watch input changes
+  const username = watch('username');
+  const password = watch('password');
+
+  // Clear errors on input change
+  useEffect(() => {
+    if (username || password) {
       setError(null);
-    };
-  };
+    }
+  }, [username, password]);
+
   return (
     <>
       <Head>
-        <title>{t('common:siteTitle')}</title>
+        <title>{t('login:login.pageTitle')}</title>
       </Head>
 
       <Header />
@@ -89,7 +96,6 @@ const Login = () => {
                       placeholder={t('login:login.form.usernamePlaceholder')}
                       {...register("username", { required: t('common:common.validation.required') })}
                       isInvalid={!!errors.username}
-                      onChange={handleInputChange('username')}
                     />
                     <Form.Control.Feedback type="invalid">
                       {errors.username?.message}
@@ -104,7 +110,6 @@ const Login = () => {
                         placeholder={t('login:login.form.passwordPlaceholder')}
                         {...register("password", { required: t('common:common.validation.required') })}
                         isInvalid={!!errors.password}
-                        onChange={handleInputChange('password')}
                       />
                       <Button
                         variant="outline-secondary"
