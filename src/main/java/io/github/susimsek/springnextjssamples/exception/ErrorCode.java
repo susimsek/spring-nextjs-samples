@@ -16,6 +16,7 @@ public enum ErrorCode {
     UNSUPPORTED_RESPONSE_TYPE("unsupported_response_type", HttpStatus.BAD_REQUEST,
         "error.unsupported_response_type"),
     INVALID_TOKEN("invalid_token", HttpStatus.UNAUTHORIZED, "error.invalid_token"),
+    INVALID_CREDENTIALS("invalid_credentials", HttpStatus.UNAUTHORIZED, "error.invalid_credentials"),
     SERVER_ERROR("server_error", HttpStatus.INTERNAL_SERVER_ERROR, "error.server_error"),
     TEMPORARILY_UNAVAILABLE("temporarily_unavailable", HttpStatus.SERVICE_UNAVAILABLE,
         "error.temporarily_unavailable"),

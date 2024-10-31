@@ -3,9 +3,11 @@ package io.github.susimsek.springnextjssamples.service;
 
 import io.github.susimsek.springnextjssamples.dto.LoginRequestDTO;
 import io.github.susimsek.springnextjssamples.dto.TokenDTO;
+import io.github.susimsek.springnextjssamples.exception.InvalidCredentialsException;
 import io.github.susimsek.springnextjssamples.mapper.TokenMapper;
 import io.github.susimsek.springnextjssamples.security.token.TokenGenerator;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
@@ -23,19 +25,24 @@ public class AuthenticationService {
     private final TokenMapper tokenMapper;
 
     public TokenDTO authenticate(LoginRequestDTO loginRequest) throws AuthenticationException {
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-            loginRequest.username(),
-            loginRequest.password()
-        );
+        try {
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                loginRequest.username(),
+                loginRequest.password()
+            );
 
-        // Authenticate the user
-        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Authenticate the user
+            Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        // Generate JWT token
-        Jwt jwt = tokenGenerator.generate(authentication);
+            // Generate JWT token
+            Jwt jwt = tokenGenerator.generate(authentication);
 
-        // Map JWT to TokenDTO using MapStruct
-        return tokenMapper.toTokenDTO(jwt);
+            // Map JWT to TokenDTO using MapStruct
+            return tokenMapper.toTokenDTO(jwt);
+
+        } catch (BadCredentialsException ex) {
+            throw new InvalidCredentialsException();
+        }
     }
 }
