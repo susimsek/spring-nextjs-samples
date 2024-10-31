@@ -68,7 +68,7 @@ public class RequestMatcherConfig {
 
     public String[] helloApiPaths() {
         return new String[] {
-            "/api/hello/**"
+            "/api/v{version}/hello/**"
         };
     }
 

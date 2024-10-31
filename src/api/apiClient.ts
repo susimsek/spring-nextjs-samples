@@ -8,7 +8,7 @@ const TIMEOUT = 60 * 1000;
 const detectedLng = languageDetector.detect() as string;
 
 const apiClient = axios.create({
-  baseURL: '/api',
+  baseURL: '/api/v1',
   headers: {
     'Content-Type': 'application/json',
     'Accept-Language': detectedLng,

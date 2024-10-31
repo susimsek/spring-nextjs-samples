@@ -12,6 +12,12 @@ export const notificationInterceptor = (error: AxiosError): Promise<AxiosError> 
     const status = error.response.status;
     const problemDetail: ProblemDetail = error.response.data as ProblemDetail;
 
+    // Check if the request URL ends with /auth/token to support different API versions
+    if (error.config?.url?.endsWith('/auth/token')) {
+      // If it's a login request, do not show a notification and reject the error
+      return Promise.reject(error);
+    }
+
     switch (status) {
       case 401:
         // Ignore, page will be redirected to login.

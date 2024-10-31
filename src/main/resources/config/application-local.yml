@@ -15,9 +15,9 @@ spring:
   mvc:
     cors:
       enabled: true
-      allowed-origins: "http://localhost:9060"
+      allowed-origins: "http://localhost:3000"
       allowed-methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH"
-      allowed-headers: "Authorization,Content-Type,Accept,Cache-Control,X-Requested-With,Origin,Referer,User-Agent"
+      allowed-headers: "Authorization,Accept-Language,Content-Type,Accept,Cache-Control,X-Requested-With,Origin,Referer,User-Agent"
       allow-credentials: true
       max-age: 3600
   datasource:

@@ -32,7 +32,7 @@ public class HelloController {
                 schema = @Schema(example = "{\"error\": \"Internal Server Error\"}"))
         )
     })
-    @GetMapping("/api/hello")
+    @GetMapping("/api/v1/hello")
     public HelloDTO hello() {
         return new HelloDTO("Hello, Next.js!");
     }

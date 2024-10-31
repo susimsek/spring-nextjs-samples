@@ -9,14 +9,12 @@ const Footer: React.FC = () => {
   const { t } = useTranslation('footer');
 
   return (
-    <footer className="footer">
+    <footer className="bg-light text-dark py-3">
       <Container>
-        <Row>
-          <Col md={6}>
-            <p className="footer-text">{t('footer.text')}</p>
-          </Col>
-          <Col md={6} className="text-md-end">
-            <p className="footer-rights">
+        <Row className="text-center">
+          <Col>
+            <p className="mb-0">{t('footer.text')}</p>
+            <p className="mb-0 d-flex align-items-center justify-content-center">
               <FontAwesomeIcon icon={faCopyright} className="me-1" />
               {new Date().getFullYear()} {t('footer.rightsReserved')}
             </p>
