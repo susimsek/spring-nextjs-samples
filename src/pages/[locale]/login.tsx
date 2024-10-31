@@ -1,7 +1,6 @@
 // pages/login.tsx
 import { useState, useEffect } from 'react';
 import { Form, Button, Container, Row, Col, Alert, Spinner, Card, InputGroup } from 'react-bootstrap';
-import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 import Header from '@/components/Header';
@@ -14,6 +13,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '@/config/store';
 import { login as loginAction } from '@/reducers/authentication';
+import {useRedirect} from "@/hooks/useRedirect";
+import {router} from "next/client";
 
 interface LoginFormInputs {
   username: string;
@@ -25,7 +26,7 @@ const Login = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const router = useRouter();
+  const redirect = useRedirect();
   const dispatch = useAppDispatch();
 
   const { register, handleSubmit, formState: { errors }, watch } = useForm<LoginFormInputs>({
@@ -42,7 +43,7 @@ const Login = () => {
       const loginData: LoginRequestDTO = { username, password };
       const tokenData = await login(loginData);
       dispatch(loginAction(tokenData.accessToken));
-      await router.push('/');
+      redirect('/');
     } catch (error) {
       setError(t('login:login.form.errorInvalidCredentials'));
     } finally {

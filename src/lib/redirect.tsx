@@ -1,10 +1,11 @@
 // redirect.tsx
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
+import { Spinner } from 'react-bootstrap';
 import languageDetector from './languageDetector';
 
 // Helper function for language-based redirection
-const detectAndRedirect = (router, targetPath) => {
+const detectAndRedirect = (router: NextRouter, targetPath: string) => {
   const detectedLng = languageDetector.detect() as string;
 
   if (targetPath.startsWith('/' + detectedLng) && router.route === '/404') {
@@ -19,7 +20,7 @@ const detectAndRedirect = (router, targetPath) => {
   router.replace('/' + detectedLng + targetPath);
 };
 
-// Custom hook for language-based redirection
+// Custom hook for language-based redirection with spinner display
 export const useRedirect = (to?: string): JSX.Element => {
   const router = useRouter();
   const targetPath = to || router.asPath;
@@ -28,18 +29,19 @@ export const useRedirect = (to?: string): JSX.Element => {
     detectAndRedirect(router, targetPath);
   }, [router, targetPath]);
 
-  return <></>;
+  return (
+    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <Spinner animation="border" role="status" />
+    </div>
+  );
 };
 
-// Functional components for direct usage
+// Functional component for direct usage with spinner display
 export const Redirect: React.FC = () => {
-  useRedirect();
-  return <></>;
+  return useRedirect();
 };
 
-
-// Higher-order function for specific path redirection
+// Higher-order function for specific path redirection with spinner display
 export const getRedirect = (to: string): React.FC => () => {
-  useRedirect(to);
-  return <></>;
+  return useRedirect(to);
 };

@@ -10,6 +10,7 @@ import {fetchHelloMessage} from "@/api/helloApi";
 import {HelloDTO} from "@/types/helloDTO";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
+import withAuth from "@/components/withAuth";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
@@ -89,7 +90,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);
 
 const getStaticProps = makeStaticProps(['common', 'home', 'footer']);
 export {getStaticPaths, getStaticProps};
