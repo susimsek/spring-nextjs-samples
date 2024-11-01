@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,7 +27,9 @@ import org.hibernate.proxy.HibernateProxy;
 @AllArgsConstructor
 @SuperBuilder
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = CacheName.MESSAGE_ENTITY_CACHE)
-public class MessageEntity extends BaseEntity {
+public class MessageEntity extends BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "messageSequenceGenerator")

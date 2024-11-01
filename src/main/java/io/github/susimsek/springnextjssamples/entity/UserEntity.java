@@ -1,5 +1,6 @@
 package io.github.susimsek.springnextjssamples.entity;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import io.github.susimsek.springnextjssamples.cache.CacheName;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -7,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -28,7 +30,10 @@ import org.hibernate.proxy.HibernateProxy;
 @AllArgsConstructor
 @SuperBuilder
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = CacheName.USER_ENTITY_CACHE)
-public class UserEntity extends BaseEntity {
+@JsonFilter("lazyPropertyFilter")
+public class UserEntity extends BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(length = 36, nullable = false)
@@ -55,8 +60,8 @@ public class UserEntity extends BaseEntity {
     @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE,
-        region = CacheName.USER_ENTITY_CACHE + ".userRoles")
-    private Set<UserRoleMappingEntity> userRoles = new HashSet<>();
+        region = CacheName.USER_ENTITY_CACHE + ".roles")
+    private Set<UserRoleMappingEntity> roles = new HashSet<>();
 
     @Override
     public final boolean equals(Object obj) {

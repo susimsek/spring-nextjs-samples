@@ -54,7 +54,7 @@ spring:
       - roleEntity
       - roleEntityByName
       - userEntity
-      - userEntity.userRoles
+      - userEntity.roles
       - userEntityByUsername
       - userEntityByEmail
       - userRoleMappingEntity

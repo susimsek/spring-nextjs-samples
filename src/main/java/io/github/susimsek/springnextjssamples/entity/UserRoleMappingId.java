@@ -14,6 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserRoleMappingId implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @Column(name = "user_id", length = 36, nullable = false)
     private String userId;
 

@@ -3,6 +3,7 @@ package io.github.susimsek.springnextjssamples.entity;
 import jakarta.persistence.Column;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @SuperBuilder
 @ToString
-public class DateAuditingEntity {
+public class DateAuditingEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @CreatedDate
     @Column(name = "created_at", nullable = false, updatable = false)

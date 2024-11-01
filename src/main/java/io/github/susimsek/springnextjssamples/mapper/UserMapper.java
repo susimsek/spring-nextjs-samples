@@ -14,7 +14,7 @@ public interface UserMapper {
         return User.builder()
             .username(userEntity.getUsername())
             .password(userEntity.getPassword())
-            .authorities(userEntity.getUserRoles().stream()
+            .authorities(userEntity.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority(role.getRole().getName()))
                 .collect(Collectors.toSet()))
             .accountExpired(false)

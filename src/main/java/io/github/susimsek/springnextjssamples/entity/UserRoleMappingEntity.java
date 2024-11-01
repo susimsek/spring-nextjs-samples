@@ -10,6 +10,7 @@ import jakarta.persistence.IdClass;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,7 +30,9 @@ import org.hibernate.proxy.HibernateProxy;
 @AllArgsConstructor
 @SuperBuilder
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = CacheName.USER_ROLE_MAPPING_ENTITY_CACHE)
-public class UserRoleMappingEntity extends BaseEntity {
+public class UserRoleMappingEntity extends BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "user_id", length = 36, nullable = false)
