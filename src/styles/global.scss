@@ -79,6 +79,11 @@ body {
   .nav-link,
   .navbar-brand {
     color: var(--navbar-text-color) !important;
+    transition: color 0.2s ease-in-out; // Smooth transition for hover effect
+
+    &:hover {
+      color: var(--highlight-text-color) !important; // Adjusted hover color
+    }
   }
 
   .btn-outline-secondary {
@@ -229,18 +234,18 @@ p, h1, h2, h3, h4, h5, h6 {
   background-color: transparent !important; /* Transparent background initially */
   color: inherit; /* Matches text color to surrounding text */
   box-shadow: none !important; /* Ensures no shadow appears */
-  transition: none; /* Removes any transition effects */
+  transition: color 0.2s ease-in-out; /* Smooth transition for color changes */
 
   /* Remove hover, active, and focus effects */
-  &:hover, &:focus, &:active {
+  &:hover {
     background-color: transparent !important; /* Keeps background transparent */
-    color: inherit !important; /* Ensures text color doesn’t change */
+    color: var(--highlight-text-color) !important; /* Changes color on hover */
     opacity: 1 !important; /* Prevents transparency */
     box-shadow: none !important; /* No shadow on hover */
     outline: none; /* Removes outline */
   }
 
-  /* Optional: adjust alignment and spacing */
+  /* Alignment and spacing */
   display: flex;
   align-items: center;
 }
