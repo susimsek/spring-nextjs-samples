@@ -25,6 +25,9 @@
   --primary-text-color: #007acc; /* Primary blue color */
   --error-text-color: #d9534f; /* Light theme error color */
   --border-color: #ced4da; /* Standardized light theme border */
+  --alert-danger-bg: #f8d7da; /* Alert background for light theme */
+  --alert-danger-border: #f5c6cb; /* Alert border for light theme */
+  --alert-danger-text: #721c24; /* Alert text color for light theme */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -54,6 +57,9 @@
   --primary-text-color: #66b3ff; /* Softer blue primary color */
   --error-text-color: #ff6b6b; /* Dark theme error color */
   --border-color: #444444; /* Standardized dark theme border */
+  --alert-danger-bg: #45171d; /* Alert background for dark theme */
+  --alert-danger-border: #5e252a; /* Alert border for dark theme */
+  --alert-danger-text: #ff6b6b; /* Alert text color for dark theme */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -199,6 +205,12 @@ footer {
 .alert-info {
   background-color: var(--highlight-text-color);
   color: #ffffff;
+}
+
+.alert-danger {
+  background-color: var(--alert-danger-bg) !important;
+  color: var(--alert-danger-text) !important;
+  border-color: var(--alert-danger-border) !important;
 }
 
 // Apply text color to general elements
