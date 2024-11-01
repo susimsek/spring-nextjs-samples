@@ -1,26 +1,41 @@
 // components/Header.tsx
-import React from 'react';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
+import React, {useState} from 'react';
+import { Navbar, Nav, Container, NavDropdown, Button } from 'react-bootstrap';
 import { useTranslation } from 'next-i18next';
 import i18nextConfig from '../../next-i18next.config';
 import LanguageSwitchLink from '../components/LanguageSwitchLink';
 import LinkComponent from '../components/Link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobe, faHome, faSignOutAlt, faSignInAlt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faGlobe,
+  faHome,
+  faSignOutAlt,
+  faSignInAlt,
+  faSun,
+  faMoon,
+  faTimes,
+  faBars
+} from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector, useAppDispatch } from '@/config/store';
 import { logout } from '@/reducers/authentication';
-import {useRouter} from "next/router";
+import { toggleTheme } from '@/reducers/theme'; // Import theme toggle action
+import { useRouter } from 'next/router';
 
 const Header: React.FC = () => {
   const { t } = useTranslation(['common']);
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
-  const router = useRouter();// Custom hook for redirecting
+  const currentTheme = useAppSelector(state => state.theme.theme); // Get the current theme
+  const router = useRouter();
   const currentLocale = router.query.locale || i18nextConfig.i18n.defaultLocale;
 
   const handleLogout = () => {
     dispatch(logout());
-    router.replace(`/${currentLocale}/login`); // Redirect to login page after logout
+    router.replace(`/${currentLocale}/login`);
+  };
+
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme());
   };
 
   return (
@@ -39,13 +54,16 @@ const Header: React.FC = () => {
           <span className="fw-bold">{t('common:common.siteTitle')}</span>
         </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Toggle aria-controls="basic-navbar-nav">
+          <FontAwesomeIcon icon={faBars} className="navbar-toggler-icon" />
+        </Navbar.Toggle>
+
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-              <LinkComponent href="/">
-                <FontAwesomeIcon icon={faHome} className="me-2" />
-                {t('common:common.home')}
-              </LinkComponent>
+            <LinkComponent href="/">
+              <FontAwesomeIcon icon={faHome} className="me-2" />
+              {t('common:common.home')}
+            </LinkComponent>
           </Nav>
           <Nav>
             <NavDropdown title={<><FontAwesomeIcon icon={faGlobe} className="me-2" />{t('common:common.language')}</>} id="language-selector">
@@ -54,16 +72,23 @@ const Header: React.FC = () => {
                 return <LanguageSwitchLink locale={locale} key={locale} />;
               })}
             </NavDropdown>
+            <Button
+              onClick={handleThemeToggle}
+              className="theme-toggle ps-0 ps-lg-3 me-2"
+            >
+              <FontAwesomeIcon icon={currentTheme === 'dark' ? faSun : faMoon} className="me-2" />
+              {currentTheme === 'dark' ? t('common:common.theme.lightMode') : t('common:common.theme.darkMode')}
+            </Button>
             {isAuthenticated ? (
-              <Nav.Link as="span" onClick={handleLogout} className="ms-3">
+              <Nav.Link as="span" onClick={handleLogout}>
                 <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
                 {t('common:common.logout')}
               </Nav.Link>
             ) : (
-                <LinkComponent href="/login">
-                  <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
-                  {t('common:common.login')}
-                </LinkComponent>
+              <LinkComponent href="/login">
+                <FontAwesomeIcon icon={faSignInAlt} className="me-2" />
+                {t('common:common.login')}
+              </LinkComponent>
             )}
           </Nav>
         </Navbar.Collapse>

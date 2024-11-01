@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '@/config/store';
 import { login as loginAction } from '@/reducers/authentication';
-import {useRedirect} from "@/hooks/useRedirect";
+import { useRedirect } from '@/hooks/useRedirect';
 
 interface LoginFormInputs {
   username: string;
@@ -67,11 +67,11 @@ const Login = () => {
 
       <Header />
 
-      <Container className="mt-4 mb-4 d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
+      <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
         <Row className="w-100">
           <Col xs={12} md={10} lg={6} className="mx-auto">
             <Card className="shadow-lg border-0">
-              <Card.Header className="text-center" style={{ backgroundColor: '#f8f9fa', color: '#333', fontWeight: 'bold', fontSize: '1.5rem', padding: '1rem', marginBottom: '0.5rem', boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)' }}>
+              <Card.Header className="text-center" style={{fontWeight: 'bold', fontSize: '1.5rem', padding: '1rem' }}>
                 {t('login:login.form.heading')}
               </Card.Header>
 

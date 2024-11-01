@@ -46,6 +46,10 @@
       "alpha": "Bu alan sadece harf içermelidir.",
       "alphanumeric": "Bu alan sadece harf ve rakam içermelidir.",
       "passwordStrength": "Şifre en az bir büyük harf, bir sayı ve bir özel karakter içeren en az 8 karakter olmalıdır."
+    },
+    "theme": {
+      "darkMode": "Koyu Mod",
+      "lightMode": "Açık Mod"
     }
   }
 }

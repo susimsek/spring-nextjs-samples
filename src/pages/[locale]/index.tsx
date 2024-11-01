@@ -1,22 +1,19 @@
 // pages/index.tsx
-import {Container, Button, Spinner, Alert} from 'react-bootstrap';
+import { Container, Button, Spinner, Alert } from 'react-bootstrap';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 import { makeStaticProps, getStaticPaths } from '@/lib/getStatic';
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import {fetchHelloMessage} from "@/api/helloApi";
-import {HelloDTO} from "@/types/helloDTO";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSave, faTimes} from "@fortawesome/free-solid-svg-icons";
-import withAuth from "@/components/withAuth";
+import { fetchHelloMessage } from "@/api/helloApi";
+import { HelloDTO } from "@/types/helloDTO";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
   const [messageData, setMessageData] = useState<HelloDTO | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [showAlert, setShowAlert] = useState<string | null>(null); // Alert için state
+  const [showAlert, setShowAlert] = useState<string | null>(null);
 
   useEffect(() => {
     const getMessage = async () => {
@@ -33,14 +30,6 @@ const Home = () => {
     getMessage();
   }, []);
 
-  const handleSave = () => {
-    setShowAlert(t('common:common.saveSuccess'));
-  };
-
-  const handleCancel = () => {
-    setShowAlert(t('common:common.cancelAction'));
-  };
-
   return (
     <>
       <Head>
@@ -49,11 +38,11 @@ const Home = () => {
 
       <Header />
 
-      <Container className="mt-4 mb-4">
+      <Container className="mt-4 mb-4" style={{ minHeight: '80vh' }}>
         <h1>
           {t('home:home.heading')}
         </h1>
-        <p>{t('home:home.description')}</p>
+        <p style={{ color: 'var(--text-color)' }}>{t('home:home.description')}</p>
 
         <div className="my-3">
           {loading ? (
@@ -61,7 +50,7 @@ const Home = () => {
               <span className="visually-hidden">Loading...</span>
             </Spinner>
           ) : (
-            <p className="text-primary" style={{fontWeight: 'bold'}}>
+            <p className="text-primary" style={{ fontWeight: 'bold'}}>
               {messageData?.message}
             </p>
           )}
@@ -72,25 +61,14 @@ const Home = () => {
             {showAlert}
           </Alert>
         )}
-
-        <div className="d-flex gap-2 mb-4">
-          <Button variant="primary" onClick={handleSave}>
-            <FontAwesomeIcon icon={faSave} className="me-2"/>
-            {t('common:common.save')}
-          </Button>
-          <Button variant="secondary" className="ms-2" onClick={handleCancel}>
-            <FontAwesomeIcon icon={faTimes} className="me-2"/>
-            {t('common:common.cancel')}
-          </Button>
-        </div>
       </Container>
 
-      <Footer/>
+      <Footer />
     </>
   );
 };
 
-export default withAuth(Home);
+export default Home;
 
 const getStaticProps = makeStaticProps(['common', 'home', 'footer']);
-export {getStaticPaths, getStaticProps};
+export { getStaticPaths, getStaticProps };

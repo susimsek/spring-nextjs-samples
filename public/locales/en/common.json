@@ -46,6 +46,10 @@
       "alpha": "This field should only contain letters.",
       "alphanumeric": "This field should only contain letters and numbers.",
       "passwordStrength": "Password must contain at least 8 characters, including an uppercase letter, a number, and a special character."
+    },
+    "theme": {
+      "darkMode": "Dark Mode",
+      "lightMode": "Light Mode"
     }
   }
 }

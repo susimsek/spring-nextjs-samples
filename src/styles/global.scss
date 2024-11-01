@@ -1,3 +1,234 @@
+// Import Bootstrap SCSS
 @import 'bootstrap/scss/bootstrap';
-// styles/globals.scss
 
+// Light Theme
+.light-theme {
+  --background-color: #f4f6f8; /* Light gray for a softer background */
+  --text-color: #2c3e50; /* Dark gray-blue for better readability */
+  --highlight-text-color: #007acc; /* Calmer blue for highlighted text */
+  --navbar-bg-color: #ffffff; /* Pure white for navbar */
+  --navbar-text-color: #2c3e50; /* Dark gray-blue text color */
+  --navbar-btn-border-color: #d1dce5; /* Slightly lighter gray for button borders */
+  --navbar-btn-text-color: #2c3e50;
+  --footer-bg-color: #ffffff; /* Light gray for footer */
+  --navbar-collapse-bg-color: #ffffff; /* New variable for collapse background */
+  --footer-text-color: #2c3e50;
+  --card-bg-color: #ffffff; /* White for card background */
+  --card-text-color: #2c3e50;
+  --input-bg-color: #ffffff; /* White input background */
+  --input-border-color: #d1dce5; /* Light gray border for inputs */
+  --button-bg-color: #007acc; /* Blue for primary buttons */
+  --button-border-color: #007acc;
+  --button-text-color: #ffffff; /* White text on buttons */
+  --button-bg-color-hover: #005c99; /* Darker blue for hover effect */
+  --placeholder-color: #a1aab3;
+  --primary-text-color: #007acc; /* Primary blue color */
+  --error-text-color: #d9534f; /* Light theme error color */
+  --border-color: #ced4da; /* Standardized light theme border */
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+// Dark Theme
+.dark-theme {
+  --background-color: #1c1c1e; /* Darker gray for background to reduce eye strain */
+  --text-color: #e0e0e0; /* Light gray for readability */
+  --highlight-text-color: #66b3ff; /* Softer blue for highlighted text */
+  --navbar-bg-color: #2c2c2e; /* Dark gray for navbar */
+  --navbar-text-color: #e0e0e0;
+  --navbar-btn-border-color: #3a3a3c; /* Dark gray for button borders */
+  --navbar-btn-text-color: #e0e0e0;
+  --navbar-collapse-bg-color: #2c2c2e; /* New variable for collapse background */
+  --footer-bg-color: #2c2c2e; /* Dark gray for footer */
+  --footer-text-color: #e0e0e0;
+  --card-bg-color: #2c2c2e; /* Dark gray for card background */
+  --card-text-color: #e0e0e0;
+  --input-bg-color: #3a3a3c; /* Darker gray for inputs */
+  --input-border-color: #4a4a4c; /* Gray border for inputs */
+  --button-bg-color: #4a90e2; /* Muted blue for primary buttons */
+  --button-border-color: #4a90e2;
+  --button-text-color: #ffffff; /* White text on buttons */
+  --button-bg-color-hover: #357ABD; /* Darker blue for hover effect */
+  --placeholder-color: #b0b0b0;
+  --primary-text-color: #66b3ff; /* Softer blue primary color */
+  --error-text-color: #ff6b6b; /* Dark theme error color */
+  --border-color: #444444; /* Standardized dark theme border */
+
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+// General theme settings for body and general text
+body {
+  background-color: var(--background-color) !important;
+  color: var(--text-color) !important;
+}
+
+// Navbar styling
+.navbar {
+  background-color: var(--navbar-bg-color) !important;
+  color: var(--navbar-text-color);
+
+  .nav-link,
+  .navbar-brand {
+    color: var(--navbar-text-color) !important;
+  }
+
+  .btn-outline-secondary {
+    border-color: var(--navbar-btn-border-color);
+    color: var(--navbar-btn-text-color);
+
+    &:hover {
+      background-color: var(--navbar-btn-border-color);
+      color: var(--navbar-bg-color);
+    }
+  }
+}
+
+.navbar-toggler {
+  color: var(--navbar-text-color); /* Match the color of the navbar text */
+  background-color: transparent !important; /* Transparent background */
+  border: 1px solid var(--border-color) !important; /* Apply standardized border color */
+  border-radius: 0.25rem; /* Optional: rounded border for a smoother appearance */
+}
+
+.navbar-toggler-icon {
+  background-image: none; /* Remove default icon */
+  color: var(--navbar-text-color); /* Set icon color to match text */
+  font-size: 1.2rem; /* Adjust size for better visibility */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-toggler {
+  padding: 0.5rem 1rem; /* Comfortable padding */
+  border: 1px solid var(--navbar-btn-border-color) !important;
+  background-color: var(--navbar-bg-color); /* Match background color to navbar */
+  color: var(--navbar-text-color); /* Match text color to theme */
+  border-radius: 0.375rem; /* Rounded corners for a softer look */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+
+  &:hover, &:focus {
+    background-color: var(--highlight-text-color); /* Highlight on hover */
+    color: #ffffff; /* White text on hover for contrast */
+    outline: none;
+  }
+}
+
+// Card styling
+.card {
+  background-color: var(--card-bg-color);
+  color: var(--card-text-color);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+  .card-header {
+    background-color: var(--card-bg-color);
+    color: var(--card-text-color);
+    border-bottom: 1px solid var(--input-border-color);
+    font-weight: bold;
+  }
+
+  .card-body {
+    color: var(--card-text-color);
+  }
+}
+
+// Button styling
+button, .btn-primary {
+  background-color: var(--button-bg-color);
+  border-color: var(--button-border-color);
+  color: var(--button-text-color);
+
+  &:hover {
+    background-color: var(--button-bg-color-hover);
+    border-color: var(--button-border-color-hover);
+  }
+}
+
+// Form input styling
+.form-control {
+  background-color: var(--input-bg-color) !important;
+  border-color: var(--input-border-color) !important;
+  color: var(--text-color) !important;
+}
+
+// Apply primary color to .text-primary class based on theme
+.text-primary {
+  color: var(--primary-text-color) !important;
+}
+
+// Form control error message styling
+.form-control.is-invalid {
+  border-color: var(--error-text-color) !important;
+}
+
+.form-control.is-invalid ~ .invalid-feedback {
+  color: var(--error-text-color) !important;
+}
+
+// Footer styling
+footer {
+  background-color: var(--footer-bg-color);
+  color: var(--footer-text-color);
+  padding: 1rem 0;
+
+  p, span, .nav-link {
+    color: var(--footer-text-color) !important;
+  }
+
+  .footer-rights, .footer-text {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .footer-rights {
+    font-size: 0.875rem;
+  }
+}
+
+// Spinner styling
+.spinner-border {
+  color: var(--text-color);
+}
+
+// Alert styling
+.alert-info {
+  background-color: var(--highlight-text-color);
+  color: #ffffff;
+}
+
+// Apply text color to general elements
+p, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color);
+}
+
+.form-control::placeholder {
+  color: var(--placeholder-color);
+  opacity: 1;
+}
+
+
+.theme-toggle {
+  border: none !important; /* Removes the button border */
+  background-color: transparent !important; /* Transparent background initially */
+  color: inherit; /* Matches text color to surrounding text */
+  box-shadow: none !important; /* Ensures no shadow appears */
+  transition: none; /* Removes any transition effects */
+
+  /* Remove hover, active, and focus effects */
+  &:hover, &:focus, &:active {
+    background-color: transparent !important; /* Keeps background transparent */
+    color: inherit !important; /* Ensures text color doesn’t change */
+    opacity: 1 !important; /* Prevents transparency */
+    box-shadow: none !important; /* No shadow on hover */
+    outline: none; /* Removes outline */
+  }
+
+  /* Optional: adjust alignment and spacing */
+  display: flex;
+  align-items: center;
+}
