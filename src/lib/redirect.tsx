@@ -1,8 +1,8 @@
-// redirect.tsx
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { NextRouter, useRouter } from 'next/router';
-import { Spinner } from 'react-bootstrap';
+import {useAppSelector} from '@/config/store';
 import languageDetector from './languageDetector';
+import {Spinner} from "react-bootstrap";
 
 // Helper function for language-based redirection
 const detectAndRedirect = (router: NextRouter, targetPath: string) => {
@@ -24,14 +24,17 @@ const detectAndRedirect = (router: NextRouter, targetPath: string) => {
 export const useRedirect = (to?: string): JSX.Element => {
   const router = useRouter();
   const targetPath = to || router.asPath;
+  const theme = useAppSelector((state) => state.theme.theme);
 
   useEffect(() => {
     detectAndRedirect(router, targetPath);
   }, [router, targetPath]);
 
   return (
-    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-      <Spinner animation="border" role="status" />
+    <div className={theme === 'dark' ? 'dark-theme' : 'light-theme'}>
+      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+        <Spinner animation="border" role="status" />
+      </div>
     </div>
   );
 };
