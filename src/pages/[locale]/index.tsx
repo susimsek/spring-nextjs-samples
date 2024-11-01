@@ -8,6 +8,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { fetchHelloMessage } from "@/api/helloApi";
 import { HelloDTO } from "@/types/helloDTO";
+import withAuth from "@/components/withAuth";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
@@ -68,7 +69,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);
 
 const getStaticProps = makeStaticProps(['common', 'home', 'footer']);
 export { getStaticPaths, getStaticProps };
