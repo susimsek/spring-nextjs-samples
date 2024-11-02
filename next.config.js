@@ -4,6 +4,13 @@ const options = {
   tls: false,
 };
 
+const sources = [
+  '/api/:path*',
+  '/h2-console',
+  '/swagger-ui.html',
+  '/swagger-ui/:path*',
+  '/v3/api-docs/:path*'];
+
 const nextConfig = {
   distDir: 'target/classes/static',
   output: 'export',
@@ -12,12 +19,10 @@ const nextConfig = {
   },
   ...(isDev && {
     async rewrites() {
-      return [
-        {
-          source: '/api/:path*',
-          destination: `http${options.tls ? 's' : ''}://localhost:8080/api/:path*`,
-        },
-      ];
+      return sources.map((source) => ({
+        source,
+        destination: `http${options.tls ? 's' : ''}://localhost:8080${source}`,
+      }));
     },
   }),
 };
