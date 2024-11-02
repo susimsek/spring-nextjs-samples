@@ -38,8 +38,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg">
-      <Container>
+    <Navbar bg="light" expand="lg" className="p-3">
         <Navbar.Brand as="span" className="d-flex align-items-center">
           <LinkComponent href="/">
             <img
@@ -57,7 +56,7 @@ const Header: React.FC = () => {
           <FontAwesomeIcon icon={faBars} className="navbar-toggler-icon" />
         </Navbar.Toggle>
 
-        <Navbar.Collapse id="basic-navbar-nav">
+        <Navbar.Collapse id="basic-navbar-nav" className="p-3">
           <Nav className="me-auto">
             <LinkComponent href="/">
               <FontAwesomeIcon icon={faHome} className="me-2" />
@@ -91,7 +90,6 @@ const Header: React.FC = () => {
             )}
           </Nav>
         </Navbar.Collapse>
-      </Container>
     </Navbar>
   );
 };

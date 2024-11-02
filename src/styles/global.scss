@@ -28,7 +28,7 @@
   --alert-danger-bg: #f8d7da; /* Alert background for light theme */
   --alert-danger-border: #f5c6cb; /* Alert border for light theme */
   --alert-danger-text: #721c24; /* Alert text color for light theme */
-  --sidebar-bg-color: #f8f9fa; /* Sidebar background color for light theme */
+  --sidebar-bg-color: #f1f3f5; /* Sidebar background color for light theme */
   --sidebar-text-color: #2c3e50; /* Sidebar text color for light theme */
   --sidebar-hover-bg-color: #e9ecef; /* Sidebar hover background color for light theme */
   --sidebar-active-bg-color: #007acc; /* Sidebar active background color for light theme */
@@ -266,7 +266,6 @@ p, h1, h2, h3, h4, h5, h6 {
 
   .nav-link {
     color: var(--sidebar-text-color);
-    padding: 0.75rem 1rem;
     transition: background-color 0.3s, color 0.3s;
 
     &:hover {

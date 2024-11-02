@@ -10,7 +10,7 @@ const Sidebar: React.FC = () => {
   const { t } = useTranslation('common');
 
   return (
-    <Nav className="flex-column sidebar p-3 min-vh-100">
+    <Nav className="d-flex flex-column sidebar p-3 flex-grow-1">
       <Nav.Item className="mb-3">
         <LinkComponent href="/">
           <FontAwesomeIcon icon={faHome} className="me-2" />
