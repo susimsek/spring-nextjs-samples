@@ -38,7 +38,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg" className="p-3">
+    <Navbar bg="light" expand="lg" className="p-2">
         <Navbar.Brand as="span" className="d-flex align-items-center">
           <LinkComponent href="/">
             <img
