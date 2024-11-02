@@ -1,6 +1,7 @@
 package io.github.susimsek.springnextjssamples.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import io.github.susimsek.springnextjssamples.cache.CacheName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -30,6 +31,7 @@ import org.hibernate.proxy.HibernateProxy;
 @AllArgsConstructor
 @SuperBuilder
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = CacheName.USER_ROLE_MAPPING_ENTITY_CACHE)
+@JsonFilter("lazyPropertyFilter")
 public class UserRoleMappingEntity extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;

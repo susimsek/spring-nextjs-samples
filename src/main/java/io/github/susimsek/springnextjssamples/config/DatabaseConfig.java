@@ -1,9 +1,9 @@
 package io.github.susimsek.springnextjssamples.config;
 
 import static io.github.susimsek.springnextjssamples.constant.Constants.SPRING_PROFILE_DEVELOPMENT;
-import static io.github.susimsek.springnextjssamples.constant.Constants.SYSTEM;
 
 import io.github.susimsek.springnextjssamples.h2.H2ConfigurationHelper;
+import io.github.susimsek.springnextjssamples.security.SpringSecurityAuditorAware;
 import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Instant;
@@ -35,7 +35,7 @@ public class DatabaseConfig {
 
     @Bean
     public AuditorAware<String> springSecurityAuditorAware() {
-        return () -> Optional.of(SYSTEM);
+        return new SpringSecurityAuditorAware();
     }
 
     @Bean
