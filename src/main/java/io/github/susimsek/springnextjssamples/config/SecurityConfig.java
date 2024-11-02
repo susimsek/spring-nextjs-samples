@@ -46,15 +46,12 @@ public class SecurityConfig {
     private final SecurityProperties securityProperties;
     private final Environment env;
 
-    private static final String LOGIN_PAGE_URI = "/login";
-
     @Bean
     @Order(org.springframework.boot.autoconfigure.security.SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain defaultSecurityFilterChain(
         HttpSecurity http,
         RequestMatcherConfig requestMatcherConfig,
-        SecurityProblemSupport problemSupport,
-        MvcRequestMatcher.Builder mvc) throws Exception {
+        SecurityProblemSupport problemSupport) throws Exception {
         if (env.acceptsProfiles(Profiles.of(SPRING_PROFILE_DEVELOPMENT))) {
             http.authorizeHttpRequests(authz -> authz.requestMatchers(antMatcher("/h2-console/**")).permitAll());
         }
