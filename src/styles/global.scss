@@ -3,10 +3,10 @@
 
 // Light Theme
 .light-theme {
-  --background-color: #f4f6f8; /* Light gray for a softer background */
+  --background-color: #ffffff; /* Light gray for a softer background */
   --text-color: #2c3e50; /* Dark gray-blue for better readability */
   --highlight-text-color: #007acc; /* Calmer blue for highlighted text */
-  --navbar-bg-color: #ffffff; /* Pure white for navbar */
+  --navbar-bg-color: #f8f9fa; /* Pure white for navbar */
   --navbar-text-color: #2c3e50; /* Dark gray-blue text color */
   --navbar-btn-border-color: #d1dce5; /* Slightly lighter gray for button borders */
   --navbar-btn-text-color: #2c3e50;
@@ -28,6 +28,11 @@
   --alert-danger-bg: #f8d7da; /* Alert background for light theme */
   --alert-danger-border: #f5c6cb; /* Alert border for light theme */
   --alert-danger-text: #721c24; /* Alert text color for light theme */
+  --sidebar-bg-color: #f8f9fa; /* Sidebar background color for light theme */
+  --sidebar-text-color: #2c3e50; /* Sidebar text color for light theme */
+  --sidebar-hover-bg-color: #e9ecef; /* Sidebar hover background color for light theme */
+  --sidebar-active-bg-color: #007acc; /* Sidebar active background color for light theme */
+  --sidebar-active-text-color: #ffffff; /* Sidebar active text color for light theme */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -35,15 +40,15 @@
 
 // Dark Theme
 .dark-theme {
-  --background-color: #1c1c1e; /* Darker gray for background to reduce eye strain */
+  --background-color: #323437; /* Darker gray for background to reduce eye strain */
   --text-color: #e0e0e0; /* Light gray for readability */
   --highlight-text-color: #66b3ff; /* Softer blue for highlighted text */
-  --navbar-bg-color: #2c2c2e; /* Dark gray for navbar */
+  --navbar-bg-color: #1c1c1e; /* Dark gray for navbar */
   --navbar-text-color: #e0e0e0;
   --navbar-btn-border-color: #3a3a3c; /* Dark gray for button borders */
   --navbar-btn-text-color: #e0e0e0;
   --navbar-collapse-bg-color: #2c2c2e; /* New variable for collapse background */
-  --footer-bg-color: #2c2c2e; /* Dark gray for footer */
+  --footer-bg-color: #1c1c1e; /* Dark gray for footer */
   --footer-text-color: #e0e0e0;
   --card-bg-color: #2c2c2e; /* Dark gray for card background */
   --card-text-color: #e0e0e0;
@@ -60,6 +65,11 @@
   --alert-danger-bg: #45171d; /* Alert background for dark theme */
   --alert-danger-border: #5e252a; /* Alert border for dark theme */
   --alert-danger-text: #ff6b6b; /* Alert text color for dark theme */
+  --sidebar-bg-color: #2b2d2f;/* Sidebar background color for dark theme */
+  --sidebar-text-color: #e0e0e0; /* Sidebar text color for dark theme */
+  --sidebar-hover-bg-color: #3a3a3c; /* Sidebar hover background color for dark theme */
+  --sidebar-active-bg-color: #66b3ff; /* Sidebar active background color for dark theme */
+  --sidebar-active-text-color: #ffffff; /* Sidebar active text color for dark theme */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -248,4 +258,29 @@ p, h1, h2, h3, h4, h5, h6 {
   /* Alignment and spacing */
   display: flex;
   align-items: center;
+}
+
+.sidebar {
+  background-color: var(--sidebar-bg-color);
+  color: var(--sidebar-text-color);
+
+  .nav-link {
+    color: var(--sidebar-text-color);
+    padding: 0.75rem 1rem;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+      background-color: var(--sidebar-hover-bg-color);
+      color: var(--highlight-text-color) !important; // Hover için temaya göre renk
+    }
+
+    &.active {
+      background-color: var(--sidebar-active-bg-color);
+      color: var(--sidebar-active-text-color);
+    }
+  }
+
+  .nav-item {
+    margin-bottom: 0.5rem;
+  }
 }

@@ -50,6 +50,11 @@
     "theme": {
       "darkMode": "Koyu Mod",
       "lightMode": "Açık Mod"
+    },
+    "menu": {
+      "home": "Ana Sayfa",
+      "api": "API",
+      "database": "Veritabanı"
     }
   }
 }

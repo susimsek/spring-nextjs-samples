@@ -1,14 +1,14 @@
 // pages/index.tsx
-import { Container, Button, Spinner, Alert } from 'react-bootstrap';
+import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
 import { makeStaticProps, getStaticPaths } from '@/lib/getStatic';
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import Sidebar from '@/components/Sidebar';
 import { fetchHelloMessage } from "@/api/helloApi";
 import { HelloDTO } from "@/types/helloDTO";
-import withAuth from "@/components/withAuth";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
@@ -39,37 +39,45 @@ const Home = () => {
 
       <Header />
 
-      <Container className="mt-4 mb-4" style={{ minHeight: '80vh' }}>
-        <h1>
-          {t('home:home.heading')}
-        </h1>
-        <p style={{ color: 'var(--text-color)' }}>{t('home:home.description')}</p>
+      <Container fluid className="d-flex flex-column min-vh-100 p-0">
+        <Row className="flex-grow-1 g-0">
+          {/* Sidebar Column */}
+          <Col xs={12} md={3} className="p-0 d-flex flex-column">
+            <Sidebar />
+          </Col>
 
-        <div className="my-3">
-          {loading ? (
-            <Spinner animation="border" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          ) : (
-            <p className="text-primary" style={{ fontWeight: 'bold'}}>
-              {messageData?.message}
-            </p>
-          )}
-        </div>
+          {/* Main Content Column */}
+          <Col xs={12} md={9} className="p-4">
+            <h1>{t('home:home.heading')}</h1>
+            <p style={{ color: 'var(--text-color)' }}>{t('home:home.description')}</p>
 
-        {showAlert && (
-          <Alert variant="info" onClose={() => setShowAlert(null)} dismissible>
-            {showAlert}
-          </Alert>
-        )}
+            <div className="my-3">
+              {loading ? (
+                <Spinner animation="border" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              ) : (
+                <p className="text-primary" style={{ fontWeight: 'bold' }}>
+                  {messageData?.message}
+                </p>
+              )}
+            </div>
+
+            {showAlert && (
+              <Alert variant="info" onClose={() => setShowAlert(null)} dismissible>
+                {showAlert}
+              </Alert>
+            )}
+          </Col>
+        </Row>
+
+        <Footer />
       </Container>
-
-      <Footer />
     </>
   );
 };
 
-export default withAuth(Home);
+export default Home;
 
 const getStaticProps = makeStaticProps(['common', 'home', 'footer']);
 export { getStaticPaths, getStaticProps };

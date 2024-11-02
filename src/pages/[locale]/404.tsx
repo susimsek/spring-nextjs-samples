@@ -17,22 +17,33 @@ const Custom404 = () => {
         <title>{t('404:404.title')}</title>
       </Head>
 
-      <Header />
+      <div className="d-flex flex-column min-vh-100">
+        <Header />
 
-      <Container className="text-center my-5">
-        <Alert variant="danger" className="p-3" style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <h1 className="h4 mb-2">{t('404:404.h1')}</h1>
-          <p>{t('404:404.description')}</p>
-        </Alert>
+        <Container
+          fluid
+          className="d-flex flex-grow-1 justify-content-center align-items-center"
+          style={{
+            backgroundColor: "var(--background-color)"
+          }}
+        >
+          <Alert
+            variant="danger"
+            className="text-center d-flex flex-column align-items-center justify-content-center"
+            style={{ width: '100%', maxWidth: '600px', padding: '2rem' }}
+          >
+            <h1 className="h4 mb-3">{t('404:404.h1')}</h1>
+            <p>{t('404:404.description')}</p>
+            <Link href="/" passHref>
+              <Button variant="primary" type="button" className="mt-4">
+                {t('common:common.back-to-home')}
+              </Button>
+            </Link>
+          </Alert>
+        </Container>
 
-        <Link href="/" passHref>
-          <Button variant="primary" type="button" className="mt-3">
-            {t('common:common.back-to-home')}
-          </Button>
-        </Link>
-      </Container>
-
-      <Footer />
+        <Footer />
+      </div>
     </>
   );
 };

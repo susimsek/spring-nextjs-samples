@@ -50,6 +50,11 @@
     "theme": {
       "darkMode": "Dark Mode",
       "lightMode": "Light Mode"
+    },
+    "menu": {
+      "home": "Home",
+      "api": "API",
+      "database": "Database"
     }
   }
 }

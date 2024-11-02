@@ -1,5 +1,5 @@
 // components/Header.tsx
-import React, {useState} from 'react';
+import React from 'react';
 import { Navbar, Nav, Container, NavDropdown, Button } from 'react-bootstrap';
 import { useTranslation } from 'next-i18next';
 import i18nextConfig from '../../next-i18next.config';
@@ -13,7 +13,6 @@ import {
   faSignInAlt,
   faSun,
   faMoon,
-  faTimes,
   faBars
 } from '@fortawesome/free-solid-svg-icons';
 import { useAppSelector, useAppDispatch } from '@/config/store';
@@ -39,7 +38,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <Navbar bg="light" expand="lg" className="mb-4">
+    <Navbar bg="light" expand="lg">
       <Container>
         <Navbar.Brand as="span" className="d-flex align-items-center">
           <LinkComponent href="/">
