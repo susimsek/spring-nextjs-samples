@@ -108,11 +108,11 @@ jobs:
 
       # Deploy to GitHub Packages
       - name: Deploy to GitHub Packages
-        run: mvn deploy -Pprod,webapp -Dgpg.skip -Dgithub -DskipTests
+        run: mvn deploy -Pprod -Dgpg.skip -Dgithub -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Build and Publish Docker Image using Spring Boot Maven Plugin
       - name: Build and Publish Docker Image
         run: |
-          mvn -ntp -Pprod,webapp jib:build -DskipTests -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-samples:${{ env.BRANCH_NAME }}
+          mvn -ntp -Pprod jib:build -DskipTests -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-samples:${{ env.BRANCH_NAME }}
