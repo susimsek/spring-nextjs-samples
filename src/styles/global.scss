@@ -79,6 +79,7 @@
 body {
   background-color: var(--background-color) !important;
   color: var(--text-color) !important;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 // Navbar styling
