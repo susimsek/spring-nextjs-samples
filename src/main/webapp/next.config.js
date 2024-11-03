@@ -1,3 +1,5 @@
+const path = require('path');
+
 const isDev = process.env.NODE_ENV === 'development';
 
 const options = {
@@ -12,7 +14,7 @@ const sources = [
   '/v3/api-docs/:path*'];
 
 const nextConfig = {
-  distDir: 'target/classes/static',
+  distDir: 'build',
   output: 'export',
   eslint: {
     ignoreDuringBuilds: true,

@@ -1,0 +1,15 @@
+{
+  "login": {
+    "pageTitle": "Login",
+    "form": {
+      "heading": "Login to Your Account",
+      "usernameLabel": "Username",
+      "usernamePlaceholder": "Enter your username",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "submitButton": "Login",
+      "errorEmptyFields": "Username and password are required.",
+      "errorInvalidCredentials": "Invalid username or password."
+    }
+  }
+}

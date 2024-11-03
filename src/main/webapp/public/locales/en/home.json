@@ -1,0 +1,7 @@
+{
+  "home": {
+    "title": "Spring Boot and Next.js Example",
+    "heading": "Spring Boot and Next.js Example",
+    "description": "This is a simple 'Hello World' example using Spring Boot as the backend and Next.js for the frontend."
+  }
+}

@@ -10,7 +10,7 @@
     "webapp:dev": "npm run clean-www && next dev",
     "webapp:prod": "npm run clean-www && npm run webapp:build:prod",
     "webapp:build:prod": "next build",
-    "clean-www": "rimraf target/classes/static/*",
+    "clean-www": "rimraf build/*",
     "java:jar": "./mvnw -ntp verify -DskipTests --batch-mode",
     "java:jar:dev": "npm run java:jar -- -Plocal",
     "java:jar:prod": "npm run java:jar -- -Pprod"
