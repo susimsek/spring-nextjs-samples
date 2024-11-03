@@ -21,11 +21,10 @@ import { toggleTheme } from '@/reducers/theme';
 import { useRouter } from 'next/router';
 
 type HeaderProps = {
-  onToggleSidebar: () => void;   // Function to toggle sidebar visibility
+  onToggleSidebar?: () => void;  // Make onToggleSidebar optional
   isSidebarOpen?: boolean;       // Controls if the sidebar is open; default is true
   showSidebarToggle?: boolean;   // Controls if the sidebar toggle icon should be displayed; default is false
 };
-
 const Header: React.FC<HeaderProps> = ({
                                          onToggleSidebar,
                                          isSidebarOpen = true,         // Default value set to true
@@ -51,7 +50,7 @@ const Header: React.FC<HeaderProps> = ({
     <Navbar bg="light" expand="lg" className="p-2">
       {/* Sidebar toggle icon - only visible if showSidebarToggle is true */}
       {showSidebarToggle && (
-        <Button variant="link" onClick={onToggleSidebar} className="sidebar-toggler me-2">
+        <Button variant="link" onClick={onToggleSidebar ? onToggleSidebar : undefined} className="sidebar-toggler me-2">
           <FontAwesomeIcon icon={faBars} className="sidebar-toggler-icon" />
         </Button>
       )}
