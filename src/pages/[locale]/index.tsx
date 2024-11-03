@@ -10,6 +10,7 @@ import { fetchHelloMessage } from "@/api/helloApi";
 import { HelloDTO } from "@/types/helloDTO";
 import { getStaticPaths, makeStaticProps } from "@/lib/getStatic";
 import EmbeddedContentFrame from "@/components/EmbeddedContentFrame";
+import withAuth from "@/components/withAuth";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
@@ -88,7 +89,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);
 
 const getStaticProps = makeStaticProps(['common', 'home', 'footer']);
 export { getStaticPaths, getStaticProps };
