@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({
           </LinkComponent>
         </Nav>
         <Nav>
-          <NavDropdown title={<><FontAwesomeIcon icon={faGlobe} className="me-2" />{t('common:common.language')}</>} id="language-selector">
+          <NavDropdown title={<><FontAwesomeIcon icon={faGlobe} className="dropdown-menu me-2" />{t('common:common.language')}</>} id="language-selector">
             {i18nextConfig.i18n.locales.map((locale) => {
               if (locale === currentLocale) return null;
               return <LanguageSwitchLink locale={locale} key={locale} />;

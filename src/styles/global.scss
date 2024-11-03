@@ -34,6 +34,11 @@
   --sidebar-active-bg-color: #007acc; /* Sidebar active background color for light theme */
   --sidebar-active-text-color: #ffffff; /* Sidebar active text color for light theme */
 
+  --dropdown-bg-color: #f1f3f5; /* Light theme background color for dropdown */
+  --dropdown-text-color: #2c3e50; /* Light theme text color */
+  --dropdown-hover-bg-color: #f0f8ff; /* Light theme hover background */
+  --dropdown-hover-text-color: #007acc; /* Light theme hover text color */
+
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -65,11 +70,16 @@
   --alert-danger-bg: #45171d; /* Alert background for dark theme */
   --alert-danger-border: #5e252a; /* Alert border for dark theme */
   --alert-danger-text: #ff6b6b; /* Alert text color for dark theme */
-  --sidebar-bg-color: #2b2d2f;/* Sidebar background color for dark theme */
+  --sidebar-bg-color: #2b2d2f; /* Sidebar background color for dark theme */
   --sidebar-text-color: #e0e0e0; /* Sidebar text color for dark theme */
   --sidebar-hover-bg-color: #3a3a3c; /* Sidebar hover background color for dark theme */
   --sidebar-active-bg-color: #66b3ff; /* Sidebar active background color for dark theme */
   --sidebar-active-text-color: #ffffff; /* Sidebar active text color for dark theme */
+
+  --dropdown-bg-color: #2b2d2f; /* Dark theme background color for dropdown */
+  --dropdown-text-color: #e0e0e0; /* Dark theme text color */
+  --dropdown-hover-bg-color: #1e2f3a; /* Dark theme hover background */
+  --dropdown-hover-text-color: #66b3ff; /* Dark theme hover text color */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -337,4 +347,38 @@ p, h1, h2, h3, h4, h5, h6 {
   justify-content: center;
   width: 1.5em; // Set consistent width
   height: 1.5em;
+}
+
+// General button styles
+.button-link {
+  color: var(--text-color); /* Theme-based default color */
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--highlight-text-color);
+  }
+}
+
+// Dropdown Menu Styling
+.dropdown-menu {
+  background-color: var(--dropdown-bg-color) !important; /* Theme-based background color */
+  color: var(--text-color) !important; /* Theme-based text color */
+  border: none; /* Optional: Remove border for a cleaner look */
+
+  .dropdown-item {
+    color: var(--text-color) !important; /* Theme-based default text color */
+    background-color: var(--dropdown-bg-color) !important; /* Theme-based background color */
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: var(--dropdown-hover-bg-color) !important; /* Theme-based hover background */
+      color: var(--dropdown-hover-text-color) !important; /* Theme-based hover text color */
+    }
+
+    &.active {
+      background-color: var(--dropdown-hover-bg-color) !important; /* Theme-based active background */
+      color: var(--dropdown-hover-text-color) !important; /* Theme-based active text color */
+    }
+  }
 }

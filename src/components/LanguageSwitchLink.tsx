@@ -36,7 +36,7 @@ const LanguageSwitchLink: React.FC<LanguageSwitchLinkProps> = ({ locale, href, .
         {...rest}
         variant="link"
         size="sm"
-        style={{ textDecoration: 'none', color: 'inherit' }}
+        className="button-link"
         onClick={() => languageDetector.cache?.(locale)}
       >
         {locale.toUpperCase()}
