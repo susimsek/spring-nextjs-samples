@@ -88,13 +88,13 @@ const Home = () => {
         <Row className="flex-grow-1 g-0">
           {/* Sidebar Column - visible only if isSidebarOpen is true */}
           {isSidebarOpen && (
-            <Col xs={12} md={3} className="p-0 d-flex flex-column">
+            <Col xs={12} md={3} lg={2} className="p-0 d-flex flex-column">
               <Sidebar onNavigate={(page) => setActivePage(page)} />
             </Col>
           )}
 
           {/* Main Content Column */}
-          <Col xs={12} md={isSidebarOpen ? 9 : 12}>
+          <Col xs={12} md={isSidebarOpen ? 9 : 12} lg={isSidebarOpen ? 10 : 12}>
             {renderContent()}
           </Col>
         </Row>

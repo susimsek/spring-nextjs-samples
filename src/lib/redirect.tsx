@@ -24,14 +24,13 @@ const detectAndRedirect = (router: NextRouter, targetPath: string) => {
 export const useRedirect = (to?: string): JSX.Element => {
   const router = useRouter();
   const targetPath = to || router.asPath;
-  const theme = useAppSelector((state) => state.theme.theme);
 
   useEffect(() => {
     detectAndRedirect(router, targetPath);
   }, [router, targetPath]);
 
   return (
-    <div className={theme === 'dark' ? 'dark-theme' : 'light-theme'}>
+    <div>
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
         <Spinner animation="border" role="status" />
       </div>
