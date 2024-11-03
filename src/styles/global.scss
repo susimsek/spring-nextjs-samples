@@ -113,6 +113,11 @@ body {
   background-color: transparent !important; /* Transparent background */
   border: 1px solid var(--border-color) !important; /* Apply standardized border color */
   border-radius: 0.25rem; /* Optional: rounded border for a smoother appearance */
+  &:hover {
+    .navbar-toggler-icon {
+      color: var(--highlight-text-color);
+    }
+  }
 }
 
 .navbar-toggler-icon {
@@ -315,6 +320,12 @@ p, h1, h2, h3, h4, h5, h6 {
   background-color: transparent !important; /* Transparent background */
   border: 1px solid var(--border-color) !important; /* Apply standardized border color */
   border-radius: 0.25rem; /* Optional: rounded border for a smoother appearance */
+
+  &:hover {
+    .sidebar-toggler-icon {
+      color: var(--highlight-text-color);
+    }
+  }
 }
 
 .sidebar-toggler-icon {

@@ -1,4 +1,3 @@
-// pages/index.tsx
 import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
 import Head from 'next/head';
 import { useTranslation } from 'next-i18next';
@@ -6,6 +5,7 @@ import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
+import HomeContent from '@/components/HomeContent';
 import { fetchHelloMessage } from "@/api/helloApi";
 import { HelloDTO } from "@/types/helloDTO";
 import { getStaticPaths, makeStaticProps } from "@/lib/getStatic";
@@ -44,24 +44,7 @@ const Home = () => {
   const renderContent = () => {
     switch (activePage) {
       case 'home':
-        return (
-          <div className="p-4">
-            <h1>{t('home:home.heading')}</h1>
-            <p style={{ color: 'var(--text-color)' }}>{t('home:home.description')}</p>
-
-            <div className="my-3">
-              {loading ? (
-                <Spinner animation="border" role="status">
-                  <span className="visually-hidden">{t('common:common.loading')}</span>
-                </Spinner>
-              ) : (
-                <p className="text-primary" style={{ fontWeight: 'bold' }}>
-                  {messageData?.message}
-                </p>
-              )}
-            </div>
-          </div>
-        );
+        return <HomeContent messageData={messageData} loading={loading} />;
       case 'api':
         return <EmbeddedContentFrame src="/swagger-ui.html" title={t('common:common.menu.api')} />;
       case 'database':
