@@ -9,6 +9,7 @@ import Sidebar from '@/components/Sidebar';
 import { fetchHelloMessage } from "@/api/helloApi";
 import { HelloDTO } from "@/types/helloDTO";
 import {getStaticPaths, makeStaticProps} from "@/lib/getStatic";
+import EmbeddedContentFrame from "@/components/EmbeddedContentFrame";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
@@ -58,33 +59,10 @@ const Home = () => {
           </div>
         );
       case 'api':
-        return (
-          <iframe
-            src="/swagger-ui.html"
-            width="100%"
-            height="600px"
-            style={{
-              width: '100%',
-              height: '100vh',
-              border: 'none',
-              flexGrow: 1,
-            }}
-            title="API Documentation"
-          />
-        );
+        return <EmbeddedContentFrame src="/swagger-ui.html" title={t('common:common.menu.api')} />;
       case 'database':
-        return (
-          <iframe
-            src="/h2-console"
-            style={{
-              width: '100%',
-              height: '100vh',
-              border: 'none',
-              flexGrow: 1,
-            }}
-            title="Database Console"
-          />
-        );
+        return <EmbeddedContentFrame src="/h2-console" title={t('common:common.menu.database')} backgroundColor="#ffffff"/>;
+
       default:
         return <p>{t('home:defaultDescription')}</p>;
     }
