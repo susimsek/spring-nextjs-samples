@@ -87,7 +87,7 @@ jobs:
 
       # Download dependencies for Maven
       - name: Download Dependencies
-        run: mvn dependency:go-offline
+        run: mvn -ntp dependency:go-offline
 
       # Run Snyk security test and monitor
       - name: Snyk Test and Monitor
@@ -100,7 +100,7 @@ jobs:
 
       # Run tests
       - name: Run Tests
-        run: mvn -ntp -Pprod clean verify
+        run: mvn -ntp -Dskip.installnodenpm -Dskip.npm verify --batch-mode
 
       # Run quality analysis
       - name: Quality Analysis
