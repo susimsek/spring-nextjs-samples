@@ -1,24 +1,23 @@
 ######################
 # Project Specific
 ######################
-/src/main/webapp/content/css/main.css
 /target/classes/static/**
 /src/kotlin/javascript/coverage/
 
 ######################
 # Node
 ######################
-/node/
-node_tmp/
-node_modules/
-npm-debug.log.*
-/.awcache/*
-/.cache-loader/*
+/src/main/webapp/node/
+/src/main/webapp/node_tmp/
+/src/main/webapp/node_modules/
+/src/main/webapp/npm-debug.log.*
+/src/main/webapp/.awcache/*
+/src/main/webapp/.cache-loader/*
 
 ######################
 # SASS
 ######################
-.sass-cache/
+/src/main/webapp/.sass-cache/
 
 ######################
 # Eclipse
@@ -149,7 +148,7 @@ Desktop.ini
 ######################
 # ESLint
 ######################
-.eslintcache
+/src/main/webapp/.eslintcache
 
 ######################
 # Code coverage
@@ -160,5 +159,5 @@ Desktop.ini
 ######################
 # Next.js
 ######################
-.next
-dist
+/src/main/webapp/.next
+/src/main/webapp/build
