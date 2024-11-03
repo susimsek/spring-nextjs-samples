@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
 import { fetchHelloMessage } from "@/api/helloApi";
 import { HelloDTO } from "@/types/helloDTO";
-import {getStaticPaths, makeStaticProps} from "@/lib/getStatic";
+import { getStaticPaths, makeStaticProps } from "@/lib/getStatic";
 import EmbeddedContentFrame from "@/components/EmbeddedContentFrame";
 
 const Home = () => {
@@ -17,6 +17,10 @@ const Home = () => {
   const [messageData, setMessageData] = useState<HelloDTO | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [showAlert, setShowAlert] = useState<string | null>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);  // Sidebar starts as open
+
+  // Function to toggle sidebar visibility
+  const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
 
   useEffect(() => {
     if (activePage === 'home') {
@@ -61,7 +65,7 @@ const Home = () => {
       case 'api':
         return <EmbeddedContentFrame src="/swagger-ui.html" title={t('common:common.menu.api')} />;
       case 'database':
-        return <EmbeddedContentFrame src="/h2-console" title={t('common:common.menu.database')} backgroundColor="#ffffff"/>;
+        return <EmbeddedContentFrame src="/h2-console" title={t('common:common.menu.database')} backgroundColor="#ffffff" />;
 
       default:
         return <p>{t('home:defaultDescription')}</p>;
@@ -74,17 +78,23 @@ const Home = () => {
         <title>{t('common:common.siteTitle')}</title>
       </Head>
 
-      <Header />
+      <Header
+        onToggleSidebar={toggleSidebar}       // Pass toggle function to Header
+        isSidebarOpen={isSidebarOpen}          // Sidebar open state
+        showSidebarToggle={true}               // Show toggle switch in Header
+      />
 
       <Container fluid className="d-flex flex-column min-vh-100 p-0">
         <Row className="flex-grow-1 g-0">
-          {/* Sidebar Column */}
-          <Col xs={12} md={3} className="p-0 d-flex flex-column">
-            <Sidebar onNavigate={(page) => setActivePage(page)} />
-          </Col>
+          {/* Sidebar Column - visible only if isSidebarOpen is true */}
+          {isSidebarOpen && (
+            <Col xs={12} md={3} className="p-0 d-flex flex-column">
+              <Sidebar onNavigate={(page) => setActivePage(page)} />
+            </Col>
+          )}
 
           {/* Main Content Column */}
-          <Col xs={12} md={9}>
+          <Col xs={12} md={isSidebarOpen ? 9 : 12}>
             {renderContent()}
           </Col>
         </Row>

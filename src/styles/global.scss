@@ -306,3 +306,23 @@ p, h1, h2, h3, h4, h5, h6 {
   border: none;
   z-index: 5;
 }
+
+// Sidebar Toggle Button
+.sidebar-toggler {
+  padding: 0.5rem 1rem;
+  color: var(--navbar-text-color); /* Match the color of the navbar text */
+  background-color: transparent !important; /* Transparent background */
+  border: 1px solid var(--border-color) !important; /* Apply standardized border color */
+  border-radius: 0.25rem; /* Optional: rounded border for a smoother appearance */
+}
+
+.sidebar-toggler-icon {
+  background-image: none; /* Remove default icon */
+  color: var(--navbar-text-color); /* Set icon color to match text */
+  font-size: 1.2rem; /* Adjust size for better visibility */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5em; // Set consistent width
+  height: 1.5em;
+}
