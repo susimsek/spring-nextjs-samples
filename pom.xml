@@ -210,28 +210,6 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.hibernate.orm.tooling</groupId>
-                <artifactId>hibernate-enhance-maven-plugin</artifactId>
-                <version>${hibernate.version}</version>
-                <executions>
-                    <execution>
-                        <id>enhance</id>
-                        <configuration>
-                            <enableLazyInitialization>true</enableLazyInitialization>
-                            <enableDirtyTracking>true</enableDirtyTracking>
-                            <enableAssociationManagement>true</enableAssociationManagement>
-                        </configuration>
-                        <goals>
-                            <goal>enhance</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.graalvm.buildtools</groupId>
-                <artifactId>native-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
                 <version>${jib-maven-plugin.version}</version>
@@ -278,18 +256,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>${maven-clean-plugin.version}</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>target/classes/static/</directory>
-                        </fileset>
-                    </filesets>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -357,76 +323,6 @@
                         </requireJavaVersion>
                     </rules>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.eirslett</groupId>
-                <artifactId>frontend-maven-plugin</artifactId>
-                <version>${frontend-maven-plugin.version}</version>
-                <configuration>
-                    <workingDirectory>src/main/webapp</workingDirectory>
-                </configuration>
-                <executions>
-                    <!-- Install Node and npm -->
-                    <execution>
-                        <id>install node and npm</id>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <configuration>
-                            <nodeVersion>${node.version}</nodeVersion>
-                            <npmVersion>${npm.version}</npmVersion>
-                        </configuration>
-                    </execution>
-                    <!-- npm install -->
-                    <execution>
-                        <id>npm install</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <arguments>install</arguments>
-                        </configuration>
-                    </execution>
-                    <!-- npm run webapp:prod -->
-                    <execution>
-                        <id>webapp build prod</id>
-                        <goals>
-                            <goal>npm</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <arguments>run webapp:prod</arguments>
-                            <!-- Removed the environmentVariables section -->
-                            <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven-resources-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>copy-frontend-build</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/webapp/build</directory>
-                                    <includes>
-                                        <include>**/*</include>
-                                    </includes>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -539,7 +435,6 @@
         <profile>
             <id>native</id>
             <properties>
-                <native-buildtools.version>0.10.2</native-buildtools.version>
                 <repackage.classifier>exec</repackage.classifier>
             </properties>
             <dependencies>
@@ -582,9 +477,26 @@
                         </executions>
                     </plugin>
                     <plugin>
+                        <groupId>org.hibernate.orm.tooling</groupId>
+                        <artifactId>hibernate-enhance-maven-plugin</artifactId>
+                        <version>${hibernate.version}</version>
+                        <executions>
+                            <execution>
+                                <id>enhance</id>
+                                <configuration>
+                                    <enableLazyInitialization>true</enableLazyInitialization>
+                                    <enableDirtyTracking>true</enableDirtyTracking>
+                                    <enableAssociationManagement>true</enableAssociationManagement>
+                                </configuration>
+                                <goals>
+                                    <goal>enhance</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
                         <groupId>org.graalvm.buildtools</groupId>
                         <artifactId>native-maven-plugin</artifactId>
-                        <version>${native-buildtools.version}</version>
                         <executions>
                             <execution>
                                 <id>add-reachability-metadata</id>
@@ -714,6 +626,98 @@
                     <url>https://maven.pkg.github.com/susimsek/spring-nextjs-samples/</url>
                 </repository>
             </distributionManagement>
+        </profile>
+        <profile>
+            <id>webapp</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${maven-clean-plugin.version}</version>
+                        <configuration>
+                            <filesets>
+                                <fileset>
+                                    <directory>target/classes/static/</directory>
+                                </fileset>
+                            </filesets>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <version>${frontend-maven-plugin.version}</version>
+                        <configuration>
+                            <workingDirectory>src/main/webapp</workingDirectory>
+                        </configuration>
+                        <executions>
+                            <!-- Install Node and npm -->
+                            <execution>
+                                <id>install node and npm</id>
+                                <goals>
+                                    <goal>install-node-and-npm</goal>
+                                </goals>
+                                <configuration>
+                                    <nodeVersion>${node.version}</nodeVersion>
+                                    <npmVersion>${npm.version}</npmVersion>
+                                </configuration>
+                            </execution>
+                            <!-- npm install -->
+                            <execution>
+                                <id>npm install</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <arguments>install</arguments>
+                                </configuration>
+                            </execution>
+                            <!-- npm run webapp:prod -->
+                            <execution>
+                                <id>webapp build prod</id>
+                                <goals>
+                                    <goal>npm</goal>
+                                </goals>
+                                <phase>generate-resources</phase>
+                                <configuration>
+                                    <arguments>run webapp:prod</arguments>
+                                    <!-- Removed the environmentVariables section -->
+                                    <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>${maven-resources-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>copy-frontend-build</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/classes/static</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>src/main/webapp/build</directory>
+                                            <includes>
+                                                <include>**/*</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
