@@ -82,7 +82,11 @@ const Login = () => {
                     <Form.Control
                       type="text"
                       placeholder={t('login:login.form.usernamePlaceholder')}
-                      {...register("username", { required: t('common:common.validation.required') })}
+                      {...register("username", {
+                        required: t('common:common.validation.required'),
+                        minLength: { value: 3, message: t('common:common.validation.minlength', { min: 3 }) },
+                        maxLength: { value: 50, message: t('common:common.validation.maxlength', { max: 50 }) }
+                      })}
                       isInvalid={!!errors.username}
                     />
                     <Form.Control.Feedback type="invalid">
@@ -96,7 +100,11 @@ const Login = () => {
                       <Form.Control
                         type={passwordVisible ? 'text' : 'password'}
                         placeholder={t('login:login.form.passwordPlaceholder')}
-                        {...register("password", { required: t('common:common.validation.required') })}
+                        {...register("password", {
+                          required: t('common:common.validation.required'),
+                          minLength: { value: 4, message: t('common:common.validation.minlength', { min: 4 }) },
+                          maxLength: { value: 100, message: t('common:common.validation.maxlength', { max: 100 }) }
+                        })}
                         isInvalid={!!errors.password}
                       />
                       <Button variant="outline-secondary" onClick={() => setPasswordVisible(!passwordVisible)}>
