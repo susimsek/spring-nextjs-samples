@@ -1,7 +1,0 @@
-{
-  "home": {
-    "title": "Spring Boot ve Next.js Örneği",
-    "heading": "Spring Boot ve Next.js Örneği",
-    "description": "Bu, Spring Boot'u arka uç olarak ve Next.js'i ön uç olarak kullanarak basit bir 'Merhaba Dünya' örneğidir."
-  }
-}
