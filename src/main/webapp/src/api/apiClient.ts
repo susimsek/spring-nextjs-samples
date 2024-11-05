@@ -1,20 +1,20 @@
 // /api/apiClient.ts
 import axios from 'axios';
-import languageDetector from '../lib/languageDetector';
-import { loggingInterceptor } from '@/config/loggingInterceptor';
-import { notificationInterceptor } from '@/config/notificationInterceptor';
+import {loggingInterceptor} from '@/config/loggingInterceptor';
+import {notificationInterceptor} from '@/config/notificationInterceptor';
 import store from '@/config/store';
-import { logout } from '@/reducers/authentication';
+import {logout} from '@/reducers/authentication';
+import i18nextConfig from "../../next-i18next.config";
 
 const TIMEOUT = 60 * 1000;
-const detectedLng = languageDetector.detect() as string;
+const isBrowser = typeof window !== 'undefined';
+
 
 // Create an Axios instance with default settings
 const apiClient = axios.create({
   baseURL: '/api/v1',
   headers: {
-    'Content-Type': 'application/json',
-    'Accept-Language': detectedLng,
+    'Content-Type': 'application/json'
   },
   timeout: TIMEOUT,
 });
@@ -26,6 +26,8 @@ apiClient.interceptors.request.use(
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
+    config.headers['Accept-Language'] = localStorage.getItem('i18nextLng');
     return config;
   },
   error => Promise.reject(error)
