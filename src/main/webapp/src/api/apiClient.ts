@@ -6,7 +6,6 @@ import store from '@/config/store';
 import {logout} from '@/reducers/authentication';
 
 const TIMEOUT = 60 * 1000;
-const isBrowser = typeof window !== 'undefined';
 
 
 // Create an Axios instance with default settings

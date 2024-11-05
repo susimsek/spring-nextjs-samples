@@ -1,13 +1,15 @@
 // reducers/theme.ts
 import { createSlice } from '@reduxjs/toolkit';
 
+const isBrowser = typeof window !== 'undefined';
+
 interface ThemeState {
   theme: 'light' | 'dark';
 }
 
 // Retrieve the theme from localStorage or default to 'light' if not set
 const initialState: ThemeState = {
-  theme: (typeof window !== 'undefined' && localStorage.getItem('theme')) as 'light' | 'dark' || 'light',
+  theme: (isBrowser && localStorage.getItem('theme')) as 'light' | 'dark' || 'light',
 };
 
 const themeSlice = createSlice({

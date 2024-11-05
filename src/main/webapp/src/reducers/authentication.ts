@@ -1,14 +1,16 @@
 // reducers/authentication.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+const isBrowser = typeof window !== 'undefined';
+
 interface AuthenticationState {
   token: string | null;
   isAuthenticated: boolean;
 }
 
 const initialState: AuthenticationState = {
-  token: typeof window !== 'undefined' ? localStorage.getItem('token') : null,
-  isAuthenticated: typeof window !== 'undefined' ? !!localStorage.getItem('token') : false,
+  token: isBrowser ? localStorage.getItem('token') : null,
+  isAuthenticated: isBrowser ? !!localStorage.getItem('token') : false,
 };
 
 const authenticationSlice = createSlice({
