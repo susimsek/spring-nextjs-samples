@@ -61,7 +61,7 @@ Use the following credentials to log in:
 |----------|-----------------------------------------------------------------------------|
 | Jdbc Url | `jdbc:h2:mem:demo;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE` |
 | Username | `admin`                                                                     |
-| Password | `password`                                                                  |
+| Password | `root`                                                                      |
 
 ## Testing
 
