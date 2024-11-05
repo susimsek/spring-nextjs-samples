@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Import;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 @Configuration(proxyBeanMethods = false)
@@ -26,15 +26,13 @@ public class LocaleConfig {
 
     public static final Locale TR = Locale.of("tr", "TR");
     public static final Locale EN = Locale.ENGLISH;
-    public static final String COOKIE_NAME = "lang";
     public static final String PARAM_NAME = "lang";
 
     @Bean
     public LocaleResolver localeResolver(WebProperties webProperties) {
-        CookieLocaleResolver cookieLocaleResolver = new CookieLocaleResolver(COOKIE_NAME);
-        cookieLocaleResolver.setDefaultLocale(webProperties.getLocale());
-        cookieLocaleResolver.setCookieMaxAge(Duration.ofDays(365));
-        return cookieLocaleResolver;
+        var localeResolver = new AcceptHeaderLocaleResolver();
+        localeResolver.setDefaultLocale(webProperties.getLocale());
+        return localeResolver;
     }
 
     @Bean
@@ -69,7 +67,7 @@ public class LocaleConfig {
             messageSource.setCacheMillis(cacheDuration.toMillis());
         }
         messageSource.setAlwaysUseMessageFormat(properties.isAlwaysUseMessageFormat());
-        messageSource.setUseCodeAsDefaultMessage(properties.isUseCodeAsDefaultMessage());
+        messageSource.setUseCodeAsDefaultMessage(properties.isUseCodeAsDefaultMessage());;
         return messageSource;
     }
 }

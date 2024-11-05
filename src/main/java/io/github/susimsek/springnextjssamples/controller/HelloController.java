@@ -8,6 +8,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Locale;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Tag(name = "hello", description = "Hello API")
 @SecurityRequirement(name = "bearerAuth")
+@RequiredArgsConstructor
 public class HelloController {
+
+    private final MessageSource messageSource;
 
     @Operation(summary = "Say Hello", description = "Returns a simple Hello Next.js message in JSON format")
     @ApiResponses(value = {
@@ -33,7 +39,8 @@ public class HelloController {
         )
     })
     @GetMapping("/api/v1/hello")
-    public HelloDTO hello() {
-        return new HelloDTO("Hello, Next.js!");
+    public HelloDTO hello(Locale locale) {
+        var message =  messageSource.getMessage("hello.message", null, locale);
+        return new HelloDTO(message);
     }
 }

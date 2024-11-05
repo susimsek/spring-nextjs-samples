@@ -101,3 +101,5 @@ id;locale;code;content;created_at;created_by;updated_at;updated_by
 100;en;search.criteria.id;id;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
 101;tr;error.invalid_credentials;Geçersiz kullanıcı adı veya şifre.;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
 102;en;error.invalid_credentials;Invalid username or password.;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+103;tr;hello.message;Merhaba, Next.js!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+104;en;hello.message;Hello, Next.js!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
