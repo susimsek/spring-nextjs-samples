@@ -85,7 +85,11 @@ const Login = () => {
                       {...register("username", {
                         required: t('common:common.validation.required'),
                         minLength: { value: 3, message: t('common:common.validation.minlength', { min: 3 }) },
-                        maxLength: { value: 50, message: t('common:common.validation.maxlength', { max: 50 }) }
+                        maxLength: { value: 50, message: t('common:common.validation.maxlength', { max: 50 }) },
+                        pattern: {
+                          value: /^[a-zA-Z0-9]*$/,
+                          message: t('common:common.validation.alphanumeric')
+                        }
                       })}
                       isInvalid={!!errors.username}
                     />
