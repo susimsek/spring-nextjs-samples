@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.web.exception;
+package io.github.susimsek.springnextjssamples.exception;
 
 import java.util.Arrays;
 import java.util.Optional;

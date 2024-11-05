@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.web.exception;
+package io.github.susimsek.springnextjssamples.exception;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

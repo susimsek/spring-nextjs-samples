@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.web.exception.ratelimit;
+package io.github.susimsek.springnextjssamples.exception.ratelimit;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

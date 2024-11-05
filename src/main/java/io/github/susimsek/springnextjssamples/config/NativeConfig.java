@@ -1,6 +1,6 @@
 package io.github.susimsek.springnextjssamples.config;
 
-import io.github.susimsek.springnextjssamples.web.exception.Violation;
+import io.github.susimsek.springnextjssamples.exception.Violation;
 import io.github.susimsek.springnextjssamples.config.logging.annotation.Loggable;
 import java.util.Collections;
 import org.hibernate.cache.jcache.internal.JCacheRegionFactory;

@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.web.exception.versioning;
+package io.github.susimsek.springnextjssamples.exception.versioning;
 
 public class UnsupportedApiVersionException extends RuntimeException {
 

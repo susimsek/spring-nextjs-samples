@@ -6,7 +6,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 import io.github.susimsek.springnextjssamples.config.RequestMatcherConfig;
-import io.github.susimsek.springnextjssamples.web.exception.security.SecurityProblemSupport;
+import io.github.susimsek.springnextjssamples.exception.security.SecurityProblemSupport;
 import io.github.susimsek.springnextjssamples.web.filter.SpaWebFilter;
 import io.github.susimsek.springnextjssamples.web.filter.XssFilter;
 import io.github.susimsek.springnextjssamples.service.mapper.UserMapper;

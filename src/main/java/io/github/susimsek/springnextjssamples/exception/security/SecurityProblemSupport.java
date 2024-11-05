@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.web.exception.security;
+package io.github.susimsek.springnextjssamples.exception.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

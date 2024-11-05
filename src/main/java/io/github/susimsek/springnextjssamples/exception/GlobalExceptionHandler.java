@@ -1,11 +1,11 @@
-package io.github.susimsek.springnextjssamples.web.exception;
+package io.github.susimsek.springnextjssamples.exception;
 
 import static io.github.susimsek.springnextjssamples.constant.RateLimitConstants.RATE_LIMIT_LIMIT_HEADER_NAME;
 import static io.github.susimsek.springnextjssamples.constant.RateLimitConstants.RATE_LIMIT_REMAINING_HEADER_NAME;
 import static io.github.susimsek.springnextjssamples.constant.RateLimitConstants.RATE_LIMIT_RESET_HEADER_NAME;
 
-import io.github.susimsek.springnextjssamples.web.exception.ratelimit.RateLimitExceededException;
-import io.github.susimsek.springnextjssamples.web.exception.versioning.UnsupportedApiVersionException;
+import io.github.susimsek.springnextjssamples.exception.ratelimit.RateLimitExceededException;
+import io.github.susimsek.springnextjssamples.exception.versioning.UnsupportedApiVersionException;
 import io.github.susimsek.springnextjssamples.config.i18n.ParameterMessageSource;
 import jakarta.validation.ConstraintViolationException;
 import java.net.SocketTimeoutException;

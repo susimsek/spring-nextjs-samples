@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.web.exception;
+package io.github.susimsek.springnextjssamples.exception;
 
 import java.util.Map;
 import lombok.Getter;

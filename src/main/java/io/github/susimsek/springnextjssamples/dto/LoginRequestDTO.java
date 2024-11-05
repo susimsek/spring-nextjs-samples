@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.service.dto;
+package io.github.susimsek.springnextjssamples.dto;
 
 import io.github.susimsek.springnextjssamples.validation.AlphaNumeric;
 import io.swagger.v3.oas.annotations.media.Schema;

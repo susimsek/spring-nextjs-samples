@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.web.exception.versioning;
+package io.github.susimsek.springnextjssamples.exception.versioning;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

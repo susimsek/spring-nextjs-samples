@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.web.exception.async;
+package io.github.susimsek.springnextjssamples.exception.async;
 
 import java.lang.reflect.Method;
 import lombok.extern.slf4j.Slf4j;
