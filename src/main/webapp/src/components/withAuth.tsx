@@ -18,7 +18,7 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
     if (!isAuthenticated) {
       return (
         <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-          <Spinner animation="border" role="status" />
+          <Spinner animation="border" role="status"/>
         </div>
       );
     }

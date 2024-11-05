@@ -32,7 +32,7 @@ export const useRedirect = (to?: string): JSX.Element => {
   return (
     <div>
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
-        <Spinner animation="border" role="status" />
+        <Spinner animation="border" role="status"/>
       </div>
     </div>
   );

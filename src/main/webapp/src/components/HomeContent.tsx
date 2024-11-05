@@ -19,7 +19,7 @@ const HomeContent: React.FC<HomeContentProps> = ({ messageData, loading }) => {
       <div className="my-3">
         {loading ? (
           <Spinner animation="border" role="status">
-            <span className="visually-hidden">{t('common:common.loading')}</span>
+            <span className="visually-hidden">Loading...</span>
           </Spinner>
         ) : (
           <p className="text-primary" style={{ fontWeight: 'bold' }}>

@@ -14,9 +14,7 @@ const EmbeddedContentFrame: React.FC<EmbeddedContentFrameProps> = ({ src, title,
     <div className="iframe-wrapper" style={{ backgroundColor: backgroundColor || 'var(--background-color)' }}>
       {loading && (
         <div className="iframe-overlay d-flex justify-content-center align-items-center">
-          <Spinner animation="border" role="status" variant="light">
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
+          <Spinner animation="border" role="status"/>
         </div>
       )}
       <iframe
