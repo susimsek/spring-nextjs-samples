@@ -15,6 +15,14 @@ Before you begin, ensure you have the following installed:
 - **Docker** (for running dependencies like PostgreSQL etc.)
 - **Kubernetes** (if deploying to a Kubernetes cluster)
 
+## Usage
+
+Once the application is running, navigate to [http://localhost:8080](http://localhost:8080) to access the main web interface.
+
+![Spring Next.js Web Application](https://github.com/susimsek/spring-nextjs-samples/blob/main/images/webapp.png)
+
+This interface is powered by Next.js and interacts with the Spring Boot backend through RESTful API endpoints.
+
 ### Login
 
 This server already has preconfigured users.
