@@ -20,7 +20,7 @@ spring:
       allow-credentials: true
       max-age: 3600
   datasource:
-    url: jdbc:postgresql://localhost:5432/sso
+    url: jdbc:postgresql://localhost:5432/demo
     username: admin
     password: root
     hikari:
