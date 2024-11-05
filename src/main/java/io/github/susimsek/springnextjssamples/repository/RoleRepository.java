@@ -1,6 +1,6 @@
 package io.github.susimsek.springnextjssamples.repository;
 
-import static io.github.susimsek.springnextjssamples.cache.CacheName.ROLE_ENTITY_BY_NAME_CACHE;
+import static io.github.susimsek.springnextjssamples.config.cache.CacheName.ROLE_ENTITY_BY_NAME_CACHE;
 
 import io.github.susimsek.springnextjssamples.entity.RoleEntity;
 import java.util.Optional;

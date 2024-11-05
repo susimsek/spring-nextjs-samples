@@ -2,7 +2,7 @@ package io.github.susimsek.springnextjssamples.config;
 
 import static io.github.susimsek.springnextjssamples.constant.Constants.SPRING_PROFILE_DEVELOPMENT;
 
-import io.github.susimsek.springnextjssamples.h2.H2ConfigurationHelper;
+import io.github.susimsek.springnextjssamples.config.h2.H2ConfigurationHelper;
 import jakarta.servlet.ServletContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

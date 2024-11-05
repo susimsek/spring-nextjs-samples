@@ -1,6 +1,6 @@
 package io.github.susimsek.springnextjssamples.service;
 
-import io.github.susimsek.springnextjssamples.cache.CacheName;
+import io.github.susimsek.springnextjssamples.config.cache.CacheName;
 import io.github.susimsek.springnextjssamples.entity.MessageEntity;
 import io.github.susimsek.springnextjssamples.repository.MessageRepository;
 import java.util.List;

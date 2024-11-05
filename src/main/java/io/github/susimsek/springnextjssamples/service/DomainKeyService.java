@@ -2,7 +2,7 @@ package io.github.susimsek.springnextjssamples.service;
 
 import com.nimbusds.jose.jwk.KeyUse;
 import io.github.susimsek.springnextjssamples.entity.KeyEntity;
-import io.github.susimsek.springnextjssamples.mapper.KeyMapper;
+import io.github.susimsek.springnextjssamples.service.mapper.KeyMapper;
 import io.github.susimsek.springnextjssamples.repository.KeyRepository;
 import io.github.susimsek.springnextjssamples.security.key.Key;
 import io.github.susimsek.springnextjssamples.security.key.KeyService;

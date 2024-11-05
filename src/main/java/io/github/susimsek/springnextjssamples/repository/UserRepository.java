@@ -1,7 +1,7 @@
 package io.github.susimsek.springnextjssamples.repository;
 
-import static io.github.susimsek.springnextjssamples.cache.CacheName.USER_ENTITY_BY_EMAIL_CACHE;
-import static io.github.susimsek.springnextjssamples.cache.CacheName.USER_ENTITY_BY_USERNAME_CACHE;
+import static io.github.susimsek.springnextjssamples.config.cache.CacheName.USER_ENTITY_BY_EMAIL_CACHE;
+import static io.github.susimsek.springnextjssamples.config.cache.CacheName.USER_ENTITY_BY_USERNAME_CACHE;
 
 import io.github.susimsek.springnextjssamples.entity.UserEntity;
 import java.util.Optional;

@@ -1,6 +1,6 @@
 package io.github.susimsek.springnextjssamples.entity;
 
-import io.github.susimsek.springnextjssamples.cache.CacheName;
+import io.github.susimsek.springnextjssamples.config.cache.CacheName;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

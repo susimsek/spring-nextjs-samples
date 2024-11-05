@@ -1,6 +1,6 @@
 package io.github.susimsek.springnextjssamples.config;
 
-import io.github.susimsek.springnextjssamples.exception.async.GlobalAsyncExceptionHandler;
+import io.github.susimsek.springnextjssamples.web.exception.async.GlobalAsyncExceptionHandler;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ThreadPoolExecutor;
 import lombok.RequiredArgsConstructor;

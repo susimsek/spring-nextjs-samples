@@ -1,7 +1,7 @@
 package io.github.susimsek.springnextjssamples.repository;
 
-import static io.github.susimsek.springnextjssamples.cache.CacheName.KEY_ENTITY_BY_KID_CACHE;
-import static io.github.susimsek.springnextjssamples.cache.CacheName.KEY_ENTITY_BY_USE_CACHE;
+import static io.github.susimsek.springnextjssamples.config.cache.CacheName.KEY_ENTITY_BY_KID_CACHE;
+import static io.github.susimsek.springnextjssamples.config.cache.CacheName.KEY_ENTITY_BY_USE_CACHE;
 import io.github.susimsek.springnextjssamples.entity.KeyEntity;
 import java.util.List;
 import java.util.Optional;

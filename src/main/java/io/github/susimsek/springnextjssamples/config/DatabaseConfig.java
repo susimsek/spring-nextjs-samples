@@ -2,7 +2,7 @@ package io.github.susimsek.springnextjssamples.config;
 
 import static io.github.susimsek.springnextjssamples.constant.Constants.SPRING_PROFILE_DEVELOPMENT;
 
-import io.github.susimsek.springnextjssamples.h2.H2ConfigurationHelper;
+import io.github.susimsek.springnextjssamples.config.h2.H2ConfigurationHelper;
 import io.github.susimsek.springnextjssamples.security.SpringSecurityAuditorAware;
 import java.sql.SQLException;
 import java.time.Clock;

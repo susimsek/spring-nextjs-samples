@@ -1,6 +1,6 @@
 package io.github.susimsek.springnextjssamples.aspect;
 
-import io.github.susimsek.springnextjssamples.logging.handler.LoggingHandler;
+import io.github.susimsek.springnextjssamples.config.logging.handler.LoggingHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -17,8 +17,8 @@ public class LoggingAspect {
     private final LoggingHandler loggingHandler;
 
     @Pointcut(
-        "@within(io.github.susimsek.springnextjssamples.logging.annotation.Loggable) || "
-            + "@annotation(io.github.susimsek.springnextjssamples.logging.annotation.Loggable)"
+        "@within(io.github.susimsek.springnextjssamples.config.logging.annotation.Loggable) || "
+            + "@annotation(io.github.susimsek.springnextjssamples.config.logging.annotation.Loggable)"
     )
     public void loggablePointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
