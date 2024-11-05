@@ -4,7 +4,6 @@ import {loggingInterceptor} from '@/config/loggingInterceptor';
 import {notificationInterceptor} from '@/config/notificationInterceptor';
 import store from '@/config/store';
 import {logout} from '@/reducers/authentication';
-import i18nextConfig from "../../next-i18next.config";
 
 const TIMEOUT = 60 * 1000;
 const isBrowser = typeof window !== 'undefined';
