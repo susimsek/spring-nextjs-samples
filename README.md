@@ -5,16 +5,6 @@
 ## Overview
 This project is a full-stack web application using Spring Boot for the backend and Next.js for the frontend. The backend provides a RESTful API, while the frontend interacts with these endpoints to deliver a dynamic, responsive user experience.
 
-## Prerequisites
-
-Before you begin, ensure you have the following installed:
-
-- **Java 21**
-- **Maven 3.x**
-- **Node.js 21**
-- **Docker** (for running dependencies like PostgreSQL etc.)
-- **Kubernetes** (if deploying to a Kubernetes cluster)
-
 ## Usage
 
 Once the application is running, navigate to [http://localhost:8080](http://localhost:8080) to access the main web interface.
@@ -32,6 +22,17 @@ Therefore, to login please use one of these predefined credentials:
 |----------|--------------------------|----------|--------|
 | user     | user@example.com         | password | USER   |
 | admin    | admin@example.com        | password | ADMIN  |
+
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Java 21**
+- **Maven 3.x**
+- **Node.js 21**
+- **Docker** (for running dependencies like PostgreSQL etc.)
+- **Kubernetes** (if deploying to a Kubernetes cluster)
 
 ## Build
 
