@@ -10,11 +10,11 @@ services:
       - postgresql:/bitnami/postgresql
     extends:
       file: common-config.yml
-      service: sso-db-config
+      service: app-db-config
 
-  spring-nextjs-app:
+  app:
     image: suayb/spring-nextjs-app:main
-    container_name: spring-nextjs-app
+    container_name: app
     ports:
       - 8080:8080
     environment:
@@ -32,10 +32,10 @@ services:
       start_period: 10s
     extends:
       file: common-config.yml
-      service: sso-base-config
+      service: app-base-config
 
 networks:
-  sso:
+  app:
     driver: "bridge"
 
 volumes:

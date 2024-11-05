@@ -1,9 +1,9 @@
 services:
   network-deploy-service:
     networks:
-      - sso
+      - app
 
-  sso-base-config:
+  app-base-config:
     extends:
       service: network-deploy-service
     deploy:
@@ -14,7 +14,7 @@ services:
       SPRING_PROFILES_ACTIVE: prod
 
 
-  sso-db-config:
+  app-db-config:
     extends:
       service: network-deploy-service
     image: suayb/bitnami-debezium-postgresql:15.4.0
