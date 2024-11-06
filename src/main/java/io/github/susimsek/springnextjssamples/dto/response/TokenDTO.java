@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.dto;
+package io.github.susimsek.springnextjssamples.dto.response;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 

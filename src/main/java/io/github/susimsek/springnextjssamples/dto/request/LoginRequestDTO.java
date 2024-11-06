@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.dto;
+package io.github.susimsek.springnextjssamples.dto.request;
 
 import io.github.susimsek.springnextjssamples.validation.AlphaNumeric;
 import io.github.susimsek.springnextjssamples.validation.ConstraintMessage;

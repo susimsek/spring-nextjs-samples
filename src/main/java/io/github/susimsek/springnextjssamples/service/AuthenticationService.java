@@ -1,8 +1,8 @@
 package io.github.susimsek.springnextjssamples.service;
 
 
-import io.github.susimsek.springnextjssamples.dto.LoginRequestDTO;
-import io.github.susimsek.springnextjssamples.dto.TokenDTO;
+import io.github.susimsek.springnextjssamples.dto.request.LoginRequestDTO;
+import io.github.susimsek.springnextjssamples.dto.response.TokenDTO;
 import io.github.susimsek.springnextjssamples.exception.InvalidCredentialsException;
 import io.github.susimsek.springnextjssamples.service.mapper.TokenMapper;
 import io.github.susimsek.springnextjssamples.security.token.TokenGenerator;

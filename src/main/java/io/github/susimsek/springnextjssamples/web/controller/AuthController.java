@@ -1,7 +1,7 @@
 package io.github.susimsek.springnextjssamples.web.controller;
 
-import io.github.susimsek.springnextjssamples.dto.LoginRequestDTO;
-import io.github.susimsek.springnextjssamples.dto.TokenDTO;
+import io.github.susimsek.springnextjssamples.dto.request.LoginRequestDTO;
+import io.github.susimsek.springnextjssamples.dto.response.TokenDTO;
 import io.github.susimsek.springnextjssamples.service.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;

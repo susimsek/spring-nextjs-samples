@@ -1,6 +1,6 @@
 package io.github.susimsek.springnextjssamples.service.mapper;
 
-import io.github.susimsek.springnextjssamples.dto.TokenDTO;
+import io.github.susimsek.springnextjssamples.dto.response.TokenDTO;
 import java.time.Duration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
