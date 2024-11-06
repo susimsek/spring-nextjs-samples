@@ -52,6 +52,7 @@
         <properties-maven-plugin.version>1.2.1</properties-maven-plugin.version>
         <frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
+        <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
     </properties>
     <dependencies>
         <dependency>
@@ -345,7 +346,7 @@
                         <configuration>
                             <addOutputDirectory>false</addOutputDirectory>
                             <sourceDirectory>src/main/java</sourceDirectory>
-                            <outputDirectory>${project.build.directory}/generated-sources/delombok</outputDirectory>
+                            <outputDirectory>${project.build.directory}/delombok</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -356,10 +357,15 @@
                 <version>${maven-javadoc-plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
-                    <sourcepath>${project.build.directory}/generated-sources/delombok</sourcepath>
+                    <sourcepath>${project.build.directory}/delombok</sourcepath>
                     <subpackages>io.github.susimsek.springnextjssamples</subpackages>
                     <doctitle>Spring Boot Next.js Samples API Documentation</doctitle>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
