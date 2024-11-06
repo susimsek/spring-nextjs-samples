@@ -1,6 +1,7 @@
 package io.github.susimsek.springnextjssamples.dto;
 
 import io.github.susimsek.springnextjssamples.validation.AlphaNumeric;
+import io.github.susimsek.springnextjssamples.validation.ConstraintMessage;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -12,8 +13,8 @@ public record LoginRequestDTO(
         example = "admin",
         requiredMode = Schema.RequiredMode.REQUIRED
     )
-    @NotBlank(message = "{validation.field.notBlank}")
-    @Size(min = 3, max = 50, message = "{validation.field.size}")
+    @NotBlank(message = ConstraintMessage.NOT_BLANK)
+    @Size(min = 3, max = 50, message = ConstraintMessage.SIZE)
     @AlphaNumeric
     String username,
 
@@ -22,7 +23,7 @@ public record LoginRequestDTO(
         example = "password",
         requiredMode = Schema.RequiredMode.REQUIRED
     )
-    @NotBlank(message = "{validation.field.notBlank}")
-    @Size(min = 4, max = 100, message = "{validation.field.size}")
+    @NotBlank(message = ConstraintMessage.NOT_BLANK)
+    @Size(min = 4, max = 100, message = ConstraintMessage.SIZE)
     String password
 ) {}
