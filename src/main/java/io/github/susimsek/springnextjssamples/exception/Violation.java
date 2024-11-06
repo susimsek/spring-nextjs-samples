@@ -10,6 +10,14 @@ import java.io.Serializable;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
+/**
+ * Represents a validation violation, encapsulating details about a constraint violation.
+ * <p>
+ * This record is used to provide information on failed validation constraints, including
+ * the object name, field, rejected value, and an error message. This structure is often used
+ * in API responses to give feedback on specific validation errors.
+ * </p>
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public record Violation(
     @Schema(description = "Code.", example = "not_blank")
@@ -32,10 +40,22 @@ public record Violation(
     @JsonProperty
     String message
 ) implements Serializable {
+
+    /**
+     * Constructs a simple {@code Violation} with only the object name and message.
+     *
+     * @param objectName the name of the object where the violation occurred
+     * @param message the error message describing the violation
+     */
     public Violation(String objectName, String message) {
         this(null, objectName, null, null, message);
     }
 
+    /**
+     * Constructs a {@code Violation} from a {@link FieldError} instance.
+     *
+     * @param error the field error containing details about the validation violation
+     */
     public Violation(FieldError error) {
         this(
             getCode(error.getCode()),
@@ -46,6 +66,11 @@ public record Violation(
         );
     }
 
+    /**
+     * Constructs a {@code Violation} from an {@link ObjectError} instance.
+     *
+     * @param error the object error containing details about the validation violation
+     */
     public Violation(ObjectError error) {
         this(
             getCode(error.getCode()),
@@ -56,6 +81,11 @@ public record Violation(
         );
     }
 
+    /**
+     * Constructs a {@code Violation} from a {@link ConstraintViolation} instance.
+     *
+     * @param violation the constraint violation containing details about the validation error
+     */
     public Violation(ConstraintViolation<?> violation) {
         this(
             getCode(violation.getConstraintDescriptor()
@@ -67,6 +97,12 @@ public record Violation(
         );
     }
 
+    /**
+     * Extracts the field name from the provided property path.
+     *
+     * @param propertyPath the path representing the property where the violation occurred
+     * @return the name of the field in violation
+     */
     private static String getField(Path propertyPath) {
         String fieldName = null;
         for (Path.Node node : propertyPath) {
@@ -75,6 +111,12 @@ public record Violation(
         return fieldName;
     }
 
+    /**
+     * Converts the constraint annotation name to a snake_case format.
+     *
+     * @param annotationName the name of the annotation related to the constraint violation
+     * @return the code for the violation in snake_case
+     */
     private static String getCode(String annotationName) {
         return StringUtils.toSnakeCase(annotationName);
     }
