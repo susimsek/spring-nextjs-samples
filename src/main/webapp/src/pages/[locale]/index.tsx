@@ -17,7 +17,6 @@ const Home = () => {
   const [activePage, setActivePage] = useState<string>('home');
   const [messageData, setMessageData] = useState<HelloDTO | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
-  const [showAlert, setShowAlert] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);  // Sidebar starts as open
 
   // Function to toggle sidebar visibility
@@ -32,7 +31,6 @@ const Home = () => {
           setMessageData(data);
         } catch (error) {
           console.error(error);
-          setShowAlert('An error occurred while fetching the message.');
         } finally {
           setLoading(false);
         }
