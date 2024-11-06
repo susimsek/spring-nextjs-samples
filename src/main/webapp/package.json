@@ -13,7 +13,10 @@
     "clean-www": "rimraf build/*",
     "java:jar": "./mvnw -ntp verify -DskipTests --batch-mode",
     "java:jar:dev": "npm run java:jar -- -Plocal",
-    "java:jar:prod": "npm run java:jar -- -Pprod"
+    "java:jar:prod": "npm run java:jar -- -Pprod",
+    "backend:start": "./mvnw spring-boot:run -Plocal",
+    "native-package": "./mvnw package -B -ntp -Pnative,prod -DskipTests",
+    "native-start": "./target/native-executable"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
