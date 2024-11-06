@@ -46,6 +46,21 @@ import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
+/**
+ * {@code DomainTokenEncoder} is responsible for encoding JSON Web Tokens (JWTs) with JSON Web Signature (JWS) and
+ * optional JSON Web Encryption (JWE) using RSA keys.
+ *
+ * <p>This class leverages the Nimbus JOSE library to create, sign, and optionally encrypt JWTs. It selects appropriate
+ * keys from the provided {@link JWKSource} based on header parameters and constructs signed and encrypted JWTs.</p>
+ *
+ * <p>Example usage:
+ * <pre>
+ *     JWKSource<SecurityContext> jwkSource = ...;
+ *     DomainTokenEncoder encoder = new DomainTokenEncoder(jwkSource);
+ *     Jwt jwt = encoder.encode(parameters, rsaKey);
+ * </pre>
+ * </p>
+ */
 @RequiredArgsConstructor
 public class DomainTokenEncoder implements TokenEncoder {
 
@@ -55,6 +70,14 @@ public class DomainTokenEncoder implements TokenEncoder {
     private static final JWSSignerFactory JWS_SIGNER_FACTORY;
     private final Map<JWK, JWSSigner> jwsSigners = new ConcurrentHashMap<>();
 
+    /**
+     * Encodes the JWT with the given parameters, optionally signing and encrypting it.
+     *
+     * @param parameters the token encoding parameters, including claims and headers
+     * @param rsaKey the RSA key to use for encryption if JWE is applied
+     * @return the encoded {@link Jwt} instance
+     * @throws JwtEncodingException if an error occurs during encoding
+     */
     @Override
     public Jwt encode(TokenEncoderParameters parameters, RSAKey rsaKey) throws JwtEncodingException {
         Assert.notNull(parameters, "parameters cannot be null");
@@ -91,6 +114,12 @@ public class DomainTokenEncoder implements TokenEncoder {
         }
     }
 
+    /**
+     * Converts {@link JwsHeader} to {@link JWSHeader} for Nimbus processing.
+     *
+     * @param headers the JwsHeader instance to convert
+     * @return the converted JWSHeader instance
+     */
     private static JWSHeader convert(JwsHeader headers) {
         JWSHeader.Builder builder = new JWSHeader.Builder(JWSAlgorithm.parse(headers.getAlgorithm().getName()));
         if (headers.getJwkSetUrl() != null) {
@@ -154,6 +183,12 @@ public class DomainTokenEncoder implements TokenEncoder {
         return builder.build();
     }
 
+    /**
+     * Converts {@link JwtClaimsSet} to {@link JWTClaimsSet} for Nimbus processing.
+     *
+     * @param claims the JwtClaimsSet instance to convert
+     * @return the converted JWTClaimsSet instance
+     */
     private static JWTClaimsSet convert(JwtClaimsSet claims) {
         JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
         Object issuer = claims.getClaim("iss");
@@ -205,6 +240,13 @@ public class DomainTokenEncoder implements TokenEncoder {
         return builder.build();
     }
 
+    /**
+     * Converts a {@link URL} to a {@link URI} for setting certain headers.
+     *
+     * @param header the header type (e.g., "jku" or "x5u")
+     * @param url the URL to convert
+     * @return the converted URI
+     */
     private static URI convertAsURI(String header, URL url) {
         try {
             return url.toURI();
@@ -214,12 +256,26 @@ public class DomainTokenEncoder implements TokenEncoder {
         }
     }
 
+    /**
+     * Converts a list of X.509 certificate chain strings to a list of {@link Base64} encoded values.
+     * This is useful for setting the "x5c" header parameter in JWS and JWE headers.
+     *
+     * @param x509CertificateChain the list of X.509 certificates as strings in Base64 format
+     * @return a list of {@link Base64} encoded certificate chain values
+     */
     private static List<Base64> convertCertificateChain(List<String> x509CertificateChain) {
         List<Base64> x5cList = new ArrayList<>();
         x509CertificateChain.forEach(x5c -> x5cList.add(new Base64(x5c)));
         return x5cList;
     }
 
+    /**
+     * Selects the appropriate {@link JWK} based on the provided {@link JwsHeader}.
+     *
+     * @param headers the headers used for selecting the key
+     * @return the selected {@link JWK} instance
+     * @throws JwtEncodingException if multiple or no keys match the selection criteria
+     */
     private JWK selectJwk(JwsHeader headers) {
         List jwks;
         try {
@@ -242,6 +298,12 @@ public class DomainTokenEncoder implements TokenEncoder {
         }
     }
 
+    /**
+     * Creates a {@link JWKMatcher} to select keys based on the {@link JwsHeader} configuration.
+     *
+     * @param headers the JwsHeader instance with key selection parameters
+     * @return the configured {@link JWKMatcher} instance
+     */
     private static JWKMatcher createJwkMatcher(JwsHeader headers) {
         JWSAlgorithm jwsAlgorithm = JWSAlgorithm.parse(headers.getAlgorithm().getName());
         if (!JWSAlgorithm.Family.RSA.contains(jwsAlgorithm) && !JWSAlgorithm.Family.EC.contains(jwsAlgorithm)) {
@@ -257,6 +319,13 @@ public class DomainTokenEncoder implements TokenEncoder {
         }
     }
 
+    /**
+     * Creates a {@link JWSSigner} for the specified {@link JWK}.
+     *
+     * @param jwk the JWK instance for which to create the signer
+     * @return the created {@link JWSSigner} instance
+     * @throws JwtEncodingException if the signer cannot be created
+     */
     private static JWSSigner createSigner(JWK jwk) {
         try {
             return JWS_SIGNER_FACTORY.createJWSSigner(jwk);
@@ -266,6 +335,13 @@ public class DomainTokenEncoder implements TokenEncoder {
         }
     }
 
+    /**
+     * Adds key identifier headers to {@link JwsHeader} if they are missing but available in the {@link JWK}.
+     *
+     * @param headers the current JwsHeader instance
+     * @param jwk the JWK containing key identifier information
+     * @return a modified JwsHeader instance with key identifiers
+     */
     private static JwsHeader addKeyIdentifierHeadersIfNecessary(JwsHeader headers, JWK jwk) {
         if (StringUtils.hasText(headers.getKeyId()) && StringUtils.hasText(headers.getX509SHA256Thumbprint())) {
             return headers;
@@ -285,6 +361,13 @@ public class DomainTokenEncoder implements TokenEncoder {
         }
     }
 
+    /**
+     * Creates an {@link RSAEncrypter} for JWE encryption using the provided RSA key.
+     *
+     * @param rsaKey the RSA key for encryption
+     * @return the configured {@link RSAEncrypter}
+     * @throws JOSEException if encryption setup fails
+     */
     public JWEEncrypter createEncrypter(RSAKey rsaKey) throws JOSEException {
         return new RSAEncrypter(rsaKey);
     }
