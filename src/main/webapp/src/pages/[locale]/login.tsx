@@ -14,6 +14,7 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '@/config/store';
 import { login as loginAction } from '@/reducers/authentication';
 import { useRedirect } from '@/hooks/useRedirect';
+import {ALPHANUMERIC_PATTERN} from "@/config/constants";
 
 interface LoginFormInputs {
   username: string;
@@ -87,7 +88,7 @@ const Login = () => {
                         minLength: { value: 3, message: t('common:common.validation.minlength', { min: 3 }) },
                         maxLength: { value: 50, message: t('common:common.validation.maxlength', { max: 50 }) },
                         pattern: {
-                          value: /^[a-zA-Z0-9]*$/,
+                          value: ALPHANUMERIC_PATTERN,
                           message: t('common:common.validation.alphanumeric')
                         }
                       })}

@@ -1,7 +1,6 @@
 // reducers/authentication.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-const isBrowser = typeof window !== 'undefined';
+import {isBrowser} from "@/config/constants";
 
 interface AuthenticationState {
   token: string | null;

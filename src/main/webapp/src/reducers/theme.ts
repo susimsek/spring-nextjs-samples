@@ -1,7 +1,6 @@
 // reducers/theme.ts
 import { createSlice } from '@reduxjs/toolkit';
-
-const isBrowser = typeof window !== 'undefined';
+import {isBrowser} from "@/config/constants";
 
 interface ThemeState {
   theme: 'light' | 'dark';
