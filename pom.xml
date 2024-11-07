@@ -32,9 +32,11 @@
 
     <properties>
         <java.version>21</java.version>
+        <kotlin.version>1.9.25</kotlin.version>
         <maven.version>3.2.5</maven.version>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
         <checkstyle.version>10.18.1</checkstyle.version>
+        <detekt.version>1.23.7</detekt.version>
         <springdoc.version>2.5.0</springdoc.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
@@ -53,6 +55,9 @@
         <frontend-maven-plugin.version>1.15.0</frontend-maven-plugin.version>
         <lombok-maven-plugin.version>1.18.20.0</lombok-maven-plugin.version>
         <maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+        <detekt.configFile>${project.basedir}/detekt.yml</detekt.configFile>
+        <detekt.xmlReportFile>${project.build.directory}/detekt-reports/detekt.xml</detekt.xmlReportFile>
+        <sonar.kotlin.detekt.reportPaths>${detekt.xmlReportFile}</sonar.kotlin.detekt.reportPaths>
     </properties>
     <dependencies>
         <dependency>
@@ -95,6 +100,18 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-kotlin</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -159,6 +176,11 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test-junit5</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -228,6 +250,26 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>com.github.ozsie</groupId>
+                <artifactId>detekt-maven-plugin</artifactId>
+                <version>${detekt.version}</version>
+                <executions>
+                    <execution>
+                        <id>run-detekt</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <config>${detekt.configFile}</config>
+                            <report>
+                                <report>xml:${detekt.xmlReportFile}</report>
+                            </report>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>${maven-checkstyle-plugin.version}</version>
@@ -251,13 +293,60 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <id>validate</id>
-                        <phase>validate</phase>
+                        <id>run-checkstyle</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>kotlin-compile</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>kotlin-test-compile</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <args>
+                        <arg>-Xjsr305=strict</arg>
+                    </args>
+                    <compilerPlugins>
+                        <plugin>spring</plugin>
+                        <plugin>jpa</plugin>
+                        <plugin>all-open</plugin>
+                    </compilerPlugins>
+                    <pluginOptions>
+                        <option>all-open:annotation=jakarta.persistence.Entity</option>
+                        <option>all-open:annotation=jakarta.persistence.MappedSuperclass</option>
+                        <option>all-open:annotation=jakarta.persistence.Embeddable</option>
+                    </pluginOptions>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-allopen</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                    <dependency>
+                        <groupId>org.jetbrains.kotlin</groupId>
+                        <artifactId>kotlin-maven-noarg</artifactId>
+                        <version>${kotlin.version}</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

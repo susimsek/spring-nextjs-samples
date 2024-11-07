@@ -1,16 +1,14 @@
-package io.github.susimsek.springnextjssamples;
+package io.github.susimsek.springnextjssamples
 
-import io.github.susimsek.springnextjssamples.config.NativeConfig;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportRuntimeHints;
+import io.github.susimsek.springnextjssamples.config.NativeConfig
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
+import org.springframework.context.annotation.ImportRuntimeHints
 
 @SpringBootApplication
-@ImportRuntimeHints(NativeConfig.AppNativeRuntimeHints.class)
-public class SpringNextjsSamplesApplication {
+@ImportRuntimeHints(NativeConfig.AppNativeRuntimeHints::class)
+class SpringNextjsSamplesApplication
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringNextjsSamplesApplication.class, args);
-    }
-
+fun main(args: Array<String>) {
+    runApplication<SpringNextjsSamplesApplication>(*args)
 }

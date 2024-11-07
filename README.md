@@ -81,10 +81,18 @@ mvn -Psonar compile initialize sonar:sonar
 
 ## Checkstyle
 
-To check the code style using Checkstyle, execute:
+To check the Java code style using Checkstyle, execute:
 
 ```sh
 mvn checkstyle:check
+```
+
+## Detekt
+
+To check the Kotlin code style using Detekt, execute:
+
+```sh
+mvn detekt:check -Ddetekt.config=detekt.yml
 ```
 
 ## Deployment
@@ -164,6 +172,7 @@ Below is the ER Diagram used for the project:
 ## Used Technologies
 
 - Java 22
+- Kotlin
 - Spring Boot 3.x
 - Docker
 - Kubernetes
