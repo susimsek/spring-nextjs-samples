@@ -171,7 +171,7 @@ Below is the ER Diagram used for the project:
 
 ## Used Technologies
 
-- Java 22
+- Java 21
 - Kotlin
 - Spring Boot 3.x
 - Docker
