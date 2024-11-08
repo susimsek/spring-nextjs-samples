@@ -1,22 +1,44 @@
+# Root queries for fetching data
 type Query {
+    # Returns a simple welcome message
     hello: HelloDTO!
 }
 
+# Mutations for user authentication
 type Mutation {
+    # Authenticates the user with username and password, returns a JWT token.
     authenticate(loginRequest: LoginRequestDTO!): TokenDTO!
 }
 
+# Data structure containing a welcome message
 type HelloDTO {
+    # The welcome message content
+    # Example: "Hello, welcome to our API!"
     message: String!
 }
 
+# Input structure for user login request
 input LoginRequestDTO {
+    # Username of the user
+    # Example: "admin"
     username: String!
+
+    # Password of the user
+    # Example: "password"
     password: String!
 }
 
+# JWT token response data structure
 type TokenDTO {
+    # JWT access token
+    # Example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
     accessToken: String!
+
+    # Type of token (e.g., "Bearer")
+    # Example: "Bearer"
     tokenType: String!
+
+    # Access token expiration time in seconds
+    # Example: 3600
     accessTokenExpiresIn: Int!
 }
