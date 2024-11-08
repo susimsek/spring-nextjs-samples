@@ -81,4 +81,16 @@ public class RequestMatcherConfig {
     public RequestMatcher tokenPath() {
         return  mvc.pattern("/api/v{version}/auth/token");
     }
+
+    public RequestMatcher[] graphqlPath() {
+        return new MvcRequestMatcher[] {
+            mvc.pattern("/graphql"),
+        };
+    }
+
+    public RequestMatcher[] graphiqlPath() {
+        return new MvcRequestMatcher[] {
+            mvc.pattern("/graphiql"),
+        };
+    }
 }

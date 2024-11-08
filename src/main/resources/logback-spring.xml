@@ -21,6 +21,7 @@
     <logger name="org.redisson" level="WARN"/>
     <logger name="org.springframework" level="WARN"/>
     <logger name="org.springframework.web" level="WARN"/>
+    <logger name="org.springframework.graphql" level="WARN"/>
     <logger name="org.springframework.security" level="WARN"/>
     <logger name="org.springframework.security.oauth2" level="WARN"/>
     <logger name="org.springframework.cache" level="WARN"/>
@@ -31,6 +32,7 @@
     <logger name="com.netflix" level="WARN"/>
     <logger name="com.netflix.discovery" level="WARN"/>
     <logger name="io.swagger.v3" level="WARN"/>
+    <logger name="graphql" level="WARN"/>
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>

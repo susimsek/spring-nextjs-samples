@@ -76,6 +76,8 @@ public class SecurityConfig {
                     .requestMatchers(requestMatcherConfig.staticResources()).permitAll()
                     .requestMatchers(requestMatcherConfig.swaggerPaths()).permitAll()
                     .requestMatchers(requestMatcherConfig.actuatorPaths()).permitAll()
+                    .requestMatchers(requestMatcherConfig.graphqlPath()).permitAll()
+                    .requestMatchers(requestMatcherConfig.graphiqlPath()).permitAll()
                     .requestMatchers(requestMatcherConfig.tokenPath()).permitAll()
                     .requestMatchers(requestMatcherConfig.helloApiPaths()).hasAuthority(ADMIN)
                     .anyRequest().authenticated())

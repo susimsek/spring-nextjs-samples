@@ -12,7 +12,7 @@ import org.springframework.util.Assert;
  * {@code TokenEncoderParameters} holds the parameters needed for encoding a JWT, including the JWS and JWE headers
  * and the claims set. This class supports creating parameters for both signed and encrypted JWTs.
  *
- * <p>This class is immutable and provides static factory methods for easily creating instances with either
+ * <p>This class is immutable and provides graphiql factory methods for easily creating instances with either
  * a minimal set of claims or with specified JWS and JWE headers.</p>
  *
  * <p>Example usage:

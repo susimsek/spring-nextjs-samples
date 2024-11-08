@@ -28,7 +28,9 @@ public class SpaWebFilter extends OncePerRequestFilter {
         String path = request.getRequestURI().substring(request.getContextPath().length());
 
         if (!path.startsWith("/api") &&
-            !path.startsWith("/management") &&
+            !path.startsWith("/graphql") &&
+            !path.startsWith("/graphiql") &&
+            !path.startsWith("/actuator") &&
             !path.startsWith("/v3/api-docs") &&
             !path.startsWith("/h2-console") &&
             !path.contains(".") &&

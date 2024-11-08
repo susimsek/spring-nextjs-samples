@@ -1,0 +1,22 @@
+type Query {
+    hello: HelloDTO!
+}
+
+type Mutation {
+    authenticate(loginRequest: LoginRequestDTO!): TokenDTO!
+}
+
+type HelloDTO {
+    message: String!
+}
+
+input LoginRequestDTO {
+    username: String!
+    password: String!
+}
+
+type TokenDTO {
+    accessToken: String!
+    tokenType: String!
+    accessTokenExpiresIn: Int!
+}
