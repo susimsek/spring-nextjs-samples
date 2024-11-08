@@ -1,13 +1,13 @@
 # Root queries for fetching data
 type Query {
     # Returns a simple welcome message
-    hello: HelloDTO!
+    hello: HelloDTO
 }
 
 # Mutations for user authentication
 type Mutation {
     # Authenticates the user with username and password, returns a JWT token.
-    authenticate(loginRequest: LoginRequestDTO!): TokenDTO!
+    authenticate(loginRequest: LoginRequestDTO!): TokenDTO
 }
 
 # Data structure containing a welcome message

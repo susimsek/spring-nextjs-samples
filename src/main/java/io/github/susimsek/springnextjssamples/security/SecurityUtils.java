@@ -52,11 +52,9 @@ public class SecurityUtils {
      */
     public boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication != null
-            && authentication.isAuthenticated()
-            && !(authentication instanceof JwtAuthenticationToken);
+        return authentication != null && authentication.isAuthenticated()
+            && !(authentication instanceof AnonymousAuthenticationToken);
     }
-
     /**
      * Checks if the currently authenticated user has the specified role.
      *
