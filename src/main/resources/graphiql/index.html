@@ -32,17 +32,25 @@
   const subscriptionUrl = `${wsProtocol}//${location.host}${wsPath}`;
 
   const defaultQuery = `
-        mutation {
-            authenticate(loginRequest: {
-                username: "admin",
-                password: "password"
-            }) {
-                accessToken
-                tokenType
-                accessTokenExpiresIn
-            }
-        }
-    `;
+    # Mutation to authenticate and retrieve a token
+    mutation AuthenticateUser {
+      authenticate(loginRequest: {
+          username: "admin",
+          password: "password"
+      }) {
+          accessToken
+          tokenType
+          accessTokenExpiresIn
+      }
+    }
+
+    # Query to get a hello message
+    query GetHelloMessage {
+      hello {
+          message
+      }
+    }
+`;
 
   const gqlFetcher = GraphiQL.createFetcher({'url': url, 'subscriptionUrl': subscriptionUrl});
   const explorerPlugin = GraphiQLPluginExplorer.explorerPlugin();
