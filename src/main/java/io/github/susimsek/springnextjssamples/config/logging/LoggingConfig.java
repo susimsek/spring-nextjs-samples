@@ -14,8 +14,6 @@ import com.github.loki4j.logback.JsonEncoder;
 import com.github.loki4j.logback.Loki4jAppender;
 import io.github.susimsek.springnextjssamples.aspect.LoggingAspect;
 import io.github.susimsek.springnextjssamples.config.RequestMatcherConfig;
-import io.github.susimsek.springnextjssamples.enums.FilterOrder;
-import io.github.susimsek.springnextjssamples.web.filter.LoggingFilter;
 import io.github.susimsek.springnextjssamples.config.logging.config.LoggingProperties;
 import io.github.susimsek.springnextjssamples.config.logging.formatter.JsonLogFormatter;
 import io.github.susimsek.springnextjssamples.config.logging.formatter.LogFormatter;
@@ -26,6 +24,8 @@ import io.github.susimsek.springnextjssamples.config.logging.strategy.NoOpObfusc
 import io.github.susimsek.springnextjssamples.config.logging.strategy.ObfuscationStrategy;
 import io.github.susimsek.springnextjssamples.config.logging.utils.Obfuscator;
 import io.github.susimsek.springnextjssamples.config.logging.wrapper.HttpLoggingWrapper;
+import io.github.susimsek.springnextjssamples.enums.FilterOrder;
+import io.github.susimsek.springnextjssamples.web.filter.LoggingFilter;
 import io.micrometer.tracing.Tracer;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.LoggerFactory;
@@ -36,7 +36,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
 
 @Configuration
 @EnableConfigurationProperties(LoggingProperties.class)
@@ -84,7 +83,7 @@ public class LoggingConfig {
             .requestMatchers(requestMatcherConfig.staticResourcePaths()).permitAll()
             .requestMatchers(requestMatcherConfig.swaggerResourcePaths()).permitAll()
             .requestMatchers(requestMatcherConfig.actuatorEndpoints()).permitAll()
-            .requestMatchers(HttpMethod.GET, "/login").permitAll()
+            .requestMatchers(requestMatcherConfig.graphiqlResourcePath()).permitAll()
             .anyRequest().logged()
             .build();
     }

@@ -93,4 +93,10 @@ public class RequestMatcherConfig {
             mvc.pattern("/graphiql"),
         };
     }
+
+    public String[] graphiqlResourcePath() {
+        return new String[] {
+            "/graphiql"
+        };
+    }
 }
