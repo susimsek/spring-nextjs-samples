@@ -11,34 +11,26 @@ import { HelloDTO } from "@/types/helloDTO";
 import { getStaticPaths, makeStaticProps } from "@/lib/getStatic";
 import EmbeddedContentFrame from "@/components/EmbeddedContentFrame";
 import withAuth from "@/components/withAuth";
+import {useQuery} from "@apollo/client";
+import {useGetHelloMessageQuery} from "@/generated/graphql";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
   const [activePage, setActivePage] = useState<string>('home');
-  const [messageData, setMessageData] = useState<HelloDTO | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);  // Sidebar starts as open
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
 
+  const { data, loading, refetch } = useGetHelloMessageQuery();
+
+  const messageData = data?.hello ?? null;
+  // Sidebar starts as open
   // Function to toggle sidebar visibility
   const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
 
   useEffect(() => {
     if (activePage === 'home') {
-      const getMessage = async () => {
-        setLoading(true);
-        try {
-          const data = await fetchHelloMessage();
-          setMessageData(data);
-        } catch (error) {
-          console.error(error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      getMessage();
+      refetch();
     }
-  }, [activePage]);
+  }, [activePage, refetch]);
 
   const renderContent = () => {
     switch (activePage) {

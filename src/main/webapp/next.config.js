@@ -9,7 +9,10 @@ const sources = [
   '/h2-console',
   '/swagger-ui.html',
   '/swagger-ui/:path*',
-  '/v3/api-docs/:path*'];
+  '/v3/api-docs/:path*',
+  '/graphql',
+  '/graphiql'
+];
 
 const nextConfig = {
   distDir: 'build',

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Spinner } from 'react-bootstrap';
-import { HelloDTO } from '@/types/helloDTO';
 import { useTranslation } from 'next-i18next';
+import {HelloDto} from "@/generated/graphql";
 
 type HomeContentProps = {
-  messageData: HelloDTO | null;
+  messageData: HelloDto | null;
   loading: boolean;
 };
 
