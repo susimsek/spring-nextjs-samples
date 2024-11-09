@@ -1,5 +1,5 @@
 # Custom scalar for DateTime in ISO-8601 format
-scalar DateTime
+scalar DateTime @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time.html")
 
 # Root queries for fetching data
 type Query {
