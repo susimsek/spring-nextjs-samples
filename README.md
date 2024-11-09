@@ -163,6 +163,13 @@ http://localhost:8080/swagger-ui.html
 
 ![Api Documentation](https://github.com/susimsek/spring-nextjs-samples/blob/main/images/swagger-ui.png)
 
+### GraphQL Playground
+Use the GraphiQL interface to explore and test GraphQL queries:
+
+http://localhost:8080/graphiql
+
+![GraphQL Documentation](https://github.com/susimsek/spring-nextjs-samples/blob/main/images/graphiql.png)
+
 ## ER Diagram
 
 Below is the ER Diagram used for the project:
