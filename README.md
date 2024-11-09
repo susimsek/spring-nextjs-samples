@@ -188,6 +188,7 @@ Below is the ER Diagram used for the project:
 - Docker
 - Kubernetes
 - Checkstyle
+- Detekt
 - SonarQube
 - Helm
 - GitHub Actions
