@@ -38,6 +38,8 @@ const Home = () => {
         return <HomeContent messageData={messageData} loading={loading} />;
       case 'api':
         return <EmbeddedContentFrame src="/swagger-ui.html" title={t('common:common.menu.api')} />;
+      case 'gqlApi':
+        return <EmbeddedContentFrame src="/graphiql" title={t('common:common.menu.gqlApi')}/>;
       case 'database':
         return <EmbeddedContentFrame src="/h2-console" title={t('common:common.menu.database')} backgroundColor="#ffffff" />;
 

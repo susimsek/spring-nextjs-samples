@@ -64,7 +64,8 @@
     "menu": {
       "home": "Ana Sayfa",
       "api": "API",
-      "database": "Veritabanı"
+      "database": "Veritabanı",
+      "gqlApi": "GraphQL API"
     }
   }
 }

@@ -34,6 +34,16 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
           {t('common:common.menu.api')}
         </a>
       </Nav.Item>
+      <Nav.Item className="mb-3">
+        <a
+          href="#"
+          onClick={() => onNavigate('gqlApi')}
+          className="nav-link"
+        >
+          <FontAwesomeIcon icon={faCode} className="me-2" />
+          {t('common:common.menu.gqlApi')}
+        </a>
+      </Nav.Item>
       <Nav.Item>
         <a
           href="#"

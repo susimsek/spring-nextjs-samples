@@ -65,7 +65,8 @@
     "menu": {
       "home": "Home",
       "api": "API",
-      "database": "Database"
+      "database": "Database",
+      "gqlApi": "GraphQL API"
     }
   }
 }
