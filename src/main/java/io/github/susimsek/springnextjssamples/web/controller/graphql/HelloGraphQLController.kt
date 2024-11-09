@@ -15,7 +15,7 @@ class HelloGraphQLController(
     @QueryMapping
     @PreAuthorize("hasRole('ADMIN')")
     fun hello(locale: Locale): HelloDTO {
-        val message = messageSource.getMessage("hello.message", null, locale)
+      val message = messageSource.getMessage("hello.message", null, locale)
       val timestamp = Instant.now()
       return HelloDTO(message, timestamp)
     }
