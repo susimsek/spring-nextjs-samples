@@ -27,6 +27,16 @@
         "403": "Erişim Engellendi. Bu kaynağa erişim izniniz yok.",
         "default": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin."
       },
+      "graphql": {
+        "BAD_REQUEST": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.",
+        "UNAUTHORIZED": "Yetkisiz erişim. Bu kaynağa erişmek için giriş yapmalısınız.",
+        "FORBIDDEN": "Erişim Engellendi. Bu kaynağa erişim izniniz yok.",
+        "NOT_FOUND": "Sayfa bulunamadı. Aradığınız kaynak mevcut değil.",
+        "INTERNAL_ERROR": "Sunucu Hatası. Lütfen daha sonra tekrar deneyin.",
+        "THROTTLED": "Çok fazla istek yapıldı. Lütfen biraz bekleyin.",
+        "CONFLICT": "Çakışma meydana geldi. İstek bir çakışma nedeniyle tamamlanamadı.",
+        "default": "Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin."
+      },
       "validationErrors": "Aşağıdaki alanlarda hata oluştu:"
     },
     "validation": {
