@@ -157,7 +157,10 @@ helm uninstall spring-nextjs-app
 
 ## Documentation
 
-For API documentation, please refer to the Swagger UI:
+For API documentation, please refer to the following:
+
+### Swagger UI
+Access the Swagger UI for REST API documentation:
 
 http://localhost:8080/swagger-ui.html
 
