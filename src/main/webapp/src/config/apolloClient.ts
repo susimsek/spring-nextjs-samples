@@ -18,7 +18,7 @@ const authLink = new ApolloLink((operation, forward) => {
   // Set headers
   operation.setContext({
     headers: {
-      // Set Authorization only if token exists
+      ...(token && { Authorization: `Bearer ${token}` }), // Set Authorization only if token exists
       'Accept-Language': language, // Always set Accept-Language
     },
   });

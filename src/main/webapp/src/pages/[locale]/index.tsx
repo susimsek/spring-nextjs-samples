@@ -79,7 +79,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);
 
 const getStaticProps = makeStaticProps(['common', 'home', 'footer']);
 export { getStaticPaths, getStaticProps };
