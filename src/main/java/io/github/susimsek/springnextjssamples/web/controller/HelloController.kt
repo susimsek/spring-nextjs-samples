@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
+import java.time.Instant
 import java.util.*
 
 @RestController
@@ -45,6 +46,7 @@ class HelloController(
     @GetMapping("/api/v1/hello")
     fun hello(locale: Locale): HelloDTO {
         val message = messageSource.getMessage("hello.message", null, locale)
-        return HelloDTO(message)
+      val timestamp = Instant.now()
+      return HelloDTO(message, timestamp)
     }
 }

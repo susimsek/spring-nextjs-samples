@@ -1,5 +1,6 @@
 // /api/apolloClient.ts
-import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, concat } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink, ApolloLink } from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
 import { notificationLink } from "@/config/notificationLink";
 import loggingLink from "@/config/loggingLink";
 import { logout } from '@/reducers/authentication';
@@ -23,23 +24,32 @@ const authLink = new ApolloLink((operation, forward) => {
     },
   });
 
-  return forward(operation).map((response) => {
-    if (response.errors) {
-      response.errors.forEach((error) => {
-        const { extensions } = error;
-        // Check for UNAUTHORIZED classification or status 401
-        if (extensions?.classification === 'UNAUTHORIZED' || extensions?.status === 401) {
-          store.dispatch(logout()); // Trigger logout for 401 errors or UNAUTHORIZED classification
-        }
-      });
-    }
-    return response;
-  });
+  return forward(operation); // Continue the request
 });
 
-// Create the Apollo Client instance
+// onError link for handling unauthorized errors and triggering logout
+const logoutLink = onError(({ graphQLErrors, networkError }) => {
+  const graphQLError = graphQLErrors && graphQLErrors.length > 0 ? graphQLErrors[0] : null;
+  if (graphQLError) {
+    const classification = graphQLError.extensions?.classification;
+    if (classification === 'UNAUTHORIZED') {
+      store.dispatch(logout()); // Trigger logout
+    }
+  }
+
+  if (networkError) {
+    // Check for 'statusCode' in networkError
+    const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
+
+    if (status === 401) {
+      store.dispatch(logout()); // Trigger logout for network 401 errors
+    }
+  }
+});
+
+// Combine all links
 const client = new ApolloClient({
-  link: concat(authLink, concat(notificationLink, concat(loggingLink, httpLink))), // Combine links
+  link: ApolloLink.from([authLink, logoutLink, notificationLink, loggingLink, httpLink]), // Combine auth, logout, notification, logging, and HTTP links
   cache: new InMemoryCache(),
 });
 

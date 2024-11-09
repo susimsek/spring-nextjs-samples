@@ -15,9 +15,10 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
+  DateTime: { input: any; output: any };
 };
 
-/**  Data structure containing a welcome message */
+/**  Data structure containing a welcome message and timestamp */
 export type HelloDto = {
   __typename?: 'HelloDTO';
   /**
@@ -25,6 +26,11 @@ export type HelloDto = {
    *  Example: "Hello, welcome to our API!"
    */
   message: Scalars['String']['output'];
+  /**
+   *  The timestamp of the welcome message
+   *  Example: "2023-11-10T10:00:00Z"
+   */
+  timestamp: Scalars['DateTime']['output'];
 };
 
 /**  Input structure for user login request */
@@ -91,7 +97,7 @@ export type AuthenticateMutation = {
 
 export type GetHelloMessageQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetHelloMessageQuery = { __typename?: 'Query'; hello?: { __typename?: 'HelloDTO'; message: string } | null };
+export type GetHelloMessageQuery = { __typename?: 'Query'; hello?: { __typename?: 'HelloDTO'; message: string; timestamp: any } | null };
 
 export const AuthenticateDocument = gql`
   mutation Authenticate($loginRequest: LoginRequestDTO!) {
@@ -132,6 +138,7 @@ export const GetHelloMessageDocument = gql`
   query GetHelloMessage {
     hello {
       message
+      timestamp
     }
   }
 `;

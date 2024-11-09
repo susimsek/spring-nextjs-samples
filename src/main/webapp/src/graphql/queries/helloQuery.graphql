@@ -1,5 +1,6 @@
 query GetHelloMessage {
     hello {
         message
+        timestamp
     }
 }

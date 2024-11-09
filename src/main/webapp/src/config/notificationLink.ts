@@ -7,8 +7,9 @@ export const notificationLink = onError(({ graphQLErrors, networkError, operatio
   let messageKey: string | undefined = 'common:common.error.http.default';
   let errorMessage: string | undefined = undefined;
 
+  // Network Errors handling
   if (networkError) {
-    const status = 'status' in networkError ? networkError.status : undefined;
+    const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
 
     switch (status) {
       case 401:
@@ -22,35 +23,39 @@ export const notificationLink = onError(({ graphQLErrors, networkError, operatio
         messageKey = `common:common.error.http.${status}`;
         break;
       default:
-        const graphQLError = graphQLErrors && graphQLErrors.length > 0 ? graphQLErrors[0] : null;
-        if (graphQLError) {
-          const classification = graphQLError.extensions?.classification;
-
-          switch (classification) {
-            case 'UNAUTHORIZED':
-              // Ignore UNAUTHORIZED errors
-              return forward(operation);
-            case 'FORBIDDEN':
-            case 'INTERNAL_ERROR':
-            case 'THROTTLED':
-            case 'CONFLICT':
-              messageKey = `common:common.error.graphql.${classification}`;
-              break;
-            default:
-              errorMessage = graphQLError.message;
-              messageKey = undefined;
-              break;
-          }
-        }
+        errorMessage = networkError.message;
         break;
     }
-
-    store.dispatch(
-      showNotification({
-        messageKey,
-        message: errorMessage,
-        variant: 'danger',
-      })
-    );
   }
+
+  // Handle only the first GraphQL error
+  const graphQLError = graphQLErrors && graphQLErrors.length > 0 ? graphQLErrors[0] : null;
+  if (graphQLError) {
+    const classification = graphQLError.extensions?.classification;
+
+    switch (classification) {
+      case 'UNAUTHORIZED':
+        // Ignore UNAUTHORIZED errors
+        return forward(operation);
+      case 'FORBIDDEN':
+      case 'INTERNAL_ERROR':
+      case 'THROTTLED':
+      case 'CONFLICT':
+        messageKey = `common:common.error.graphql.${classification}`;
+        break;
+      default:
+        errorMessage = graphQLError.message;
+        messageKey = undefined;
+        break;
+    }
+  }
+
+  // Dispatch the notification if a messageKey or errorMessage is set
+  store.dispatch(
+    showNotification({
+      messageKey,
+      message: errorMessage,
+      variant: 'danger',
+    })
+  );
 });
