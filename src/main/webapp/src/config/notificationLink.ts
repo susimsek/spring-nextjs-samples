@@ -4,53 +4,74 @@ import store from '@/config/store';
 import { showNotification } from '@/reducers/notification';
 
 export const notificationLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
-  let messageKey: string | undefined = 'common:common.error.http.default';
-  let errorMessage: string | undefined = undefined;
-
-  // Network Errors handling
-  if (networkError) {
-    const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
-
-    switch (status) {
-      case 401:
-        // Ignore, page will be redirected to login.
-        return forward(operation);
-      case 0:
-      case 403:
-      case 405:
-      case 500:
-      case 503:
-        messageKey = `common:common.error.http.${status}`;
-        break;
-      default:
-        errorMessage = networkError.message;
-        break;
-    }
-  }
-
-  // Handle only the first GraphQL error
+  // Takes the first GraphQL error and processes it through the handleGraphQLError function
   const graphQLError = graphQLErrors && graphQLErrors.length > 0 ? graphQLErrors[0] : null;
   if (graphQLError) {
-    const classification = graphQLError.extensions?.classification;
-
-    switch (classification) {
-      case 'UNAUTHORIZED':
-        // Ignore UNAUTHORIZED errors
-        return forward(operation);
-      case 'FORBIDDEN':
-      case 'INTERNAL_ERROR':
-      case 'THROTTLED':
-      case 'CONFLICT':
-        messageKey = `common:common.error.graphql.${classification}`;
-        break;
-      default:
-        errorMessage = graphQLError.message;
-        messageKey = undefined;
-        break;
+    const { messageKey, errorMessage } = handleGraphQLError(graphQLError, operation, forward);
+    if (messageKey || errorMessage) {
+      dispatchNotification(messageKey, errorMessage);
     }
   }
 
-  // Dispatch the notification if a messageKey or errorMessage is set
+  // Processes the network error through the handleNetworkError function
+  if (networkError) {
+    const { messageKey, errorMessage } = handleNetworkError(networkError, operation, forward);
+    if (messageKey || errorMessage) {
+      dispatchNotification(messageKey, errorMessage);
+    }
+  }
+});
+
+// Function to handle GraphQL errors
+function handleGraphQLError(graphQLError: any, operation: any, forward: any) {
+  let messageKey: string | undefined = 'common:common.error.http.default';
+  let errorMessage: string | undefined;
+
+  const classification = graphQLError.extensions?.classification;
+  switch (classification) {
+    case 'UNAUTHORIZED':
+      return forward(operation); // Redirects for UNAUTHORIZED errors
+    case 'FORBIDDEN':
+    case 'INTERNAL_ERROR':
+    case 'THROTTLED':
+    case 'CONFLICT':
+      messageKey = `common:common.error.graphql.${classification}`;
+      break;
+    default:
+      errorMessage = graphQLError.message;
+      messageKey = undefined;
+      break;
+  }
+
+  return { messageKey, errorMessage };
+}
+
+// Function to handle network errors
+function handleNetworkError(networkError: any, operation: any, forward: any) {
+  let messageKey: string | undefined = 'common:common.error.http.default';
+  let errorMessage: string | undefined;
+
+  const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
+  switch (status) {
+    case 401:
+      return forward(operation); // Redirects for 401 errors
+    case 0:
+    case 403:
+    case 405:
+    case 500:
+    case 503:
+      messageKey = `common:common.error.http.${status}`;
+      break;
+    default:
+      errorMessage = networkError.message;
+      break;
+  }
+
+  return { messageKey, errorMessage };
+}
+
+// Function to manage the notification dispatching
+function dispatchNotification(messageKey: string | undefined, errorMessage: string | undefined) {
   store.dispatch(
     showNotification({
       messageKey,
@@ -58,4 +79,4 @@ export const notificationLink = onError(({ graphQLErrors, networkError, operatio
       variant: 'danger',
     })
   );
-});
+}

@@ -27,25 +27,35 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation); // Continue the request
 });
 
-// onError link for handling unauthorized errors and triggering logout
+// onError link for handling errors and triggering logout if necessary
 const logoutLink = onError(({ graphQLErrors, networkError }) => {
+  // Handle GraphQL errors
   const graphQLError = graphQLErrors && graphQLErrors.length > 0 ? graphQLErrors[0] : null;
   if (graphQLError) {
-    const classification = graphQLError.extensions?.classification;
-    if (classification === 'UNAUTHORIZED') {
-      store.dispatch(logout()); // Trigger logout
-    }
+    handleGraphQLErrorForLogout(graphQLError);
   }
 
+  // Handle network errors
   if (networkError) {
-    // Check for 'statusCode' in networkError
-    const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
-
-    if (status === 401) {
-      store.dispatch(logout()); // Trigger logout for network 401 errors
-    }
+    handleNetworkErrorForLogout(networkError);
   }
 });
+
+// Function to handle GraphQL errors for logout
+function handleGraphQLErrorForLogout(graphQLError: any) {
+  const classification = graphQLError.extensions?.classification;
+  if (classification === 'UNAUTHORIZED') {
+    store.dispatch(logout()); // Trigger logout if the error is UNAUTHORIZED
+  }
+}
+
+// Function to handle network errors for logout
+function handleNetworkErrorForLogout(networkError: any) {
+  const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
+  if (status === 401) {
+    store.dispatch(logout()); // Trigger logout if the status code is 401
+  }
+}
 
 // Combine all links
 const client = new ApolloClient({
