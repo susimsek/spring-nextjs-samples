@@ -181,6 +181,7 @@ Below is the ER Diagram used for the project:
 - Helm
 - GitHub Actions
 - Spring Boot Starter Web
+- Spring Boot Starter GraphQL
 - Spring Boot Starter Validation
 - Spring Boot Starter Data JPA
 - Spring Boot Starter OAuth2 Resource Server
@@ -190,6 +191,7 @@ Below is the ER Diagram used for the project:
 - Spring Boot Actuator
 - Spring Boot Configuration Processor
 - SpringDoc OpenAPI Starter WebMVC UI
+- GraphiQL
 - Liquibase
 - PostgreSQL
 - H2
@@ -210,6 +212,8 @@ Below is the ER Diagram used for the project:
 - Next i18next
 - Next Language Detector
 - Axios
+- Apollo Client
+- GraphQL Codegen
 - React Hook Form
 - Bootstrap
 - Font Awesome
