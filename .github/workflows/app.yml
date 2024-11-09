@@ -16,7 +16,7 @@ jobs:
       run:
         working-directory: ${{ github.workspace }}
     env:
-      NODE_VERSION: 16.14.2
+      NODE_VERSION: 21.6.0
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
     permissions:
       contents: read
