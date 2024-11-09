@@ -32,11 +32,10 @@
   const subscriptionUrl = `${wsProtocol}//${location.host}${wsPath}`;
 
   const defaultQuery = `
-    # Mutation to authenticate and retrieve a token
-    mutation AuthenticateUser {
+    mutation AuthenticateUser($username: String!, $password: String!) {
       authenticate(loginRequest: {
-          username: "admin",
-          password: "password"
+          username: $username,
+          password: $password
       }) {
           accessToken
           tokenType
@@ -44,7 +43,6 @@
       }
     }
 
-    # Query to get a hello message
     query GetHelloMessage {
       hello {
           message
@@ -52,6 +50,11 @@
       }
     }
 `;
+
+  const defaultVariables = JSON.stringify({
+    username: "admin",
+    password: "password"
+  }, null, 2);
 
   const gqlFetcher = GraphiQL.createFetcher({'url': url, 'subscriptionUrl': subscriptionUrl});
   const explorerPlugin = GraphiQLPluginExplorer.explorerPlugin();
@@ -63,7 +66,8 @@
     ...(xsrfToken && { "X-XSRF-TOKEN": xsrfToken[1] }),
     "Accept-Language": "tr",
     ...(token && { "Authorization": `Bearer ${token}` })
-  });
+  }, null, 2);
+
   ReactDOM.render(
     React.createElement(GraphiQL, {
       fetcher: gqlFetcher,
@@ -72,7 +76,8 @@
       shouldPersistHeaders: true,
       headers: headers,
       plugins: [explorerPlugin],
-      defaultQuery: defaultQuery
+      defaultQuery: defaultQuery,
+      variables: defaultVariables
     }),
     document.getElementById('graphiql'),
   );
