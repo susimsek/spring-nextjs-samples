@@ -174,6 +174,17 @@ http://localhost:8080/graphiql
 
 ![GraphQL Documentation](https://github.com/susimsek/spring-nextjs-samples/blob/main/images/graphiql.png)
 
+## Internationalization (i18n) Support
+
+This project supports internationalization (i18n) for English (`en`) and Turkish (`tr`). Language selection is determined based on the `Accept-Language` header, allowing users to experience the application in their preferred language automatically.
+
+- **Backend (Spring Boot)**: The backend uses a custom `ParameterMessageSource` that extends Spring's `MessageSource` to manage multilingual support for server-side messages and responses with named parameter support.
+- **Frontend (Next.js)**: The frontend utilizes `next-i18next` and `Next Language Detector` to manage translations and detect the user's preferred language.
+
+### Configuration
+
+The `i18n` configuration in Next.js automatically detects and loads the appropriate translations based on the user's language preference. This is reflected throughout the UI components, ensuring a consistent experience in either language.
+
 ## ER Diagram
 
 Below is the ER Diagram used for the project:
