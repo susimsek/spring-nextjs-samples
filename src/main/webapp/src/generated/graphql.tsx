@@ -66,6 +66,13 @@ export type Query = {
   hello?: Maybe<HelloDto>;
 };
 
+/**  Subscriptions for real-time updates */
+export type Subscription = {
+  __typename?: 'Subscription';
+  /**  Sends a welcome message periodically */
+  helloSubscription?: Maybe<HelloDto>;
+};
+
 /**  JWT token response data structure */
 export type TokenDto = {
   __typename?: 'TokenDTO';
@@ -98,6 +105,13 @@ export type AuthenticateMutation = {
 export type GetHelloMessageQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetHelloMessageQuery = { __typename?: 'Query'; hello?: { __typename?: 'HelloDTO'; message: string; timestamp: any } | null };
+
+export type HelloSubscriptionSubscriptionVariables = Exact<{ [key: string]: never }>;
+
+export type HelloSubscriptionSubscription = {
+  __typename?: 'Subscription';
+  helloSubscription?: { __typename?: 'HelloDTO'; message: string; timestamp: any } | null;
+};
 
 export const AuthenticateDocument = gql`
   mutation Authenticate($loginRequest: LoginRequestDTO!) {
@@ -178,3 +192,35 @@ export type GetHelloMessageQueryHookResult = ReturnType<typeof useGetHelloMessag
 export type GetHelloMessageLazyQueryHookResult = ReturnType<typeof useGetHelloMessageLazyQuery>;
 export type GetHelloMessageSuspenseQueryHookResult = ReturnType<typeof useGetHelloMessageSuspenseQuery>;
 export type GetHelloMessageQueryResult = Apollo.QueryResult<GetHelloMessageQuery, GetHelloMessageQueryVariables>;
+export const HelloSubscriptionDocument = gql`
+  subscription HelloSubscription {
+    helloSubscription {
+      message
+      timestamp
+    }
+  }
+`;
+
+/**
+ * __useHelloSubscriptionSubscription__
+ *
+ * To run a query within a React component, call `useHelloSubscriptionSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useHelloSubscriptionSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useHelloSubscriptionSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useHelloSubscriptionSubscription(
+  baseOptions?: Apollo.SubscriptionHookOptions<HelloSubscriptionSubscription, HelloSubscriptionSubscriptionVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSubscription<HelloSubscriptionSubscription, HelloSubscriptionSubscriptionVariables>(HelloSubscriptionDocument, options);
+}
+export type HelloSubscriptionSubscriptionHookResult = ReturnType<typeof useHelloSubscriptionSubscription>;
+export type HelloSubscriptionSubscriptionResult = Apollo.SubscriptionResult<HelloSubscriptionSubscription>;

@@ -11,7 +11,8 @@ const sources = [
   '/swagger-ui/:path*',
   '/v3/api-docs/:path*',
   '/graphql',
-  '/graphiql'
+  '/graphiql',
+  '/subscriptions'
 ];
 
 const nextConfig = {

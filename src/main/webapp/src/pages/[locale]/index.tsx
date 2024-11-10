@@ -6,13 +6,10 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
 import HomeContent from '@/components/HomeContent';
-import { fetchHelloMessage } from "@/api/helloApi";
-import { HelloDTO } from "@/types/helloDTO";
 import { getStaticPaths, makeStaticProps } from "@/lib/getStatic";
 import EmbeddedContentFrame from "@/components/EmbeddedContentFrame";
 import withAuth from "@/components/withAuth";
-import {useQuery} from "@apollo/client";
-import {useGetHelloMessageQuery} from "@/generated/graphql";
+import {HelloDto, useGetHelloMessageQuery, useHelloSubscriptionSubscription} from "@/generated/graphql";
 
 const Home = () => {
   const { t } = useTranslation(['common', 'home']);
@@ -21,7 +18,13 @@ const Home = () => {
 
   const { data, loading, refetch } = useGetHelloMessageQuery();
 
-  const messageData = data?.hello ?? null;
+
+  // Subscription for real-time updates
+  const { data: subscriptionData } = useHelloSubscriptionSubscription();
+
+  // Determine which message to display: real-time or initial
+  const messageData: HelloDto | null = subscriptionData?.helloSubscription || data?.hello || null;
+
   // Sidebar starts as open
   // Function to toggle sidebar visibility
   const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
