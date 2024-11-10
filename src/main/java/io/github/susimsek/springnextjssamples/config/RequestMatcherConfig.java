@@ -88,6 +88,12 @@ public class RequestMatcherConfig {
         };
     }
 
+    public RequestMatcher[] subscriptionPath() {
+        return new MvcRequestMatcher[] {
+            mvc.pattern("/subscriptions"),
+        };
+    }
+
     public RequestMatcher[] graphiqlPath() {
         return new MvcRequestMatcher[] {
             mvc.pattern("/graphiql"),

@@ -7,7 +7,6 @@ import com.nimbusds.jose.proc.JWSVerificationKeySelector;
 import com.nimbusds.jose.proc.SecurityContext;
 import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
-import io.github.susimsek.springnextjssamples.service.mapper.KeyMapper;
 import io.github.susimsek.springnextjssamples.repository.KeyRepository;
 import io.github.susimsek.springnextjssamples.security.AuthoritiesConstants;
 import io.github.susimsek.springnextjssamples.security.SecurityProperties;
@@ -18,6 +17,7 @@ import io.github.susimsek.springnextjssamples.security.token.TokenDecoder;
 import io.github.susimsek.springnextjssamples.security.token.TokenEncoder;
 import io.github.susimsek.springnextjssamples.security.token.TokenGenerator;
 import io.github.susimsek.springnextjssamples.service.DomainKeyService;
+import io.github.susimsek.springnextjssamples.service.mapper.KeyMapper;
 import java.util.HashSet;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +25,13 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Role;
+import org.springframework.graphql.server.WebSocketGraphQlInterceptor;
+import org.springframework.graphql.server.support.BearerTokenAuthenticationExtractor;
+import org.springframework.graphql.server.webmvc.AuthenticationWebSocketInterceptor;
+import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
 @Configuration(proxyBeanMethods = false)
@@ -83,6 +88,18 @@ public class SecurityJwtConfig {
                                          KeyService oAuth2KeyService,
                                          SecurityProperties securityProperties) {
         return new TokenGenerator(tokenEncoder, oAuth2KeyService, securityProperties);
+    }
+
+    @Bean
+    public WebSocketGraphQlInterceptor authenticationInterceptor(JwtDecoder jwtDecoder,
+                                                                 JwtAuthenticationConverter jwtAuthenticationConverter) {
+        JwtAuthenticationProvider jwtAuthProvider = new JwtAuthenticationProvider(jwtDecoder);
+        jwtAuthProvider.setJwtAuthenticationConverter(jwtAuthenticationConverter);
+
+        return new AuthenticationWebSocketInterceptor(
+            new BearerTokenAuthenticationExtractor(),
+            new ProviderManager(jwtAuthProvider)
+        );
     }
 
 }

@@ -12,6 +12,9 @@ spring:
       enabled: true
   graphql:
     path: /graphql
+    websocket:
+      path: /subscriptions
+      connection-init-timeout: 60s
   web:
     locale: en
     resources:

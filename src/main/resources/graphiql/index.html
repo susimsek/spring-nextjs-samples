@@ -32,6 +32,7 @@
   const subscriptionUrl = `${wsProtocol}//${location.host}${wsPath}`;
 
   const defaultQuery = `
+    # Mutation to authenticate and retrieve a token
     mutation AuthenticateUser($username: String!, $password: String!) {
       authenticate(loginRequest: {
           username: $username,
@@ -43,8 +44,17 @@
       }
     }
 
+    # Query to get a hello message
     query GetHelloMessage {
       hello {
+          message
+          timestamp
+      }
+    }
+
+    # Subscription to receive periodic hello messages
+    subscription HelloSubscription {
+      helloSubscription {
           message
           timestamp
       }

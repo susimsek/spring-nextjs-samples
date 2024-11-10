@@ -103,3 +103,13 @@ id;locale;code;content;created_at;created_by;updated_at;updated_by
 102;en;error.invalid_credentials;Invalid username or password.;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
 103;tr;hello.message;Merhaba, Next.js!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
 104;en;hello.message;Hello, Next.js!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+105;tr;welcome.message;Merhaba, API'mize hoş geldiniz!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+106;en;welcome.message;Hello, welcome to our API!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+107;tr;greeting.message;Sizi görmek güzel!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+108;en;greeting.message;Good to see you!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+109;tr;power.message;Spring MVC ve GraphQL güçlüdür!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+110;en;power.message;Spring MVC and GraphQL are powerful!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+111;tr;random.message;Size özel rastgele bir mesaj!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+112;en;random.message;Random message just for you!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+113;tr;motivation.message;Öğrenmeye ve kodlamaya devam et!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+114;en;motivation.message;Keep learning and coding!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system

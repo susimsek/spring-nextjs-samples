@@ -13,6 +13,12 @@ type Mutation {
   authenticate(loginRequest: LoginRequestDTO!): TokenDTO
 }
 
+# Subscriptions for real-time updates
+type Subscription {
+  # Sends a welcome message periodically
+  helloSubscription: HelloDTO
+}
+
 # Data structure containing a welcome message and timestamp
 type HelloDTO {
   # The welcome message content
