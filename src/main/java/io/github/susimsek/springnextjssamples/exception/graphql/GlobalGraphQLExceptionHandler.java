@@ -3,9 +3,7 @@ package io.github.susimsek.springnextjssamples.exception.graphql;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
-import graphql.ErrorClassification;
 import graphql.GraphQLError;
-import graphql.GraphqlErrorBuilder;
 import graphql.schema.DataFetchingEnvironment;
 import io.github.susimsek.springnextjssamples.config.i18n.ParameterMessageSource;
 import io.github.susimsek.springnextjssamples.exception.ErrorCode;
@@ -13,7 +11,6 @@ import io.github.susimsek.springnextjssamples.exception.LocalizedException;
 import io.github.susimsek.springnextjssamples.exception.ResourceException;
 import io.github.susimsek.springnextjssamples.exception.Violation;
 import io.github.susimsek.springnextjssamples.exception.ratelimit.RateLimitExceededException;
-import io.github.susimsek.springnextjssamples.security.SecurityUtils;
 import jakarta.validation.ConstraintViolationException;
 import java.util.HashMap;
 import java.util.List;
@@ -35,6 +32,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 @Slf4j
 public class GlobalGraphQLExceptionHandler {
 
+    private final GraphQLErrorUtils graphQLErrorUtils;
     private final ParameterMessageSource messageSource;
 
     @GraphQlExceptionHandler(MethodArgumentNotValidException.class)
@@ -47,7 +45,7 @@ public class GlobalGraphQLExceptionHandler {
 
         ErrorCode errorCode = ErrorCode.VALIDATION_FAILED;
 
-        return handleExceptionInternal(
+        return graphQLErrorUtils.handleExceptionInternal(
             ex,
             ErrorType.BAD_REQUEST,
             Map.of(
@@ -56,7 +54,7 @@ public class GlobalGraphQLExceptionHandler {
             ),
             errorCode.messageKey(),
             null,
-            environment
+            environment.getLocale()
         );
     }
 
@@ -69,7 +67,7 @@ public class GlobalGraphQLExceptionHandler {
 
         ErrorCode errorCode = ErrorCode.VALIDATION_FAILED;
 
-        return handleExceptionInternal(
+        return graphQLErrorUtils.handleExceptionInternal(
             ex,
             ErrorType.BAD_REQUEST,
             Map.of(
@@ -78,7 +76,7 @@ public class GlobalGraphQLExceptionHandler {
             ),
             errorCode.messageKey(),
             null,
-            environment
+            environment.getLocale()
         );
     }
 
@@ -88,9 +86,7 @@ public class GlobalGraphQLExceptionHandler {
     })
     public GraphQLError handleSecurityException(@NonNull Exception ex,
                                                 @NonNull DataFetchingEnvironment environment) {
-        return SecurityUtils.isAuthenticated()
-            ? resolveAccessDenied(ex, environment)
-            : resolveUnauthorized(ex, environment);
+        return graphQLErrorUtils.resolveSecurityException(ex, environment.getLocale());
     }
 
     @GraphQlExceptionHandler(RateLimitExceededException.class)
@@ -106,13 +102,13 @@ public class GlobalGraphQLExceptionHandler {
             "reset", ex.getResetTime()
         );
 
-        return handleExceptionInternal(
+        return graphQLErrorUtils.handleExceptionInternal(
             ex,
             ErrorType.THROTTLED,
             extensions,
             errorCode.messageKey(),
             null,
-            environment
+            environment.getLocale()
         );
     }
 
@@ -136,7 +132,7 @@ public class GlobalGraphQLExceptionHandler {
             errorType = ErrorType.INTERNAL_ERROR;
         }
 
-        return handleExceptionInternal(
+        return graphQLErrorUtils.handleExceptionInternal(
             ex,
             errorType,
             Map.of(
@@ -144,7 +140,7 @@ public class GlobalGraphQLExceptionHandler {
             ),
             ex.getMessage(),
             namedArgs,
-            environment
+            environment.getLocale()
         );
     }
 
@@ -157,66 +153,19 @@ public class GlobalGraphQLExceptionHandler {
             default -> ErrorType.INTERNAL_ERROR;
         };
 
-        return handleExceptionInternal(ex, errorType,
-            Map.of("error", ex.getErrorCode()), ex.getMessage(), ex.getNamedArgs(), environment);
+        return graphQLErrorUtils.handleExceptionInternal(ex, errorType,
+            Map.of("error", ex.getErrorCode()), ex.getMessage(), ex.getNamedArgs(), environment.getLocale());
     }
 
     @GraphQlExceptionHandler
     public GraphQLError handleAllExceptions(@NonNull Exception ex,
                                             @NonNull DataFetchingEnvironment environment) {
-        ErrorCode errorCode = ErrorCode.SERVER_ERROR;
-        return handleExceptionInternal(ex, ErrorType.INTERNAL_ERROR,
-            Map.of("error", errorCode.errorCode()), errorCode.messageKey(), null, environment);
-    }
-
-    protected GraphQLError handleExceptionInternal(
-        @NonNull Exception ex,
-        ErrorClassification errorClassification,
-        Map<String, Object> extensions,
-        String messageKey,
-        Map<String, Object> namedArgs,
-        DataFetchingEnvironment environment) {
-        log.error("A GraphQL exception occurred, resulting in a response with classification {}",
-            errorClassification, ex);
-        return createGraphQLError(
-            errorClassification,
-            extensions,
-            messageKey,
-            namedArgs,
-            environment
-        );
-    }
-
-    private GraphQLError createGraphQLError(
-        ErrorClassification errorClassification,
-        Map<String, Object> extensions,
-        String messageKey,
-        Map<String, Object> namedArgs,
-        DataFetchingEnvironment environment) {
-        String errorMessage = messageSource.getMessageWithNamedArgs(
-            messageKey, namedArgs, environment.getLocale());
-        return GraphqlErrorBuilder.newError()
-            .errorType(errorClassification)
-            .message(errorMessage)
-            .extensions(extensions)
-            .build();
-    }
-
-    private GraphQLError resolveAccessDenied(Exception ex, DataFetchingEnvironment environment) {
-        ErrorCode errorCode = ErrorCode.ACCESS_DENIED;
-        return handleExceptionInternal(ex, ErrorType.FORBIDDEN,
-            Map.of("error", errorCode.errorCode()), errorCode.messageKey(), null, environment);
-    }
-
-    private GraphQLError resolveUnauthorized(Exception ex, DataFetchingEnvironment environment) {
-        ErrorCode errorCode = ErrorCode.INVALID_TOKEN;
-        return handleExceptionInternal(ex, ErrorType.UNAUTHORIZED,
-            Map.of("error", errorCode.errorCode()), errorCode.messageKey(), null, environment);
+        return graphQLErrorUtils.resolveServerError(ex, environment.getLocale());
     }
 
     private Map<String, Object> createNamedArgs(String resourceName,
-                                                String searchCriteria,
-                                                Object searchValue) {
+                                               String searchCriteria,
+                                               Object searchValue) {
         Map<String, Object> namedArgs = new HashMap<>();
         namedArgs.put("resource", resourceName);
         namedArgs.put("criteria", searchCriteria);
