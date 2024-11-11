@@ -12,4 +12,5 @@ module.exports = {
     typeof window === 'undefined'
       ? require('path').resolve('./public/locales')
       : '/locales',
+  reloadOnPrerender: isDev
 };
