@@ -3,7 +3,6 @@ import React from 'react';
 import { Nav } from 'react-bootstrap';
 import { useTranslation } from 'next-i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faDatabase, faCode } from '@fortawesome/free-solid-svg-icons';
 
 type SidebarProps = {
   onNavigate: (page: string) => void;
@@ -20,7 +19,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
           onClick={() => onNavigate('home')}
           className="nav-link"
         >
-          <FontAwesomeIcon icon={faHome} className="me-2" />
+          <FontAwesomeIcon icon="home" className="me-2" />
           {t('common:common.menu.home')}
         </a>
       </Nav.Item>
@@ -30,7 +29,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
           onClick={() => onNavigate('api')}
           className="nav-link"
         >
-          <FontAwesomeIcon icon={faCode} className="me-2" />
+          <FontAwesomeIcon icon="code" className="me-2" />
           {t('common:common.menu.api')}
         </a>
       </Nav.Item>
@@ -40,7 +39,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
           onClick={() => onNavigate('gqlApi')}
           className="nav-link"
         >
-          <FontAwesomeIcon icon={faCode} className="me-2" />
+          <FontAwesomeIcon icon="code" className="me-2" />
           {t('common:common.menu.gqlApi')}
         </a>
       </Nav.Item>
@@ -50,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onNavigate }) => {
           onClick={() => onNavigate('database')}
           className="nav-link"
         >
-          <FontAwesomeIcon icon={faDatabase} className="me-2" />
+          <FontAwesomeIcon icon="database" className="me-2" />
           {t('common:common.menu.database')}
         </a>
       </Nav.Item>

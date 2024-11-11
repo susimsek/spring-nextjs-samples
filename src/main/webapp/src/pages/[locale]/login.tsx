@@ -10,7 +10,6 @@ import { login } from '@/api/authApi';
 import { LoginRequestDTO } from '@/types/loginRequestDTO';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch } from '@/config/store';
 import { login as loginAction } from '@/reducers/authentication';
 import { useRedirect } from '@/hooks/useRedirect';
@@ -113,7 +112,7 @@ const Login = () => {
                         isInvalid={!!errors.password}
                       />
                       <Button variant="outline-secondary" onClick={() => setPasswordVisible(!passwordVisible)}>
-                        <FontAwesomeIcon icon={passwordVisible ? faEyeSlash : faEye} />
+                        <FontAwesomeIcon icon={passwordVisible ? 'eye-slash' : 'eye'} />
                       </Button>
                       <Form.Control.Feedback type="invalid">
                         {errors.password?.message}
