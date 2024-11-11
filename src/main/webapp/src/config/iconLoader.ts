@@ -1,6 +1,8 @@
 import {
   faGlobe,
   faHome,
+  faSave,
+  faSearch,
   faSignOutAlt,
   faSignInAlt,
   faSun,
@@ -10,6 +12,7 @@ import {
   faInfoCircle,
   faCheckCircle,
   faExclamationCircle,
+  faTrash,
   faDatabase,
   faCode,
   faEye,
@@ -21,6 +24,8 @@ export const loadIcons = () => {
   library.add(
     faGlobe,
     faHome,
+    faSave,
+    faSearch,
     faSignOutAlt,
     faSignInAlt,
     faSun,
@@ -30,6 +35,7 @@ export const loadIcons = () => {
     faInfoCircle,
     faCheckCircle,
     faExclamationCircle,
+    faTrash,
     faDatabase,
     faCode,
     faEye,
