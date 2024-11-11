@@ -1,12 +1,12 @@
-import { Container, Row, Col, Spinner, Alert } from 'react-bootstrap';
+import {Col, Container, Row} from 'react-bootstrap';
 import Head from 'next/head';
-import { useTranslation } from 'next-i18next';
-import React, { useEffect, useState } from 'react';
+import {useTranslation} from 'next-i18next';
+import React, {useEffect, useState} from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Sidebar from '@/components/Sidebar';
 import HomeContent from '@/components/HomeContent';
-import { getStaticPaths, makeStaticProps } from "@/lib/getStatic";
+import {getStaticPaths, makeStaticProps} from "@/lib/getStatic";
 import EmbeddedContentFrame from "@/components/EmbeddedContentFrame";
 import withAuth from "@/components/withAuth";
 import {HelloDto, useGetHelloMessageQuery, useHelloSubscriptionSubscription} from "@/generated/graphql";
