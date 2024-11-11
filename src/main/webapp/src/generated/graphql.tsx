@@ -16,6 +16,7 @@ export type Scalars = {
   Int: { input: number; output: number };
   Float: { input: number; output: number };
   DateTime: { input: any; output: any };
+  Locale: { input: any; output: any };
 };
 
 /**  Data structure containing a welcome message and timestamp */
@@ -69,8 +70,13 @@ export type Query = {
 /**  Subscriptions for real-time updates */
 export type Subscription = {
   __typename?: 'Subscription';
-  /**  Sends a welcome message periodically */
+  /**  Sends a welcome message periodically, supports locale for i18n */
   helloSubscription?: Maybe<HelloDto>;
+};
+
+/**  Subscriptions for real-time updates */
+export type SubscriptionHelloSubscriptionArgs = {
+  locale?: InputMaybe<Scalars['Locale']['input']>;
 };
 
 /**  JWT token response data structure */
@@ -106,7 +112,9 @@ export type GetHelloMessageQueryVariables = Exact<{ [key: string]: never }>;
 
 export type GetHelloMessageQuery = { __typename?: 'Query'; hello?: { __typename?: 'HelloDTO'; message: string; timestamp: any } | null };
 
-export type HelloSubscriptionSubscriptionVariables = Exact<{ [key: string]: never }>;
+export type HelloSubscriptionSubscriptionVariables = Exact<{
+  locale?: InputMaybe<Scalars['Locale']['input']>;
+}>;
 
 export type HelloSubscriptionSubscription = {
   __typename?: 'Subscription';
@@ -193,8 +201,8 @@ export type GetHelloMessageLazyQueryHookResult = ReturnType<typeof useGetHelloMe
 export type GetHelloMessageSuspenseQueryHookResult = ReturnType<typeof useGetHelloMessageSuspenseQuery>;
 export type GetHelloMessageQueryResult = Apollo.QueryResult<GetHelloMessageQuery, GetHelloMessageQueryVariables>;
 export const HelloSubscriptionDocument = gql`
-  subscription HelloSubscription {
-    helloSubscription {
+  subscription HelloSubscription($locale: Locale) {
+    helloSubscription(locale: $locale) {
       message
       timestamp
     }
@@ -213,6 +221,7 @@ export const HelloSubscriptionDocument = gql`
  * @example
  * const { data, loading, error } = useHelloSubscriptionSubscription({
  *   variables: {
+ *      locale: // value for 'locale'
  *   },
  * });
  */

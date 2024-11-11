@@ -1,5 +1,5 @@
-subscription HelloSubscription {
-  helloSubscription {
+subscription HelloSubscription($locale: Locale) {
+  helloSubscription(locale: $locale) {
     message
     timestamp
   }

@@ -1,6 +1,9 @@
 # Custom scalar for DateTime in ISO-8601 format
 scalar DateTime @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time.html")
 
+# Custom scalar for Locale in BCP 47 format
+scalar Locale @specifiedBy(url: "https://tools.ietf.org/html/bcp47")
+
 # Root queries for fetching data
 type Query {
   # Returns a simple welcome message
@@ -15,8 +18,8 @@ type Mutation {
 
 # Subscriptions for real-time updates
 type Subscription {
-  # Sends a welcome message periodically
-  helloSubscription: HelloDTO
+  # Sends a welcome message periodically, supports locale for i18n
+  helloSubscription(locale: Locale): HelloDTO
 }
 
 # Data structure containing a welcome message and timestamp

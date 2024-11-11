@@ -52,18 +52,21 @@
       }
     }
 
-    # Subscription to receive periodic hello messages
-    subscription HelloSubscription {
-      helloSubscription {
+    # Subscription to receive a hello message with optional locale
+    subscription HelloSubscription($locale: Locale) {
+      helloSubscription(locale: $locale) {
           message
           timestamp
       }
     }
 `;
 
+  const locale = localStorage.getItem('i18nextLng') || "en";
+
   const defaultVariables = JSON.stringify({
     username: "admin",
-    password: "password"
+    password: "password",
+    locale: locale
   }, null, 2);
 
   const gqlFetcher = GraphiQL.createFetcher({'url': url, 'subscriptionUrl': subscriptionUrl});
@@ -74,7 +77,7 @@
 
   const headers = JSON.stringify({
     ...(xsrfToken && { "X-XSRF-TOKEN": xsrfToken[1] }),
-    "Accept-Language": "tr",
+    "Accept-Language": locale,
     ...(token && { "Authorization": `Bearer ${token}` })
   }, null, 2);
 

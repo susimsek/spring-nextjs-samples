@@ -2,6 +2,7 @@ package io.github.susimsek.springnextjssamples.web.controller.graphql
 
 import io.github.susimsek.springnextjssamples.dto.response.HelloDTO
 import io.github.susimsek.springnextjssamples.service.HelloService
+import org.springframework.graphql.data.method.annotation.Argument
 import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping
 import org.springframework.security.access.prepost.PreAuthorize
@@ -29,7 +30,8 @@ class HelloGraphQLController(
 
   @SubscriptionMapping
   @PreAuthorize("hasRole('ADMIN')")
-  fun helloSubscription(authentication: Authentication, locale: Locale): Flux<HelloDTO> {
+  fun helloSubscription(authentication: Authentication,
+                        @Argument locale: Locale): Flux<HelloDTO> {
     logAccess(authentication, "helloSubscription")
 
     return helloService.getHelloMessageStream(locale)
