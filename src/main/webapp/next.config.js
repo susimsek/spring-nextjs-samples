@@ -16,6 +16,7 @@ const sources = [
 ];
 
 const nextConfig = {
+  poweredByHeader: false,
   distDir: 'build',
   output: 'export',
   eslint: {
