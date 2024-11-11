@@ -29,14 +29,22 @@
         "default": "An unexpected error occurred. Please try again."
       },
       "graphql": {
-        "BAD_REQUEST": "An unexpected error occurred. Please try again.",
-        "UNAUTHORIZED": "Unauthorized. Please log in to access this resource.",
-        "FORBIDDEN": "Forbidden. You do not have permission to access this resource.",
-        "NOT_FOUND": "Page not found. The resource you are looking for does not exist.",
-        "INTERNAL_ERROR": "Internal Server Error. Please try again later.",
-        "THROTTLED": "Rate limit exceeded. Please wait before making more requests.",
-        "CONFLICT": "Conflict occurred. The request could not be completed due to a conflict.",
-        "default": "An unexpected error occurred. Please try again."
+        "classification": {
+          "BAD_REQUEST": "An unexpected error occurred. Please try again.",
+          "UNAUTHORIZED": "Unauthorized. Please log in to access this resource.",
+          "FORBIDDEN": "Forbidden. You do not have permission to access this resource.",
+          "NOT_FOUND": "Page not found. The resource you are looking for does not exist.",
+          "INTERNAL_ERROR": "Internal Server Error. Please try again later.",
+          "THROTTLED": "Rate limit exceeded. Please wait before making more requests.",
+          "CONFLICT": "Conflict occurred. The request could not be completed due to a conflict.",
+          "default": "An unexpected error occurred. Please try again."
+        },
+        "subscription": {
+          "4400": "Invalid message received.",
+          "4401": "Unauthorized access. Please log in.",
+          "4408": "Connection initialization timeout.",
+          "4429": "Too many initialization requests. Please try again later."
+        }
       },
       "validationErrors": "Validation errors found:"
     },

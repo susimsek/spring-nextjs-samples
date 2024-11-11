@@ -76,6 +76,12 @@ function handleGraphQLErrorForLogout(graphQLError: any) {
 // Function to handle network errors for logout
 function handleNetworkErrorForLogout(networkError: any) {
   const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
+
+  if (networkError.message.includes('4401')) {
+    store.dispatch(logout());
+    return;
+  }
+
   if (status === 401) {
     store.dispatch(logout()); // Trigger logout if the status code is 401
   }

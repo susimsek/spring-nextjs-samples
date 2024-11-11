@@ -35,7 +35,7 @@ function handleGraphQLError(graphQLError: any, operation: any, forward: any) {
     case 'INTERNAL_ERROR':
     case 'THROTTLED':
     case 'CONFLICT':
-      messageKey = `common:common.error.graphql.${classification}`;
+      messageKey = `common:common.error.graphql.classification.${classification}`;
       break;
     default:
       errorMessage = graphQLError.message;
@@ -52,6 +52,7 @@ function handleNetworkError(networkError: any, operation: any, forward: any) {
   let errorMessage: string | undefined;
 
   const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
+
   switch (status) {
     case 401:
       return forward(operation); // Redirects for 401 errors
@@ -63,7 +64,17 @@ function handleNetworkError(networkError: any, operation: any, forward: any) {
       messageKey = `common:common.error.http.${status}`;
       break;
     default:
-      errorMessage = networkError.message;
+      if (networkError.message.includes('4400')) {
+        messageKey = 'common:error.graphql.subscription.4400';
+      } else if (networkError.message.includes('4401')) {
+        return forward(operation); // Redirects for 4401 errors
+      } else if (networkError.message.includes('4408')) {
+        messageKey = 'common:error.graphql.subscription.4408';
+      } else if (networkError.message.includes('4429')) {
+        messageKey = 'common:error.graphql.subscription.4429';
+      } else {
+        errorMessage = networkError.message;
+      }
       break;
   }
 
