@@ -12,15 +12,15 @@ scalar UUID @specifiedBy(url: "https://tools.ietf.org/html/rfc4122")
 
 # A Url scalar
 # Example: "https://www.example.com"
-scalar URL @specifiedBy(url: "https://www.w3.org/Addressing/URL/url-spec.txt")
+scalar Url @specifiedBy(url: "https://www.w3.org/Addressing/URL/url-spec.txt")
 
 # A 64-bit signed integer
 # Example: 123456789012345
-scalar GraphQLLong
+scalar Long
 
 # An arbitrary precision signed decimal
 # Example: 12345.6789
-scalar GraphQLBigDecimal
+scalar BigDecimal
 
 # Root queries for fetching data
 type Query {
