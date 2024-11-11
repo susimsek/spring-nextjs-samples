@@ -13,6 +13,10 @@ public class GraphQLConfig {
     public RuntimeWiringConfigurer runtimeWiringConfigurer() {
         return wiringBuilder -> wiringBuilder
             .scalar(DateTimeScalar.DATE_TIME)
-            .scalar(ExtendedScalars.Locale);
+            .scalar(ExtendedScalars.Locale)
+            .scalar(ExtendedScalars.GraphQLLong)
+            .scalar(ExtendedScalars.GraphQLBigDecimal)
+            .scalar(ExtendedScalars.Url)
+            .scalar(ExtendedScalars.UUID);
     }
 }

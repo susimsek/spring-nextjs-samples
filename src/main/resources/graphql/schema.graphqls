@@ -1,8 +1,26 @@
-# Custom scalar for DateTime in ISO-8601 format
+# A slightly refined version of RFC-3339 compliant DateTime Scalar
+# Example: "2023-11-10T10:00:00Z"
 scalar DateTime @specifiedBy(url: "https://scalars.graphql.org/andimarek/date-time.html")
 
-# Custom scalar for Locale in BCP 47 format
+# A IETF BCP 47 language tag
+# Example: "en"
 scalar Locale @specifiedBy(url: "https://tools.ietf.org/html/bcp47")
+
+# A universally unique identifier compliant UUID Scalar
+# Example: "123e4567-e89b-12d3-a456-426614174000"
+scalar UUID @specifiedBy(url: "https://tools.ietf.org/html/rfc4122")
+
+# A Url scalar
+# Example: "https://www.example.com"
+scalar URL @specifiedBy(url: "https://www.w3.org/Addressing/URL/url-spec.txt")
+
+# A 64-bit signed integer
+# Example: 123456789012345
+scalar GraphQLLong
+
+# An arbitrary precision signed decimal
+# Example: 12345.6789
+scalar GraphQLBigDecimal
 
 # Root queries for fetching data
 type Query {
