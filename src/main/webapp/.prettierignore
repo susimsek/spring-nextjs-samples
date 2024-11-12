@@ -17,3 +17,6 @@ public
 
 # API and GraphQL generated files
 src/generated/*
+
+.git
+target/classes/static/
