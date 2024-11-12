@@ -19,6 +19,9 @@ const nextConfig = {
   poweredByHeader: false,
   distDir: 'build',
   output: 'export',
+  images: {
+    unoptimized: true,
+  },
   ...(isDev && {
     async rewrites() {
       return sources.map((source) => ({

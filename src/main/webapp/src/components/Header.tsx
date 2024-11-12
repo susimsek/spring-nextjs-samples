@@ -54,7 +54,6 @@ const Header: React.FC<HeaderProps> = ({
             width={40}
             height={40}
             className="d-inline-block align-top me-2"
-            unoptimized
           />
         </LinkComponent>
         <span className="fw-bold">{t('common:common.siteTitle')}</span>
