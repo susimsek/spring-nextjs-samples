@@ -16,9 +16,9 @@ import {
   faSignInAlt,
   faSignOutAlt,
   faSun,
-  faTrash
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import {library} from '@fortawesome/fontawesome-svg-core';
+import { library } from '@fortawesome/fontawesome-svg-core';
 
 export const loadIcons = () => {
   library.add(
@@ -39,6 +39,6 @@ export const loadIcons = () => {
     faDatabase,
     faCode,
     faEye,
-    faEyeSlash
+    faEyeSlash,
   );
 };

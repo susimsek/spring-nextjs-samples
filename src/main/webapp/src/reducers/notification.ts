@@ -1,10 +1,10 @@
 // /redux/slices/notificationSlice.ts
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface NotificationState {
   messageKey?: string | undefined;
   message?: string | undefined;
-  data?: unknown | undefined
+  data?: unknown | undefined;
   variant?: 'success' | 'danger' | 'info' | 'warning' | undefined;
   show: boolean;
 }
@@ -13,7 +13,7 @@ const initialState: NotificationState = {
   messageKey: undefined,
   message: undefined,
   data: undefined,
-  variant: "info",
+  variant: 'info',
   show: false,
 };
 
@@ -38,5 +38,5 @@ const notificationSlice = createSlice({
   },
 });
 
-export const {showNotification, hideNotification} = notificationSlice.actions;
+export const { showNotification, hideNotification } = notificationSlice.actions;
 export default notificationSlice.reducer;

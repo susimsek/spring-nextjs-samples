@@ -1,17 +1,17 @@
 // /config/notificationLink.ts
-import {onError} from '@apollo/client/link/error';
+import { onError } from '@apollo/client/link/error';
 import store from '@/config/store';
-import {showNotification} from '@/reducers/notification';
-import {GraphQLFormattedError} from "graphql/error";
-import {NextLink, Operation, ServerError, ServerParseError} from "@apollo/client";
+import { showNotification } from '@/reducers/notification';
+import { GraphQLFormattedError } from 'graphql/error';
+import { NextLink, Operation, ServerError, ServerParseError } from '@apollo/client';
 
-export const notificationLink = onError(({graphQLErrors, networkError, operation, forward}) => {
+export const notificationLink = onError(({ graphQLErrors, networkError, operation, forward }) => {
   // Takes the first GraphQL error and processes it through the handleGraphQLError function
   const graphQLError = graphQLErrors && graphQLErrors.length > 0 ? graphQLErrors[0] : null;
   if (graphQLError) {
     const result = handleGraphQLError(graphQLError, operation, forward);
     if (result) {
-      const {messageKey, errorMessage} = result;
+      const { messageKey, errorMessage } = result;
       if (messageKey || errorMessage) {
         dispatchNotification(messageKey, errorMessage);
       }
@@ -22,7 +22,7 @@ export const notificationLink = onError(({graphQLErrors, networkError, operation
   if (networkError) {
     const result = handleNetworkError(networkError, operation, forward);
     if (result) {
-      const {messageKey, errorMessage} = result;
+      const { messageKey, errorMessage } = result;
       if (messageKey || errorMessage) {
         dispatchNotification(messageKey, errorMessage);
       }
@@ -34,7 +34,7 @@ export const notificationLink = onError(({graphQLErrors, networkError, operation
 function handleGraphQLError(
   graphQLError: GraphQLFormattedError,
   operation: Operation,
-  forward: NextLink
+  forward: NextLink,
 ): { messageKey?: string; errorMessage?: string } | null {
   let messageKey: string | undefined = 'common:common.error.http.default';
   let errorMessage: string | undefined;
@@ -56,14 +56,14 @@ function handleGraphQLError(
       break;
   }
 
-  return {messageKey, errorMessage};
+  return { messageKey, errorMessage };
 }
 
 // Function to handle network errors
 function handleNetworkError(
   networkError: Error | ServerParseError | ServerError,
   operation: Operation,
-  forward: NextLink
+  forward: NextLink,
 ): { messageKey?: string; errorMessage?: string } | null {
   let messageKey: string | undefined = 'common:common.error.http.default';
   let errorMessage: string | undefined;
@@ -97,7 +97,7 @@ function handleNetworkError(
       break;
   }
 
-  return {messageKey, errorMessage};
+  return { messageKey, errorMessage };
 }
 
 // Function to manage the notification dispatching
@@ -107,6 +107,6 @@ function dispatchNotification(messageKey: string | undefined, errorMessage: stri
       messageKey,
       message: errorMessage,
       variant: 'danger',
-    })
+    }),
   );
 }

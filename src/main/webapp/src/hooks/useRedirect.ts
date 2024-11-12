@@ -1,6 +1,6 @@
-import {useRouter} from 'next/router';
-import {useCallback} from 'react';
-import i18nextConfig from "../../next-i18next.config";
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
+import i18nextConfig from '../../next-i18next.config';
 
 export const useRedirect = () => {
   const router = useRouter();

@@ -1,10 +1,10 @@
-import {AxiosError} from 'axios';
-import {ProblemDetail} from "@/types/problemDetail";
+import { AxiosError } from 'axios';
+import { ProblemDetail } from '@/types/problemDetail';
 
 const DEVELOPMENT = process.env.NODE_ENV === 'development';
 
 const getErrorMessage = (problemDetail: ProblemDetail): string => {
-  let {detail} = problemDetail;
+  let { detail } = problemDetail;
 
   if (problemDetail.violations && problemDetail.violations.length > 0) {
     problemDetail.violations.forEach((violation) => {

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Spinner} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Spinner } from 'react-bootstrap';
 
 type EmbeddedContentFrameProps = {
   src: string;
@@ -7,14 +7,14 @@ type EmbeddedContentFrameProps = {
   backgroundColor?: string;
 };
 
-const EmbeddedContentFrame: React.FC<EmbeddedContentFrameProps> = ({src, title, backgroundColor}) => {
+const EmbeddedContentFrame: React.FC<EmbeddedContentFrameProps> = ({ src, title, backgroundColor }) => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="iframe-wrapper" style={{backgroundColor: backgroundColor || 'var(--background-color)'}}>
+    <div className="iframe-wrapper" style={{ backgroundColor: backgroundColor || 'var(--background-color)' }}>
       {loading && (
         <div className="iframe-overlay d-flex justify-content-center align-items-center">
-          <Spinner animation="border" role="status"/>
+          <Spinner animation="border" role="status" />
         </div>
       )}
       <iframe

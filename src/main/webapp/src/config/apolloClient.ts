@@ -1,13 +1,21 @@
-import {ApolloClient, ApolloLink, HttpLink, InMemoryCache, ServerError, ServerParseError, split} from '@apollo/client';
-import {onError} from '@apollo/client/link/error';
-import {notificationLink} from "@/config/notificationLink";
-import loggingLink from "@/config/loggingLink";
-import {logout} from '@/reducers/authentication';
+import {
+  ApolloClient,
+  ApolloLink,
+  HttpLink,
+  InMemoryCache,
+  ServerError,
+  ServerParseError,
+  split,
+} from '@apollo/client';
+import { onError } from '@apollo/client/link/error';
+import { notificationLink } from '@/config/notificationLink';
+import loggingLink from '@/config/loggingLink';
+import { logout } from '@/reducers/authentication';
 import store from '@/config/store';
-import {GraphQLWsLink} from '@apollo/client/link/subscriptions';
-import {createClient} from 'graphql-ws';
-import {getMainDefinition} from '@apollo/client/utilities';
-import {GraphQLFormattedError} from "graphql/error";
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
+import { createClient } from 'graphql-ws';
+import { getMainDefinition } from '@apollo/client/utilities';
+import { GraphQLFormattedError } from 'graphql/error';
 
 // Create an HTTP link for the Apollo Client
 const httpLink = new HttpLink({
@@ -20,14 +28,14 @@ const wsLink = new GraphQLWsLink(createClient({
   connectionParams: () => {
     const token = localStorage.getItem('token');
     return {
-      ...(token && {Authorization: `Bearer ${token}`}), // Send token as Authorization in the payload
+      ...(token && { Authorization: `Bearer ${token}` }), // Send token as Authorization in the payload
     };
   },
 }));
 
 // Split link for using WebSocket link for subscriptions and HTTP link for queries and mutations
 const splitLink = split(
-  ({query}) => {
+  ({ query }) => {
     const definition = getMainDefinition(query);
     return (
       definition.kind === 'OperationDefinition' &&
@@ -46,7 +54,7 @@ const authLink = new ApolloLink((operation, forward) => {
   // Set headers
   operation.setContext({
     headers: {
-      ...(token && {Authorization: `Bearer ${token}`}), // Set Authorization only if token exists
+      ...(token && { Authorization: `Bearer ${token}` }), // Set Authorization only if token exists
       'Accept-Language': language, // Always set Accept-Language
     },
   });
@@ -55,7 +63,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 // onError link for handling errors and triggering logout if necessary
-const logoutLink = onError(({graphQLErrors, networkError}) => {
+const logoutLink = onError(({ graphQLErrors, networkError }) => {
   const graphQLError = graphQLErrors && graphQLErrors.length > 0 ? graphQLErrors[0] : null;
   if (graphQLError) {
     handleGraphQLErrorForLogout(graphQLError);

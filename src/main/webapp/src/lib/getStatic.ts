@@ -1,6 +1,6 @@
 // lib/getStatic.ts
-import {GetStaticPaths, GetStaticPropsContext} from 'next';
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import { GetStaticPaths, GetStaticPropsContext } from 'next';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import i18nextConfig from '../../next-i18next.config';
 
 // Define the type of params returned in getI18nPaths for locale-based paths
@@ -27,7 +27,7 @@ export const getStaticPaths: GetStaticPaths = () => ({
 // Load i18n props for specific namespaces, defaulting to ['common']
 export const getI18nProps = async (
   ctx: GetStaticPropsContext,
-  ns: string[] = ['common']
+  ns: string[] = ['common'],
 ) => {
   const locale = ctx?.params?.locale as string || i18nextConfig.i18n.defaultLocale;
   return {

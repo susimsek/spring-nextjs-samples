@@ -1,9 +1,9 @@
 // /api/apiClient.ts
 import axios from 'axios';
-import {loggingInterceptor} from '@/config/loggingInterceptor';
-import {notificationInterceptor} from '@/config/notificationInterceptor';
+import { loggingInterceptor } from '@/config/loggingInterceptor';
+import { notificationInterceptor } from '@/config/notificationInterceptor';
 import store from '@/config/store';
-import {logout} from '@/reducers/authentication';
+import { logout } from '@/reducers/authentication';
 
 const TIMEOUT = 60 * 1000;
 
@@ -12,7 +12,7 @@ const TIMEOUT = 60 * 1000;
 const apiClient = axios.create({
   baseURL: '/api/v1',
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
   timeout: TIMEOUT,
 });
@@ -28,18 +28,18 @@ apiClient.interceptors.request.use(
     config.headers['Accept-Language'] = localStorage.getItem('i18nextLng');
     return config;
   },
-  error => Promise.reject(error)
+  error => Promise.reject(error),
 );
 
 // Add additional response interceptors for logging and notifications
 apiClient.interceptors.response.use(
   response => response,
-  loggingInterceptor
+  loggingInterceptor,
 );
 
 apiClient.interceptors.response.use(
   response => response,
-  notificationInterceptor
+  notificationInterceptor,
 );
 
 // Add a response interceptor for handling errors, including 401 Unauthorized
@@ -54,7 +54,7 @@ apiClient.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default apiClient;

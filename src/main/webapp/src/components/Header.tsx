@@ -1,15 +1,15 @@
 // components/Header.tsx
 import React from 'react';
-import {Button, Nav, Navbar, NavDropdown} from 'react-bootstrap';
-import {useTranslation} from 'next-i18next';
+import { Button, Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { useTranslation } from 'next-i18next';
 import i18nextConfig from '../../next-i18next.config';
 import LanguageSwitchLink from '../components/LanguageSwitchLink';
 import LinkComponent from '../components/Link';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {useAppDispatch, useAppSelector} from '@/config/store';
-import {logout} from '@/reducers/authentication';
-import {toggleTheme} from '@/reducers/theme';
-import {useRouter} from 'next/router';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useAppDispatch, useAppSelector } from '@/config/store';
+import { logout } from '@/reducers/authentication';
+import { toggleTheme } from '@/reducers/theme';
+import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 type HeaderProps = {
@@ -19,9 +19,9 @@ type HeaderProps = {
 };
 const Header: React.FC<HeaderProps> = ({
                                          onToggleSidebar,
-                                         showSidebarToggle = false     // Default value set to false
+                                         showSidebarToggle = false,     // Default value set to false
                                        }) => {
-  const {t} = useTranslation(['common']);
+  const { t } = useTranslation(['common']);
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
   const currentTheme = useAppSelector(state => state.theme.theme);
@@ -42,7 +42,7 @@ const Header: React.FC<HeaderProps> = ({
       {/* Sidebar toggle icon - only visible if showSidebarToggle is true */}
       {showSidebarToggle && (
         <Button variant="link" onClick={onToggleSidebar ? onToggleSidebar : undefined} className="sidebar-toggler me-2">
-          <FontAwesomeIcon icon="bars" className="sidebar-toggler-icon"/>
+          <FontAwesomeIcon icon="bars" className="sidebar-toggler-icon" />
         </Button>
       )}
 
@@ -60,13 +60,13 @@ const Header: React.FC<HeaderProps> = ({
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav">
-        <FontAwesomeIcon icon="bars" className="navbar-toggler-icon"/>
+        <FontAwesomeIcon icon="bars" className="navbar-toggler-icon" />
       </Navbar.Toggle>
 
       <Navbar.Collapse id="basic-navbar-nav" className="p-3">
         <Nav className="me-auto">
           <LinkComponent href="/">
-            <FontAwesomeIcon icon="home" className="me-2"/>
+            <FontAwesomeIcon icon="home" className="me-2" />
             {t('common:common.home')}
           </LinkComponent>
         </Nav>
@@ -74,7 +74,7 @@ const Header: React.FC<HeaderProps> = ({
           <NavDropdown
             title={
               <span>
-      <FontAwesomeIcon icon="globe" className="me-2"/>
+      <FontAwesomeIcon icon="globe" className="me-2" />
                 {t('common:common.language')}
     </span>
             }
@@ -82,24 +82,24 @@ const Header: React.FC<HeaderProps> = ({
           >
             {i18nextConfig.i18n.locales.map((locale) => {
               if (locale === currentLocale) return null;
-              return <LanguageSwitchLink locale={locale} key={locale}/>;
+              return <LanguageSwitchLink locale={locale} key={locale} />;
             })}
           </NavDropdown>
           <Button
             onClick={handleThemeToggle}
             className="theme-toggle ps-0 ps-lg-3 me-2"
           >
-            <FontAwesomeIcon icon={currentTheme === 'dark' ? "sun" : "moon"} className="me-2"/>
+            <FontAwesomeIcon icon={currentTheme === 'dark' ? 'sun' : 'moon'} className="me-2" />
             {currentTheme === 'dark' ? t('common:common.theme.lightMode') : t('common:common.theme.darkMode')}
           </Button>
           {isAuthenticated ? (
             <Nav.Link as="span" onClick={handleLogout}>
-              <FontAwesomeIcon icon="sign-out-alt" className="me-2"/>
+              <FontAwesomeIcon icon="sign-out-alt" className="me-2" />
               {t('common:common.logout')}
             </Nav.Link>
           ) : (
             <LinkComponent href="/login">
-              <FontAwesomeIcon icon="sign-in-alt" className="me-2"/>
+              <FontAwesomeIcon icon="sign-in-alt" className="me-2" />
               {t('common:common.login')}
             </LinkComponent>
           )}

@@ -1,9 +1,9 @@
 // components/ThemeProvider.tsx
-import React, {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
-import {IRootState} from '@/config/store';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { IRootState } from '@/config/store';
 
-const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
+const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const theme = useSelector((state: IRootState) => state.theme.theme);
   const [isClient, setIsClient] = useState(false);
 

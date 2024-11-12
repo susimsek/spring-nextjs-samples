@@ -1,6 +1,6 @@
 // reducers/theme.ts
-import {createSlice} from '@reduxjs/toolkit';
-import {isBrowser} from "@/config/constants";
+import { createSlice } from '@reduxjs/toolkit';
+import { isBrowser } from '@/config/constants';
 
 interface ThemeState {
   theme: 'light' | 'dark';
@@ -22,9 +22,9 @@ const themeSlice = createSlice({
     setTheme: (state, action) => {
       state.theme = action.payload;
       localStorage.setItem('theme', state.theme); // Save the theme to localStorage
-    }
+    },
   },
 });
 
-export const {toggleTheme, setTheme} = themeSlice.actions;
+export const { toggleTheme, setTheme } = themeSlice.actions;
 export default themeSlice.reducer;

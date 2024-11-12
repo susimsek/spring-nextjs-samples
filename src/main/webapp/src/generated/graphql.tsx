@@ -1,5 +1,5 @@
 import * as Apollo from '@apollo/client';
-import {gql} from '@apollo/client';
+import { gql } from '@apollo/client';
 
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -159,7 +159,7 @@ export type AuthenticateMutationFn = Apollo.MutationFunction<AuthenticateMutatio
  * });
  */
 export function useAuthenticateMutation(baseOptions?: Apollo.MutationHookOptions<AuthenticateMutation, AuthenticateMutationVariables>) {
-  const options = {...defaultOptions, ...baseOptions};
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<AuthenticateMutation, AuthenticateMutationVariables>(AuthenticateDocument, options);
 }
 
@@ -191,21 +191,21 @@ export const GetHelloMessageDocument = gql`
  * });
  */
 export function useGetHelloMessageQuery(baseOptions?: Apollo.QueryHookOptions<GetHelloMessageQuery, GetHelloMessageQueryVariables>) {
-  const options = {...defaultOptions, ...baseOptions};
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<GetHelloMessageQuery, GetHelloMessageQueryVariables>(GetHelloMessageDocument, options);
 }
 
 export function useGetHelloMessageLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetHelloMessageQuery, GetHelloMessageQueryVariables>,
 ) {
-  const options = {...defaultOptions, ...baseOptions};
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<GetHelloMessageQuery, GetHelloMessageQueryVariables>(GetHelloMessageDocument, options);
 }
 
 export function useGetHelloMessageSuspenseQuery(
   baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetHelloMessageQuery, GetHelloMessageQueryVariables>,
 ) {
-  const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions};
+  const options = baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
   return Apollo.useSuspenseQuery<GetHelloMessageQuery, GetHelloMessageQueryVariables>(GetHelloMessageDocument, options);
 }
 
@@ -241,7 +241,7 @@ export const HelloSubscriptionDocument = gql`
 export function useHelloSubscriptionSubscription(
   baseOptions?: Apollo.SubscriptionHookOptions<HelloSubscriptionSubscription, HelloSubscriptionSubscriptionVariables>,
 ) {
-  const options = {...defaultOptions, ...baseOptions};
+  const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useSubscription<HelloSubscriptionSubscription, HelloSubscriptionSubscriptionVariables>(HelloSubscriptionDocument, options);
 }
 

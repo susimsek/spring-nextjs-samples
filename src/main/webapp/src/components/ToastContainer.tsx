@@ -1,7 +1,7 @@
 import React from 'react';
 import NotificationToast from '@/components/NotificationToast';
-import {useAppDispatch, useAppSelector} from '@/config/store';
-import {hideNotification} from '@/reducers/notification';
+import { useAppDispatch, useAppSelector } from '@/config/store';
+import { hideNotification } from '@/reducers/notification';
 
 const ToastContainer: React.FC = () => {
   const toast = useAppSelector((state) => state.notification);

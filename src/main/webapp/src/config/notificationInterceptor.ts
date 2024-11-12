@@ -1,8 +1,8 @@
 // /config/notificationInterceptor.ts
-import {AxiosError} from 'axios';
+import { AxiosError } from 'axios';
 import store from '@/config/store';
-import {showNotification} from '@/reducers/notification';
-import {ProblemDetail} from '@/types/problemDetail';
+import { showNotification } from '@/reducers/notification';
+import { ProblemDetail } from '@/types/problemDetail';
 
 export const notificationInterceptor = (error: AxiosError): Promise<AxiosError> => {
   let messageKey: string | undefined = 'common:common.error.http.default';
@@ -48,7 +48,7 @@ export const notificationInterceptor = (error: AxiosError): Promise<AxiosError> 
       messageKey,
       message: errorMessage,
       variant: 'danger',
-    })
+    }),
   );
 
   return Promise.reject(error);

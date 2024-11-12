@@ -1,19 +1,19 @@
 // pages/login.tsx
-import {useEffect, useState} from 'react';
-import {Alert, Button, Card, Col, Container, Form, InputGroup, Row, Spinner} from 'react-bootstrap';
-import {useTranslation} from 'next-i18next';
+import { useEffect, useState } from 'react';
+import { Alert, Button, Card, Col, Container, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
+import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import {getStaticPaths, makeStaticProps} from '@/lib/getStatic';
-import {login} from '@/api/authApi';
-import {LoginRequestDTO} from '@/types/loginRequestDTO';
-import {SubmitHandler, useForm} from 'react-hook-form';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {useAppDispatch} from '@/config/store';
-import {login as loginAction} from '@/reducers/authentication';
-import {useRedirect} from '@/hooks/useRedirect';
-import {ALPHANUMERIC_PATTERN} from "@/config/constants";
+import { getStaticPaths, makeStaticProps } from '@/lib/getStatic';
+import { login } from '@/api/authApi';
+import { LoginRequestDTO } from '@/types/loginRequestDTO';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useAppDispatch } from '@/config/store';
+import { login as loginAction } from '@/reducers/authentication';
+import { useRedirect } from '@/hooks/useRedirect';
+import { ALPHANUMERIC_PATTERN } from '@/config/constants';
 
 interface LoginFormInputs {
   username: string;
@@ -21,14 +21,14 @@ interface LoginFormInputs {
 }
 
 const Login = () => {
-  const {t} = useTranslation(['common', 'login']);
+  const { t } = useTranslation(['common', 'login']);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const redirect = useRedirect();
   const dispatch = useAppDispatch();
 
-  const {register, handleSubmit, formState: {errors}, watch} = useForm<LoginFormInputs>({
+  const { register, handleSubmit, formState: { errors }, watch } = useForm<LoginFormInputs>({
     mode: 'onChange',
   });
 
@@ -36,10 +36,10 @@ const Login = () => {
     setError(null);
     setLoading(true);
 
-    const {username, password} = data;
+    const { username, password } = data;
 
     try {
-      const loginData: LoginRequestDTO = {username, password};
+      const loginData: LoginRequestDTO = { username, password };
       const tokenData = await login(loginData);
       dispatch(loginAction(tokenData.accessToken));
       redirect('/');
@@ -65,13 +65,13 @@ const Login = () => {
         <title>{t('login:login.pageTitle')}</title>
       </Head>
 
-      <Header/>
+      <Header />
 
-      <Container className="d-flex justify-content-center align-items-center" style={{minHeight: '80vh'}}>
+      <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
         <Row className="w-100">
           <Col xs={12} md={10} lg={6} className="mx-auto">
             <Card className="shadow-lg border-0">
-              <Card.Header className="text-center" style={{fontWeight: 'bold', fontSize: '1.5rem', padding: '1rem'}}>
+              <Card.Header className="text-center" style={{ fontWeight: 'bold', fontSize: '1.5rem', padding: '1rem' }}>
                 {t('login:login.form.heading')}
               </Card.Header>
 
@@ -82,14 +82,14 @@ const Login = () => {
                     <Form.Control
                       type="text"
                       placeholder={t('login:login.form.usernamePlaceholder')}
-                      {...register("username", {
+                      {...register('username', {
                         required: t('common:common.validation.required'),
-                        minLength: {value: 3, message: t('common:common.validation.minlength', {min: 3})},
-                        maxLength: {value: 50, message: t('common:common.validation.maxlength', {max: 50})},
+                        minLength: { value: 3, message: t('common:common.validation.minlength', { min: 3 }) },
+                        maxLength: { value: 50, message: t('common:common.validation.maxlength', { max: 50 }) },
                         pattern: {
                           value: ALPHANUMERIC_PATTERN,
-                          message: t('common:common.validation.alphanumeric')
-                        }
+                          message: t('common:common.validation.alphanumeric'),
+                        },
                       })}
                       isInvalid={!!errors.username}
                     />
@@ -104,15 +104,15 @@ const Login = () => {
                       <Form.Control
                         type={passwordVisible ? 'text' : 'password'}
                         placeholder={t('login:login.form.passwordPlaceholder')}
-                        {...register("password", {
+                        {...register('password', {
                           required: t('common:common.validation.required'),
-                          minLength: {value: 4, message: t('common:common.validation.minlength', {min: 4})},
-                          maxLength: {value: 100, message: t('common:common.validation.maxlength', {max: 100})}
+                          minLength: { value: 4, message: t('common:common.validation.minlength', { min: 4 }) },
+                          maxLength: { value: 100, message: t('common:common.validation.maxlength', { max: 100 }) },
                         })}
                         isInvalid={!!errors.password}
                       />
                       <Button variant="outline-secondary" onClick={() => setPasswordVisible(!passwordVisible)}>
-                        <FontAwesomeIcon icon={passwordVisible ? 'eye-slash' : 'eye'}/>
+                        <FontAwesomeIcon icon={passwordVisible ? 'eye-slash' : 'eye'} />
                       </Button>
                       <Form.Control.Feedback type="invalid">
                         {errors.password?.message}
@@ -128,7 +128,7 @@ const Login = () => {
 
                   <Button variant="primary" type="submit" className="w-100" size="lg" disabled={loading}>
                     {loading ? (
-                      <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true"/>
+                      <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
                     ) : (
                       t('login:login.form.submitButton')
                     )}
@@ -140,7 +140,7 @@ const Login = () => {
         </Row>
       </Container>
 
-      <Footer/>
+      <Footer />
     </>
   );
 };
@@ -148,4 +148,4 @@ const Login = () => {
 export default Login;
 
 const getStaticProps = makeStaticProps(['common', 'login', 'footer']);
-export {getStaticPaths, getStaticProps};
+export { getStaticPaths, getStaticProps };
