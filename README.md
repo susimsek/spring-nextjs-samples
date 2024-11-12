@@ -3,11 +3,15 @@
 ![Spring Next.js Samples](https://github.com/susimsek/spring-nextjs-samples/blob/main/images/introduction.png)
 
 ## Overview
-This project is a full-stack web application using Spring Boot for the backend and Next.js for the frontend. The backend provides a RESTful API, while the frontend interacts with these endpoints to deliver a dynamic, responsive user experience.
+
+This project is a full-stack web application using Spring Boot for the backend and Next.js for the frontend. The backend
+provides a RESTful API, while the frontend interacts with these endpoints to deliver a dynamic, responsive user
+experience.
 
 ## Usage
 
-Once the application is running, navigate to [http://localhost:8080](http://localhost:8080) to access the main web interface.
+Once the application is running, navigate to [http://localhost:8080](http://localhost:8080) to access the main web
+interface.
 
 ![Spring Next.js Web Application](https://github.com/susimsek/spring-nextjs-samples/blob/main/images/webapp.png)
 
@@ -18,11 +22,10 @@ This interface is powered by Next.js and interacts with the Spring Boot backend 
 This server already has preconfigured users.
 Therefore, to login please use one of these predefined credentials:
 
-| Username | Email                    | Password | Roles  |
-|----------|--------------------------|----------|--------|
-| user     | user@example.com         | password | USER   |
-| admin    | admin@example.com        | password | ADMIN  |
-
+| Username | Email             | Password | Roles |
+|----------|-------------------|----------|-------|
+| user     | user@example.com  | password | USER  |
+| admin    | admin@example.com | password | ADMIN |
 
 ## Prerequisites
 
@@ -95,6 +98,14 @@ To check the Kotlin code style using Detekt, execute:
 mvn detekt:check -Ddetekt.config=detekt.yml
 ```
 
+## ESLint
+
+To check the JavaScript and TypeScript code style using ESLint, execute:
+
+```sh
+npm run lint
+````
+
 ## Deployment
 
 ### Docker Deployment
@@ -105,7 +116,8 @@ The application can also be fully dockerized. To achieve this, first build a Doc
 mvn verify jib:dockerBuild
 ```
 
-To deploy the application and dependencies (PostgreSQL) using Docker Compose for a production environment, follow these steps:
+To deploy the application and dependencies (PostgreSQL) using Docker Compose for a production environment, follow these
+steps:
 
 From the root directory of the project, use Docker Compose to deploy the application:
 
@@ -160,6 +172,7 @@ helm uninstall spring-nextjs-app
 For API documentation, please refer to the following:
 
 ### Swagger UI
+
 Access the Swagger UI for REST API documentation:
 
 http://localhost:8080/swagger-ui.html
@@ -176,14 +189,20 @@ http://localhost:8080/graphiql
 
 ## Internationalization (i18n) Support
 
-This project supports internationalization (i18n) for English (`en`) and Turkish (`tr`). Language selection is determined based on the `Accept-Language` header, allowing users to experience the application in their preferred language automatically.
+This project supports internationalization (i18n) for English (`en`) and Turkish (`tr`). Language selection is
+determined based on the `Accept-Language` header, allowing users to experience the application in their preferred
+language automatically.
 
-- **Backend (Spring Boot)**: The backend uses a custom `ParameterMessageSource` that extends Spring's `MessageSource` to manage multilingual support for server-side messages and responses with named parameter support.
-- **Frontend (Next.js)**: The frontend utilizes `next-i18next` and `Next Language Detector` to manage translations and detect the user's preferred language.
+- **Backend (Spring Boot)**: The backend uses a custom `ParameterMessageSource` that extends Spring's `MessageSource` to
+  manage multilingual support for server-side messages and responses with named parameter support.
+- **Frontend (Next.js)**: The frontend utilizes `next-i18next` and `Next Language Detector` to manage translations and
+  detect the user's preferred language.
 
 ### Configuration
 
-The `i18n` configuration in Next.js automatically detects and loads the appropriate translations based on the user's language preference. This is reflected throughout the UI components, ensuring a consistent experience in either language.
+The `i18n` configuration in Next.js automatically detects and loads the appropriate translations based on the user's
+language preference. This is reflected throughout the UI components, ensuring a consistent experience in either
+language.
 
 ## ER Diagram
 
@@ -231,6 +250,7 @@ Below is the ER Diagram used for the project:
 - React
 - Next.js
 - TypeScript
+- ESLint
 - Redux
 - Next i18next
 - Next Language Detector
