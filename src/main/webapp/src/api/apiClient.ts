@@ -7,7 +7,6 @@ import { logout } from '@/reducers/authentication';
 
 const TIMEOUT = 60 * 1000;
 
-
 // Create an Axios instance with default settings
 const apiClient = axios.create({
   baseURL: '/api/v1',
@@ -32,15 +31,9 @@ apiClient.interceptors.request.use(
 );
 
 // Add additional response interceptors for logging and notifications
-apiClient.interceptors.response.use(
-  response => response,
-  loggingInterceptor,
-);
+apiClient.interceptors.response.use(response => response, loggingInterceptor);
 
-apiClient.interceptors.response.use(
-  response => response,
-  notificationInterceptor,
-);
+apiClient.interceptors.response.use(response => response, notificationInterceptor);
 
 // Add a response interceptor for handling errors, including 401 Unauthorized
 apiClient.interceptors.response.use(

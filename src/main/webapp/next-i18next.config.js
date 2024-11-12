@@ -1,6 +1,5 @@
 // next-i18next.config.js
-const isDev = process.env.NODE_ENV === 'development'
-
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
   debug: isDev,
@@ -8,9 +7,6 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en', 'tr'],
   },
-  localePath:
-    typeof window === 'undefined'
-      ? require('path').resolve('./public/locales')
-      : '/locales',
-  reloadOnPrerender: isDev
+  localePath: typeof window === 'undefined' ? require('path').resolve('./public/locales') : '/locales',
+  reloadOnPrerender: isDev,
 };

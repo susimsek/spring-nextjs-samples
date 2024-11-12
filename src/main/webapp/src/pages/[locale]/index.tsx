@@ -23,7 +23,6 @@ const Home = () => {
 
   const { data, loading, refetch } = useGetHelloMessageQuery();
 
-
   // Subscription for real-time updates
   const { data: subscriptionData } = useHelloSubscriptionSubscription({
     variables: { locale: currentLocale },
@@ -51,8 +50,9 @@ const Home = () => {
       case 'gqlApi':
         return <EmbeddedContentFrame src="/graphiql" title={t('common:common.menu.gqlApi')} />;
       case 'database':
-        return <EmbeddedContentFrame src="/h2-console" title={t('common:common.menu.database')}
-                                     backgroundColor="#ffffff" />;
+        return (
+          <EmbeddedContentFrame src="/h2-console" title={t('common:common.menu.database')} backgroundColor="#ffffff" />
+        );
 
       default:
         return <p>{t('home:defaultDescription')}</p>;
@@ -66,8 +66,8 @@ const Home = () => {
       </Head>
 
       <Header
-        onToggleSidebar={toggleSidebar}       // Pass toggle function to Header
-        showSidebarToggle={true}               // Show toggle switch in Header
+        onToggleSidebar={toggleSidebar} // Pass toggle function to Header
+        showSidebarToggle={true} // Show toggle switch in Header
       />
 
       <Container fluid className="d-flex flex-column min-vh-100 p-0">
@@ -75,7 +75,7 @@ const Home = () => {
           {/* Sidebar Column - visible only if isSidebarOpen is true */}
           {isSidebarOpen && (
             <Col xs={12} md={3} lg={2} className="p-0 d-flex flex-column">
-              <Sidebar onNavigate={(page) => setActivePage(page)} />
+              <Sidebar onNavigate={page => setActivePage(page)} />
             </Col>
           )}
 

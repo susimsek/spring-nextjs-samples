@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '@/config/store';
 import { hideNotification } from '@/reducers/notification';
 
 const ToastContainer: React.FC = () => {
-  const toast = useAppSelector((state) => state.notification);
+  const toast = useAppSelector(state => state.notification);
   const dispatch = useAppDispatch();
 
   const closeToast = () => dispatch(hideNotification());

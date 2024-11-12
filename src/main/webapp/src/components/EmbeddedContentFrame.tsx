@@ -17,11 +17,7 @@ const EmbeddedContentFrame: React.FC<EmbeddedContentFrameProps> = ({ src, title,
           <Spinner animation="border" role="status" />
         </div>
       )}
-      <iframe
-        src={src}
-        onLoad={() => setLoading(false)}
-        title={title}
-      />
+      <iframe src={src} onLoad={() => setLoading(false)} title={title} />
     </div>
   );
 };

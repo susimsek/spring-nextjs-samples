@@ -11,12 +11,12 @@ interface LinkComponentProps extends Omit<LinkProps, 'href'> {
 }
 
 const LinkComponent: React.FC<LinkComponentProps> = ({
-                                                       children,
-                                                       skipLocaleHandling = false,
-                                                       href,
-                                                       className,
-                                                       ...rest
-                                                     }) => {
+  children,
+  skipLocaleHandling = false,
+  href,
+  className,
+  ...rest
+}) => {
   const router = useRouter();
   const locale = (rest.locale as string) || (router.query.locale as string) || '';
 

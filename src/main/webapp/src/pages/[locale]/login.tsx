@@ -28,11 +28,16 @@ const Login = () => {
   const redirect = useRedirect();
   const dispatch = useAppDispatch();
 
-  const { register, handleSubmit, formState: { errors }, watch } = useForm<LoginFormInputs>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<LoginFormInputs>({
     mode: 'onChange',
   });
 
-  const onSubmit: SubmitHandler<LoginFormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<LoginFormInputs> = async data => {
     setError(null);
     setLoading(true);
 
@@ -93,9 +98,7 @@ const Login = () => {
                       })}
                       isInvalid={!!errors.username}
                     />
-                    <Form.Control.Feedback type="invalid">
-                      {errors.username?.message}
-                    </Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">{errors.username?.message}</Form.Control.Feedback>
                   </Form.Group>
 
                   <Form.Group controlId="formPassword" className="mb-3">
@@ -114,9 +117,7 @@ const Login = () => {
                       <Button variant="outline-secondary" onClick={() => setPasswordVisible(!passwordVisible)}>
                         <FontAwesomeIcon icon={passwordVisible ? 'eye-slash' : 'eye'} />
                       </Button>
-                      <Form.Control.Feedback type="invalid">
-                        {errors.password?.message}
-                      </Form.Control.Feedback>
+                      <Form.Control.Feedback type="invalid">{errors.password?.message}</Form.Control.Feedback>
                     </InputGroup>
                   </Form.Group>
 

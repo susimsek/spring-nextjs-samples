@@ -23,24 +23,23 @@ const httpLink = new HttpLink({
 });
 
 // Create a WebSocket link using graphql-ws for subscriptions
-const wsLink = new GraphQLWsLink(createClient({
-  url: '/subscriptions',
-  connectionParams: () => {
-    const token = localStorage.getItem('token');
-    return {
-      ...(token && { Authorization: `Bearer ${token}` }), // Send token as Authorization in the payload
-    };
-  },
-}));
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: '/subscriptions',
+    connectionParams: () => {
+      const token = localStorage.getItem('token');
+      return {
+        ...(token && { Authorization: `Bearer ${token}` }), // Send token as Authorization in the payload
+      };
+    },
+  }),
+);
 
 // Split link for using WebSocket link for subscriptions and HTTP link for queries and mutations
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query);
-    return (
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
-    );
+    return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
   },
   wsLink,
   httpLink,

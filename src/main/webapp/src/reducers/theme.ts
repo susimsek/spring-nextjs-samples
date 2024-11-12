@@ -8,14 +8,14 @@ interface ThemeState {
 
 // Retrieve the theme from localStorage or default to 'light' if not set
 const initialState: ThemeState = {
-  theme: (isBrowser && localStorage.getItem('theme')) as 'light' | 'dark' || 'light',
+  theme: ((isBrowser && localStorage.getItem('theme')) as 'light' | 'dark') || 'light',
 };
 
 const themeSlice = createSlice({
   name: 'theme',
   initialState,
   reducers: {
-    toggleTheme: (state) => {
+    toggleTheme: state => {
       state.theme = state.theme === 'light' ? 'dark' : 'light';
       localStorage.setItem('theme', state.theme); // Save the theme to localStorage
     },

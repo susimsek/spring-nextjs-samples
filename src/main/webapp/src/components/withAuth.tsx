@@ -5,7 +5,7 @@ import { Spinner } from 'react-bootstrap';
 import { useRedirect } from '@/hooks/useRedirect';
 
 const withAuth = (WrappedComponent: React.ComponentType) => {
-  const AuthHOC: React.FC = (props) => {
+  const AuthHOC: React.FC = props => {
     const redirect = useRedirect();
     const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
 

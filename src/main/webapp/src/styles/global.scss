@@ -62,7 +62,7 @@
   --button-bg-color: #4a90e2; /* Muted blue for primary buttons */
   --button-border-color: #4a90e2;
   --button-text-color: #ffffff; /* White text on buttons */
-  --button-bg-color-hover: #357ABD; /* Darker blue for hover effect */
+  --button-bg-color-hover: #357abd; /* Darker blue for hover effect */
   --placeholder-color: #b0b0b0;
   --primary-text-color: #66b3ff; /* Softer blue primary color */
   --error-text-color: #ff6b6b; /* Dark theme error color */
@@ -89,7 +89,9 @@
 body {
   background-color: var(--background-color) !important;
   color: var(--text-color) !important;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 // Navbar styling
@@ -145,9 +147,12 @@ body {
   background-color: var(--navbar-bg-color); /* Match background color to navbar */
   color: var(--navbar-text-color); /* Match text color to theme */
   border-radius: 0.375rem; /* Rounded corners for a softer look */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease; /* Smooth transition */
 
-  &:hover, &:focus {
+  &:hover,
+  &:focus {
     background-color: var(--highlight-text-color); /* Highlight on hover */
     color: #ffffff; /* White text on hover for contrast */
     outline: none;
@@ -173,7 +178,8 @@ body {
 }
 
 // Button styling
-button, .btn-primary {
+button,
+.btn-primary {
   background-color: var(--button-bg-color);
   border-color: var(--button-border-color);
   color: var(--button-text-color);
@@ -211,11 +217,14 @@ footer {
   color: var(--footer-text-color);
   padding: 1rem 0;
 
-  p, span, .nav-link {
+  p,
+  span,
+  .nav-link {
     color: var(--footer-text-color) !important;
   }
 
-  .footer-rights, .footer-text {
+  .footer-rights,
+  .footer-text {
     margin: 0;
     display: flex;
     align-items: center;
@@ -245,7 +254,13 @@ footer {
 }
 
 // Apply text color to general elements
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   color: var(--text-color);
 }
 
@@ -253,7 +268,6 @@ p, h1, h2, h3, h4, h5, h6 {
   color: var(--placeholder-color);
   opacity: 1;
 }
-
 
 .theme-toggle {
   border: none !important; /* Removes the button border */
@@ -282,7 +296,9 @@ p, h1, h2, h3, h4, h5, h6 {
 
   .nav-link {
     color: var(--sidebar-text-color);
-    transition: background-color 0.3s, color 0.3s;
+    transition:
+      background-color 0.3s,
+      color 0.3s;
 
     &:hover {
       background-color: var(--sidebar-hover-bg-color);
@@ -369,7 +385,9 @@ p, h1, h2, h3, h4, h5, h6 {
   .dropdown-item {
     color: var(--text-color) !important; /* Theme-based default text color */
     background-color: var(--dropdown-bg-color) !important; /* Theme-based background color */
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
 
     &:hover {
       background-color: var(--dropdown-hover-bg-color) !important; /* Theme-based hover background */

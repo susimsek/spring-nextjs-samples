@@ -13,14 +13,14 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 type HeaderProps = {
-  onToggleSidebar?: () => void;  // Make onToggleSidebar optional
-  isSidebarOpen?: boolean;       // Controls if the sidebar is open; default is true
-  showSidebarToggle?: boolean;   // Controls if the sidebar toggle icon should be displayed; default is false
+  onToggleSidebar?: () => void; // Make onToggleSidebar optional
+  isSidebarOpen?: boolean; // Controls if the sidebar is open; default is true
+  showSidebarToggle?: boolean; // Controls if the sidebar toggle icon should be displayed; default is false
 };
 const Header: React.FC<HeaderProps> = ({
-                                         onToggleSidebar,
-                                         showSidebarToggle = false,     // Default value set to false
-                                       }) => {
+  onToggleSidebar,
+  showSidebarToggle = false, // Default value set to false
+}) => {
   const { t } = useTranslation(['common']);
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
@@ -74,21 +74,18 @@ const Header: React.FC<HeaderProps> = ({
           <NavDropdown
             title={
               <span>
-      <FontAwesomeIcon icon="globe" className="me-2" />
+                <FontAwesomeIcon icon="globe" className="me-2" />
                 {t('common:common.language')}
-    </span>
+              </span>
             }
             id="language-selector"
           >
-            {i18nextConfig.i18n.locales.map((locale) => {
+            {i18nextConfig.i18n.locales.map(locale => {
               if (locale === currentLocale) return null;
               return <LanguageSwitchLink locale={locale} key={locale} />;
             })}
           </NavDropdown>
-          <Button
-            onClick={handleThemeToggle}
-            className="theme-toggle ps-0 ps-lg-3 me-2"
-          >
+          <Button onClick={handleThemeToggle} className="theme-toggle ps-0 ps-lg-3 me-2">
             <FontAwesomeIcon icon={currentTheme === 'dark' ? 'sun' : 'moon'} className="me-2" />
             {currentTheme === 'dark' ? t('common:common.theme.lightMode') : t('common:common.theme.darkMode')}
           </Button>

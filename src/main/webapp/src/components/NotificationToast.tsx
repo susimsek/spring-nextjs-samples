@@ -20,16 +20,15 @@ interface NotificationToastProps extends TostMessage {
 }
 
 const NotificationToast: React.FC<NotificationToastProps> = ({
-                                                               message,
-                                                               messageKey,
-                                                               data,
-                                                               variant = 'info',
-                                                               show,
-                                                               onClose = () => {
-                                                               },
-                                                               dismissible = true,
-                                                               size = 'lg',
-                                                             }) => {
+  message,
+  messageKey,
+  data,
+  variant = 'info',
+  show,
+  onClose = () => {},
+  dismissible = true,
+  size = 'lg',
+}) => {
   const { t } = useTranslation('common');
   const toastMessage = messageKey ? String(t(messageKey, data)) : message;
 
@@ -92,11 +91,11 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
           }}
         >
           <FontAwesomeIcon icon={icon as IconProp} className="me-2" style={{ color, fontSize: '20px' }} />
-          <strong className="me-auto" style={{ fontSize: '18px' }}>{title}</strong>
+          <strong className="me-auto" style={{ fontSize: '18px' }}>
+            {title}
+          </strong>
         </Toast.Header>
-        <Toast.Body style={{ fontSize: '16px' }}>
-          {toastMessage ?? t('common:common.error.http.default')}
-        </Toast.Body>
+        <Toast.Body style={{ fontSize: '16px' }}>{toastMessage ?? t('common:common.error.http.default')}</Toast.Body>
       </Toast>
     </ToastContainer>
   );

@@ -7,7 +7,7 @@ const getErrorMessage = (problemDetail: ProblemDetail): string => {
   let { detail } = problemDetail;
 
   if (problemDetail.violations && problemDetail.violations.length > 0) {
-    problemDetail.violations.forEach((violation) => {
+    problemDetail.violations.forEach(violation => {
       detail += `\nField: ${violation.field}, Object: ${violation.object}, Message: ${violation.message}`;
     });
   }
@@ -17,7 +17,6 @@ const getErrorMessage = (problemDetail: ProblemDetail): string => {
 
 export const loggingInterceptor = (error: AxiosError): Promise<AxiosError> => {
   if (DEVELOPMENT) {
-
     if (error.response && error.response.data) {
       const problemDetail = error.response.data as ProblemDetail;
       const message = getErrorMessage(problemDetail);

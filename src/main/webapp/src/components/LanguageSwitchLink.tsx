@@ -15,7 +15,7 @@ const LanguageSwitchLink: React.FC<LanguageSwitchLinkProps> = ({ locale, href, .
   let currentHref = href || router.asPath;
   let currentPath = router.pathname;
 
-  Object.keys(router.query).forEach((key) => {
+  Object.keys(router.query).forEach(key => {
     if (key === 'locale') {
       currentPath = currentPath.replace(`[${key}]`, locale);
       return;

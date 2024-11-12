@@ -12,7 +12,7 @@ const sources = [
   '/v3/api-docs/:path*',
   '/graphql',
   '/graphiql',
-  '/subscriptions'
+  '/subscriptions',
 ];
 
 const nextConfig = {
@@ -24,7 +24,7 @@ const nextConfig = {
   },
   ...(isDev && {
     async rewrites() {
-      return sources.map((source) => ({
+      return sources.map(source => ({
         source,
         destination: `http${options.tls ? 's' : ''}://localhost:8080${source}`,
       }));

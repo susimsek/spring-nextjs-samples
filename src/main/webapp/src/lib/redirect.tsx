@@ -43,6 +43,8 @@ export const Redirect: React.FC = () => {
 };
 
 // Higher-order function for specific path redirection with spinner display
-export const getRedirect = (to: string): React.FC => () => {
-  return useRedirect(to);
-};
+export const getRedirect =
+  (to: string): React.FC =>
+  () => {
+    return useRedirect(to);
+  };

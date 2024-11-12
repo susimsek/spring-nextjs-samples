@@ -25,11 +25,8 @@ export const getStaticPaths: GetStaticPaths = () => ({
 });
 
 // Load i18n props for specific namespaces, defaulting to ['common']
-export const getI18nProps = async (
-  ctx: GetStaticPropsContext,
-  ns: string[] = ['common'],
-) => {
-  const locale = ctx?.params?.locale as string || i18nextConfig.i18n.defaultLocale;
+export const getI18nProps = async (ctx: GetStaticPropsContext, ns: string[] = ['common']) => {
+  const locale = (ctx?.params?.locale as string) || i18nextConfig.i18n.defaultLocale;
   return {
     ...(await serverSideTranslations(locale, ns)),
   };
@@ -38,6 +35,6 @@ export const getI18nProps = async (
 // Higher-order function to create getStaticProps with specified namespaces
 export const makeStaticProps =
   (ns: string[] = []) =>
-    async (ctx: GetStaticPropsContext) => ({
-      props: await getI18nProps(ctx, ns),
-    });
+  async (ctx: GetStaticPropsContext) => ({
+    props: await getI18nProps(ctx, ns),
+  });
