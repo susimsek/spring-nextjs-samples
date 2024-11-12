@@ -38,6 +38,6 @@ export const getI18nProps = async (
 // Higher-order function to create getStaticProps with specified namespaces
 export const makeStaticProps =
   (ns: string[] = []) =>
-  async (ctx: GetStaticPropsContext) => ({
-    props: await getI18nProps(ctx, ns),
-  });
+    async (ctx: GetStaticPropsContext) => ({
+      props: await getI18nProps(ctx, ns),
+    });

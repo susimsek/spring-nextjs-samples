@@ -1,24 +1,24 @@
 import {
+  faBars,
+  faCheckCircle,
+  faCode,
+  faDatabase,
+  faExclamationCircle,
+  faExclamationTriangle,
+  faEye,
+  faEyeSlash,
   faGlobe,
   faHome,
+  faInfoCircle,
+  faMoon,
   faSave,
   faSearch,
-  faSignOutAlt,
   faSignInAlt,
+  faSignOutAlt,
   faSun,
-  faMoon,
-  faBars,
-  faExclamationTriangle,
-  faInfoCircle,
-  faCheckCircle,
-  faExclamationCircle,
-  faTrash,
-  faDatabase,
-  faCode,
-  faEye,
-  faEyeSlash
+  faTrash
 } from '@fortawesome/free-solid-svg-icons';
-import { library } from '@fortawesome/fontawesome-svg-core';
+import {library} from '@fortawesome/fontawesome-svg-core';
 
 export const loadIcons = () => {
   library.add(

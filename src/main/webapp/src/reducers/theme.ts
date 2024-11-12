@@ -1,5 +1,5 @@
 // reducers/theme.ts
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 import {isBrowser} from "@/config/constants";
 
 interface ThemeState {
@@ -26,5 +26,5 @@ const themeSlice = createSlice({
   },
 });
 
-export const { toggleTheme, setTheme } = themeSlice.actions;
+export const {toggleTheme, setTheme} = themeSlice.actions;
 export default themeSlice.reducer;

@@ -1,8 +1,8 @@
 // components/withAuth.tsx
-import React, { useEffect } from 'react';
-import { useAppSelector } from '@/config/store'; // assuming useAppSelector is set up in your store
-import { Spinner } from 'react-bootstrap';
-import { useRedirect } from '@/hooks/useRedirect';
+import React, {useEffect} from 'react';
+import {useAppSelector} from '@/config/store'; // assuming useAppSelector is set up in your store
+import {Spinner} from 'react-bootstrap';
+import {useRedirect} from '@/hooks/useRedirect';
 
 const withAuth = (WrappedComponent: React.ComponentType) => {
   const AuthHOC: React.FC = (props) => {
@@ -17,7 +17,7 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
 
     if (!isAuthenticated) {
       return (
-        <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+        <div className="d-flex justify-content-center align-items-center" style={{minHeight: '100vh'}}>
           <Spinner animation="border" role="status"/>
         </div>
       );

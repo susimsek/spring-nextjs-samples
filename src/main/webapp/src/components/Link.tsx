@@ -1,6 +1,6 @@
-import React, { ReactNode } from 'react';
-import Link, { LinkProps } from 'next/link';
-import { useRouter } from 'next/router';
+import React, {ReactNode} from 'react';
+import Link, {LinkProps} from 'next/link';
+import {useRouter} from 'next/router';
 import classNames from 'classnames';
 
 interface LinkComponentProps extends Omit<LinkProps, 'href'> {

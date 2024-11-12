@@ -1,9 +1,9 @@
 // store.ts
-import { configureStore } from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import authenticationReducer from '@/reducers/authentication';
 import notificationReducer from '@/reducers/notification';
-import themeReducer from '@/reducers/theme';  // Import the theme reducer
-import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import themeReducer from '@/reducers/theme'; // Import the theme reducer
+import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux';
 
 const store = configureStore({
   reducer: {

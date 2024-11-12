@@ -1,5 +1,6 @@
-import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
+import {gql} from '@apollo/client';
+
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -105,12 +106,20 @@ export type AuthenticateMutationVariables = Exact<{
 
 export type AuthenticateMutation = {
   __typename?: 'Mutation';
-  authenticate?: { __typename?: 'TokenDTO'; accessToken: string; tokenType: string; accessTokenExpiresIn: number } | null;
+  authenticate?: {
+    __typename?: 'TokenDTO';
+    accessToken: string;
+    tokenType: string;
+    accessTokenExpiresIn: number
+  } | null;
 };
 
 export type GetHelloMessageQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetHelloMessageQuery = { __typename?: 'Query'; hello?: { __typename?: 'HelloDTO'; message: string; timestamp: any } | null };
+export type GetHelloMessageQuery = {
+  __typename?: 'Query';
+  hello?: { __typename?: 'HelloDTO'; message: string; timestamp: any } | null
+};
 
 export type HelloSubscriptionSubscriptionVariables = Exact<{
   locale?: InputMaybe<Scalars['Locale']['input']>;
@@ -150,9 +159,10 @@ export type AuthenticateMutationFn = Apollo.MutationFunction<AuthenticateMutatio
  * });
  */
 export function useAuthenticateMutation(baseOptions?: Apollo.MutationHookOptions<AuthenticateMutation, AuthenticateMutationVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
+  const options = {...defaultOptions, ...baseOptions};
   return Apollo.useMutation<AuthenticateMutation, AuthenticateMutationVariables>(AuthenticateDocument, options);
 }
+
 export type AuthenticateMutationHookResult = ReturnType<typeof useAuthenticateMutation>;
 export type AuthenticateMutationResult = Apollo.MutationResult<AuthenticateMutation>;
 export type AuthenticateMutationOptions = Apollo.BaseMutationOptions<AuthenticateMutation, AuthenticateMutationVariables>;
@@ -181,21 +191,24 @@ export const GetHelloMessageDocument = gql`
  * });
  */
 export function useGetHelloMessageQuery(baseOptions?: Apollo.QueryHookOptions<GetHelloMessageQuery, GetHelloMessageQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
+  const options = {...defaultOptions, ...baseOptions};
   return Apollo.useQuery<GetHelloMessageQuery, GetHelloMessageQueryVariables>(GetHelloMessageDocument, options);
 }
+
 export function useGetHelloMessageLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<GetHelloMessageQuery, GetHelloMessageQueryVariables>,
 ) {
-  const options = { ...defaultOptions, ...baseOptions };
+  const options = {...defaultOptions, ...baseOptions};
   return Apollo.useLazyQuery<GetHelloMessageQuery, GetHelloMessageQueryVariables>(GetHelloMessageDocument, options);
 }
+
 export function useGetHelloMessageSuspenseQuery(
   baseOptions?: Apollo.SkipToken | Apollo.SuspenseQueryHookOptions<GetHelloMessageQuery, GetHelloMessageQueryVariables>,
 ) {
-  const options = baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+  const options = baseOptions === Apollo.skipToken ? baseOptions : {...defaultOptions, ...baseOptions};
   return Apollo.useSuspenseQuery<GetHelloMessageQuery, GetHelloMessageQueryVariables>(GetHelloMessageDocument, options);
 }
+
 export type GetHelloMessageQueryHookResult = ReturnType<typeof useGetHelloMessageQuery>;
 export type GetHelloMessageLazyQueryHookResult = ReturnType<typeof useGetHelloMessageLazyQuery>;
 export type GetHelloMessageSuspenseQueryHookResult = ReturnType<typeof useGetHelloMessageSuspenseQuery>;
@@ -228,8 +241,9 @@ export const HelloSubscriptionDocument = gql`
 export function useHelloSubscriptionSubscription(
   baseOptions?: Apollo.SubscriptionHookOptions<HelloSubscriptionSubscription, HelloSubscriptionSubscriptionVariables>,
 ) {
-  const options = { ...defaultOptions, ...baseOptions };
+  const options = {...defaultOptions, ...baseOptions};
   return Apollo.useSubscription<HelloSubscriptionSubscription, HelloSubscriptionSubscriptionVariables>(HelloSubscriptionDocument, options);
 }
+
 export type HelloSubscriptionSubscriptionHookResult = ReturnType<typeof useHelloSubscriptionSubscription>;
 export type HelloSubscriptionSubscriptionResult = Apollo.SubscriptionResult<HelloSubscriptionSubscription>;

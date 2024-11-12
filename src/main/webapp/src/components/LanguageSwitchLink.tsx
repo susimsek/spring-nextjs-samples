@@ -1,7 +1,7 @@
 import languageDetector from '../lib/languageDetector'
-import { useRouter } from 'next/router'
+import {useRouter} from 'next/router'
 import Link from 'next/link'
-import { Button } from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 import React from "react";
 
 interface LanguageSwitchLinkProps {
@@ -9,7 +9,7 @@ interface LanguageSwitchLinkProps {
   href?: string
 }
 
-const LanguageSwitchLink: React.FC<LanguageSwitchLinkProps> = ({ locale, href, ...rest }) => {
+const LanguageSwitchLink: React.FC<LanguageSwitchLinkProps> = ({locale, href, ...rest}) => {
   const router = useRouter()
 
   let currentHref = href || router.asPath

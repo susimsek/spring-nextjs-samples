@@ -1,5 +1,5 @@
 // reducers/authentication.ts
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {isBrowser} from "@/config/constants";
 
 interface AuthenticationState {
@@ -29,5 +29,5 @@ const authenticationSlice = createSlice({
   },
 });
 
-export const { login, logout } = authenticationSlice.actions;
+export const {login, logout} = authenticationSlice.actions;
 export default authenticationSlice.reducer;
