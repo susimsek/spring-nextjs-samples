@@ -2,7 +2,7 @@ export interface Violation {
   code: string;
   object: string;
   field: string;
-  rejectedValue: any;
+  rejectedValue: unknown;
   message: string;
 }
 

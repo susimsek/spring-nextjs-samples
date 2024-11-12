@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { NextRouter, useRouter } from 'next/router';
-import {useAppSelector} from '@/config/store';
+import React, {useEffect} from 'react';
+import {NextRouter, useRouter} from 'next/router';
 import languageDetector from './languageDetector';
 import {Spinner} from "react-bootstrap";
 
@@ -31,7 +30,7 @@ export const useRedirect = (to?: string): JSX.Element => {
 
   return (
     <div>
-      <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <div className="d-flex justify-content-center align-items-center" style={{minHeight: '100vh'}}>
         <Spinner animation="border" role="status"/>
       </div>
     </div>

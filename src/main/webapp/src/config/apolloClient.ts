@@ -1,12 +1,13 @@
-import { ApolloClient, InMemoryCache, HttpLink, ApolloLink, split } from '@apollo/client';
-import { onError } from '@apollo/client/link/error';
-import { notificationLink } from "@/config/notificationLink";
+import {ApolloClient, ApolloLink, HttpLink, InMemoryCache, ServerError, ServerParseError, split} from '@apollo/client';
+import {onError} from '@apollo/client/link/error';
+import {notificationLink} from "@/config/notificationLink";
 import loggingLink from "@/config/loggingLink";
-import { logout } from '@/reducers/authentication';
+import {logout} from '@/reducers/authentication';
 import store from '@/config/store';
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { createClient } from 'graphql-ws';
-import { getMainDefinition } from '@apollo/client/utilities';
+import {GraphQLWsLink} from '@apollo/client/link/subscriptions';
+import {createClient} from 'graphql-ws';
+import {getMainDefinition} from '@apollo/client/utilities';
+import {GraphQLFormattedError} from "graphql/error";
 
 // Create an HTTP link for the Apollo Client
 const httpLink = new HttpLink({
@@ -19,14 +20,14 @@ const wsLink = new GraphQLWsLink(createClient({
   connectionParams: () => {
     const token = localStorage.getItem('token');
     return {
-      ...(token && { Authorization: `Bearer ${token}` }), // Send token as Authorization in the payload
+      ...(token && {Authorization: `Bearer ${token}`}), // Send token as Authorization in the payload
     };
   },
 }));
 
 // Split link for using WebSocket link for subscriptions and HTTP link for queries and mutations
 const splitLink = split(
-  ({ query }) => {
+  ({query}) => {
     const definition = getMainDefinition(query);
     return (
       definition.kind === 'OperationDefinition' &&
@@ -45,7 +46,7 @@ const authLink = new ApolloLink((operation, forward) => {
   // Set headers
   operation.setContext({
     headers: {
-      ...(token && { Authorization: `Bearer ${token}` }), // Set Authorization only if token exists
+      ...(token && {Authorization: `Bearer ${token}`}), // Set Authorization only if token exists
       'Accept-Language': language, // Always set Accept-Language
     },
   });
@@ -54,7 +55,7 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 // onError link for handling errors and triggering logout if necessary
-const logoutLink = onError(({ graphQLErrors, networkError }) => {
+const logoutLink = onError(({graphQLErrors, networkError}) => {
   const graphQLError = graphQLErrors && graphQLErrors.length > 0 ? graphQLErrors[0] : null;
   if (graphQLError) {
     handleGraphQLErrorForLogout(graphQLError);
@@ -66,16 +67,16 @@ const logoutLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 // Function to handle GraphQL errors for logout
-function handleGraphQLErrorForLogout(graphQLError: any) {
+function handleGraphQLErrorForLogout(graphQLError: GraphQLFormattedError) {
   const classification = graphQLError.extensions?.classification;
   if (classification === 'UNAUTHORIZED') {
-    store.dispatch(logout()); // Trigger logout if the error is UNAUTHORIZED
+    store.dispatch(logout());
   }
 }
 
 // Function to handle network errors for logout
-function handleNetworkErrorForLogout(networkError: any) {
-  const status = 'statusCode' in networkError ? networkError.statusCode : undefined;
+function handleNetworkErrorForLogout(networkError: Error | ServerParseError | ServerError) {
+  const status = (networkError as ServerError).statusCode ?? undefined;
 
   if (networkError.message.includes('4401')) {
     store.dispatch(logout());
@@ -83,7 +84,7 @@ function handleNetworkErrorForLogout(networkError: any) {
   }
 
   if (status === 401) {
-    store.dispatch(logout()); // Trigger logout if the status code is 401
+    store.dispatch(logout());
   }
 }
 

@@ -15,18 +15,18 @@ import i18nextConfig from '../../../next-i18next.config';
 
 const Home = () => {
   const router = useRouter();
-  const { t } = useTranslation(['common', 'home']);
+  const {t} = useTranslation(['common', 'home']);
   const [activePage, setActivePage] = useState<string>('home');
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
 
   const currentLocale = router.query.locale || i18nextConfig.i18n.defaultLocale;
 
-  const { data, loading, refetch } = useGetHelloMessageQuery();
+  const {data, loading, refetch} = useGetHelloMessageQuery();
 
 
   // Subscription for real-time updates
-  const { data: subscriptionData } = useHelloSubscriptionSubscription({
-    variables: { locale: currentLocale }
+  const {data: subscriptionData} = useHelloSubscriptionSubscription({
+    variables: {locale: currentLocale}
   });
 
   // Determine which message to display: real-time or initial
@@ -45,13 +45,14 @@ const Home = () => {
   const renderContent = () => {
     switch (activePage) {
       case 'home':
-        return <HomeContent messageData={messageData} loading={loading} />;
+        return <HomeContent messageData={messageData} loading={loading}/>;
       case 'api':
-        return <EmbeddedContentFrame src="/swagger-ui.html" title={t('common:common.menu.api')} />;
+        return <EmbeddedContentFrame src="/swagger-ui.html" title={t('common:common.menu.api')}/>;
       case 'gqlApi':
         return <EmbeddedContentFrame src="/graphiql" title={t('common:common.menu.gqlApi')}/>;
       case 'database':
-        return <EmbeddedContentFrame src="/h2-console" title={t('common:common.menu.database')} backgroundColor="#ffffff" />;
+        return <EmbeddedContentFrame src="/h2-console" title={t('common:common.menu.database')}
+                                     backgroundColor="#ffffff"/>;
 
       default:
         return <p>{t('home:defaultDescription')}</p>;
@@ -66,7 +67,6 @@ const Home = () => {
 
       <Header
         onToggleSidebar={toggleSidebar}       // Pass toggle function to Header
-        isSidebarOpen={isSidebarOpen}          // Sidebar open state
         showSidebarToggle={true}               // Show toggle switch in Header
       />
 
@@ -75,7 +75,7 @@ const Home = () => {
           {/* Sidebar Column - visible only if isSidebarOpen is true */}
           {isSidebarOpen && (
             <Col xs={12} md={3} lg={2} className="p-0 d-flex flex-column">
-              <Sidebar onNavigate={(page) => setActivePage(page)} />
+              <Sidebar onNavigate={(page) => setActivePage(page)}/>
             </Col>
           )}
 
@@ -85,7 +85,7 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Footer />
+        <Footer/>
       </Container>
     </>
   );
@@ -94,4 +94,4 @@ const Home = () => {
 export default withAuth(Home);
 
 const getStaticProps = makeStaticProps(['common', 'home', 'footer']);
-export { getStaticPaths, getStaticProps };
+export {getStaticPaths, getStaticProps};

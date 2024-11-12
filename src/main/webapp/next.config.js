@@ -19,9 +19,6 @@ const nextConfig = {
   poweredByHeader: false,
   distDir: 'build',
   output: 'export',
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   ...(isDev && {
     async rewrites() {
       return sources.map((source) => ({
