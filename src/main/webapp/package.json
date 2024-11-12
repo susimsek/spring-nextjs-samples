@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "start": "next start",
-    "lint": "next lint && npm run format",
+    "lint": "next lint",
     "format": "npx prettier -w .",
     "build": "npm run webapp:prod --",
     "webapp:dev": "npm run clean-www && next dev",
