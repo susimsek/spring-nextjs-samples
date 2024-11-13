@@ -12,7 +12,7 @@ import { useAppDispatch } from '@/config/store';
 import { login as loginAction } from '@/reducers/authentication';
 import { useRedirect } from '@/hooks/useRedirect';
 import { ALPHANUMERIC_PATTERN } from '@/config/constants';
-import RootLayout from '@/pages/layout';
+import Layout from '@/components/Layout';
 
 interface LoginFormInputs {
   username: string;
@@ -64,7 +64,7 @@ const Login = () => {
   }, [username, password]);
 
   return (
-    <RootLayout>
+    <Layout>
       <Head>
         <title>{t('login:login.pageTitle')}</title>
       </Head>
@@ -137,7 +137,7 @@ const Login = () => {
           </Col>
         </Row>
       </Container>
-    </RootLayout>
+    </Layout>
   );
 };
 

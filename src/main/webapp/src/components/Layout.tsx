@@ -1,4 +1,3 @@
-// app/layout.tsx
 import { ReactNode, useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -11,7 +10,7 @@ type LayoutProps = {
   onNavigate?: (page: string) => void;
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
   showSidebar = false,
   onNavigate = () => {}, // Default empty function to avoid undefined

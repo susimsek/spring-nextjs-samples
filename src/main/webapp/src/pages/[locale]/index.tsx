@@ -8,7 +8,7 @@ import withAuth from '@/components/withAuth';
 import { HelloDto, useGetHelloMessageQuery, useHelloSubscriptionSubscription } from '@/generated/graphql';
 import { useRouter } from 'next/router';
 import i18nextConfig from '../../../next-i18next.config';
-import RootLayout from '@/pages/layout';
+import Layout from '@/components/Layout';
 
 const Home = () => {
   const router = useRouter();
@@ -52,12 +52,12 @@ const Home = () => {
   };
 
   return (
-    <RootLayout showSidebar={true} onNavigate={(page: string) => setActivePage(page)}>
+    <Layout showSidebar={true} onNavigate={(page: string) => setActivePage(page)}>
       <Head>
         <title>{t('common:common.siteTitle')}</title>
       </Head>
       {renderContent()}
-    </RootLayout>
+    </Layout>
   );
 };
 

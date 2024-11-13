@@ -5,13 +5,13 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import { getStaticPaths, makeStaticProps } from '@/lib/getStatic';
 import React from 'react';
-import RootLayout from '@/pages/layout';
+import Layout from '@/components/Layout';
 
-const Custom404 = () => {
+const NotFound = () => {
   const { t } = useTranslation(['404', 'common']);
 
   return (
-    <RootLayout>
+    <Layout>
       <Head>
         <title>{t('404:404.title')}</title>
       </Head>
@@ -36,15 +36,15 @@ const Custom404 = () => {
           </Link>
         </Alert>
       </Container>
-    </RootLayout>
+    </Layout>
   );
 };
 
-Custom404.layoutProps = {
+NotFound.layoutProps = {
   showSidebar: false,
 };
 
-export default Custom404;
+export default NotFound;
 
 const getStaticProps = makeStaticProps(['404', 'common', 'footer']);
 export { getStaticPaths, getStaticProps };
