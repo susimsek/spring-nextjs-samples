@@ -106,6 +106,12 @@ To check the JavaScript and TypeScript code style using ESLint, execute:
 npm run lint
 ```
 
+To automatically fix linting issues, execute:
+
+```sh
+npm run lint:fix
+```
+
 ## Prettier
 
 To format the code using Prettier, execute:
