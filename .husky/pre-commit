@@ -3,4 +3,3 @@
 
 cd src/main/webapp || exit 1
 npx lint-staged --config .lintstagedrc
-

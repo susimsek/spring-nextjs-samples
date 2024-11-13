@@ -251,6 +251,8 @@ Below is the ER Diagram used for the project:
 - Next.js
 - TypeScript
 - ESLint
+- Prettier
+- Husky
 - Redux
 - Next i18next
 - Next Language Detector
