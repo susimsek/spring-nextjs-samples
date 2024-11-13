@@ -8,7 +8,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "prepare": "husky",
-    "prettier:format": "prettier --write */**/*.{js,jsx,json,yml,ts,html,tsx,scss,css,md}",
+    "prettier:format": "prettier --write */**/*.{md,json,js,ts,html,tsx,css,scss}",
     "build": "npm run webapp:prod --",
     "webapp:dev": "npm run clean-www && next dev",
     "webapp:prod": "npm run clean-www && npm run webapp:build:prod",
