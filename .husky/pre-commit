@@ -1,5 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-cd src/main/webapp || exit 1
-npx lint-staged --config .lintstagedrc
+npx lint-staged --config src/main/webapp/.lintstagedrc
