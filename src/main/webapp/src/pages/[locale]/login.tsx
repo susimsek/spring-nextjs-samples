@@ -1,10 +1,8 @@
 // pages/login.tsx
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Button, Card, Col, Container, Form, InputGroup, Row, Spinner } from 'react-bootstrap';
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { getStaticPaths, makeStaticProps } from '@/lib/getStatic';
 import { login } from '@/api/authApi';
 import { LoginRequestDTO } from '@/types/loginRequestDTO';
@@ -14,6 +12,7 @@ import { useAppDispatch } from '@/config/store';
 import { login as loginAction } from '@/reducers/authentication';
 import { useRedirect } from '@/hooks/useRedirect';
 import { ALPHANUMERIC_PATTERN } from '@/config/constants';
+import RootLayout from '@/pages/layout';
 
 interface LoginFormInputs {
   username: string;
@@ -65,12 +64,10 @@ const Login = () => {
   }, [username, password]);
 
   return (
-    <>
+    <RootLayout>
       <Head>
         <title>{t('login:login.pageTitle')}</title>
       </Head>
-
-      <Header />
 
       <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '80vh' }}>
         <Row className="w-100">
@@ -140,10 +137,12 @@ const Login = () => {
           </Col>
         </Row>
       </Container>
-
-      <Footer />
-    </>
+    </RootLayout>
   );
+};
+
+Login.layoutProps = {
+  showSidebar: false,
 };
 
 export default Login;
