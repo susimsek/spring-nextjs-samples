@@ -5,6 +5,7 @@ node_modules
 out
 next-env.d.ts
 next.config.js
+.cache
 
 # Build and distribution directories
 build
