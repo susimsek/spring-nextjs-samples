@@ -23,7 +23,7 @@ This server already has preconfigured users.
 Therefore, to login please use one of these predefined credentials:
 
 | Username | Email             | Password | Roles |
-|----------|-------------------|----------|-------|
+| -------- | ----------------- | -------- | ----- |
 | user     | user@example.com  | password | USER  |
 | admin    | admin@example.com | password | ADMIN |
 
@@ -61,7 +61,7 @@ http://localhost:8080/h2-console
 Use the following credentials to log in:
 
 | Field    | Value                                                                       |
-|----------|-----------------------------------------------------------------------------|
+| -------- | --------------------------------------------------------------------------- |
 | Jdbc Url | `jdbc:h2:mem:demo;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE` |
 | Username | `admin`                                                                     |
 | Password | `root`                                                                      |
@@ -104,7 +104,15 @@ To check the JavaScript and TypeScript code style using ESLint, execute:
 
 ```sh
 npm run lint
-````
+```
+
+## Prettier
+
+To format the code using Prettier, execute:
+
+```sh
+npm run prettier:format
+```
 
 ## Deployment
 
