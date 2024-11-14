@@ -1,0 +1,15 @@
+{
+  "login": {
+    "pageTitle": "Giriş Yap",
+    "form": {
+      "heading": "Hesabınıza Giriş Yapın",
+      "usernameLabel": "Kullanıcı Adı",
+      "usernamePlaceholder": "Kullanıcı adınızı girin",
+      "passwordLabel": "Şifre",
+      "passwordPlaceholder": "Şifrenizi girin",
+      "submitButton": "Giriş Yap",
+      "errorEmptyFields": "Kullanıcı adı ve şifre gereklidir.",
+      "errorInvalidCredentials": "Geçersiz kullanıcı adı veya şifre."
+    }
+  }
+}
