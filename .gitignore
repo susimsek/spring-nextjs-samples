@@ -161,3 +161,14 @@ Desktop.ini
 ######################
 /src/main/webapp/.next
 /src/main/webapp/build
+
+# Desktop
+/src/main/desktop/renderer/.next
+/src/main/desktop/app
+/src/main/desktop/dist
+/src/main/desktop/node_modules/
+
+# Nextron
+/src/main/desktop/bin
+/src/main/desktop/workspace
+
