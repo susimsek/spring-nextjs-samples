@@ -1,20 +1,28 @@
-// components/ThemeProvider.tsx
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IRootState } from '../config/store';
+import { setTheme } from '../reducers/theme';
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const theme = useSelector((state: IRootState) => state.theme.theme);
   const [isClient, setIsClient] = useState(false);
+  const dispatch = useDispatch();
 
-  // Check if we are on the client side
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    const initializeTheme = async () => {
+      setIsClient(true);
 
-  // Render only after confirming we are on the client side
+      const storedTheme = await window.ipc.getTheme();
+      if (storedTheme) {
+        dispatch(setTheme(storedTheme));
+      }
+    };
+
+    initializeTheme();
+  }, [dispatch]);
+
   if (!isClient) {
-    return null; // Render nothing on the server side initially
+    return null;
   }
 
   return <div className={theme === 'dark' ? 'dark-theme' : 'light-theme'}>{children}</div>;

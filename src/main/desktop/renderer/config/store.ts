@@ -1,6 +1,6 @@
 // store.ts
 import { configureStore } from '@reduxjs/toolkit';
-import themeReducer, { fetchTheme } from '../reducers/theme'; // Import the theme reducer
+import themeReducer from '../reducers/theme'; // Import the theme reducer
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 const store = configureStore({
@@ -8,8 +8,6 @@ const store = configureStore({
     theme: themeReducer,
   },
 });
-
-store.dispatch(fetchTheme());
 
 export type IRootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
