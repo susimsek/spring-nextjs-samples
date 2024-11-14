@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { IRootState } from '../config/store';
-import { setTheme } from '../reducers/theme';
+import { useAppDispatch, useAppSelector } from '../config/store'; // Import new hooks
+import { fetchTheme } from '../reducers/theme';
 
 const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const theme = useSelector((state: IRootState) => state.theme.theme);
+  const theme = useAppSelector(state => state.theme.theme);
   const [isClient, setIsClient] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const initializeTheme = async () => {
       setIsClient(true);
-
-      const storedTheme = await window.ipc.getTheme();
-      if (storedTheme) {
-        dispatch(setTheme(storedTheme));
-      }
+      await dispatch(fetchTheme());
     };
 
     initializeTheme();

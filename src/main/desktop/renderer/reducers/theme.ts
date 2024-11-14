@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { isClient } from '../config/constants';
 
 interface ThemeState {
@@ -9,6 +9,15 @@ interface ThemeState {
 const initialState: ThemeState = {
   theme: 'light',
 };
+
+// Async thunk to fetch the current theme from the main process
+export const fetchTheme = createAsyncThunk('theme/fetchTheme', async () => {
+  if (isClient && window.ipc && window.ipc.getTheme) {
+    const theme = await window.ipc.getTheme();
+    return theme as 'light' | 'dark';
+  }
+  return 'light';
+});
 
 const themeSlice = createSlice({
   name: 'theme',
@@ -32,6 +41,12 @@ const themeSlice = createSlice({
         window.ipc.setTheme(state.theme);
       }
     },
+  },
+  extraReducers: builder => {
+    builder.addCase(fetchTheme.fulfilled, (state, action) => {
+      // Set the theme to the fetched value
+      state.theme = action.payload;
+    });
   },
 });
 
