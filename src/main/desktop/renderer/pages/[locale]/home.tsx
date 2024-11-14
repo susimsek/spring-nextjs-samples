@@ -5,12 +5,22 @@ import LanguageSwitcher from '../../components/LanguageSwitcher';
 import { getStaticPaths, makeStaticProps } from '../../lib/get-static';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { toggleTheme } from '../../reducers/theme';
+import { useAppDispatch, useAppSelector } from '../../config/store';
 
 export default function HomePage() {
   const {
     i18n: { language: locale },
     t,
   } = useTranslation('common');
+
+  const dispatch = useAppDispatch();
+
+  const theme = useAppSelector(state => state.theme.theme);
+  // Handle theme toggle
+  const handleThemeToggle = () => {
+    dispatch(toggleTheme()); // Dispatch theme toggle action
+  };
 
   return (
     <React.Fragment>
@@ -42,6 +52,13 @@ export default function HomePage() {
         <Row className="mt-4">
           <Col>
             <LanguageSwitcher />
+          </Col>
+        </Row>
+        <Row className="mt-4">
+          <Col>
+            <Button variant={theme === 'dark' ? 'light' : 'dark'} onClick={handleThemeToggle}>
+              {theme === 'dark' ? t('common:light_mode') : t('common:dark_mode')}
+            </Button>
           </Col>
         </Row>
       </Container>
