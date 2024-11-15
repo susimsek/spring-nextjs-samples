@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Button } from 'react-bootstrap';
-import React, { useEffect } from 'react';
+import React from 'react';
 
 interface LanguageSwitchLinkProps {
   locale: string;
@@ -11,32 +11,12 @@ interface LanguageSwitchLinkProps {
 const LanguageSwitchLink: React.FC<LanguageSwitchLinkProps> = ({ locale, href, ...rest }) => {
   const router = useRouter();
 
-  useEffect(() => {
-    window.ipc.setLocale(locale);
-  }, [locale]);
-
-  let currentHref = href || router.asPath;
-  let currentPath = router.pathname;
-
-  // Replace dynamic route segments with the correct values
-  Object.keys(router.query).forEach(key => {
-    if (key === 'locale') {
-      currentPath = currentPath.replace(`[${key}]`, locale);
-      return;
-    }
-    currentPath = currentPath.replace(`[${key}]`, String(router.query[key]));
-  });
-
-  // Ensure the locale is correctly added to the path
-  if (locale) {
-    currentHref = href ? `/${locale}${href}` : currentPath;
-  }
-  if (!currentHref.startsWith(`/${locale}`)) {
-    currentHref = `/${locale}${currentHref}`;
-  }
+  const currentPath = router.pathname;
+  const currentHref = currentPath.replace('[locale]', locale);
 
   const handleLocaleChange = () => {
     // Push the new locale to the URL and trigger navigation
+    window.ipc.setLocale(locale);
     router.push(currentHref);
   };
 
