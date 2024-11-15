@@ -5,6 +5,10 @@
   "description": "Spring Boot and Nextron full-stack application",
   "license": "UNLICENSED",
   "main": "app/background.js",
+  "author": {
+    "name": "Şuayb Şimşek",
+    "email": "suaybsimsek58@gmail.com"
+  },
   "scripts": {
     "build": "nextron build",
     "codegen": "graphql-codegen --config codegen.ts",
