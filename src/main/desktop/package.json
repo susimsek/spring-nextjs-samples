@@ -7,8 +7,14 @@
   "main": "app/background.js",
   "author": {
     "name": "Şuayb Şimşek",
-    "email": "suaybsimsek58@gmail.com"
+    "email": "suaybsimsek58@gmail.com",
+    "url": "https://github.com/susimsek"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/susimsek/spring-nextjs-samples.git"
+  },
+  "homepage": "https://github.com/susimsek/spring-nextjs-samples",
   "scripts": {
     "build": "nextron build",
     "codegen": "graphql-codegen --config codegen.ts",
