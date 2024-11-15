@@ -129,10 +129,15 @@ This project also supports desktop application development using **Nextron**, wh
 
 ### Development
 
-To start developing the desktop application:
+To install dependencies:
 
 ```sh
 npm install
+```
+
+To start developing the desktop application:
+
+```sh
 npm run dev
 ```
 
