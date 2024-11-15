@@ -21,7 +21,7 @@ if (isProd) {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      webSecurity: true,
+      nodeIntegration: false,
       contextIsolation: true,
     },
   });
