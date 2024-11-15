@@ -88,11 +88,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
 
-      # Get branch name
-      - name: Get Branch Name
-        id: get_branch
-        run: echo "BRANCH_NAME=$(echo ${GITHUB_REF} | awk -F'/' '{print $3}')" >> $GITHUB_ENV
-
       # Print Java, Maven, Node, Npm Version
       - name: Print Java, Maven, Node, Npm Version
         run: |
