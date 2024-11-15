@@ -8,5 +8,27 @@ files:
   - from: .
     filter:
       - package.json
-      - app
-publish: null
+      - app/**
+publish:
+  - provider: github
+    owner: susimsek
+    repo: spring-nextjs-samples
+    releaseType: draft
+mac:
+  target:
+    - dmg
+    - zip
+  category: public.app-category.developer-tools
+win:
+  target:
+    - nsis
+    - zip
+  artifactName: "${productName}-${version}-setup.${ext}"
+linux:
+  target:
+    - AppImage
+    - deb
+    - rpm
+    - tar.gz
+  category: Development
+  artifactName: "${productName}-${version}.${ext}"

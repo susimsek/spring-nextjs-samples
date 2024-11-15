@@ -97,6 +97,12 @@ jobs:
         working-directory: src/main/desktop
         run: npm run build
 
+      # Create GitHub Release and Publish
+      - name: Publish to GitHub
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm run publish
+
       # Download dependencies for Maven
       - name: Download Dependencies
         run: mvn -ntp dependency:go-offline
