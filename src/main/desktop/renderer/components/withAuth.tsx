@@ -17,7 +17,7 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
       if (isAuthenticated === false) {
         router.push(`/${locale}/login`);
       }
-    }, [isAuthenticated, locale]);
+    }, [router, isAuthenticated, locale]);
 
     if (isAuthenticated === null) {
       return (

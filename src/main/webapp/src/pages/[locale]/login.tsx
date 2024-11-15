@@ -10,9 +10,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppDispatch } from '@/config/store';
 import { login as loginAction } from '@/reducers/authentication';
-import { useRedirect } from '@/hooks/useRedirect';
 import { ALPHANUMERIC_PATTERN } from '@/config/constants';
 import Layout from '@/components/Layout';
+import { router } from 'next/client';
 
 interface LoginFormInputs {
   username: string;
@@ -24,8 +24,10 @@ const Login = () => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const redirect = useRedirect();
   const dispatch = useAppDispatch();
+  const {
+    i18n: { language: locale },
+  } = useTranslation();
 
   const {
     register,
@@ -46,7 +48,7 @@ const Login = () => {
       const loginData: LoginRequestDTO = { username, password };
       const tokenData = await login(loginData);
       dispatch(loginAction(tokenData.accessToken));
-      redirect('/');
+      router.push(`/${locale}`);
     } catch {
       setError(t('login:login.form.errorInvalidCredentials'));
     } finally {

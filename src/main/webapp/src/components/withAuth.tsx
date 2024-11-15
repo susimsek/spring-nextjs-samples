@@ -2,18 +2,22 @@
 import React, { useEffect } from 'react';
 import { useAppSelector } from '@/config/store'; // assuming useAppSelector is set up in your store
 import { Spinner } from 'react-bootstrap';
-import { useRedirect } from '@/hooks/useRedirect';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'next-i18next';
 
 const withAuth = (WrappedComponent: React.ComponentType) => {
   const AuthHOC: React.FC = props => {
-    const redirect = useRedirect();
+    const {
+      i18n: { language: locale },
+    } = useTranslation();
+    const router = useRouter();
     const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
 
     useEffect(() => {
       if (!isAuthenticated) {
-        redirect('/login');
+        router.push(`/${locale}/login`);
       }
-    }, [isAuthenticated, redirect]);
+    }, [router, isAuthenticated, locale]);
 
     if (!isAuthenticated) {
       return (
