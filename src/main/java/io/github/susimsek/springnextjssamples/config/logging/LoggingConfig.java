@@ -1,5 +1,6 @@
 package io.github.susimsek.springnextjssamples.config.logging;
 
+import static io.github.susimsek.springnextjssamples.constant.Constants.SPRING_PROFILE_DEVELOPMENT;
 import static org.slf4j.Logger.ROOT_LOGGER_NAME;
 
 import ch.qos.logback.classic.AsyncAppender;
@@ -36,6 +37,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
 
 @Configuration
 @EnableConfigurationProperties(LoggingProperties.class)
@@ -45,6 +47,7 @@ import org.springframework.core.env.Environment;
 public class LoggingConfig {
 
     private final LoggingProperties loggingProperties;
+    private final Environment env;
 
     private static final String LOKI_APPENDER_NAME = "LOKI";
     private static final String ASYNC_LOKI_APPENDER_NAME = "ASYNC_LOKI";
@@ -77,14 +80,19 @@ public class LoggingConfig {
                                          Obfuscator obfuscator,
                                          RequestMatcherConfig requestMatcherConfig,
                                          Tracer tracer) {
-        return HttpLoggingHandler.builder(tracer, logFormatter, obfuscator)
+        var builder = HttpLoggingHandler.builder(tracer, logFormatter, obfuscator)
             .httpLogLevel(loggingProperties.getHttp().getLogLevel())
             .methodLogLevel(loggingProperties.getAspect().getLogLevel())
             .requestMatchers(requestMatcherConfig.staticResourcePaths()).permitAll()
             .requestMatchers(requestMatcherConfig.swaggerResourcePaths()).permitAll()
             .requestMatchers(requestMatcherConfig.actuatorEndpoints()).permitAll()
-            .requestMatchers(requestMatcherConfig.graphiqlResourcePath()).permitAll()
-            .anyRequest().logged()
+            .requestMatchers(requestMatcherConfig.graphiqlResourcePath()).permitAll();
+
+        if (env.acceptsProfiles(Profiles.of(SPRING_PROFILE_DEVELOPMENT))) {
+            builder.requestMatchers("/h2-console/**").permitAll();
+        }
+        return builder.anyRequest()
+            .logged()
             .build();
     }
 

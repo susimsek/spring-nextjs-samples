@@ -7,12 +7,12 @@ import static org.springframework.security.web.util.matcher.AntPathRequestMatche
 
 import io.github.susimsek.springnextjssamples.config.RequestMatcherConfig;
 import io.github.susimsek.springnextjssamples.exception.security.SecurityProblemSupport;
-import io.github.susimsek.springnextjssamples.web.filter.SpaWebFilter;
-import io.github.susimsek.springnextjssamples.web.filter.XssFilter;
-import io.github.susimsek.springnextjssamples.service.mapper.UserMapper;
 import io.github.susimsek.springnextjssamples.repository.UserRepository;
 import io.github.susimsek.springnextjssamples.security.SecurityProperties;
 import io.github.susimsek.springnextjssamples.service.DomainUserDetailsService;
+import io.github.susimsek.springnextjssamples.service.mapper.UserMapper;
+import io.github.susimsek.springnextjssamples.web.filter.SpaWebFilter;
+import io.github.susimsek.springnextjssamples.web.filter.XssFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -62,8 +62,8 @@ public class SecurityConfig {
             .logout(AbstractHttpConfigurer::disable)
             .cors(withDefaults())
             .headers(headers -> headers
-                .contentSecurityPolicy(csp -> csp.policyDirectives(securityProperties.getContentSecurityPolicy()))
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)
+                .contentSecurityPolicy(csp -> csp.policyDirectives(securityProperties.getContentSecurityPolicy()))
                 .referrerPolicy(
                     referrer -> referrer.policy(
                         ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)

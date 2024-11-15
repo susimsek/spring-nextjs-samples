@@ -19,6 +19,11 @@ const handler = {
     await ipcRenderer.invoke('setLocale', locale);
   },
 
+  // Get the current locale from the main process
+  async getLocale(): Promise<string | null> {
+    return ipcRenderer.invoke('getLocale');
+  },
+
   // Set the theme in the main process
   async setTheme(theme: 'light' | 'dark'): Promise<void> {
     await ipcRenderer.invoke('setTheme', theme);
@@ -27,6 +32,21 @@ const handler = {
   // Get the current theme from the main process
   async getTheme(): Promise<'light' | 'dark'> {
     return ipcRenderer.invoke('getTheme');
+  },
+
+  // Set the authentication token in the main process
+  async setToken(token: string): Promise<void> {
+    await ipcRenderer.invoke('setToken', token);
+  },
+
+  // Get the current authentication token from the main process
+  async getToken(): Promise<string | null> {
+    return ipcRenderer.invoke('getToken');
+  },
+
+  // Remove the authentication token from the main process
+  async removeToken(): Promise<void> {
+    await ipcRenderer.invoke('removeToken');
   },
 };
 

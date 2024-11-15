@@ -13,8 +13,8 @@ spring:
     contexts: prod
   mvc:
     cors:
-      enabled: false
-      allowed-origins: "http://localhost:8100"
+      enabled: true
+      allowed-origins: "app://."
       allowed-methods: "GET,POST,PUT,DELETE,OPTIONS,PATCH"
       allowed-headers: "Authorization,Content-Type,Accept,Cache-Control,X-Requested-With,Origin,Referer,User-Agent,X-Request-ID,X-Correlation-ID,X-Idempotency-Key,X-JWS-Signature"
       allow-credentials: true
@@ -82,7 +82,7 @@ logging:
     enabled: true
 
 security:
-  content-security-policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; worker-src 'self' blob:; img-src 'self' data:; frame-src 'self' data:; font-src 'self' data:"
+  content-security-policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; worker-src 'self' blob:; img-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; frame-ancestors 'self' app://.;"
   token:
     jwe-enabled: true
     key-id: 3f8a8e5b-89f4-4b7d-91e1-5b5c1d4e7b9c

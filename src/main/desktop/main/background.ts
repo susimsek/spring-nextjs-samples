@@ -21,14 +21,16 @@ if (isProd) {
     height: 600,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      webSecurity: true,
+      contextIsolation: true,
     },
   });
 
   const locale = userStore.get('locale', i18next.i18n.defaultLocale);
-  console.log('Using locale:', locale);
 
   if (isProd) {
     await mainWindow.loadURL(`app://./${locale}/home`);
+    mainWindow.webContents.openDevTools();
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/${locale}/home`);

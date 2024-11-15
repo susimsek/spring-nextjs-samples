@@ -1,0 +1,7 @@
+mutation Authenticate($loginRequest: LoginRequestDTO!) {
+  authenticate(loginRequest: $loginRequest) {
+    accessToken
+    tokenType
+    accessTokenExpiresIn
+  }
+}
