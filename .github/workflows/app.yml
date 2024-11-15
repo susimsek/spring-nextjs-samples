@@ -38,7 +38,9 @@ jobs:
         with:
           node-version: 21.6.0
           cache: 'npm'
-          cache-dependency-path: src/main/webapp/package-lock.json  # Cache path updated
+          cache-dependency-path: |
+            src/main/webapp/package-lock.json
+            src/main/desktop/package-lock.json
 
       # Set up JDK 22 with GraalVM
       - name: Set up JDK 22 with GraalVM
@@ -84,6 +86,16 @@ jobs:
       - name: Install node.js packages
         working-directory: src/main/webapp
         run: npm install
+
+      # Install node packages in src/main/desktop
+      - name: Install Node.js Packages for Desktop
+        working-directory: src/main/desktop
+        run: npm install
+
+      # Build desktop application
+      - name: Build Desktop Application
+        working-directory: src/main/desktop
+        run: npm run build
 
       # Download dependencies for Maven
       - name: Download Dependencies
