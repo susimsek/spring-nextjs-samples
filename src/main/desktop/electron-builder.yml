@@ -19,16 +19,4 @@ mac:
     - dmg
     - zip
   category: public.app-category.developer-tools
-win:
-  target:
-    - nsis
-    - zip
-  artifactName: "${productName}-${version}-setup.${ext}"
-linux:
-  target:
-    - AppImage
-    - deb
-    - rpm
-    - tar.gz
-  category: Development
-  artifactName: "${productName}-${version}.${ext}"
+artifactName: "${productName}-${version}.${ext}"

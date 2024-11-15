@@ -1,4 +1,4 @@
-name: Build, Test, and Publish Spring Boot Application
+name: Build, Test, and Publish Application
 
 on:
   workflow_dispatch:
@@ -10,17 +10,55 @@ on:
       - main
 
 jobs:
-  build:
+  desktop-build:
+    name: Desktop macOS Build
+    runs-on: macos-latest
+    permissions:
+      contents: write
+      packages: write
+    env:
+      NODE_VERSION: 21.6.0
+    steps:
+      # Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 21.6.0
+          cache: 'npm'
+          cache-dependency-path: src/main/desktop/package-lock.json
+
+      # Install Node.js dependencies for the desktop application
+      - name: Install Node.js Packages
+        working-directory: src/main/desktop
+        run: npm install
+
+      # Build the desktop application
+      - name: Build Desktop Application
+        working-directory: src/main/desktop
+        run: npm run build
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Publish the desktop application to GitHub Releases
+      - name: Publish Desktop Application
+        working-directory: src/main/desktop
+        run: npm run publish
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  backend-build:
+    name: Backend Build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ github.workspace }}
+    permissions:
+      contents: write
+      packages: write
     env:
       NODE_VERSION: 21.6.0
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
-    permissions:
-      contents: read
-      packages: write
     steps:
       # Checkout the repository
       - name: Checkout Repository
@@ -38,11 +76,9 @@ jobs:
         with:
           node-version: 21.6.0
           cache: 'npm'
-          cache-dependency-path: |
-            src/main/webapp/package-lock.json
-            src/main/desktop/package-lock.json
+          cache-dependency-path: src/main/webapp/package-lock.json
 
-      # Set up JDK 22 with GraalVM
+      # Set up Java Development Kit (JDK) with GraalVM
       - name: Set up JDK 22 with GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
@@ -68,7 +104,7 @@ jobs:
           node -v
           npm --version
 
-      # Configure Maven for GitHub Packages
+      # Configure Maven settings for GitHub Packages
       - name: Configure Maven for GitHub Packages
         run: |
           mkdir -p ~/.m2
@@ -82,58 +118,30 @@ jobs:
                   </servers>
                 </settings>' > ~/.m2/settings.xml
 
-      # Install node packages in src/main/webapp
-      - name: Install node.js packages
+      # Install Node.js dependencies for the web application
+      - name: Install Node.js Packages for WebApp
         working-directory: src/main/webapp
         run: npm install
 
-      # Install node packages in src/main/desktop
-      - name: Install Node.js Packages for Desktop
-        working-directory: src/main/desktop
-        run: npm install
-
-      # Build desktop application
-      - name: Build Desktop Application
-        working-directory: src/main/desktop
-        run: npm run build
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Create GitHub Release and Publish
-      - name: Publish to GitHub
-        working-directory: src/main/desktop
-        run: npm run publish
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # Download dependencies for Maven
+      # Download all required dependencies for Maven
       - name: Download Dependencies
         run: mvn -ntp dependency:go-offline
 
-      # Run Snyk security test and monitor
-      - name: Snyk Test and Monitor
-        continue-on-error: true
-        run: |
-          snyk test --all-projects
-          snyk monitor --all-projects
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      # Run tests
+      # Run unit and integration tests for the backend
       - name: Run Tests
         run: mvn -ntp -Dskip.installnodenpm -Dskip.npm verify --batch-mode
 
-      # Run quality analysis
-      - name: Quality Analysis
+      # Perform quality analysis using SonarQube
+      - name: Run Quality Analysis
         run: mvn -ntp -Psonar initialize sonar:sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
 
-      # Deploy to GitHub Packages
+      # Deploy the backend application to GitHub Packages
       - name: Deploy to GitHub Packages
         run: mvn deploy -Pprod -Dgpg.skip -Dgithub -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and Publish Docker Image using Spring Boot Maven Plugin
+      # Build and publish Docker image for the backend
       - name: Build and Publish Docker Image
         run: |
-          mvn -ntp -Pprod jib:build -DskipTests -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ env.BRANCH_NAME }}
+          mvn -ntp -Pprod jib:build -DskipTests -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}
