@@ -120,6 +120,34 @@ To format the code using Prettier, execute:
 npm run prettier:format
 ```
 
+## Desktop Application
+
+This project also supports desktop application development using **Nextron**, which is a combination of **Electron** and
+**Next.js**, allowing seamless integration for cross-platform desktop applications.
+
+![Spring Next.js Desktop Application](https://github.com/susimsek/spring-nextjs-samples/blob/main/images/desktop-app.png)
+
+### Development
+
+To start developing the desktop application:
+
+```sh
+npm install
+npm run dev
+```
+
+The application will open as a desktop window.
+
+### Build
+
+To build the desktop application for distribution:
+
+```sh
+npm run build
+```
+
+The application packages for Windows, macOS, and Linux will be available in the `dist` folder.
+
 ## Deployment
 
 ### Docker Deployment
