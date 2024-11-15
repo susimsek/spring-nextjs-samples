@@ -1,4 +1,13 @@
-import { ApolloClient, ApolloLink, fromPromise, HttpLink, InMemoryCache, ServerError, ServerParseError, split } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloLink,
+  fromPromise,
+  HttpLink,
+  InMemoryCache,
+  ServerError,
+  ServerParseError,
+  split,
+} from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { notificationLink } from './notificationLink';
 import loggingLink from './loggingLink';

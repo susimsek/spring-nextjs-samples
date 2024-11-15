@@ -38,7 +38,9 @@ export const notificationInterceptor = (error: AxiosError): Promise<AxiosError> 
     }
 
     if (problemDetail.violations && problemDetail.violations.length > 0) {
-      errorMessage += problemDetail.violations.map(violation => `field: ${violation.field}, message: ${violation.message}`).join('\n');
+      errorMessage += problemDetail.violations
+        .map(violation => `field: ${violation.field}, message: ${violation.message}`)
+        .join('\n');
     }
   }
   store.dispatch(

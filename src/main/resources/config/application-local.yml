@@ -82,7 +82,7 @@ management:
       endpoint: http://localhost:9411
 
 security:
-  content-security-policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; worker-src 'self' blob:; img-src 'self' data:; frame-src 'self' app://. http://localhost:8080 data:; font-src 'self' data:; frame-ancestors 'self' http://localhost:8080 http://localhost:3000 http://localhost:8888;"
+  content-security-policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; worker-src 'self' blob:; img-src 'self' data:; frame-src 'self' app://. http://localhost:8080 data:; font-src 'self' data:; frame-ancestors 'self' http://localhost:8080;"
   token:
     jwe-enabled: true
     key-id: 3f8a8e5b-89f4-4b7d-91e1-5b5c1d4e7b9c

@@ -2,3 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npx lint-staged --config src/main/webapp/.lintstagedrc
+
+npx lint-staged --config src/main/desktop/.lintstagedrc

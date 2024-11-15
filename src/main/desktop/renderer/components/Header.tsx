@@ -50,7 +50,13 @@ const Header: React.FC<HeaderProps> = ({
 
       <Navbar.Brand as="span" className="d-flex align-items-center">
         <LinkComponent href="/">
-          <Image src="/logo.png" alt={t('common:common.siteTitle')} width={40} height={40} className="d-inline-block align-top me-2" />
+          <Image
+            src="/logo.png"
+            alt={t('common:common.siteTitle')}
+            width={40}
+            height={40}
+            className="d-inline-block align-top me-2"
+          />
         </LinkComponent>
         <span className="fw-bold">{t('common:common.siteTitle')}</span>
       </Navbar.Brand>

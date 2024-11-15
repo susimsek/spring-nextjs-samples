@@ -10,7 +10,13 @@ interface LinkComponentProps extends Omit<LinkProps, 'href'> {
   className?: string; // Additional custom classes
 }
 
-const LinkComponent: React.FC<LinkComponentProps> = ({ children, skipLocaleHandling = false, href, className, ...rest }) => {
+const LinkComponent: React.FC<LinkComponentProps> = ({
+  children,
+  skipLocaleHandling = false,
+  href,
+  className,
+  ...rest
+}) => {
   const {
     i18n: { language: locale },
   } = useTranslation();
