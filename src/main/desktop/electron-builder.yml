@@ -8,7 +8,7 @@ files:
   - from: .
     filter:
       - package.json
-      - app/**
+      - app
 publish:
   - provider: github
     owner: susimsek
