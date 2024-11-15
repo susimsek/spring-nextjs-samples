@@ -301,6 +301,10 @@ Below is the ER Diagram used for the project:
 - Axios
 - Apollo Client
 - GraphQL Codegen
+- GraphQL ws
 - React Hook Form
 - Bootstrap
 - Font Awesome
+- Nextron
+- Electron
+- Electron Store
