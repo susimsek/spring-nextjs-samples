@@ -18,7 +18,7 @@
   "scripts": {
     "build": "nextron build",
     "codegen": "graphql-codegen --config codegen.ts",
-    "dev": "nextron",
+    "dev": "nextron --renderer-port 8888",
     "postinstall": "electron-builder install-app-deps",
     "publish": "electron-builder --publish always",
     "lint": "next lint",
