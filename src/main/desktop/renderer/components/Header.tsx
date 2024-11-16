@@ -49,7 +49,7 @@ const Header: React.FC<HeaderProps> = ({
       )}
 
       <Navbar.Brand as="span" className="d-flex align-items-center">
-        <LinkComponent href="/">
+        <LinkComponent href="/home">
           <Image
             src="/logo.png"
             alt={t('common:common.siteTitle')}
@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({
 
       <Navbar.Collapse id="basic-navbar-nav" className="p-3">
         <Nav className="me-auto">
-          <LinkComponent href="/">
+          <LinkComponent href="/home">
             <FontAwesomeIcon icon="home" className="me-2" />
             {t('common:common.home')}
           </LinkComponent>
