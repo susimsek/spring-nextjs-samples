@@ -34,7 +34,6 @@ if (isProd) {
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/${locale}/home`);
-    mainWindow.webContents.openDevTools();
   }
 })();
 
