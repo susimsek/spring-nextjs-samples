@@ -3,11 +3,13 @@ import { isClient } from '../config/constants';
 
 interface ThemeState {
   theme: 'light' | 'dark';
+  isLoading: boolean;
 }
 
 // Initial state with default theme 'light'
 const initialState: ThemeState = {
   theme: 'light',
+  isLoading: false,
 };
 
 // Async thunk to fetch the current theme from the main process
@@ -43,10 +45,17 @@ const themeSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchTheme.fulfilled, (state, action) => {
-      // Set the theme to the fetched value
-      state.theme = action.payload;
-    });
+    builder
+      .addCase(fetchTheme.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(fetchTheme.fulfilled, (state, action) => {
+        state.theme = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchTheme.rejected, state => {
+        state.isLoading = false;
+      });
   },
 });
 

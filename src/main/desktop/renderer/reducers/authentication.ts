@@ -4,11 +4,13 @@ import { isClient } from '../config/constants';
 interface AuthenticationState {
   token: string | null;
   isAuthenticated: boolean;
+  isLoading: boolean;
 }
 
 const initialState: AuthenticationState = {
   token: null,
-  isAuthenticated: null,
+  isAuthenticated: false,
+  isLoading: false,
 };
 
 // Async thunk to fetch the current token from the main process
@@ -53,10 +55,18 @@ const authenticationSlice = createSlice({
     },
   },
   extraReducers: builder => {
-    builder.addCase(fetchToken.fulfilled, (state, action) => {
-      state.token = action.payload;
-      state.isAuthenticated = !!action.payload;
-    });
+    builder
+      .addCase(fetchToken.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(fetchToken.fulfilled, (state, action) => {
+        state.token = action.payload;
+        state.isAuthenticated = !!action.payload;
+        state.isLoading = false;
+      })
+      .addCase(fetchToken.rejected, (state, action) => {
+        state.isLoading = false;
+      });
   },
 });
 

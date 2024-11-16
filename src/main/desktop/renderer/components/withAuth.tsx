@@ -11,15 +11,16 @@ const withAuth = (WrappedComponent: React.ComponentType) => {
       i18n: { language: locale },
     } = useTranslation();
     const router = useRouter();
-    const isAuthenticated = useAppSelector(state => state.authentication.isAuthenticated);
+    const { isAuthenticated } = useAppSelector(state => state.authentication);
 
     useEffect(() => {
-      if (isAuthenticated === false) {
+      if (!isAuthenticated) {
+        console.log(isAuthenticated);
         router.push(`/${locale}/login`);
       }
-    }, [router, isAuthenticated, locale]);
+    }, [isAuthenticated, router, locale]);
 
-    if (isAuthenticated === null) {
+    if (!isAuthenticated) {
       return (
         <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
           <Spinner animation="border" role="status" />

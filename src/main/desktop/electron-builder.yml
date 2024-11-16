@@ -9,15 +9,15 @@ files:
     filter:
       - package.json
       - app
-publish:
-  - provider: github
-    owner: susimsek
-    repo: spring-nextjs-samples
-    releaseType: draft
-mac:
-  target:
-    - dmg
-    - zip
-  category: public.app-category.developer-tools
-artifactName: "${productName}-${version}.${ext}"
+publish: null
+#  - provider: github
+#    owner: susimsek
+#    repo: spring-nextjs-samples
+#    releaseType: draft
+#mac:
+#  target:
+#    - dmg
+#    - zip
+#  category: public.app-category.developer-tools
+#artifactName: "${productName}-${version}.${ext}"
 

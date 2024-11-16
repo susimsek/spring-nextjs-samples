@@ -40,8 +40,6 @@ jobs:
       - name: Build Desktop Application
         working-directory: src/main/desktop
         run: npm run build
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   #      # Publish the desktop application to GitHub Releases
   #      - name: Publish Desktop Application
