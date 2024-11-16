@@ -6,7 +6,7 @@ ipcMain.handle('setLocale', (_event, locale: string) => {
 });
 
 ipcMain.handle('getLocale', () => {
-  return userStore.get('locale') || 'en';
+  return userStore.get('locale');
 });
 
 ipcMain.handle('setTheme', (_event, theme: 'light' | 'dark') => {
@@ -14,7 +14,7 @@ ipcMain.handle('setTheme', (_event, theme: 'light' | 'dark') => {
 });
 
 ipcMain.handle('getTheme', () => {
-  return userStore.get('theme') || 'light';
+  return userStore.get('theme');
 });
 
 // Handle setting the authentication token
@@ -24,7 +24,7 @@ ipcMain.handle('setToken', (_event, token: string) => {
 
 // Handle retrieving the authentication token
 ipcMain.handle('getToken', () => {
-  return userStore.get('token') || null;
+  return userStore.get('token');
 });
 
 // Handle removing the authentication token
