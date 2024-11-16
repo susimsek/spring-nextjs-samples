@@ -30,10 +30,10 @@ if (isProd) {
 
   if (isProd) {
     await mainWindow.loadURL(`app://./${locale}/home`);
-    mainWindow.webContents.openDevTools();
   } else {
     const port = process.argv[2];
     await mainWindow.loadURL(`http://localhost:${port}/${locale}/home`);
+    mainWindow.webContents.openDevTools();
   }
 })();
 
