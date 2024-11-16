@@ -1,12 +1,13 @@
 import { ipcMain } from 'electron';
 import { userStore } from './user-store';
+import i18next from '../../next-i18next.config';
 
 ipcMain.handle('setLocale', (_event, locale: string) => {
   userStore.set('locale', locale);
 });
 
 ipcMain.handle('getLocale', () => {
-  return userStore.get('locale');
+  return userStore.get('locale', i18next.i18n.defaultLocale);
 });
 
 ipcMain.handle('setTheme', (_event, theme: 'light' | 'dark') => {
@@ -14,7 +15,7 @@ ipcMain.handle('setTheme', (_event, theme: 'light' | 'dark') => {
 });
 
 ipcMain.handle('getTheme', () => {
-  return userStore.get('theme');
+  return userStore.get('theme') || null;
 });
 
 // Handle setting the authentication token
@@ -24,7 +25,7 @@ ipcMain.handle('setToken', (_event, token: string) => {
 
 // Handle retrieving the authentication token
 ipcMain.handle('getToken', () => {
-  return userStore.get('token');
+  return userStore.get('token') || null;
 });
 
 // Handle removing the authentication token
