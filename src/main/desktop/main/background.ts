@@ -1,11 +1,12 @@
 import path from 'path';
-import { app } from 'electron';
+import { app, ipcMain } from 'electron';
 import serve from 'electron-serve';
-import i18next from '../next-i18next.config.js';
 import { createWindow } from './helpers';
 import { userStore } from './helpers/user-store';
+import i18next from '../next-i18next.config.js';
 
-const isProd = process.env.NODE_ENV === 'production';
+const isProd: boolean = process.env.NODE_ENV === 'production';
+export const protocol = 'spring-nextron';
 
 if (isProd) {
   serve({ directory: 'app' });
@@ -13,10 +14,74 @@ if (isProd) {
   app.setPath('userData', `${app.getPath('userData')} (development)`);
 }
 
+let windowIsReady = false;
+let mainWindow: Electron.BrowserWindow | null = null;
+
+const getMainWindowWhenReady = async () => {
+  if (!windowIsReady) {
+    await new Promise(resolve => ipcMain.once('window-is-ready', resolve));
+  }
+  return mainWindow;
+};
+
+function checkLauncherUrl(getMainWindow: () => Promise<Electron.BrowserWindow | null>) {
+  if (process.platform === 'darwin') {
+    app.on('open-url', async (_event, url) => {
+      const mainWindow = await getMainWindow();
+      if (mainWindow) {
+        mainWindow.webContents.send('launcher-url', url);
+        if (mainWindow.isMinimized()) {
+          mainWindow.restore();
+        }
+      }
+    });
+  }
+
+  if (process.platform === 'win32') {
+    const gotTheLock = app.requestSingleInstanceLock();
+    if (!gotTheLock) {
+      app.quit();
+      return false;
+    }
+
+    app.setAsDefaultProtocolClient(protocol);
+
+    app.on('second-instance', async (_event, args) => {
+      const mainWindow = await getMainWindow();
+      const url = args.find(arg => arg.startsWith(`${protocol}://`));
+      if (url && mainWindow) {
+        mainWindow.webContents.send('launcher-url', url);
+        if (mainWindow.isMinimized()) {
+          mainWindow.restore();
+        }
+        mainWindow.focus();
+      }
+    });
+
+    const url = process.argv.find(arg => arg.startsWith(`${protocol}://`));
+    if (url) {
+      getMainWindow().then(mainWindow => {
+        if (mainWindow) {
+          mainWindow.webContents.send('launcher-url', url);
+        }
+      });
+    }
+  }
+
+  return true;
+}
+
 (async () => {
+  const shouldContinue = checkLauncherUrl(getMainWindowWhenReady);
+  if (!shouldContinue) return;
+
   await app.whenReady();
 
-  const mainWindow = createWindow('main', {
+  ipcMain.once('window-is-ready', () => {
+    windowIsReady = true;
+  });
+
+  mainWindow = createWindow('main', {
     width: 1000,
     height: 600,
     webPreferences: {

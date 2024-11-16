@@ -9,6 +9,9 @@ files:
     filter:
       - package.json
       - app
+protocols:
+  - name: Spring Nextron App
+    schemes: [ spring-nextron ]
 publish: null
 #  - provider: github
 #    owner: susimsek
