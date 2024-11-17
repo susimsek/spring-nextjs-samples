@@ -85,7 +85,6 @@ function checkForUpdates() {
     if (mainWindow) {
       mainWindow.webContents.send('update_downloaded');
     }
-    autoUpdater.quitAndInstall();
   });
 
   autoUpdater.on('error', error => {

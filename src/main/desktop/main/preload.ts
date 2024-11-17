@@ -27,6 +27,13 @@ const handler = {
     };
   },
 
+  /**
+   * Restart the app after an update.
+   */
+  restartApp() {
+    ipcRenderer.send('restart_app');
+  },
+
   // Listen for update downloaded event
   onUpdateDownloaded(callback: () => void) {
     const subscription = (_event: IpcRendererEvent) => {

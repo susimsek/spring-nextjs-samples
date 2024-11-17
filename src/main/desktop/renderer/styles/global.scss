@@ -39,6 +39,10 @@
   --dropdown-hover-bg-color: #f0f8ff; /* Light theme hover background */
   --dropdown-hover-text-color: #007acc; /* Light theme hover text color */
 
+  --modal-bg-color: #ffffff; /* Slightly off-white for modal background */
+  --modal-backdrop-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark backdrop */
+  --modal-shadow-color: rgba(0, 0, 0, 0.2); /* Soft shadow for light theme modal */
+
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -76,10 +80,14 @@
   --sidebar-active-bg-color: #66b3ff; /* Sidebar active background color for dark theme */
   --sidebar-active-text-color: #ffffff; /* Sidebar active text color for dark theme */
 
-  --dropdown-bg-color: #2b2d2f; /* Dark theme background color for dropdown */
+  --dropdown-bg-color: #2c2c2e; /* Dark theme background color for dropdown */
   --dropdown-text-color: #e0e0e0; /* Dark theme text color */
   --dropdown-hover-bg-color: #1e2f3a; /* Dark theme hover background */
   --dropdown-hover-text-color: #66b3ff; /* Dark theme hover text color */
+
+  --modal-bg-color: #1e1e1e; /* Darker gray for modal background */
+  --modal-backdrop-color: rgba(0, 0, 0, 0.7); /* More opaque dark backdrop */
+  --modal-shadow-color: rgba(0, 0, 0, 0.5); /* Stronger shadow for dark theme modal */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -398,5 +406,69 @@ h6 {
       background-color: var(--dropdown-hover-bg-color) !important; /* Theme-based active background */
       color: var(--dropdown-hover-text-color) !important; /* Theme-based active text color */
     }
+  }
+}
+
+// Modal Styling for Light and Dark Theme
+.modal {
+  &-content {
+    background-color: var(--modal-bg-color); // Use card background color for modal background
+    color: var(--text-color); // Use theme text color
+    border: 1px solid var(--border-color); // Add border for better visibility
+    box-shadow: 0 4px 15px var(--modal-shadow-color, rgba(0, 0, 0, 0.2)); // Shadow for depth
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      border-color 0.3s;
+  }
+
+  &-header {
+    background-color: var(--navbar-bg-color); // Match navbar background color
+    color: var(--navbar-text-color); // Match navbar text color
+    border-bottom: 1px solid var(--border-color); // Add a border
+  }
+
+  &-footer {
+    background-color: var(--footer-bg-color); // Match footer background color
+    color: var(--footer-text-color); // Match footer text color
+    border-top: 1px solid var(--border-color); // Add a border
+  }
+
+  // Footer buttons
+  &-footer .btn {
+    background-color: var(--button-bg-color); // Match button background color
+    border: 1px solid var(--button-border-color); // Match button border color
+    color: var(--button-text-color); // Match button text color
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      border-color 0.3s;
+
+    &:hover {
+      background-color: var(--button-bg-color-hover); // Darker color on hover
+      border-color: var(--button-border-color-hover, var(--button-bg-color-hover)); // Match hover border color
+      color: var(--button-text-color); // Keep text color consistent
+    }
+
+    &.btn-secondary {
+      background-color: var(--input-bg-color); // Use input background color for secondary buttons
+      border-color: var(--input-border-color); // Use input border color
+      color: var(--text-color); // Match general text color
+
+      &:hover {
+        background-color: var(--sidebar-hover-bg-color); // Hover effect for secondary buttons
+        border-color: var(--sidebar-hover-bg-color); // Match hover border color
+        color: var(--highlight-text-color); // Highlight text color for hover
+      }
+    }
+  }
+
+  &-backdrop {
+    background-color: var(--modal-backdrop-color, rgba(0, 0, 0, 0.5)); // Backdrop color
+  }
+
+  &-body {
+    background-color: var(--modal-bg-color); // Match card background
+    color: var(--text-color); // Match text color
   }
 }

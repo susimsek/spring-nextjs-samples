@@ -12,6 +12,7 @@ declare global {
       removeToken?: () => Promise<void>;
       onUpdateAvailable?: (callback: () => void) => void;
       onUpdateDownloaded?: (callback: () => void) => void;
+      restartApp: () => void;
     };
   }
 }

@@ -77,8 +77,10 @@
       "gqlApi": "GraphQL API"
     },
     "update": {
+      "title": "Update Ready",
       "available": "A new update is available!",
-      "downloaded": "The update has been downloaded. The application will restart."
+      "downloaded": "The update has been downloaded. Would you like to install it now?",
+      "confirm": "Install Now"
     }
   }
 }

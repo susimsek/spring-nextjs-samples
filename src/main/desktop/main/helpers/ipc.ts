@@ -1,6 +1,7 @@
 import { ipcMain } from 'electron';
 import { userStore } from './user-store';
 import i18next from '../../next-i18next.config';
+import { autoUpdater } from 'electron-updater';
 
 ipcMain.handle('setLocale', (_event, locale: string) => {
   userStore.set('locale', locale);
@@ -31,4 +32,9 @@ ipcMain.handle('getToken', () => {
 // Handle removing the authentication token
 ipcMain.handle('removeToken', () => {
   userStore.delete('token');
+});
+
+// Handle restarting the app for updates
+ipcMain.on('restart_app', () => {
+  autoUpdater.quitAndInstall();
 });
