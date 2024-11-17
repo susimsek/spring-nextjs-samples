@@ -13,6 +13,7 @@ protocols:
   - name: Spring Nextron App
     schemes: [ spring-nextron ]
 publish: null
+artifactName: "${productName}-${version}.${ext}"
 #  - provider: github
 #    owner: susimsek
 #    repo: spring-nextjs-samples

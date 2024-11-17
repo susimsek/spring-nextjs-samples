@@ -82,6 +82,9 @@ function checkForUpdates() {
   });
 
   autoUpdater.on('update-downloaded', () => {
+    if (mainWindow) {
+      mainWindow.webContents.send('update_downloaded');
+    }
     autoUpdater.quitAndInstall();
   });
 
@@ -110,6 +113,10 @@ function checkForUpdates() {
     },
   });
 
+  mainWindow.once('ready-to-show', () => {
+    checkForUpdates();
+  });
+
   const locale = userStore.get('locale', i18next.i18n.defaultLocale);
 
   if (isProd) {
@@ -119,8 +126,6 @@ function checkForUpdates() {
     await mainWindow.loadURL(`http://localhost:${port}/${locale}/home`);
     mainWindow.webContents.openDevTools();
   }
-
-  checkForUpdates();
 })();
 
 app.on('window-all-closed', () => {
