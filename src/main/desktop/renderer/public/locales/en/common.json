@@ -79,8 +79,9 @@
     "update": {
       "title": "Update Ready",
       "available": "A new update is available!",
-      "downloaded": "The update has been downloaded. Would you like to install it now?",
-      "confirm": "Install Now"
+      "downloaded": "The update has been successfully downloaded. Would you like to restart now to install it?",
+      "confirm": "Restart and Install",
+      "remindLater": "Remind Me Later"
     }
   }
 }

@@ -78,8 +78,9 @@
     "update": {
       "title": "Güncelleme Hazır",
       "available": "Yeni bir güncelleme mevcut!",
-      "downloaded": "Güncelleme indirildi. Şimdi yüklemek ister misiniz?",
-      "confirm": "Şimdi Yükle"
+      "downloaded": "Güncelleme başarıyla indirildi. Şimdi yüklemek için yeniden başlatmak ister misiniz?",
+      "confirm": "Yeniden Başlat ve Yükle",
+      "remindLater": "Bana Daha Sonra Hatırlat"
     }
   }
 }
