@@ -74,6 +74,10 @@
       "api": "API",
       "database": "Veritabanı",
       "gqlApi": "GraphQL API"
+    },
+    "update": {
+      "available": "Yeni bir güncelleme mevcut!",
+      "downloaded": "Güncelleme indirildi. Uygulama yeniden başlatılacak."
     }
   }
 }

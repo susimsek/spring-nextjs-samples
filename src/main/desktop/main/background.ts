@@ -3,6 +3,7 @@ import { app, ipcMain } from 'electron';
 import serve from 'electron-serve';
 import { createWindow } from './helpers';
 import { userStore } from './helpers/user-store';
+import { autoUpdater } from 'electron-updater'; // Electron-Updater'ı ekliyoruz
 import i18next from '../next-i18next.config.js';
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
@@ -71,6 +72,24 @@ function checkLauncherUrl(getMainWindow: () => Promise<Electron.BrowserWindow | 
   return true;
 }
 
+function checkForUpdates() {
+  autoUpdater.checkForUpdatesAndNotify();
+
+  autoUpdater.on('update-available', () => {
+    if (mainWindow) {
+      mainWindow.webContents.send('update_available');
+    }
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    autoUpdater.quitAndInstall();
+  });
+
+  autoUpdater.on('error', error => {
+    console.error('Error during update:', error);
+  });
+}
+
 (async () => {
   const shouldContinue = checkLauncherUrl(getMainWindowWhenReady);
   if (!shouldContinue) return;
@@ -100,6 +119,8 @@ function checkLauncherUrl(getMainWindow: () => Promise<Electron.BrowserWindow | 
     await mainWindow.loadURL(`http://localhost:${port}/${locale}/home`);
     mainWindow.webContents.openDevTools();
   }
+
+  checkForUpdates();
 })();
 
 app.on('window-all-closed', () => {

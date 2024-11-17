@@ -10,6 +10,8 @@ declare global {
       setToken?: (token: string) => Promise<void>;
       getToken?: () => Promise<string | null>;
       removeToken?: () => Promise<void>;
+      onUpdateAvailable?: (callback: () => void) => void;
+      onUpdateDownloaded?: (callback: () => void) => void;
     };
   }
 }

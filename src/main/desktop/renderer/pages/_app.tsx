@@ -10,6 +10,7 @@ import AuthProvider from '../components/AuthProvider';
 import client from '../config/apolloClient';
 import ToastContainer from '../components/ToastContainer';
 import { ApolloProvider } from '@apollo/client';
+import UpdateNotifier from '../components/UpdateNotifier';
 
 loadIcons();
 
@@ -19,6 +20,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => (
       <ApolloProvider client={client}>
         <ThemeProvider>
           <ToastContainer />
+          <UpdateNotifier />
           <Component {...pageProps} />
         </ThemeProvider>
       </ApolloProvider>
