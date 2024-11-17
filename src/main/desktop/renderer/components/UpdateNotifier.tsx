@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 
 const UpdateNotifier = () => {
   const { t } = useTranslation('common'); // Use the 'common' namespace for translations
-  const [showUpdateModal, setShowUpdateModal] = useState(true);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   useEffect(() => {
     window.ipc?.onUpdateDownloaded?.(() => {
