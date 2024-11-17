@@ -33,14 +33,54 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
   const toastMessage = messageKey ? String(t(messageKey, data)) : message;
 
   const variantStyles = {
-    danger: { bg: '#fdecea', color: '#a71d2a', border: '#f5c2c7', icon: 'exclamation-triangle' },
-    info: { bg: '#e7f5ff', color: '#1c7ed6', border: '#b6d4fe', icon: 'info-circle' },
-    success: { bg: '#d3f9d8', color: '#2f9e44', border: '#b2f2bb', icon: 'check-circle' },
-    warning: { bg: '#fff3cd', color: '#856404', border: '#ffeeba', icon: 'exclamation-circle' },
-    primary: { bg: '#cfe2ff', color: '#084298', border: '#b6d4fe', icon: 'info-circle' },
-    secondary: { bg: '#e2e3e5', color: '#41464b', border: '#d3d6d8', icon: 'info-circle' },
-    dark: { bg: '#d3d3d4', color: '#3a3b3c', border: '#bcbebf', icon: 'info-circle' },
-    light: { bg: '#fefefe', color: '#636464', border: '#fdfdfe', icon: 'info-circle' },
+    danger: {
+      bg: 'var(--danger-bg-color)',
+      color: 'var(--danger-text-color)',
+      border: 'var(--danger-border-color)',
+      icon: 'exclamation-triangle',
+    },
+    info: {
+      bg: 'var(--info-bg-color)',
+      color: 'var(--info-text-color)',
+      border: 'var(--info-border-color)',
+      icon: 'info-circle',
+    },
+    success: {
+      bg: 'var(--success-bg-color)',
+      color: 'var(--success-text-color)',
+      border: 'var(--success-border-color)',
+      icon: 'check-circle',
+    },
+    warning: {
+      bg: 'var(--warning-bg-color)',
+      color: 'var(--warning-text-color)',
+      border: 'var(--warning-border-color)',
+      icon: 'exclamation-circle',
+    },
+    primary: {
+      bg: 'var(--primary-bg-color)',
+      color: 'var(--primary-text-color)',
+      border: 'var(--primary-border-color)',
+      icon: 'info-circle',
+    },
+    secondary: {
+      bg: 'var(--secondary-bg-color)',
+      color: 'var(--secondary-text-color)',
+      border: 'var(--secondary-border-color)',
+      icon: 'info-circle',
+    },
+    dark: {
+      bg: 'var(--dark-bg-color)',
+      color: 'var(--dark-text-color)',
+      border: 'var(--dark-border-color)',
+      icon: 'info-circle',
+    },
+    light: {
+      bg: 'var(--light-bg-color)',
+      color: 'var(--light-text-color)',
+      border: 'var(--light-border-color)',
+      icon: 'info-circle',
+    },
   };
 
   const { bg, color, border, icon } = variantStyles[variant] || variantStyles.info;

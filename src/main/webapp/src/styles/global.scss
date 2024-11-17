@@ -22,12 +22,8 @@
   --button-text-color: #ffffff; /* White text on buttons */
   --button-bg-color-hover: #005c99; /* Darker blue for hover effect */
   --placeholder-color: #a1aab3;
-  --primary-text-color: #007acc; /* Primary blue color */
   --error-text-color: #d9534f; /* Light theme error color */
   --border-color: #ced4da; /* Standardized light theme border */
-  --alert-danger-bg: #f8d7da; /* Alert background for light theme */
-  --alert-danger-border: #f5c6cb; /* Alert border for light theme */
-  --alert-danger-text: #721c24; /* Alert text color for light theme */
   --sidebar-bg-color: #f1f3f5; /* Sidebar background color for light theme */
   --sidebar-text-color: #2c3e50; /* Sidebar text color for light theme */
   --sidebar-hover-bg-color: #e9ecef; /* Sidebar hover background color for light theme */
@@ -38,6 +34,50 @@
   --dropdown-text-color: #2c3e50; /* Light theme text color */
   --dropdown-hover-bg-color: #f0f8ff; /* Light theme hover background */
   --dropdown-hover-text-color: #007acc; /* Light theme hover text color */
+
+  --modal-bg-color: #ffffff; /* Slightly off-white for modal background */
+  --modal-backdrop-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark backdrop */
+  --modal-shadow-color: rgba(0, 0, 0, 0.2); /* Soft shadow for light theme modal */
+
+  --primary-bg-color: #007acc;
+  --primary-border-color: #007acc;
+  --primary-text-color: #ffffff;
+  --primary-bg-hover: #005c99;
+
+  --secondary-bg-color: #f8f9fa;
+  --secondary-border-color: #d1dce5;
+  --secondary-text-color: #2c3e50;
+  --secondary-bg-hover: #e9ecef;
+
+  --danger-bg-color: #f8d7da;
+  --danger-border-color: #f5c6cb;
+  --danger-text-color: #721c24;
+  --danger-bg-hover: #f5b7b1;
+
+  --success-bg-color: #28a745;
+  --success-border-color: #218838;
+  --success-text-color: #ffffff;
+  --success-bg-hover: #218838;
+
+  --warning-bg-color: #ffc107;
+  --warning-border-color: #e0a800;
+  --warning-text-color: #212529;
+  --warning-bg-hover: #d39e00;
+
+  --info-bg-color: #17a2b8;
+  --info-border-color: #138496;
+  --info-text-color: #ffffff;
+  --info-bg-hover: #117a8b;
+
+  --light-bg-color: #f8f9fa;
+  --light-border-color: #d1dce5;
+  --light-text-color: #2c3e50;
+  --light-bg-hover: #e9ecef;
+
+  --dark-bg-color: #343a40;
+  --dark-border-color: #23272b;
+  --dark-text-color: #ffffff;
+  --dark-bg-hover: #1d2124;
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -64,22 +104,62 @@
   --button-text-color: #ffffff; /* White text on buttons */
   --button-bg-color-hover: #357abd; /* Darker blue for hover effect */
   --placeholder-color: #b0b0b0;
-  --primary-text-color: #66b3ff; /* Softer blue primary color */
   --error-text-color: #ff6b6b; /* Dark theme error color */
   --border-color: #444444; /* Standardized dark theme border */
-  --alert-danger-bg: #45171d; /* Alert background for dark theme */
-  --alert-danger-border: #5e252a; /* Alert border for dark theme */
-  --alert-danger-text: #ff6b6b; /* Alert text color for dark theme */
   --sidebar-bg-color: #2b2d2f; /* Sidebar background color for dark theme */
   --sidebar-text-color: #e0e0e0; /* Sidebar text color for dark theme */
   --sidebar-hover-bg-color: #3a3a3c; /* Sidebar hover background color for dark theme */
   --sidebar-active-bg-color: #66b3ff; /* Sidebar active background color for dark theme */
   --sidebar-active-text-color: #ffffff; /* Sidebar active text color for dark theme */
 
-  --dropdown-bg-color: #2b2d2f; /* Dark theme background color for dropdown */
+  --dropdown-bg-color: #2c2c2e; /* Dark theme background color for dropdown */
   --dropdown-text-color: #e0e0e0; /* Dark theme text color */
   --dropdown-hover-bg-color: #1e2f3a; /* Dark theme hover background */
   --dropdown-hover-text-color: #66b3ff; /* Dark theme hover text color */
+
+  --modal-bg-color: #1e1e1e; /* Darker gray for modal background */
+  --modal-backdrop-color: rgba(0, 0, 0, 0.7); /* More opaque dark backdrop */
+  --modal-shadow-color: rgba(0, 0, 0, 0.5); /* Stronger shadow for dark theme modal */
+
+  --primary-bg-color: #4a90e2;
+  --primary-border-color: #357abd;
+  --primary-text-color: #ffffff;
+  --primary-bg-hover: #2a6fa6;
+
+  --secondary-bg-color: #3a3a3c;
+  --secondary-border-color: #4a4a4c;
+  --secondary-text-color: #e0e0e0;
+  --secondary-bg-hover: #525254;
+
+  --danger-bg-color: #45171d;
+  --danger-border-color: #5e252a;
+  --danger-text-color: #ff6b6b;
+  --danger-bg-hover: #732c36;
+
+  --success-bg-color: #218838;
+  --success-border-color: #1e7e34;
+  --success-text-color: #ffffff;
+  --success-bg-hover: #19692c;
+
+  --warning-bg-color: #e0a800;
+  --warning-border-color: #d39e00;
+  --warning-text-color: #212529;
+  --warning-bg-hover: #c69500;
+
+  --info-bg-color: #138496;
+  --info-border-color: #117a8b;
+  --info-text-color: #ffffff;
+  --info-bg-hover: #0e6673;
+
+  --light-bg-color: #2c2c2e;
+  --light-border-color: #3a3a3c;
+  --light-text-color: #e0e0e0;
+  --light-bg-hover: #444446;
+
+  --dark-bg-color: #1c1c1e;
+  --dark-border-color: #2c2c2e;
+  --dark-text-color: #e0e0e0;
+  --dark-bg-hover: #292a2d;
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -177,29 +257,11 @@ body {
   }
 }
 
-// Button styling
-button,
-.btn-primary {
-  background-color: var(--button-bg-color);
-  border-color: var(--button-border-color);
-  color: var(--button-text-color);
-
-  &:hover {
-    background-color: var(--button-bg-color-hover);
-    border-color: var(--button-border-color-hover);
-  }
-}
-
 // Form input styling
 .form-control {
   background-color: var(--input-bg-color) !important;
   border-color: var(--input-border-color) !important;
   color: var(--text-color) !important;
-}
-
-// Apply primary color to .text-primary class based on theme
-.text-primary {
-  color: var(--primary-text-color) !important;
 }
 
 // Form control error message styling
@@ -241,18 +303,6 @@ footer {
   color: var(--text-color);
 }
 
-// Alert styling
-.alert-info {
-  background-color: var(--highlight-text-color);
-  color: #ffffff;
-}
-
-.alert-danger {
-  background-color: var(--alert-danger-bg) !important;
-  color: var(--alert-danger-text) !important;
-  border-color: var(--alert-danger-border) !important;
-}
-
 // Apply text color to general elements
 p,
 h1,
@@ -272,7 +322,7 @@ h6 {
 .theme-toggle {
   border: none !important; /* Removes the button border */
   background-color: transparent !important; /* Transparent background initially */
-  color: inherit; /* Matches text color to surrounding text */
+  color: var(--navbar-text-color) !important;
   box-shadow: none !important; /* Ensures no shadow appears */
   transition: color 0.2s ease-in-out; /* Smooth transition for color changes */
 
@@ -398,5 +448,244 @@ h6 {
       background-color: var(--dropdown-hover-bg-color) !important; /* Theme-based active background */
       color: var(--dropdown-hover-text-color) !important; /* Theme-based active text color */
     }
+  }
+}
+
+// Modal Styling for Light and Dark Theme
+.modal {
+  &-content {
+    background-color: var(--modal-bg-color); // Use card background color for modal background
+    color: var(--text-color); // Use theme text color
+    border: 1px solid var(--border-color); // Add border for better visibility
+    box-shadow: 0 4px 15px var(--modal-shadow-color, rgba(0, 0, 0, 0.2)); // Shadow for depth
+    transition:
+      background-color 0.3s,
+      color 0.3s,
+      border-color 0.3s;
+  }
+
+  &-header {
+    background-color: var(--navbar-bg-color); // Match navbar background color
+    color: var(--navbar-text-color); // Match navbar text color
+    border-bottom: 1px solid var(--border-color); // Add a border
+  }
+
+  &-footer {
+    background-color: var(--footer-bg-color); // Match footer background color
+    color: var(--footer-text-color); // Match footer text color
+    border-top: 1px solid var(--border-color); // Add a border
+  }
+
+  &-backdrop {
+    background-color: var(--modal-backdrop-color, rgba(0, 0, 0, 0.5)); // Backdrop color
+  }
+
+  &-body {
+    background-color: var(--modal-bg-color); // Match card background
+    color: var(--text-color); // Match text color
+  }
+}
+
+.btn {
+  &.btn-primary {
+    background-color: var(--primary-bg-color);
+    border-color: var(--primary-border-color);
+    color: var(--primary-text-color);
+
+    &:hover {
+      background-color: var(--primary-bg-hover);
+      border-color: var(--primary-border-color);
+    }
+  }
+
+  &.btn-secondary {
+    background-color: var(--secondary-bg-color);
+    border-color: var(--secondary-border-color);
+    color: var(--secondary-text-color);
+
+    &:hover {
+      background-color: var(--secondary-bg-hover);
+      border-color: var(--secondary-border-color);
+    }
+  }
+
+  &.btn-danger {
+    background-color: var(--danger-bg-color);
+    border-color: var(--danger-border-color);
+    color: var(--danger-text-color);
+
+    &:hover {
+      background-color: var(--danger-bg-hover);
+      border-color: var(--danger-border-color);
+    }
+  }
+
+  &.btn-success {
+    background-color: var(--success-bg-color);
+    border-color: var(--success-border-color);
+    color: var(--success-text-color);
+
+    &:hover {
+      background-color: var(--success-bg-hover);
+      border-color: var(--success-border-color);
+    }
+  }
+
+  &.btn-warning {
+    background-color: var(--warning-bg-color);
+    border-color: var(--warning-border-color);
+    color: var(--warning-text-color);
+
+    &:hover {
+      background-color: var(--warning-bg-hover);
+      border-color: var(--warning-border-color);
+    }
+  }
+
+  &.btn-info {
+    background-color: var(--info-bg-color);
+    border-color: var(--info-border-color);
+    color: var(--info-text-color);
+
+    &:hover {
+      background-color: var(--info-bg-hover);
+      border-color: var(--info-border-color);
+    }
+  }
+
+  &.btn-light {
+    background-color: var(--light-bg-color);
+    border-color: var(--light-border-color);
+    color: var(--light-text-color);
+
+    &:hover {
+      background-color: var(--light-bg-hover);
+      border-color: var(--light-border-color);
+    }
+  }
+
+  &.btn-dark {
+    background-color: var(--dark-bg-color);
+    border-color: var(--dark-border-color);
+    color: var(--dark-text-color);
+
+    &:hover {
+      background-color: var(--dark-bg-hover);
+      border-color: var(--dark-border-color);
+    }
+  }
+}
+
+.alert {
+  &.alert-primary {
+    background-color: var(--primary-bg-color);
+    border-color: var(--primary-border-color);
+    color: var(--primary-text-color);
+  }
+
+  &.alert-secondary {
+    background-color: var(--secondary-bg-color);
+    border-color: var(--secondary-border-color);
+    color: var(--secondary-text-color);
+  }
+
+  &.alert-danger {
+    background-color: var(--danger-bg-color);
+    border-color: var(--danger-border-color);
+    color: var(--danger-text-color);
+  }
+
+  &.alert-success {
+    background-color: var(--success-bg-color);
+    border-color: var(--success-border-color);
+    color: var(--success-text-color);
+  }
+
+  &.alert-warning {
+    background-color: var(--warning-bg-color);
+    border-color: var(--warning-border-color);
+    color: var(--warning-text-color);
+  }
+
+  &.alert-info {
+    background-color: var(--info-bg-color);
+    border-color: var(--info-border-color);
+    color: var(--info-text-color);
+  }
+
+  &.alert-light {
+    background-color: var(--light-bg-color);
+    border-color: var(--light-border-color);
+    color: var(--light-text-color);
+  }
+
+  &.alert-dark {
+    background-color: var(--dark-bg-color);
+    border-color: var(--dark-border-color);
+    color: var(--dark-text-color);
+  }
+}
+
+.text-primary {
+  color: var(--primary-bg-color) !important;
+
+  &:hover {
+    color: var(--primary-bg-hover) !important;
+  }
+}
+
+.text-secondary {
+  color: var(--secondary-bg-color) !important;
+
+  &:hover {
+    color: var(--secondary-bg-hover) !important;
+  }
+}
+
+.text-danger {
+  color: var(--danger-bg-color) !important;
+
+  &:hover {
+    color: var(--danger-bg-hover) !important;
+  }
+}
+
+.text-success {
+  color: var(--success-bg-color) !important;
+
+  &:hover {
+    color: var(--success-bg-hover) !important;
+  }
+}
+
+.text-warning {
+  color: var(--warning-bg-color) !important;
+
+  &:hover {
+    color: var(--warning-bg-hover) !important;
+  }
+}
+
+.text-info {
+  color: var(--info-bg-color) !important;
+
+  &:hover {
+    color: var(--info-bg-hover) !important;
+  }
+}
+
+.text-light {
+  color: var(--light-bg-color) !important;
+
+  &:hover {
+    color: var(--light-bg-hover) !important;
+  }
+}
+
+.text-dark {
+  color: var(--dark-bg-color) !important;
+
+  &:hover {
+    color: var(--dark-bg-hover) !important;
   }
 }

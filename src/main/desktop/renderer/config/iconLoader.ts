@@ -40,5 +40,9 @@ export const loadIcons = () => {
     faCode,
     faEye,
     faEyeSlash,
+    faCheckCircle,
+    faExclamationCircle,
+    faExclamationTriangle,
+    faInfoCircle,
   );
 };
