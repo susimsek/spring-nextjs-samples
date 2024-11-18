@@ -106,10 +106,10 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
       }}
     >
       <Toast
+        autohide
         show={show}
         onClose={onClose}
         delay={5000}
-        autohide
         style={{
           width,
           minHeight,
@@ -123,7 +123,7 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
         }}
       >
         <Toast.Header
-          closeButton={dismissible}
+          closeButton={false}
           style={{
             backgroundColor: bg,
             color,
@@ -134,6 +134,16 @@ const NotificationToast: React.FC<NotificationToastProps> = ({
           <strong className="me-auto" style={{ fontSize: '18px' }}>
             {title}
           </strong>
+          {dismissible && (
+            <button type="button" className="close-icon" aria-label="Close" onClick={onClose}>
+              <FontAwesomeIcon
+                icon="times"
+                style={{
+                  fontSize: '16px',
+                }}
+              />
+            </button>
+          )}
         </Toast.Header>
         <Toast.Body style={{ fontSize: '16px' }}>{toastMessage ?? t('common:common.error.http.default')}</Toast.Body>
       </Toast>
