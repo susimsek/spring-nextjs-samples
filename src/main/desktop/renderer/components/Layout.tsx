@@ -19,6 +19,8 @@ export default function Layout({
 
   const toggleSidebar = () => setIsSidebarOpen(prev => !prev);
 
+  const closeSidebar = () => setIsSidebarOpen(false);
+
   return (
     <>
       <Header onToggleSidebar={toggleSidebar} showSidebarToggle={showSidebar} />
@@ -27,7 +29,7 @@ export default function Layout({
         <Row className="flex-grow-1 g-0">
           {showSidebar && isSidebarOpen && (
             <Col xs={12} md={3} lg={2} className="p-0 d-flex flex-column">
-              <Sidebar onNavigate={onNavigate} />
+              <Sidebar onNavigate={onNavigate} onClose={closeSidebar} />
             </Col>
           )}
           <Col xs={12} md={showSidebar && isSidebarOpen ? 9 : 12} lg={showSidebar && isSidebarOpen ? 10 : 12}>

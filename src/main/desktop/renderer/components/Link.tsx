@@ -8,13 +8,15 @@ interface LinkComponentProps extends Omit<LinkProps, 'href'> {
   skipLocaleHandling?: boolean;
   href?: string;
   className?: string; // Additional custom classes
+  onClick?: () => void; // Optional onClick handler
 }
 
 const LinkComponent: React.FC<LinkComponentProps> = ({
   children,
   skipLocaleHandling = false,
-  href,
+  href = '',
   className,
+  onClick, // Extract onClick
   ...rest
 }) => {
   const {
@@ -33,7 +35,9 @@ const LinkComponent: React.FC<LinkComponentProps> = ({
 
   return (
     <Link href={computedHref} legacyBehavior passHref {...rest}>
-      <a className={classNames('nav-link', className)}>{children}</a>
+      <a className={classNames('nav-link', className)} onClick={onClick}>
+        {children}
+      </a>
     </Link>
   );
 };
