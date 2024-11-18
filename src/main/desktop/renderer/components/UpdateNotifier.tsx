@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Modal } from 'react-bootstrap';
+import { useAppSelector } from '../config/store';
 
 const UpdateNotifier = () => {
   const { t } = useTranslation('common'); // Use the 'common' namespace for translations
