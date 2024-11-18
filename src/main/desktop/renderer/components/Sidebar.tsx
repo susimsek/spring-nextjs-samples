@@ -19,7 +19,9 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose, onNavigate }) => {
 
   const handleNavigate = (page: string) => {
     onNavigate(page);
-    onClose();
+    if (isMobile) {
+      onClose();
+    }
   };
 
   const renderNav = () => (
