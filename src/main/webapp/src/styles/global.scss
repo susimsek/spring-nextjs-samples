@@ -374,6 +374,49 @@ h6 {
   }
 }
 
+// Offcanvas Styling
+.offcanvas {
+  background-color: var(--sidebar-bg-color) !important; /* Match sidebar background */
+  color: var(--sidebar-text-color) !important; /* Match sidebar text color */
+
+  .offcanvas-header {
+    background-color: var(--sidebar-bg-color); /* Match sidebar background */
+    color: var(--sidebar-text-color); /* Match sidebar text color */
+    border-bottom: 1px solid var(--border-color); /* Optional border for separation */
+    .nav-link,
+    .brand {
+      color: var(--navbar-text-color) !important;
+      transition: color 0.2s ease-in-out; // Smooth transition for hover effect
+
+      &:hover {
+        color: var(--highlight-text-color) !important; // Adjusted hover color
+      }
+    }
+  }
+
+  .offcanvas-body {
+    background-color: var(--sidebar-bg-color); /* Same as the sidebar */
+    color: var(--sidebar-text-color); /* Sidebar text color */
+
+    .nav-link {
+      color: var(--sidebar-text-color) !important;
+      transition:
+        background-color 0.3s,
+        color 0.3s;
+
+      &:hover {
+        background-color: var(--sidebar-hover-bg-color) !important;
+        color: var(--highlight-text-color) !important;
+      }
+
+      &.active {
+        background-color: var(--sidebar-active-bg-color) !important;
+        color: var(--sidebar-active-text-color) !important;
+      }
+    }
+  }
+}
+
 .iframe-wrapper {
   position: relative;
   width: 100%;

@@ -16,6 +16,7 @@ import {
   faSignInAlt,
   faSignOutAlt,
   faSun,
+  faTimes,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -40,5 +41,10 @@ export const loadIcons = () => {
     faCode,
     faEye,
     faEyeSlash,
+    faCheckCircle,
+    faExclamationCircle,
+    faExclamationTriangle,
+    faInfoCircle,
+    faTimes,
   );
 };
