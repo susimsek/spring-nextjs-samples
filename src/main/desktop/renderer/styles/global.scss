@@ -109,7 +109,7 @@
   --button-bg-color-hover: #357abd; /* Darker blue for hover effect */
   --placeholder-color: #b0b0b0;
   --error-text-color: #ff6b6b; /* Dark theme error color */
-  --border-color: #444444; /* Standardized dark theme border */
+  --border-color: #5a5a5e; /* Standardized dark theme border */
   --sidebar-bg-color: #2b2d2f; /* Sidebar background color for dark theme */
   --sidebar-text-color: #e0e0e0; /* Sidebar text color for dark theme */
   --sidebar-hover-bg-color: #3a3a3c; /* Sidebar hover background color for dark theme */
@@ -856,6 +856,54 @@ h6 {
       background-color: var(--dark-bg-color);
       color: var(--dark-text-color);
       border-bottom: 1px solid var(--dark-border-color);
+    }
+  }
+}
+
+.pagination {
+  display: flex;
+  background-color: var(--background-color);
+  color: var(--text-color);
+
+  .page-item {
+    a {
+      background-color: var(--background-color);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      text-decoration: none;
+
+      &:hover {
+        background-color: var(--sidebar-hover-bg-color);
+        color: var(--highlight-text-color);
+        border-color: var(--sidebar-hover-bg-color);
+      }
+    }
+
+    &.active {
+      a {
+        background-color: var(--primary-bg-color);
+        border-color: var(--primary-border-color);
+        color: var(--primary-text-color) !important;
+      }
+    }
+
+    &.disabled {
+      a {
+        color: var(--placeholder-color) !important;
+        pointer-events: none;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .page-link {
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+
+    &:hover {
+      background-color: var(--sidebar-hover-bg-color);
+      color: var(--highlight-text-color);
     }
   }
 }
