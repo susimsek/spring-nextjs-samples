@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useMediaQuery from '../hooks/useMediaQuery';
 import Image from 'next/image';
 import LinkComponent from '../components/Link';
+import { useAppSelector } from '../config/store';
 
 type SidebarProps = {
   onClose: () => void;
@@ -14,6 +15,7 @@ type SidebarProps = {
 const Sidebar: React.FC<SidebarProps> = ({ onClose, onNavigate }) => {
   const { t } = useTranslation('common');
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const { theme } = useAppSelector(state => state.theme);
 
   const handleNavigate = (page: string) => {
     onNavigate(page);
@@ -55,12 +57,12 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose, onNavigate }) => {
         <Offcanvas
           show={isMobile}
           onHide={onClose}
+          className={`offcanvas ${theme === 'dark' ? 'dark-theme' : 'light-theme'}`}
           placement="start"
-          container={document.querySelector('.light-theme, .dark-theme') as HTMLElement}
         >
           <Offcanvas.Header closeButton={false}>
             <div className="d-flex align-items-center brand">
-              <LinkComponent href="/" onClick={onClose}>
+              <LinkComponent href="/home" onClick={onClose}>
                 <Image
                   src="/logo.png"
                   alt={t('common:common.siteTitle')}

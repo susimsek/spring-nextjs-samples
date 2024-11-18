@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import useMediaQuery from '../hooks/useMediaQuery';
 import Image from 'next/image';
 import LinkComponent from '../components/Link';
+import { useAppSelector } from '../config/store';
 
 type SidebarProps = {
   onClose: () => void;
@@ -13,6 +14,7 @@ type SidebarProps = {
 
 const Sidebar: React.FC<SidebarProps> = ({ onClose, onNavigate }) => {
   const { t } = useTranslation('common');
+  const { theme } = useAppSelector(state => state.theme);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   const handleNavigate = (page: string) => {
@@ -55,8 +57,8 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose, onNavigate }) => {
         <Offcanvas
           show={isMobile}
           onHide={onClose}
+          className={`offcanvas ${theme === 'dark' ? 'dark-theme' : 'light-theme'}`}
           placement="start"
-          container={document.querySelector('.light-theme, .dark-theme') as HTMLElement}
         >
           <Offcanvas.Header closeButton={false}>
             <div className="d-flex align-items-center brand">

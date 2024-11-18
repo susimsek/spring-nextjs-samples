@@ -4,6 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 
 const UpdateNotifier = () => {
   const { t } = useTranslation('common'); // Use the 'common' namespace for translations
+  const { theme } = useAppSelector(state => state.theme);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const UpdateNotifier = () => {
     <Modal
       show={showUpdateModal}
       onHide={handleClose}
-      container={document.querySelector('.light-theme, .dark-theme') as HTMLElement}
+      className={`modal ${theme === 'dark' ? 'dark-theme' : 'light-theme'}`}
       centered
     >
       <Modal.Header closeButton>
