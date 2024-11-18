@@ -907,3 +907,50 @@ h6 {
     }
   }
 }
+
+.table {
+  color: var(--text-color);
+  background-color: var(--card-bg-color);
+  border-color: var(--border-color);
+  border-collapse: separate;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.table > :not(caption) > * > * {
+  color: var(--text-color) !important;
+  background-color: var(--card-bg-color);
+  border-bottom: 1px solid var(--border-color);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+.table-hover > tbody > tr:hover > * {
+  background-color: var(--sidebar-hover-bg-color) !important;
+  color: var(--highlight-text-color) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: var(--light-bg-hover) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(even) > * {
+  background-color: var(--card-bg-color) !important;
+}
+
+.table > thead > tr > th {
+  background-color: var(--navbar-bg-color) !important;
+  color: var(--navbar-text-color) !important;
+  border-bottom: 2px solid var(--border-color) !important;
+  font-weight: bold;
+  text-align: left;
+}
+
+.table-responsive {
+  border: 1px solid var(--border-color);
+  background-color: var(--background-color);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
