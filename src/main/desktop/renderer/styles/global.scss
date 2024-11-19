@@ -38,6 +38,8 @@
   --modal-bg-color: #ffffff; /* Slightly off-white for modal background */
   --modal-backdrop-color: rgba(0, 0, 0, 0.3); /* Semi-transparent dark backdrop */
   --modal-shadow-color: rgba(0, 0, 0, 0.2); /* Soft shadow for light theme modal */
+  --modal-header-bg-color: #f8f9fa; /* Background color of the modal header */
+  --modal-footer-bg-color: #f8f9fa; /* Background color of the modal footer */
 
   --primary-bg-color: #007acc;
   --primary-border-color: #007acc;
@@ -83,6 +85,17 @@
   --btn-close-bg-hover: #e9ecef; /* Slightly darker gray for hover effect */
   --btn-close-color: #2c3e50; /* Dark gray for the close icon color */
 
+  --table-bg-color: #ffffff; /* Table background color */
+  --table-text-color: #2c3e50; /* Table text color */
+  --table-hover-bg-color: #e9ecef; /* Hover background color for rows */
+  --table-striped-odd-bg-color: #f8f9fa; /* Background color for odd rows in striped tables */
+  --table-striped-even-bg-color: #ffffff; /* Background color for even rows in striped tables */
+  --table-header-bg-color: #f8f9fa; /* Background color for table headers */
+  --table-header-text-color: #2c3e50; /* Text color for table headers */
+
+  --pagination-page-item-hover-bg-color: #e9ecef; /* Background color for pagination page items */
+  --pagination-page-item-hover-border-color: #e9ecef; /* Border color for pagination page items */
+
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -124,6 +137,8 @@
   --modal-bg-color: #1e1e1e; /* Darker gray for modal background */
   --modal-backdrop-color: rgba(0, 0, 0, 0.7); /* More opaque dark backdrop */
   --modal-shadow-color: rgba(0, 0, 0, 0.5); /* Stronger shadow for dark theme modal */
+  --modal-header-bg-color: #1c1c1e; /* Darker gray for modal header background */
+  --modal-footer-bg-color: #1c1c1e; /* Background color of the modal footer */
 
   --primary-bg-color: #4a90e2;
   --primary-border-color: #357abd;
@@ -168,6 +183,17 @@
   --btn-close-bg: #4a4a4c; /* Medium gray for a softer background */
   --btn-close-bg-hover: #5c5c5e; /* Slightly lighter gray for hover effect */
   --btn-close-color: #e0e0e0; /* Light gray for the close icon color */
+
+  --table-bg-color: #2c2c2e; /* Table background color */
+  --table-text-color: #e0e0e0; /* Table text color */
+  --table-hover-bg-color: #3a3a3c; /* Hover background color for rows */
+  --table-striped-odd-bg-color: #444446; /* Background color for odd rows in striped tables */
+  --table-striped-even-bg-color: #2c2c2e; /* Background color for even rows in striped tables */
+  --table-header-bg-color: #1c1c1e; /* Background color for table headers */
+  --table-header-text-color: #e0e0e0; /* Text color for table headers */
+
+  --pagination-page-item-hover-bg-color: #3a3a3c; /* Background color for pagination page items */
+  --pagination-page-item-hover-border-color: #3a3a3c; /* Border color for pagination page items */
 
   background-color: var(--background-color);
   color: var(--text-color);
@@ -516,14 +542,14 @@ h6 {
   }
 
   &-header {
-    background-color: var(--navbar-bg-color); // Match navbar background color
-    color: var(--navbar-text-color); // Match navbar text color
+    background-color: var(--modal-header-bg-color); // Match navbar background color
+    color: var(--text-color); // Match navbar text color
     border-bottom: 1px solid var(--border-color); // Add a border
   }
 
   &-footer {
-    background-color: var(--footer-bg-color); // Match footer background color
-    color: var(--footer-text-color); // Match footer text color
+    background-color: var(--modal-footer-bg-color); // Match footer background color
+    color: var(--text-color); // Match footer text color
     border-top: 1px solid var(--border-color); // Add a border
   }
 
@@ -873,9 +899,9 @@ h6 {
       text-decoration: none;
 
       &:hover {
-        background-color: var(--sidebar-hover-bg-color);
+        background-color: var(--pagination-page-item-hover-bg-color);
         color: var(--highlight-text-color);
-        border-color: var(--sidebar-hover-bg-color);
+        border-color: var(--pagination-page-item-hover-border-color);
       }
     }
 
@@ -909,8 +935,8 @@ h6 {
 }
 
 .table {
-  color: var(--text-color);
-  background-color: var(--card-bg-color);
+  color: var(--table-text-color);
+  background-color: var(--table-bg-color);
   border-color: var(--border-color);
   border-collapse: separate;
   transition:
@@ -919,8 +945,8 @@ h6 {
 }
 
 .table > :not(caption) > * > * {
-  color: var(--text-color) !important;
-  background-color: var(--card-bg-color);
+  color: var(--table-text-color);
+  background-color: var(--table-bg-color);
   border-bottom: 1px solid var(--border-color);
   transition:
     background-color 0.3s ease,
@@ -928,21 +954,21 @@ h6 {
 }
 
 .table-hover > tbody > tr:hover > * {
-  background-color: var(--sidebar-hover-bg-color) !important;
+  background-color: var(--table-hover-bg-color) !important;
   color: var(--highlight-text-color) !important;
 }
 
 .table-striped > tbody > tr:nth-of-type(odd) > * {
-  background-color: var(--light-bg-hover) !important;
+  background-color: var(--table-striped-odd-bg-color) !important;
 }
 
 .table-striped > tbody > tr:nth-of-type(even) > * {
-  background-color: var(--card-bg-color) !important;
+  background-color: var(--table-striped-even-bg-color) !important;
 }
 
 .table > thead > tr > th {
-  background-color: var(--navbar-bg-color) !important;
-  color: var(--navbar-text-color) !important;
+  background-color: var(--table-header-bg-color) !important;
+  color: var(--table-header-text-color) !important;
   border-bottom: 2px solid var(--border-color) !important;
   font-weight: bold;
   text-align: left;
