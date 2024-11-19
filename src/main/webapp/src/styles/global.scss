@@ -99,6 +99,8 @@
   --active-bg-color: #e0e0e0;
   --active-border-color: #b0b0b0;
 
+  --breadcrumb-bg-color: #f8f9fa;
+
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -201,6 +203,8 @@
   --active-bg-color: #3a3a3c;
   --active-border-color: #5a5a5e;
 
+  --breadcrumb-bg-color: #1c1c1e;
+
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -258,15 +262,23 @@ body {
       color: var(--text-color) !important;
     }
   }
+}
 
-  .btn-outline-secondary {
-    border-color: var(--navbar-btn-border-color);
-    color: var(--navbar-btn-text-color);
+.breadcrumb {
+  background-color: var(--breadcrumb-bg-color) !important;
+
+  .breadcrumb-item {
+    color: var(--text-color) !important;
+    text-decoration: none !important;
 
     &:hover {
-      background-color: var(--navbar-btn-border-color);
-      color: var(--navbar-bg-color);
+      color: var(--highlight-text-color);
+      text-decoration: underline;
     }
+  }
+
+  .breadcrumb-item + .breadcrumb-item::before {
+    color: var(--text-color); /* Divider color */
   }
 }
 
