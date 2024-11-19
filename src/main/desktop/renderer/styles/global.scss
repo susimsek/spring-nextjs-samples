@@ -689,6 +689,96 @@ h6 {
   }
 }
 
+.badge {
+  &.badge-primary {
+    background-color: var(--primary-bg-color);
+    border: 1px solid var(--primary-border-color);
+    color: var(--primary-text-color);
+
+    &:hover {
+      background-color: var(--primary-bg-hover);
+      border-color: var(--primary-border-color);
+    }
+  }
+
+  &.badge-secondary {
+    background-color: var(--secondary-bg-color);
+    border: 1px solid var(--secondary-border-color);
+    color: var(--secondary-text-color);
+
+    &:hover {
+      background-color: var(--secondary-bg-hover);
+      border-color: var(--secondary-border-color);
+    }
+  }
+
+  &.badge-danger {
+    background-color: var(--danger-bg-color);
+    border: 1px solid var(--danger-border-color);
+    color: var(--danger-text-color);
+
+    &:hover {
+      background-color: var(--danger-bg-hover);
+      border-color: var(--danger-border-color);
+    }
+  }
+
+  &.badge-success {
+    background-color: var(--success-bg-color);
+    border: 1px solid var(--success-border-color);
+    color: var(--success-text-color);
+
+    &:hover {
+      background-color: var(--success-bg-hover);
+      border-color: var(--success-border-color);
+    }
+  }
+
+  &.badge-warning {
+    background-color: var(--warning-bg-color);
+    border: 1px solid var(--warning-border-color);
+    color: var(--warning-text-color);
+
+    &:hover {
+      background-color: var(--warning-bg-hover);
+      border-color: var(--warning-border-color);
+    }
+  }
+
+  &.badge-info {
+    background-color: var(--info-bg-color);
+    border: 1px solid var(--info-border-color);
+    color: var(--info-text-color);
+
+    &:hover {
+      background-color: var(--info-bg-hover);
+      border-color: var(--info-border-color);
+    }
+  }
+
+  &.badge-light {
+    background-color: var(--light-bg-color);
+    border: 1px solid var(--light-border-color);
+    color: var(--light-text-color);
+
+    &:hover {
+      background-color: var(--light-bg-hover);
+      border-color: var(--light-border-color);
+    }
+  }
+
+  &.badge-dark {
+    background-color: var(--dark-bg-color);
+    border: 1px solid var(--dark-border-color);
+    color: var(--dark-text-color);
+
+    &:hover {
+      background-color: var(--dark-bg-hover);
+      border-color: var(--dark-border-color);
+    }
+  }
+}
+
 .alert {
   &.alert-primary {
     background-color: var(--primary-bg-color);
