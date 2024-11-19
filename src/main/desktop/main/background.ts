@@ -3,8 +3,9 @@ import { app, ipcMain } from 'electron';
 import serve from 'electron-serve';
 import { createWindow } from './helpers';
 import { userStore } from './helpers/user-store';
-import { autoUpdater } from 'electron-updater'; // Electron-Updater'ı ekliyoruz
+import { autoUpdater } from 'electron-updater';
 import i18next from '../next-i18next.config.js';
+import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer'; // Importing DevTools Installer
 
 const isProd: boolean = process.env.NODE_ENV === 'production';
 export const protocol = 'spring-nextron';
@@ -101,6 +102,16 @@ function checkForUpdates() {
   ipcMain.once('window-is-ready', () => {
     windowIsReady = true;
   });
+
+  // Install React and Redux DevTools only in development mode
+  if (!isProd) {
+    try {
+      await installExtension([REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS]);
+      console.log('React and Redux Developer Tools successfully installed!');
+    } catch (err) {
+      console.error('Error loading DevTools:', err);
+    }
+  }
 
   mainWindow = createWindow('main', {
     width: 1000,

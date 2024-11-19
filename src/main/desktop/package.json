@@ -54,6 +54,7 @@
     "bootstrap": "^5.3.3",
     "electron": "^31.0.1",
     "electron-builder": "^24.13.3",
+    "electron-devtools-installer": "^3.2.0",
     "eslint": "^9.14.0",
     "eslint-config-next": "^15.0.3",
     "eslint-config-prettier": "^9.1.0",
