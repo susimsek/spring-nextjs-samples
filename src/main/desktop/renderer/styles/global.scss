@@ -96,6 +96,9 @@
   --pagination-page-item-hover-bg-color: #e9ecef; /* Background color for pagination page items */
   --pagination-page-item-hover-border-color: #e9ecef; /* Border color for pagination page items */
 
+  --active-bg-color: #e0e0e0;
+  --active-border-color: #b0b0b0;
+
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -195,6 +198,9 @@
   --pagination-page-item-hover-bg-color: #3a3a3c; /* Background color for pagination page items */
   --pagination-page-item-hover-border-color: #3a3a3c; /* Border color for pagination page items */
 
+  --active-bg-color: #3a3a3c;
+  --active-border-color: #5a5a5e;
+
   background-color: var(--background-color);
   color: var(--text-color);
 }
@@ -220,6 +226,36 @@ body {
 
     &:hover {
       color: var(--highlight-text-color) !important; // Adjusted hover color
+    }
+  }
+
+  .btn-outline-secondary {
+    border-color: var(--navbar-btn-border-color);
+    color: var(--navbar-btn-text-color);
+
+    &:hover {
+      background-color: var(--navbar-btn-border-color);
+      color: var(--navbar-bg-color);
+    }
+  }
+}
+
+.nav-tabs {
+  background-color: var(--navbar-bg-color) !important;
+  color: var(--navbar-text-color);
+
+  .nav-link {
+    color: var(--navbar-text-color) !important;
+    transition: color 0.2s ease-in-out; // Smooth transition for hover effect
+
+    &:hover {
+      color: var(--highlight-text-color) !important; // Adjusted hover color
+    }
+
+    &.active {
+      background-color: var(--active-bg-color);
+      border-color: var(--active-border-color);
+      color: var(--text-color) !important;
     }
   }
 
