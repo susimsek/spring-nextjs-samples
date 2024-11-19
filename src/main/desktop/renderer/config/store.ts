@@ -4,6 +4,7 @@ import themeReducer from '../reducers/theme'; // Import the theme reducer
 import authenticationReducer from '../reducers/authentication';
 import notificationReducer from '../reducers/notification';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
+import { isDev } from './constants';
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     theme: themeReducer,
     notification: notificationReducer,
   },
+  devTools: isDev,
 });
 
 export type IRootState = ReturnType<typeof store.getState>;
