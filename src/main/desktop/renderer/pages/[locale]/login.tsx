@@ -38,8 +38,10 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async data => {
-    await dispatch(loginAction(data));
-    await router.push(`/${locale}/home`);
+    const accessToken = await dispatch(loginAction(data));
+    if (accessToken) {
+      await router.push(`/${locale}/home`);
+    }
   };
 
   const username = watch('username');

@@ -27,7 +27,7 @@ export const login = createAsyncThunk(
       const response = await loginApi(credentials);
       if (isClient && window.ipc && typeof window.ipc.setToken === 'function') {
         try {
-          window.ipc.setToken(response.accessToken);
+          await window.ipc.setToken(response.accessToken);
         } catch (error) {
           console.error('Failed to set token:', error);
         }
