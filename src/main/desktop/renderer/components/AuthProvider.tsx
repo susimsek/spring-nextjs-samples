@@ -10,7 +10,7 @@ interface AuthProviderProps {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector(state => state.authentication);
+  const { loading } = useAppSelector(state => state.authentication);
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     initializeAuth();
   }, [dispatch]);
 
-  if (!isInitialized || isLoading) {
+  if (!isInitialized || loading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
         <Spinner animation="border" role="status" />

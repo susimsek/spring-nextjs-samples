@@ -4,12 +4,10 @@ import { Alert, Button, Card, Col, Container, Form, InputGroup, Row, Spinner } f
 import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
 import { getStaticPaths, makeStaticProps } from '../../lib/get-static';
-import { login } from '../../api/authApi';
-import { LoginRequestDTO } from '../../types/loginRequestDTO';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useAppDispatch } from '../../config/store';
-import { login as loginAction } from '../../reducers/authentication';
+import { useAppDispatch, useAppSelector } from '../../config/store';
+import { authError, login as loginAction } from '../../reducers/authentication';
 import { ALPHANUMERIC_PATTERN } from '../../config/constants';
 import Layout from '../../components/Layout';
 import { useRouter } from 'next/router';
@@ -21,8 +19,7 @@ interface LoginFormInputs {
 
 const Login = () => {
   const { t } = useTranslation(['common', 'login']);
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const { loading, loginError } = useAppSelector(state => state.authentication);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -41,21 +38,8 @@ const Login = () => {
   });
 
   const onSubmit: SubmitHandler<LoginFormInputs> = async data => {
-    setError(null);
-    setLoading(true);
-
-    const { username, password } = data;
-
-    try {
-      const loginData: LoginRequestDTO = { username, password };
-      const tokenData = await login(loginData);
-      dispatch(loginAction(tokenData.accessToken));
-      router.push(`/${locale}/home`);
-    } catch {
-      setError(t('login:login.form.errorInvalidCredentials'));
-    } finally {
-      setLoading(false);
-    }
+    await dispatch(loginAction(data));
+    await router.push(`/${locale}/home`);
   };
 
   const username = watch('username');
@@ -63,9 +47,9 @@ const Login = () => {
 
   useEffect(() => {
     if (username || password) {
-      setError(null);
+      dispatch(authError());
     }
-  }, [username, password]);
+  }, [dispatch, username, password]);
 
   return (
     <Layout>
@@ -122,9 +106,9 @@ const Login = () => {
                     </InputGroup>
                   </Form.Group>
 
-                  {error && (
+                  {loginError && (
                     <Alert variant="danger" className="mt-2 mb-4">
-                      {error}
+                      {t('login:login.form.errorInvalidCredentials')}
                     </Alert>
                   )}
 
