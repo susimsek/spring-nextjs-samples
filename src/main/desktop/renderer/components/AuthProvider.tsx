@@ -1,7 +1,7 @@
 // src/components/AuthProvider.tsx
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../config/store';
-import { fetchToken } from '../reducers/authentication';
+import { setToken } from '../reducers/authentication';
 import { Spinner } from 'react-bootstrap';
 
 interface AuthProviderProps {
@@ -15,10 +15,12 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     const initializeAuth = async () => {
-      await dispatch(fetchToken());
+      const storedToken = await window.ipc.getToken();
+      if (storedToken) {
+        dispatch(setToken(storedToken));
+      }
       setIsInitialized(true);
     };
-
     initializeAuth();
   }, [dispatch]);
 

@@ -40,24 +40,16 @@ export const login = createAsyncThunk(
   },
 );
 
-// Async thunk to fetch the current token from the main process
-export const fetchToken = createAsyncThunk('authentication/fetchToken', async () => {
-  if (isClient && window.ipc && typeof window.ipc.getToken === 'function') {
-    try {
-      const token = await window.ipc.getToken();
-      return token as string | null;
-    } catch (error) {
-      console.error('Failed to fetch token:', error);
-      return null;
-    }
-  }
-  return null;
-});
-
 const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
   reducers: {
+    setToken: (state, action) => {
+      state.token = action.payload;
+      state.isAuthenticated = !!action.payload;
+      state.loading = false;
+      state.loginError = false;
+    },
     logout: state => {
       state.token = null;
       state.isAuthenticated = false;
@@ -88,20 +80,9 @@ const authenticationSlice = createSlice({
       .addCase(login.rejected, state => {
         state.loginError = true;
         state.loading = false;
-      })
-      .addCase(fetchToken.pending, state => {
-        state.loading = true;
-      })
-      .addCase(fetchToken.fulfilled, (state, action) => {
-        state.token = action.payload;
-        state.isAuthenticated = !!action.payload;
-        state.loading = false;
-      })
-      .addCase(fetchToken.rejected, state => {
-        state.loading = false;
       });
   },
 });
 
-export const { logout, authError } = authenticationSlice.actions;
+export const { logout, authError, setToken } = authenticationSlice.actions;
 export default authenticationSlice.reducer;
