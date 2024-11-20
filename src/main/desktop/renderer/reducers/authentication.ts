@@ -58,19 +58,6 @@ const authenticationSlice = createSlice({
   name: 'authentication',
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
-      state.isAuthenticated = true;
-
-      // Save token to Electron Store
-      if (isClient && window.ipc && typeof window.ipc.setToken === 'function') {
-        try {
-          window.ipc.setToken(action.payload);
-        } catch (error) {
-          console.error('Failed to set token:', error);
-        }
-      }
-    },
     logout: state => {
       state.token = null;
       state.isAuthenticated = false;

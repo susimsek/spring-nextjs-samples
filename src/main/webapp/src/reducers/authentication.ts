@@ -25,6 +25,7 @@ export const login = createAsyncThunk(
   async (credentials: LoginRequestDTO, { rejectWithValue }) => {
     try {
       const response = await loginApi(credentials);
+      localStorage.setItem('token', response.accessToken);
       return response.accessToken;
     } catch (error) {
       const axiosError = error as AxiosError<ProblemDetail>;
@@ -60,7 +61,6 @@ const authenticationSlice = createSlice({
         state.isAuthenticated = true;
         state.loginError = false;
         state.loading = false;
-        localStorage.setItem('token', action.payload);
       })
       .addCase(login.rejected, state => {
         state.loginError = true;
