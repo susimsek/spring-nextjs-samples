@@ -16,15 +16,15 @@ loadIcons();
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <Provider store={store}>
-    <AuthProvider>
-      <ApolloProvider client={client}>
-        <ThemeProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <ApolloProvider client={client}>
           <ToastContainer />
           <UpdateNotifier />
           <Component {...pageProps} />
-        </ThemeProvider>
-      </ApolloProvider>
-    </AuthProvider>
+        </ApolloProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </Provider>
 );
 

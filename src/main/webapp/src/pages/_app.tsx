@@ -15,12 +15,12 @@ loadIcons();
 
 const MyApp = ({ Component, pageProps }: AppProps) => (
   <Provider store={store}>
-    <ApolloProvider client={client}>
-      <ThemeProvider>
+    <ThemeProvider>
+      <ApolloProvider client={client}>
         <ToastContainer />
         <Component {...pageProps} />
-      </ThemeProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </ThemeProvider>
   </Provider>
 );
 
