@@ -25,6 +25,13 @@ export const login = createAsyncThunk(
   async (credentials: LoginRequestDTO, { rejectWithValue }) => {
     try {
       const response = await loginApi(credentials);
+      if (isClient && window.ipc && typeof window.ipc.setToken === 'function') {
+        try {
+          window.ipc.setToken(response.accessToken);
+        } catch (error) {
+          console.error('Failed to set token:', error);
+        }
+      }
       return response.accessToken;
     } catch (error) {
       const axiosError = error as AxiosError<ProblemDetail>;
@@ -90,13 +97,6 @@ const authenticationSlice = createSlice({
         state.isAuthenticated = true;
         state.loginError = false;
         state.loading = false;
-        if (isClient && window.ipc && typeof window.ipc.setToken === 'function') {
-          try {
-            window.ipc.setToken(action.payload);
-          } catch (error) {
-            console.error('Failed to set token:', error);
-          }
-        }
       })
       .addCase(login.rejected, state => {
         state.loginError = true;
