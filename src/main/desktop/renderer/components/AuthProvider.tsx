@@ -1,6 +1,6 @@
 // src/components/AuthProvider.tsx
 import React, { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../config/store';
+import { useAppDispatch } from '../config/store';
 import { setToken } from '../reducers/authentication';
 import { Spinner } from 'react-bootstrap';
 
@@ -10,8 +10,7 @@ interface AuthProviderProps {
 
 const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const dispatch = useAppDispatch();
-  const { loading } = useAppSelector(state => state.authentication);
-  const [isInitialized, setIsInitialized] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const initializeAuth = async () => {
@@ -19,12 +18,12 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (storedToken) {
         dispatch(setToken(storedToken));
       }
-      setIsInitialized(true);
+      setLoading(false);
     };
     initializeAuth();
   }, [dispatch]);
 
-  if (!isInitialized || loading) {
+  if (loading) {
     return (
       <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
         <Spinner animation="border" role="status" />
