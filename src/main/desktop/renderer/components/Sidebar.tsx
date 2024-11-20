@@ -66,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onClose, onNavigate }) => {
             <div className="d-flex align-items-center brand">
               <LinkComponent href="/home" onClick={onClose}>
                 <Image
-                  src="/logo.png"
+                  src="/images/logo.png"
                   alt={t('common:common.siteTitle')}
                   width={40}
                   height={40}
