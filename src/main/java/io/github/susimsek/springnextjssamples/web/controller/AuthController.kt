@@ -24,60 +24,46 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/v1/auth")
 @Validated
 class AuthController(
-    private val authenticationService: AuthenticationService
+  private val authenticationService: AuthenticationService
 ) {
 
-    @Operation(
-        summary = "Authenticate user",
-        description = "Authenticate user and return access token"
-    )
-    @ApiResponses(
-        value = [
-            ApiResponse(
-                responseCode = "200", description = "Successfully authenticated",
-                content = [Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = Schema(implementation = TokenDTO::class)
-                )]
-            ),
-            ApiResponse(
-                responseCode = "400", description = "Invalid input",
-                content = [Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = Schema(implementation = ProblemDetail::class)
-                )]
-            ),
-            ApiResponse(
-                responseCode = "401", description = "Invalid login credentials",
-                content = [Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = Schema(implementation = ProblemDetail::class)
-                )]
-            ),
-            ApiResponse(
-                responseCode = "429", description = "Too Many Requests",
-                content = [Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = Schema(implementation = ProblemDetail::class)
-                )]
-            ),
-            ApiResponse(
-                responseCode = "500", description = "Internal server error",
-                content = [Content(
-                    mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = Schema(implementation = ProblemDetail::class)
-                )]
-            )
-        ]
-    )
-    @PostMapping("/token")
-    fun login(
-        @io.swagger.v3.oas.annotations.parameters.RequestBody(
-            description = "Login request",
-            required = true
-        ) @Valid @RequestBody loginRequest: LoginRequestDTO
-    ): ResponseEntity<TokenDTO> {
-        val tokenResponse = authenticationService.authenticate(loginRequest)
-        return ResponseEntity.ok(tokenResponse)
-    }
+  @Operation(
+    summary = "Authenticate user",
+    description = "Authenticate user and return access token"
+  )
+  @ApiResponses(
+    value = [
+      ApiResponse(
+        responseCode = "200", description = "Successfully authenticated",
+        content = [Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = Schema(implementation = TokenDTO::class)
+        )]
+      ),
+      ApiResponse(
+        responseCode = "400", description = "Invalid input",
+        content = [Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = Schema(implementation = ProblemDetail::class)
+        )]
+      ),
+      ApiResponse(
+        responseCode = "401", description = "Invalid login credentials",
+        content = [Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = Schema(implementation = ProblemDetail::class)
+        )]
+      )
+    ]
+  )
+  @PostMapping("/token")
+  fun login(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+      description = "Login request",
+      required = true
+    ) @Valid @RequestBody loginRequest: LoginRequestDTO
+  ): ResponseEntity<TokenDTO> {
+    val tokenResponse = authenticationService.authenticate(loginRequest)
+    return ResponseEntity.ok(tokenResponse)
+  }
 }

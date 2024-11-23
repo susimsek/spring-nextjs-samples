@@ -40,30 +40,6 @@ class TodoController(
           mediaType = MediaType.APPLICATION_JSON_VALUE,
           array = ArraySchema(schema = Schema(implementation = TodoDTO::class))
         )]
-      ),
-      ApiResponse(
-        responseCode = "401",
-        description = "Unauthorized",
-        content = [Content(
-          mediaType = MediaType.APPLICATION_JSON_VALUE,
-          schema = Schema(implementation = ProblemDetail::class)
-        )]
-      ),
-      ApiResponse(
-        responseCode = "403",
-        description = "Forbidden",
-        content = [Content(
-          mediaType = MediaType.APPLICATION_JSON_VALUE,
-          schema = Schema(implementation = ProblemDetail::class)
-        )]
-      ),
-      ApiResponse(
-        responseCode = "500",
-        description = "Internal server error",
-        content = [Content(
-          mediaType = MediaType.APPLICATION_JSON_VALUE,
-          schema = Schema(example = "{\"error\": \"Internal Server Error\"}")
-        )]
       )
     ]
   )
@@ -91,32 +67,8 @@ class TodoController(
         )]
       ),
       ApiResponse(
-        responseCode = "401",
-        description = "Unauthorized",
-        content = [Content(
-          mediaType = MediaType.APPLICATION_JSON_VALUE,
-          schema = Schema(implementation = ProblemDetail::class)
-        )]
-      ),
-      ApiResponse(
-        responseCode = "403",
-        description = "Forbidden",
-        content = [Content(
-          mediaType = MediaType.APPLICATION_JSON_VALUE,
-          schema = Schema(implementation = ProblemDetail::class)
-        )]
-      ),
-      ApiResponse(
         responseCode = "404",
         description = "Todo not found",
-        content = [Content(
-          mediaType = MediaType.APPLICATION_JSON_VALUE,
-          schema = Schema(implementation = ProblemDetail::class)
-        )]
-      ),
-      ApiResponse(
-        responseCode = "500",
-        description = "Internal server error",
         content = [Content(
           mediaType = MediaType.APPLICATION_JSON_VALUE,
           schema = Schema(implementation = ProblemDetail::class)

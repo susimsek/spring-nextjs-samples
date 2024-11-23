@@ -1,18 +1,24 @@
 package io.github.susimsek.springnextjssamples.config.apidoc;
 
+import io.swagger.v3.core.util.AnnotationsUtils;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.media.Content;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.HeaderParameter;
+import io.swagger.v3.oas.models.responses.ApiResponse;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import java.util.Arrays;
+import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springdoc.core.customizers.OperationCustomizer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
 import org.springframework.web.method.HandlerMethod;
 
 @Configuration(proxyBeanMethods = false)
@@ -57,5 +63,45 @@ public class OpenApiConfig {
 
             return operation;
         };
+    }
+
+    @Bean
+    public OpenApiCustomizer errorResponsesCustomizer() {
+        return openApi -> {
+            Components components = openApi.getComponents();
+            openApi.getPaths().values().forEach(pathItem ->
+                pathItem.readOperations().forEach(operation -> {
+                    addErrorToApi(operation, components);
+                    if (operation.getSecurity() != null && !operation.getSecurity().isEmpty()) {
+                        addSecurityResponses(operation, components);
+                    }
+                })
+            );
+        };
+    }
+
+    private void addErrorToApi(Operation operation, Components components) {
+        io.swagger.v3.oas.models.media.MediaType mediaType = new io.swagger.v3.oas.models.media.MediaType()
+            .schema(AnnotationsUtils.resolveSchemaFromType(ProblemDetail.class, components, null));
+
+        // 500 Internal Server Error
+        operation.getResponses().addApiResponse("500", new ApiResponse()
+            .description("Internal Server Error")
+            .content(new Content().addMediaType(MediaType.APPLICATION_JSON_VALUE, mediaType)));
+    }
+
+    private void addSecurityResponses(Operation operation, Components components) {
+        io.swagger.v3.oas.models.media.MediaType mediaType = new io.swagger.v3.oas.models.media.MediaType()
+            .schema(AnnotationsUtils.resolveSchemaFromType(ProblemDetail.class, components, null));
+
+        // 401 Unauthorized
+        operation.getResponses().addApiResponse("401", new ApiResponse()
+            .description("Unauthorized")
+            .content(new Content().addMediaType(MediaType.APPLICATION_JSON_VALUE, mediaType)));
+
+        // 403 Forbidden
+        operation.getResponses().addApiResponse("403", new ApiResponse()
+            .description("Forbidden")
+            .content(new Content().addMediaType(MediaType.APPLICATION_JSON_VALUE, mediaType)));
     }
 }
