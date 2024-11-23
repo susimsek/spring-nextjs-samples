@@ -74,7 +74,7 @@ public class DomainTokenEncoder implements TokenEncoder {
      * Encodes the JWT with the given parameters, optionally signing and encrypting it.
      *
      * @param parameters the token encoding parameters, including claims and headers
-     * @param rsaKey the RSA key to use for encryption if JWE is applied
+     * @param rsaKey     the RSA key to use for encryption if JWE is applied
      * @return the encoded {@link Jwt} instance
      * @throws JwtEncodingException if an error occurs during encoding
      */
@@ -82,8 +82,8 @@ public class DomainTokenEncoder implements TokenEncoder {
     public Jwt encode(TokenEncoderParameters parameters, RSAKey rsaKey) throws JwtEncodingException {
         Assert.notNull(parameters, "parameters cannot be null");
 
-        JwtClaimsSet claims = parameters.getClaims();
-        JwsHeader headers = parameters.getJwsHeader();
+        JwtClaimsSet claims = parameters.claims();
+        JwsHeader headers = parameters.jwsHeader();
         if (headers == null) {
             headers = JwsHeader.with(SignatureAlgorithm.RS256).build();
         }
@@ -97,11 +97,11 @@ public class DomainTokenEncoder implements TokenEncoder {
 
         try {
             signedJwt.sign(signer);
-            if (parameters.getJweHeader() == null) {
+            if (parameters.jweHeader() == null) {
                 return new Jwt(signedJwt.serialize(),
                     claims.getIssuedAt(), claims.getExpiresAt(), headers.getHeaders(), claims.getClaims());
             }
-            JWEHeader jweHeader = parameters.getJweHeader();
+            JWEHeader jweHeader = parameters.jweHeader();
             JWEObject jweObject = new JWEObject(jweHeader,
                 new Payload(signedJwt));
 
@@ -244,7 +244,7 @@ public class DomainTokenEncoder implements TokenEncoder {
      * Converts a {@link URL} to a {@link URI} for setting certain headers.
      *
      * @param header the header type (e.g., "jku" or "x5u")
-     * @param url the URL to convert
+     * @param url    the URL to convert
      * @return the converted URI
      */
     private static URI convertAsURI(String header, URL url) {
@@ -339,7 +339,7 @@ public class DomainTokenEncoder implements TokenEncoder {
      * Adds key identifier headers to {@link JwsHeader} if they are missing but available in the {@link JWK}.
      *
      * @param headers the current JwsHeader instance
-     * @param jwk the JWK containing key identifier information
+     * @param jwk     the JWK containing key identifier information
      * @return a modified JwsHeader instance with key identifiers
      */
     private static JwsHeader addKeyIdentifierHeadersIfNecessary(JwsHeader headers, JWK jwk) {
