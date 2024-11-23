@@ -15,7 +15,6 @@ import com.github.loki4j.logback.JsonEncoder;
 import com.github.loki4j.logback.Loki4jAppender;
 import io.github.susimsek.springnextjssamples.aspect.LoggingAspect;
 import io.github.susimsek.springnextjssamples.config.RequestMatcherConfig;
-import io.github.susimsek.springnextjssamples.config.logging.config.LoggingProperties;
 import io.github.susimsek.springnextjssamples.config.logging.formatter.JsonLogFormatter;
 import io.github.susimsek.springnextjssamples.config.logging.formatter.LogFormatter;
 import io.github.susimsek.springnextjssamples.config.logging.handler.HttpLoggingHandler;

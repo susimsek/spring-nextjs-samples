@@ -1,37 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <title>GraphiQL</title>
-  <style>
-    body {
-      height: 100%;
-      margin: 0;
-      width: 100%;
-      overflow: hidden;
-    }
+  <head>
+    <title>GraphiQL</title>
+    <style>
+      body {
+        height: 100%;
+        margin: 0;
+        width: 100%;
+        overflow: hidden;
+      }
 
-    #graphiql {
-      height: 100vh;
-    }
-  </style>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/graphiql/graphiql.min.js" type="application/javascript"></script>
-  <link rel="stylesheet" href="https://unpkg.com/graphiql/graphiql.min.css" />
-  <script src="https://unpkg.com/@graphiql/plugin-explorer/dist/index.umd.js" crossorigin></script>
-  <link rel="stylesheet" href="https://unpkg.com/@graphiql/plugin-explorer/dist/style.css"/>
-</head>
-<body>
-<div id="graphiql">Loading...</div>
-<script>
-  const params = new URLSearchParams(window.location.search);
-  const path = params.get("path") || "/graphql";
-  const url = `${location.protocol}//${location.host}${path}`;
-  const wsPath = params.get("wsPath") || "/graphql";
-  const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
-  const subscriptionUrl = `${wsProtocol}//${location.host}${wsPath}`;
+      #graphiql {
+        height: 100vh;
+      }
+    </style>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/graphiql/graphiql.min.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="https://unpkg.com/graphiql/graphiql.min.css" />
+    <script src="https://unpkg.com/@graphiql/plugin-explorer/dist/index.umd.js" crossorigin></script>
+    <link rel="stylesheet" href="https://unpkg.com/@graphiql/plugin-explorer/dist/style.css" />
+  </head>
+  <body>
+    <div id="graphiql">Loading...</div>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const path = params.get('path') || '/graphql';
+      const url = `${location.protocol}//${location.host}${path}`;
+      const wsPath = params.get('wsPath') || '/graphql';
+      const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+      const subscriptionUrl = `${wsProtocol}//${location.host}${wsPath}`;
 
-  const defaultQuery = `
+      const defaultQuery = `
     # Mutation to authenticate and retrieve a token
     mutation AuthenticateUser($username: String!, $password: String!) {
       authenticate(loginRequest: {
@@ -59,41 +59,70 @@
           timestamp
       }
     }
+
+     # Query to fetch all todos
+    query GetTodos {
+      todos {
+          id
+          userId
+          title
+          completed
+      }
+    }
+
+    # Query to fetch a specific todo by ID
+    query GetTodoById($todoId: Int!) {
+      todo(id: $todoId) {
+          id
+          userId
+          title
+          completed
+      }
+    }
 `;
 
-  const locale = localStorage.getItem('i18nextLng') || "en";
+      const locale = localStorage.getItem('i18nextLng') || 'en';
 
-  const defaultVariables = JSON.stringify({
-    username: "admin",
-    password: "password",
-    locale: locale
-  }, null, 2);
+      const defaultVariables = JSON.stringify(
+        {
+          username: 'admin',
+          password: 'password',
+          locale: locale,
+          todoId: 1,
+        },
+        null,
+        2,
+      );
 
-  const gqlFetcher = GraphiQL.createFetcher({'url': url, 'subscriptionUrl': subscriptionUrl});
-  const explorerPlugin = GraphiQLPluginExplorer.explorerPlugin();
-  const xsrfToken = document.cookie.match(new RegExp('(?:^| )XSRF-TOKEN=([^;]+)'));
+      const gqlFetcher = GraphiQL.createFetcher({ url: url, subscriptionUrl: subscriptionUrl });
+      const explorerPlugin = GraphiQLPluginExplorer.explorerPlugin();
+      const xsrfToken = document.cookie.match(new RegExp('(?:^| )XSRF-TOKEN=([^;]+)'));
 
-  const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
 
-  const headers = JSON.stringify({
-    ...(xsrfToken && { "X-XSRF-TOKEN": xsrfToken[1] }),
-    "Accept-Language": locale,
-    ...(token && { "Authorization": `Bearer ${token}` })
-  }, null, 2);
+      const headers = JSON.stringify(
+        {
+          ...(xsrfToken && { 'X-XSRF-TOKEN': xsrfToken[1] }),
+          'Accept-Language': locale,
+          ...(token && { Authorization: `Bearer ${token}` }),
+        },
+        null,
+        2,
+      );
 
-  ReactDOM.render(
-    React.createElement(GraphiQL, {
-      fetcher: gqlFetcher,
-      defaultVariableEditorOpen: true,
-      headerEditorEnabled: true,
-      shouldPersistHeaders: true,
-      headers: headers,
-      plugins: [explorerPlugin],
-      defaultQuery: defaultQuery,
-      variables: defaultVariables
-    }),
-    document.getElementById('graphiql'),
-  );
-</script>
-</body>
+      ReactDOM.render(
+        React.createElement(GraphiQL, {
+          fetcher: gqlFetcher,
+          defaultVariableEditorOpen: true,
+          headerEditorEnabled: true,
+          shouldPersistHeaders: true,
+          headers: headers,
+          plugins: [explorerPlugin],
+          defaultQuery: defaultQuery,
+          variables: defaultVariables,
+        }),
+        document.getElementById('graphiql'),
+      );
+    </script>
+  </body>
 </html>

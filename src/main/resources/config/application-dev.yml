@@ -10,6 +10,9 @@ spring:
   restclient:
     connect-timeout: 5s
     read-timeout: 10s
+    clients:
+      todoClient:
+        url: https://jsonplaceholder.typicode.com
   liquibase:
     contexts: local
   mvc:

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.springframework.http.MediaType
+import org.springframework.http.ProblemDetail
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 import java.time.Instant
@@ -38,7 +39,7 @@ class HelloController(
                 description = "Internal server error",
                 content = [Content(
                     mediaType = MediaType.APPLICATION_JSON_VALUE,
-                    schema = Schema(example = "{\"error\": \"Internal Server Error\"}")
+                  schema = Schema(implementation = ProblemDetail::class)
                 )]
             )
         ]

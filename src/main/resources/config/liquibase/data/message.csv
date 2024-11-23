@@ -113,3 +113,5 @@ id;locale;code;content;created_at;created_by;updated_at;updated_by
 112;en;random.message;Random message just for you!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
 113;tr;motivation.message;Öğrenmeye ve kodlamaya devam et!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
 114;en;motivation.message;Keep learning and coding!;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+115;tr;resource.todo;Görev;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system
+116;en;resource.todo;todo;2024-01-01T00:00:00;system;2024-01-01T00:00:00;system

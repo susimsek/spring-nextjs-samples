@@ -9,6 +9,12 @@ server:
 spring:
   messages:
     cache-duration: 1h
+  restclient:
+    connect-timeout: 5s
+    read-timeout: 10s
+    clients:
+      todoClient:
+        url: https://jsonplaceholder.typicode.com
   liquibase:
     contexts: prod
   mvc:

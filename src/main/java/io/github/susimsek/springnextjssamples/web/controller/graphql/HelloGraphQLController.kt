@@ -7,13 +7,13 @@ import org.springframework.graphql.data.method.annotation.QueryMapping
 import org.springframework.graphql.data.method.annotation.SubscriptionMapping
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.core.Authentication
-import org.springframework.stereotype.Controller
 import reactor.core.publisher.Flux
 import java.time.LocalDateTime
 import java.util.*
 import java.util.logging.Logger
 
-@Controller
+@GraphQLController
+@PreAuthorize("hasRole('ADMIN')")
 class HelloGraphQLController(
   private val helloService: HelloService
 ) {
@@ -21,7 +21,6 @@ class HelloGraphQLController(
   private val logger = Logger.getLogger(HelloGraphQLController::class.java.name)
 
   @QueryMapping
-  @PreAuthorize("hasRole('ADMIN')")
   fun hello(authentication: Authentication, locale: Locale): HelloDTO {
     logAccess(authentication, "hello")
 
@@ -29,9 +28,10 @@ class HelloGraphQLController(
   }
 
   @SubscriptionMapping
-  @PreAuthorize("hasRole('ADMIN')")
-  fun helloSubscription(authentication: Authentication,
-                        @Argument locale: Locale): Flux<HelloDTO> {
+  fun helloSubscription(
+    authentication: Authentication,
+    @Argument locale: Locale
+  ): Flux<HelloDTO> {
     logAccess(authentication, "helloSubscription")
 
     return helloService.getHelloMessageStream(locale)

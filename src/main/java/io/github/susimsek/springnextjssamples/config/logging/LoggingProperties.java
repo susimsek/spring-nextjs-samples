@@ -1,4 +1,4 @@
-package io.github.susimsek.springnextjssamples.config.logging.config;
+package io.github.susimsek.springnextjssamples.config.logging;
 
 import io.github.susimsek.springnextjssamples.config.logging.enums.HttpLogLevel;
 import io.github.susimsek.springnextjssamples.config.logging.enums.MethodLogLevel;

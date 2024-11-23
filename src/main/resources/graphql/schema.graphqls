@@ -26,6 +26,12 @@ scalar BigDecimal
 type Query {
   # Returns a simple welcome message
   hello: HelloDTO
+
+  # Fetch all todos
+  todos: [TodoDTO!]
+
+  # Fetch a single todo by ID
+  todo(id: Int!): TodoDTO
 }
 
 # Mutations for user authentication
@@ -75,4 +81,23 @@ type TokenDTO {
   # Access token expiration time in seconds
   # Example: 3600
   accessTokenExpiresIn: Int!
+}
+
+# Data structure for a Todo item
+type TodoDTO {
+  # ID of the todo item
+  # Example: 1
+  id: Int!
+
+  # ID of the user who owns the todo item
+  # Example: 1
+  userId: Int!
+
+  # Title of the todo item
+  # Example: "Finish the report"
+  title: String!
+
+  # Completion status of the todo item
+  # Example: false
+  completed: Boolean!
 }
