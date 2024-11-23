@@ -84,6 +84,13 @@ class TodoController(
         )]
       ),
       ApiResponse(
+        responseCode = "400", description = "Invalid input",
+        content = [Content(
+          mediaType = MediaType.APPLICATION_JSON_VALUE,
+          schema = Schema(implementation = ProblemDetail::class)
+        )]
+      ),
+      ApiResponse(
         responseCode = "401",
         description = "Unauthorized",
         content = [Content(
