@@ -98,7 +98,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    RequestMatcherConfig requestMatchersConfig(MvcRequestMatcher.Builder mvc) {
+    RequestMatcherConfig requestMatcherConfig(MvcRequestMatcher.Builder mvc) {
         return new RequestMatcherConfig(mvc);
     }
 
