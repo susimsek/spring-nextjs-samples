@@ -60,9 +60,9 @@
       }
     }
 
-     # Query to fetch all todos
-    query GetTodos {
-      todos {
+    # Query to fetch all todos with pagination
+    query GetTodos($offset: Int = 0, $first: Int = 10) {
+      todos(offset: $offset, limit: $first) {
           id
           userId
           title
@@ -89,6 +89,8 @@
           password: 'password',
           locale: locale,
           todoId: 1,
+          offset: 0,
+          first: 10,
         },
         null,
         2,

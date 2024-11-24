@@ -3,6 +3,7 @@ package io.github.susimsek.springnextjssamples.service
 import io.github.susimsek.springnextjssamples.client.TodoClient
 import io.github.susimsek.springnextjssamples.dto.response.TodoDTO
 import io.github.susimsek.springnextjssamples.exception.ResourceNotFoundException
+import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Service
 import org.springframework.web.client.HttpClientErrorException
 
@@ -10,12 +11,15 @@ import org.springframework.web.client.HttpClientErrorException
 class TodoService(private val todoClient: TodoClient) {
 
   /**
-   * Get all todos.
+   * Get all todos with pagination support.
    *
-   * @return a list of TodoDTO objects
+   * @param pageable pagination information (page number and size)
+   * @return a list of TodoDTO objects for the requested page
    */
-  fun getAllTodos(): List<TodoDTO> {
-    return todoClient.getTodos()
+  fun getAllTodos(pageable: Pageable): List<TodoDTO> {
+    val page = pageable.pageNumber + 1 // JSON Placeholder uses 1-based indexing
+    val limit = pageable.pageSize
+    return todoClient.getTodos(page, limit)
   }
 
   /**

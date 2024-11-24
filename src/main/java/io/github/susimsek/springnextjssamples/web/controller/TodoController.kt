@@ -11,15 +11,15 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
 import io.swagger.v3.oas.annotations.tags.Tag
+import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
 import jakarta.validation.constraints.NotNull
+import org.springframework.data.domain.PageRequest
 import org.springframework.http.MediaType
 import org.springframework.http.ProblemDetail
+import org.springframework.http.ResponseEntity
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/todos")
@@ -30,7 +30,7 @@ class TodoController(
   private val todoService: TodoService
 ) {
 
-  @Operation(summary = "Get All Todos", description = "Returns a list of all todos")
+  @Operation(summary = "Get All Todos with Pagination", description = "Returns a paginated list of todos")
   @ApiResponses(
     value = [
       ApiResponse(
@@ -44,8 +44,18 @@ class TodoController(
     ]
   )
   @GetMapping
-  fun getTodos(): List<TodoDTO> {
-    return todoService.getAllTodos()
+  fun getTodos(
+    @Parameter(description = "Zero-based page index (0..N)", example = "0")
+    @RequestParam(value = "page", defaultValue = "0") @Min(value = 0, message = "{validation.field.min}") page: Int,
+
+    @Parameter(description = "The size of the page to be returned", example = "10")
+    @RequestParam(value = "size", defaultValue = "10")
+    @Min(value = 1, message = "{validation.field.min}")
+    @Max(value = 100, message = "{validation.field.max}") size: Int
+  ): ResponseEntity<List<TodoDTO>> {
+    val pageable = PageRequest.of(page, size)
+    val todos = todoService.getAllTodos(pageable)
+    return ResponseEntity.ok(todos)
   }
 
   @Operation(summary = "Get Todo by ID", description = "Returns a specific todo by its ID")

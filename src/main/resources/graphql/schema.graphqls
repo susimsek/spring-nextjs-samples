@@ -27,8 +27,8 @@ type Query {
   # Returns a simple welcome message
   hello: HelloDTO
 
-  # Fetch all todos
-  todos: [TodoDTO!]
+  # Fetch all todos with pagination
+  todos(offset: Int = 0, limit: Int = 10): [TodoDTO!]
 
   # Fetch a single todo by ID
   todo(id: Int!): TodoDTO
