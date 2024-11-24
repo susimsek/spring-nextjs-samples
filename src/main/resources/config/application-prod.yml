@@ -88,7 +88,7 @@ logging:
     enabled: true
 
 security:
-  content-security-policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; worker-src 'self' blob:; img-src 'self' data:; frame-src 'self' data:; font-src 'self' data:; frame-ancestors 'self' app://.;"
+  content-security-policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; worker-src 'self' blob:; img-src 'self' font-src 'self' https://unpkg.com data:;"
   token:
     jwe-enabled: true
     key-id: 3f8a8e5b-89f4-4b7d-91e1-5b5c1d4e7b9c

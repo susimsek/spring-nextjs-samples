@@ -63,7 +63,7 @@ public class SecurityConfig {
             .cors(withDefaults())
             .headers(headers -> headers
                 .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
-                //.contentSecurityPolicy(csp -> csp.policyDirectives(securityProperties.getContentSecurityPolicy()))
+                .contentSecurityPolicy(csp -> csp.policyDirectives(securityProperties.getContentSecurityPolicy()))
                 .referrerPolicy(
                     referrer -> referrer.policy(
                         ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
