@@ -150,6 +150,7 @@ management:
     enabled: true
 
 security:
+  content-security-policy: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://unpkg.com; style-src 'self' 'unsafe-inline' https://unpkg.com; worker-src 'self' blob:; img-src 'self' data:; font-src 'self' https://unpkg.com data:;"
   token:
     issuer: localhost
 
