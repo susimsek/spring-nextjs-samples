@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.Duration;
+import java.util.HashMap;
 import java.util.Map;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,7 +27,7 @@ public class RestClientProperties {
 
     @Valid
     @NotNull(message = "{validation.field.notNull}")
-    private Map<String, ClientConfig> clients;
+    private Map<String, ClientConfig> clients = new HashMap<>();
 
     @Getter
     @Setter
