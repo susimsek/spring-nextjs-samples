@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:15.4.0
+    container_name: postgresql
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRESQL_DATABASE: demo
+      POSTGRESQL_USERNAME: admin          #
+      POSTGRESQL_PASSWORD: root
+    volumes:
+      - postgresql:/bitnami/postgresql
+    healthcheck:
+      test: pg_isready -U postgres
+      timeout: 10s
+      retries: 10
+      interval: 10s
+      start_period: 10s
+
+networks:
+  app:
+    driver: "bridge"
+
+volumes:
+  postgresql:
