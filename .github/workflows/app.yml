@@ -125,7 +125,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          mvn -ntp -Pprod compile jib:build \
+          mvn -ntp -Pprod jib:build \
             -DskipTests \
             -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} \
             -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} \
