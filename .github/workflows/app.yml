@@ -77,7 +77,7 @@ jobs:
           cache-dependency-path: src/main/webapp/package-lock.json
 
       # Set up Java Development Kit (JDK) with GraalVM
-      - name: Set up JDK 22 with GraalVM
+      - name: Set up JDK 21 with GraalVM
         uses: graalvm/setup-graalvm@v1
         with:
           distribution: 'liberica'
@@ -137,4 +137,21 @@ jobs:
       # Build and publish Docker image for the backend
       - name: Build and Publish Docker Image
         run: |
-          mvn -ntp -Pnative,prod spring-boot:build-image -Dspring-boot.build-image.publish=true -Ddocker.username=${{ secrets.DOCKER_USERNAME }} -Ddocker.password=${{ secrets.DOCKER_PASSWORD }} -Dimage.name=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }} -DskipTests
+          # Build native image
+          mvn -ntp -Pnative,prod spring-boot:build-image \
+            -DskipTests \
+            -Dspring-boot.build-image.publish=true \
+            -Ddocker.username=${{ secrets.DOCKER_USERNAME }} \
+            -Ddocker.password=${{ secrets.DOCKER_PASSWORD }} \
+            -Dimage.name=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app-native:${{ github.ref_name }} \
+            &
+
+          # Build Jib Docker image
+          mvn -ntp -Pprod jib:build \
+            -DskipTests \
+            -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} \
+            -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} \
+            -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }} &
+
+          # Wait for both processes to complete
+          wait
