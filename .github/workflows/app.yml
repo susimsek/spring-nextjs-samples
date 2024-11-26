@@ -76,26 +76,13 @@ jobs:
           cache: 'npm'
           cache-dependency-path: src/main/webapp/package-lock.json
 
-      # Set up Java Development Kit (JDK) with GraalVM
-      - name: Set up JDK 21 with GraalVM
-        uses: graalvm/setup-graalvm@v1
+      # Set up Java Development Kit (JDK)
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
         with:
-          distribution: 'liberica'
-          version: '22.3.0'
+          distribution: 'temurin'
           java-version: '21'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
-
-      # Print Java, Maven, Node, Npm Version
-      - name: Print Java, Maven, Node, Npm Version
-        run: |
-          echo "GRAALVM_HOME: $GRAALVM_HOME"
-          echo "JAVA_HOME: $JAVA_HOME"
-          java --version
-          native-image --version
-          mvn --version
-          node -v
-          npm --version
 
       # Configure Maven settings for GitHub Packages
       - name: Configure Maven for GitHub Packages
@@ -145,6 +132,15 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Set up JDK 21 with GraalVM
+        uses: graalvm/setup-graalvm@v1
+        with:
+          distribution: 'liberica'
+          version: '22.3.0'
+          java-version: '21'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          cache: 'maven'
+
       - name: Build Native Docker Image
         run: |
           mvn -ntp -Pnative,prod spring-boot:build-image \
@@ -164,6 +160,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
 
       - name: Build Jib Docker Image
         run: |
