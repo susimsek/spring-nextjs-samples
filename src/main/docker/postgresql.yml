@@ -19,9 +19,5 @@ services:
       interval: 10s
       start_period: 10s
 
-networks:
-  app:
-    driver: "bridge"
-
 volumes:
   postgresql:
