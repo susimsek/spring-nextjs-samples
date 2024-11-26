@@ -141,6 +141,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
 
+      - name: Download Dependencies
+        run: mvn -ntp dependency:go-offline
+
       - name: Build Native Docker Image
         run: |
           mvn -ntp -Pnative,prod spring-boot:build-image \
@@ -148,7 +151,7 @@ jobs:
             -Dspring-boot.build-image.publish=true \
             -Ddocker.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.password=${{ secrets.DOCKER_PASSWORD }} \
-            -Dimage.name=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app-native:${{ github.ref_name }}
+            -Dimage.name=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native
 
   build-image:
     name: Build Docker Image
@@ -168,9 +171,12 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
+      - name: Download Dependencies
+        run: mvn -ntp dependency:go-offline
+
       - name: Build Docker Image
         run: |
-          mvn -ntp -Pprod jib:build \
+          mvn -ntp -Pprod compile jib:build \
             -DskipTests \
             -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} \
             -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} \
