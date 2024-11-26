@@ -134,24 +134,41 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Build and publish Docker image for the backend
-      - name: Build and Publish Docker Image
+  build-native-image:
+    name: Build Native Docker Image
+    needs: backend-build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Native Docker Image
         run: |
-          # Build native image
           mvn -ntp -Pnative,prod spring-boot:build-image \
             -DskipTests \
             -Dspring-boot.build-image.publish=true \
             -Ddocker.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.password=${{ secrets.DOCKER_PASSWORD }} \
-            -Dimage.name=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app-native:${{ github.ref_name }} \
-            &
+            -Dimage.name=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app-native:${{ github.ref_name }}
 
-          # Build Jib Docker image
+  build-jib-image:
+    name: Build Jib Docker Image
+    needs: backend-build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Build Jib Docker Image
+        run: |
           mvn -ntp -Pprod jib:build \
             -DskipTests \
             -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} \
             -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} \
-            -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }} &
-
-          # Wait for both processes to complete
-          wait
+            -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}
