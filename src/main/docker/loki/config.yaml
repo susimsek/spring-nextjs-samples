@@ -52,8 +52,8 @@ limits_config:
   volume_enabled: true
 
 table_manager:
-  retention_deletes_enabled: true
-  retention_period: 336h
+  retention_deletes_enabled: true  # Enable automatic deletion of logs based on retention period
+  retention_period: 336h          # Retain logs for 14 days (336 hours)
 
 query_range:
   align_queries_with_step: true
@@ -65,3 +65,6 @@ frontend:
   log_queries_longer_than: 5s
   compress_responses: true
   max_outstanding_per_tenant: 2048
+
+compactor:
+  working_directory: /tmp/compactor
