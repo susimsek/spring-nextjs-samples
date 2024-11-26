@@ -150,8 +150,8 @@ jobs:
             -Ddocker.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dimage.name=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app-native:${{ github.ref_name }}
 
-  build-jib-image:
-    name: Build Jib Docker Image
+  build-image:
+    name: Build Docker Image
     needs: backend-build
     runs-on: ubuntu-latest
     permissions:
@@ -168,7 +168,7 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
-      - name: Build Jib Docker Image
+      - name: Build Docker Image
         run: |
           mvn -ntp -Pprod jib:build \
             -DskipTests \
