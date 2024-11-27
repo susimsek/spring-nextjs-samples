@@ -143,7 +143,7 @@ jobs:
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dspring-boot.build-image.imagePlatform=linux/amd64 \
-            -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-amd64
+            -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native-amd64
 
           # Build arm64 image
           mvn -ntp -Pnative,prod spring-boot:build-image \
@@ -152,11 +152,11 @@ jobs:
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dspring-boot.build-image.imagePlatform=linux/arm64 \
-            -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-arm64
+            -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native-arm64
 
           # Create and push multi-platform manifest
-          docker manifest create docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }} \
-            --amend docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-amd64 \
-            --amend docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-arm64
+          docker manifest create docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native \
+            --amend docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native-amd64 \
+            --amend docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native-arm64
 
-          docker manifest push docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}
+          docker manifest push docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native
