@@ -51,6 +51,7 @@ jobs:
   backend-build:
     name: Backend Build
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     permissions:
       contents: write
       packages: write
@@ -58,6 +59,13 @@ jobs:
       NODE_VERSION: 21.6.0
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
     steps:
+      # Set up swap space for Linux
+      - name: Set up swap space
+        if: runner.os == 'Linux'
+        uses: pierotofy/set-swap-space@v1.0
+        with:
+          swap-size-gb: 10
+
       # Checkout the repository
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -83,6 +91,7 @@ jobs:
           distribution: 'liberica'
           version: '22.3.0'
           java-version: '21'
+          components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
 
