@@ -758,9 +758,6 @@
                 <enabled>true</enabled>
               </metadataRepository>
               <imageName>${native-image-name}</imageName>
-              <buildArgs>
-                <buildArg>--no-fallback ${native-build-args}</buildArg>
-              </buildArgs>
             </configuration>
           </plugin>
         </plugins>
