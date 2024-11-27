@@ -138,4 +138,4 @@ jobs:
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native \
-            -Dnative-build-args="--verbose -J-Xmx14g"
+            -Dnative-build-args="--verbose -J-Xmx15g"
