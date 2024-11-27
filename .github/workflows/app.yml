@@ -58,7 +58,7 @@ jobs:
     env:
       NODE_VERSION: 21.6.0
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
-      NATIVE_BUILD_ARGS: "--verbose -J-Xmx14g --native-image-parallelism=4 --shared-build-cache"
+      NATIVE_BUILD_ARGS: "--verbose -J-Xmx14g --parallelism=4 --shared-build-cache"
     defaults:
       run:
         shell: bash
