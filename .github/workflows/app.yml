@@ -146,7 +146,7 @@ jobs:
             -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-amd64
 
           # Build arm64 image
-           mvn -ntp -Pnative,prod spring-boot:build-image \
+          mvn -ntp -Pnative,prod spring-boot:build-image \
             -DskipTests \
             -Dspring-boot.build-image.publish=true \
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
