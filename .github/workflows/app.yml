@@ -143,7 +143,6 @@ jobs:
           # Build amd64 image
           mvn -ntp -Pnative,prod spring-boot:build-image \
             -DskipTests \
-            -Dspring-boot.build-image.publish=true \
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dspring-boot.build-image.imagePlatform=linux/amd64 \
@@ -152,7 +151,6 @@ jobs:
           # Build arm64 image
           mvn -ntp -Pnative,prod spring-boot:build-image \
             -DskipTests \
-            -Dspring-boot.build-image.publish=true \
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dspring-boot.build-image.imagePlatform=linux/arm64 \
