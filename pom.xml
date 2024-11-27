@@ -758,6 +758,9 @@
                 <enabled>true</enabled>
               </metadataRepository>
               <imageName>${native-image-name}</imageName>
+              <buildArgs>
+                <buildArg>${native-build-args}</buildArg>
+              </buildArgs>
             </configuration>
           </plugin>
         </plugins>
