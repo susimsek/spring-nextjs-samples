@@ -51,7 +51,7 @@ jobs:
     env:
       NODE_VERSION: 21.6.0
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
-      NATIVE_BUILD_ARGS: --verbose -J-Xmx14g
+      NATIVE_BUILD_ARGS: "--verbose --no-fallback -J-Xmx14g"
     defaults:
       run:
         shell: bash
