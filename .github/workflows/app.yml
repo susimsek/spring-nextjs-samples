@@ -98,7 +98,8 @@ jobs:
       - name: Set up Snyk
         uses: snyk/actions/setup@master
         with:
-          version: 'latest'
+          snyk-version: 'latest'
+          os: ${{ matrix.os }}
 
       # Set up Node 21
       - name: Set up Node 21
