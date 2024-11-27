@@ -684,6 +684,7 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
             <configuration>
               <image>
+                <pullPolicy>IF_NOT_PRESENT</pullPolicy>
                 <env>
                   <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
                   <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>

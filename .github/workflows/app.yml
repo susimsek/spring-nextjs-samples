@@ -58,7 +58,7 @@ jobs:
     env:
       NODE_VERSION: 21.6.0
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
-      NATIVE_BUILD_ARGS: "--verbose -J-Xmx14g --native-image-parallelism=4"
+      NATIVE_BUILD_ARGS: "--verbose -J-Xmx14g --native-image-parallelism=4 --shared-build-cache"
     defaults:
       run:
         shell: bash
@@ -91,6 +91,15 @@ jobs:
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
+
+      # Restore build cache using actions/cache
+      - name: Restore Native Build Cache
+        uses: actions/cache@v4
+        with:
+          path: ./native-build-cache
+          key: ${{ runner.os }}-native-build-cache
+          restore-keys: |
+            ${{ runner.os }}-native-build-cache
 
       # Configure Maven settings for GitHub Packages
       - name: Configure Maven for GitHub Packages
@@ -147,4 +156,11 @@ jobs:
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native \
-           "-Dnative-build-args=$NATIVE_BUILD_ARGS"
+           "-Dnative-build-args=$NATIVE_BUILD_ARGS --cache-dir=./native-build-cache"
+
+      # Save build cache
+      - name: Save Native Build Cache
+        uses: actions/cache@v4
+        with:
+          path: ./native-build-cache
+          key: ${{ runner.os }}-native-build-cache
