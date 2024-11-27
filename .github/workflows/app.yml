@@ -41,13 +41,6 @@ jobs:
         working-directory: src/main/desktop
         run: npm run build
 
-  #      # Publish the desktop application to GitHub Releases
-  #      - name: Publish Desktop Application
-  #        working-directory: src/main/desktop
-  #        run: npm run publish
-  #        env:
-  #          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   backend-build:
     name: Backend Build
     runs-on: ubuntu-latest
@@ -58,7 +51,7 @@ jobs:
     env:
       NODE_VERSION: 21.6.0
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
-      NATIVE_BUILD_ARGS: "--verbose -J-Xmx14g"
+      NATIVE_BUILD_ARGS: --verbose -J-Xmx14g
     defaults:
       run:
         shell: bash
