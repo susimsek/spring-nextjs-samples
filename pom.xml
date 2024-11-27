@@ -697,6 +697,14 @@
                   <BP_BINARY_COMPRESSION_METHOD>upx</BP_BINARY_COMPRESSION_METHOD>
                 </env>
               </image>
+              <docker>
+                <publishRegistry>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <username>${docker.publish.username}</username>
+                  <!--suppress UnresolvedMavenProperty -->
+                  <password>${docker.publish.password}</password>
+                </publishRegistry>
+              </docker>
             </configuration>
             <executions>
               <execution>

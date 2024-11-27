@@ -123,6 +123,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      # Build Docker image
       - name: Build Docker Image
         run: |
           mvn -ntp -Pprod jib:build \
@@ -131,11 +132,12 @@ jobs:
             -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} \
             -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}
 
+      # Build native Docker image
       - name: Build Native Docker Image
         run: |
           mvn -ntp -Pnative,prod spring-boot:build-image \
             -DskipTests \
             -Dspring-boot.build-image.publish=true \
-            -Dspring-boot.build-image.publishRegistryUsername=${{ secrets.DOCKER_USERNAME }} \
-            -Dspring-boot.build-image.publishRegistryPassword=${{ secrets.DOCKER_PASSWORD }} \
+            -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
+            -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native
