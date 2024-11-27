@@ -80,7 +80,6 @@ jobs:
           distribution: 'liberica'
           version: '22.3.0'
           java-version: '21'
-          components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
 
