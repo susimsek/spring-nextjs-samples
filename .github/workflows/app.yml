@@ -130,6 +130,7 @@ jobs:
             -DskipTests \
             -Djib.to.auth.username=${{ secrets.DOCKER_USERNAME }} \
             -Djib.to.auth.password=${{ secrets.DOCKER_PASSWORD }} \
+            -Djib.container.platform=linux/arm64 \
             -Djib.to.image=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}
 
       # Build native Docker image
@@ -140,4 +141,5 @@ jobs:
             -Dspring-boot.build-image.publish=true \
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
+            -Dspring-boot.build-image.imagePlatform=linux/arm64 \
             -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native
