@@ -684,7 +684,6 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
             <configuration>
               <image>
-                <imagePlatform>linux/arm64</imagePlatform>
                 <env>
                   <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
                   <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
