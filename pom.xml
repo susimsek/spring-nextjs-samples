@@ -906,13 +906,13 @@
               </execution>
               <!-- npm run webapp:prod -->
               <execution>
-                <id>webapp build prod</id>
+                <id>webapp build dev</id>
                 <goals>
                   <goal>npm</goal>
                 </goals>
                 <phase>generate-resources</phase>
                 <configuration>
-                  <arguments>run webapp:prod</arguments>
+                  <arguments>run build</arguments>
                   <!-- Removed the environmentVariables section -->
                   <npmInheritsProxyConfigFromMaven>false</npmInheritsProxyConfigFromMaven>
                 </configuration>
