@@ -260,12 +260,6 @@
         <configuration>
           <from>
             <image>${jib.from.image}</image>
-            <platforms>
-              <platform>
-                <architecture>${jib-maven-plugin.architecture}</architecture>
-                <os>linux</os>
-              </platform>
-            </platforms>
           </from>
         </configuration>
       </plugin>
