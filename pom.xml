@@ -46,7 +46,7 @@
     <npm.version>10.2.4</npm.version>
     <jib-maven-plugin.version>3.4.2</jib-maven-plugin.version>
     <jib-maven-plugin.architecture>amd64</jib-maven-plugin.architecture>
-    <jib.from.image>eclipse-temurin:21-jre-jammy</jib.from.image>
+    <jib.from.image>eclipse-temurin:21-jre-alpine</jib.from.image>
     <native-build-args>--verbose -J-Xmx10g</native-build-args>
     <native-image-name>native-executable</native-image-name>
     <maven-checkstyle-plugin.version>3.5.0</maven-checkstyle-plugin.version>
