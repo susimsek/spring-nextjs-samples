@@ -684,7 +684,7 @@
             <artifactId>spring-boot-maven-plugin</artifactId>
             <configuration>
               <image>
-                <builder>paketobuildpacks/builder-jammy-java-tiny</builder>
+                <builder>paketobuildpacks/builder-jammy-java-tiny:latest</builder>
                 <env>
                   <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
                   <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
