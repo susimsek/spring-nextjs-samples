@@ -47,7 +47,6 @@
     <jib-maven-plugin.version>3.4.2</jib-maven-plugin.version>
     <jib-maven-plugin.architecture>amd64</jib-maven-plugin.architecture>
     <jib.from.image>eclipse-temurin:21-jre-alpine</jib.from.image>
-    <native-build-args>--verbose -J-Xmx14g</native-build-args>
     <native-image-name>native-executable</native-image-name>
     <maven-checkstyle-plugin.version>3.5.0</maven-checkstyle-plugin.version>
     <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
@@ -762,9 +761,6 @@
                 <enabled>true</enabled>
               </metadataRepository>
               <imageName>${native-image-name}</imageName>
-              <buildArgs>
-                <buildArg>${native-build-args}</buildArg>
-              </buildArgs>
             </configuration>
           </plugin>
         </plugins>

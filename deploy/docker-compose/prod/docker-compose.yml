@@ -13,7 +13,7 @@ services:
       service: app-db-config
 
   app:
-    image: suayb/spring-nextjs-app:main-native
+    image: suayb/spring-nextjs-app:main
     container_name: app
     ports:
       - 8080:8080
