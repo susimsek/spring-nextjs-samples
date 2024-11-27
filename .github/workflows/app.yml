@@ -50,42 +50,24 @@ jobs:
 
   backend-build:
     name: Backend Build
-    runs-on: ${{ matrix.os }}
-    timeout-minutes: 90
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
     permissions:
       contents: write
       packages: write
     env:
       NODE_VERSION: 21.6.0
       SPRING_OUTPUT_ANSI_ENABLED: DETECT
+      NATIVE_BUILD_ARGS: "--verbose -J-Xmx10g"
     defaults:
       run:
         shell: bash
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ macos-latest ]
-        java-version: [ '21' ]
-        include:
-          - os: macos-latest
-            executable-suffix: ''
-            native-build-args: --verbose -J-Xmx13g
     steps:
       # Set up swap space for Linux
       - name: Set up swap space
-        if: runner.os == 'Linux'
         uses: pierotofy/set-swap-space@v1.0
         with:
           swap-size-gb: 10
-
-      # Set up Docker for macOS
-      - name: 'SETUP: docker'
-        run: |
-          HOMEBREW_NO_AUTO_UPDATE=1 brew install --cask docker
-          open -a /Applications/Docker.app --args --unattended --accept-license
-          #echo "We are waiting for Docker to be up and running. It can take over 2 minutes..."
-          #while ! /Applications/Docker.app/Contents/Resources/bin/docker info &>/dev/null; do sleep 1; done
-        if: runner.os == 'macOS'
 
       # Checkout the repository
       - name: Checkout Repository
@@ -100,12 +82,12 @@ jobs:
           cache-dependency-path: src/main/webapp/package-lock.json
 
       # Set up Java Development Kit (JDK) and GraalVM
-      - name: Set up GraalVM (Java ${{ matrix.java-version }})
+      - name: Set up GraalVM (Java 21)
         uses: graalvm/setup-graalvm@v1
         with:
           distribution: 'liberica'
           version: '22.3.0'
-          java-version: '${{ matrix.java-version }}'
+          java-version: '21'
           components: 'native-image'
           github-token: ${{ secrets.GITHUB_TOKEN }}
           cache: 'maven'
@@ -165,4 +147,4 @@ jobs:
             -Ddocker.publish.username=${{ secrets.DOCKER_USERNAME }} \
             -Ddocker.publish.password=${{ secrets.DOCKER_PASSWORD }} \
             -Dspring-boot.build-image.imageName=docker.io/${{ secrets.DOCKER_USERNAME }}/spring-nextjs-app:${{ github.ref_name }}-native \
-           "-Dnative-build-args=${{ matrix.native-build-args }}"
+           "-Dnative-build-args=$NATIVE_BUILD_ARGS"

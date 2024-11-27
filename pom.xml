@@ -688,7 +688,6 @@
                   <BP_NATIVE_IMAGE>true</BP_NATIVE_IMAGE>
                   <BP_JVM_VERSION>${java.version}</BP_JVM_VERSION>
                   <BP_BINARY_COMPRESSION_METHOD>upx</BP_BINARY_COMPRESSION_METHOD>
-                  <BP_NATIVE_IMAGE_BUILD_ARGUMENTS>${native-build-args}</BP_NATIVE_IMAGE_BUILD_ARGUMENTS>
                 </env>
               </image>
               <docker>
