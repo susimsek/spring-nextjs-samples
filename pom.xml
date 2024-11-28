@@ -48,6 +48,7 @@
     <jib-maven-plugin.architecture>amd64</jib-maven-plugin.architecture>
     <jib.from.image>eclipse-temurin:21-jre-alpine</jib.from.image>
     <native-image-name>native-executable</native-image-name>
+    <native-build-args>--verbose -J-Xmx14g</native-build-args>
     <maven-checkstyle-plugin.version>3.5.0</maven-checkstyle-plugin.version>
     <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
     <sonar-maven-plugin.version>3.11.0.3922</sonar-maven-plugin.version>
@@ -734,6 +735,9 @@
               </metadataRepository>
               <requiredVersion>22.3</requiredVersion>
               <imageName>${native-image-name}</imageName>
+              <buildArgs>
+                <buildArg>${native-build-args}</buildArg>
+              </buildArgs>
             </configuration>
           </plugin>
         </plugins>
