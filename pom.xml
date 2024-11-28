@@ -666,22 +666,8 @@
     </profile>
     <profile>
       <id>native</id>
-      <properties>
-        <repackage.classifier>exec</repackage.classifier>
-      </properties>
       <build>
         <plugins>
-          <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-jar-plugin</artifactId>
-            <configuration>
-              <archive>
-                <manifestEntries>
-                  <Spring-Boot-Native-Processed>true</Spring-Boot-Native-Processed>
-                </manifestEntries>
-              </archive>
-            </configuration>
-          </plugin>
           <plugin>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-maven-plugin</artifactId>
@@ -740,26 +726,13 @@
                   <goal>add-reachability-metadata</goal>
                 </goals>
               </execution>
-              <execution>
-                <id>build-native</id>
-                <goals>
-                  <goal>build</goal>
-                </goals>
-                <phase>package</phase>
-              </execution>
-              <execution>
-                <id>test-native</id>
-                <goals>
-                  <goal>test</goal>
-                </goals>
-                <phase>test</phase>
-              </execution>
             </executions>
             <configuration>
               <classesDirectory>${project.build.outputDirectory}</classesDirectory>
               <metadataRepository>
                 <enabled>true</enabled>
               </metadataRepository>
+              <requiredVersion>22.3</requiredVersion>
               <imageName>${native-image-name}</imageName>
             </configuration>
           </plugin>

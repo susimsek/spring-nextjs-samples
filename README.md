@@ -76,7 +76,7 @@ compared to running a JVM.
 Before you begin, ensure you have the following installed:
 
 - **Java 21**
-- **GraalVM 22+** (ensure `native-image` is available)
+- **GraalVM 22.3+** (ensure `native-image` is available)
 - Add GraalVM to your `PATH` and set it as your active Java version
 
 ### Building a Native Image
