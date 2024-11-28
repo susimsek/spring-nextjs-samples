@@ -66,12 +66,12 @@ Use the following credentials to log in:
 | Username | `admin`                                                                     |
 | Password | `root`                                                                      |
 
-# GraalVM Native Image Support
+## GraalVM Native Image Support
 
 GraalVM is used to create a native image of the backend, significantly reducing the startup time and resource usage
 compared to running a JVM.
 
-## Prerequisites
+### Prerequisites
 
 Before you begin, ensure you have the following installed:
 
@@ -79,7 +79,7 @@ Before you begin, ensure you have the following installed:
 - **GraalVM 22+** (ensure `native-image` is available)
 - Add GraalVM to your `PATH` and set it as your active Java version
 
-## Building a Native Image
+### Building a Native Image
 
 To build a native image for the Spring Boot backend, execute:
 
