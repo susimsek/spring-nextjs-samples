@@ -84,7 +84,7 @@ Before you begin, ensure you have the following installed:
 To build a native image for the Spring Boot backend, execute:
 
 ```bash
-./mvnw package -B -ntp -Pnative,prod -DskipTests
+./mvnw package -B -ntp -Pnative -DskipTests
 ```
 
 This will generate a native executable in the `target` directory. You can then run the application using:
