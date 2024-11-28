@@ -66,6 +66,33 @@ Use the following credentials to log in:
 | Username | `admin`                                                                     |
 | Password | `root`                                                                      |
 
+# GraalVM Native Image Support
+
+GraalVM is used to create a native image of the backend, significantly reducing the startup time and resource usage
+compared to running a JVM.
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- **Java 21**
+- **GraalVM 22+** (ensure `native-image` is available)
+- Add GraalVM to your `PATH` and set it as your active Java version
+
+## Building a Native Image
+
+To build a native image for the Spring Boot backend, execute:
+
+```bash
+./mvnw package -B -ntp -Pnative,prod -DskipTests
+```
+
+This will generate a native executable in the `target` directory. You can then run the application using:
+
+```bash
+./target/native-executable
+```
+
 ## Testing
 
 To run the application's tests, use the following command:
@@ -262,6 +289,8 @@ Below is the ER Diagram used for the project:
 - Java 21
 - Kotlin
 - Spring Boot 3.x
+- GraalVM
+- Upx
 - Docker
 - Kubernetes
 - Checkstyle
@@ -293,6 +322,7 @@ Below is the ER Diagram used for the project:
 - Micrometer Tracing
 - Micrometer Tracing Bridge OTel
 - Logback Appender For Loki
+- Jib Maven Plugin
 - Node.js 21
 - React
 - Next.js
