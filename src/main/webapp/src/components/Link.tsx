@@ -1,41 +1,53 @@
-import React, { ReactNode } from 'react';
+import React, { MouseEvent, ReactNode } from 'react';
 import Link, { LinkProps } from 'next/link';
-import classNames from 'classnames';
-import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 interface LinkComponentProps extends Omit<LinkProps, 'href'> {
   children: ReactNode;
-  skipLocaleHandling?: boolean;
   href?: string;
-  className?: string; // Additional custom classes
-  onClick?: () => void; // Optional onClick handler
+  className?: string; // Class name for the anchor element
+  skipLocaleHandling?: boolean;
+  locale?: string;
+  onClick?: (event: MouseEvent<HTMLAnchorElement>) => void; // onClick handler
 }
 
 const LinkComponent: React.FC<LinkComponentProps> = ({
   children,
   skipLocaleHandling = false,
-  href = '',
+  href,
+  locale,
   className,
-  onClick, // Extract onClick
+  onClick,
   ...rest
 }) => {
-  const {
-    i18n: { language: locale },
-  } = useTranslation();
+  const router = useRouter();
+  const currentLocale = locale || (router.query.locale as string) || '';
 
-  let computedHref = href;
+  let resolvedHref = href || router.asPath;
 
-  if (computedHref.startsWith('http')) {
+  if (resolvedHref.startsWith('http')) {
     skipLocaleHandling = true;
   }
 
-  if (locale && !skipLocaleHandling) {
-    computedHref = `/${locale}${computedHref}`;
+  if (currentLocale && !skipLocaleHandling) {
+    resolvedHref = resolvedHref
+      ? `/${currentLocale}${resolvedHref}`
+      : router.pathname.replace('[locale]', currentLocale);
   }
 
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (onClick) {
+      onClick(event);
+    }
+  };
+
+  // Define default class name
+  const defaultClassName = 'nav-link';
+  const combinedClassName = className ? `${defaultClassName} ${className}` : defaultClassName;
+
   return (
-    <Link href={computedHref} legacyBehavior passHref {...rest}>
-      <a className={classNames('nav-link', className)} onClick={onClick}>
+    <Link href={resolvedHref} {...rest} legacyBehavior>
+      <a className={combinedClassName} onClick={handleClick}>
         {children}
       </a>
     </Link>
